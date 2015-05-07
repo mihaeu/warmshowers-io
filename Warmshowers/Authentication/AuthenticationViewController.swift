@@ -34,6 +34,17 @@ class AuthenticationViewController: UIViewController
             
         } else {
             log.info("Login failure: \(password)")
+            
+            let alertController = UIAlertController(
+                title: "Login Problem",
+                message: "Incorrect username or password. Please try again ...",
+                preferredStyle: UIAlertControllerStyle.Alert
+            )
+            alertController.addAction(
+                UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil)
+            )
+            
+            presentViewController(alertController, animated: true, completion: nil)
         }
     }
 }
