@@ -10,6 +10,7 @@
 		729C10AFDF1D1FFC5F3B2F7D /* Pods_Warmshowers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41CE4247DD6EEBA9135EDC97 /* Pods_Warmshowers.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		73C979E624E10C6864594746 /* Pods_WarmshowersTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23326D4A50F1BEADD824F208 /* Pods_WarmshowersTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		844C1A2C1AFBF55D0013551A /* AuthenticationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844C1A2B1AFBF55D0013551A /* AuthenticationSpec.swift */; };
+		844C1A2E1AFBFF630013551A /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844C1A2D1AFBFF630013551A /* Storyboard.swift */; };
 		8485F2381AFBDE8F0054310F /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8485F2371AFBDE8F0054310F /* AuthenticationViewController.swift */; };
 		8485F23B1AFBEB040054310F /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8485F23A1AFBEB040054310F /* Authentication.swift */; };
 		848BC7A71AFBD7FD00974467 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848BC7A61AFBD7FD00974467 /* AppDelegate.swift */; };
@@ -35,6 +36,7 @@
 		393D17F1A86431DDB0201F6E /* Pods-WarmshowersTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WarmshowersTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WarmshowersTests/Pods-WarmshowersTests.release.xcconfig"; sourceTree = "<group>"; };
 		41CE4247DD6EEBA9135EDC97 /* Pods_Warmshowers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Warmshowers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		844C1A2B1AFBF55D0013551A /* AuthenticationSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationSpec.swift; sourceTree = "<group>"; };
+		844C1A2D1AFBFF630013551A /* Storyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
 		8485F2371AFBDE8F0054310F /* AuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthenticationViewController.swift; path = Authentication/AuthenticationViewController.swift; sourceTree = "<group>"; };
 		8485F23A1AFBEB040054310F /* Authentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		848BC7A11AFBD7FD00974467 /* Warmshowers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Warmshowers.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,6 +116,7 @@
 				848BC7AD1AFBD7FD00974467 /* Main.storyboard */,
 				848BC7A41AFBD7FD00974467 /* Supporting Files */,
 				8485F2391AFBDEF20054310F /* Authentication */,
+				844C1A2D1AFBFF630013551A /* Storyboard.swift */,
 			);
 			path = Warmshowers;
 			sourceTree = "<group>";
@@ -358,6 +361,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8485F2381AFBDE8F0054310F /* AuthenticationViewController.swift in Sources */,
+				844C1A2E1AFBFF630013551A /* Storyboard.swift in Sources */,
 				848BC7AA1AFBD7FD00974467 /* Warmshowers.xcdatamodeld in Sources */,
 				848BC7A71AFBD7FD00974467 /* AppDelegate.swift in Sources */,
 				8485F23B1AFBEB040054310F /* Authentication.swift in Sources */,

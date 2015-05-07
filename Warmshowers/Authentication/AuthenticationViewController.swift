@@ -32,6 +32,7 @@ class AuthenticationViewController: UIViewController
         if authentication.login(username, password: password) {
             log.info("Login success: \(username)")
             
+            performSegueWithIdentifier(Storyboard.ShowStartSegue, sender: nil)
         } else {
             log.info("Login failure: \(password)")
             
@@ -45,6 +46,13 @@ class AuthenticationViewController: UIViewController
             )
             
             presentViewController(alertController, animated: true, completion: nil)
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
+        if segue.identifier == Storyboard.ShowStartSegue {
+            // TODO: handover the logged in user
         }
     }
 }
