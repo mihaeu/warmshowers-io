@@ -10,6 +10,8 @@ import UIKit
 import XCGLogger
 import CoreData
 
+let log = XCGLogger.defaultInstance()
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -18,7 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-        let log = XCGLogger.defaultInstance()
         log.setup(
             logLevel: .Debug,
             showLogLevel: true,

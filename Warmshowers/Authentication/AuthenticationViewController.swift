@@ -22,14 +22,18 @@ class AuthenticationViewController: UIViewController
     
     @IBAction func attemptLogin()
     {
-        if usernameTextField.text != "" && passwordTextField.text != "" {
-            println("Login attempt with username: \(usernameTextField.text) and password: \(passwordTextField.text)")
-            if authentication.login(usernameTextField.text, password: passwordTextField.text) {
-                println("Login success: \(usernameTextField.text)")
-            } else {
-                println("Login failure: \(usernameTextField.text)")
-            }
+        let username = usernameTextField.text
+        let password = passwordTextField.text
+        
+        if username == "" || password == "" {
+            return
+        }
+        
+        if authentication.login(username, password: password) {
+            log.info("Login success: \(username)")
+            
+        } else {
+            log.info("Login failure: \(password)")
         }
     }
-    
 }
