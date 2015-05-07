@@ -2,4 +2,4 @@
 #import <UIKit/UIKit.h>
 #endif
 
-#import "Pods-Warmshowers-environment.h"
+#import "Pods-WarmshowersTests-environment.h"

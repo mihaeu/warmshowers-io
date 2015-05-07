@@ -1,5 +1,5 @@
 framework module Quick {
-  umbrella header "Pods-Warmshowers-Quick-umbrella.h"
+  umbrella header "Pods-WarmshowersTests-Quick-umbrella.h"
 
   export *
   module * { export * }
