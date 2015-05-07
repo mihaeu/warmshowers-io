@@ -1,0 +1,6 @@
+framework module SwiftyJSON {
+  umbrella header "Pods-Warmshowers-SwiftyJSON-umbrella.h"
+
+  export *
+  module * { export * }
+}

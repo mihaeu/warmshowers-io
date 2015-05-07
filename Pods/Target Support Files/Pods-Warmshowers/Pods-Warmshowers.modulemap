@@ -1,0 +1,6 @@
+framework module Pods_Warmshowers {
+  umbrella header "Pods-Warmshowers-umbrella.h"
+
+  export *
+  module * { export * }
+}

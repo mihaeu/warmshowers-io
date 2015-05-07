@@ -1,0 +1,522 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		729C10AFDF1D1FFC5F3B2F7D /* Pods_Warmshowers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41CE4247DD6EEBA9135EDC97 /* Pods_Warmshowers.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		848BC7A71AFBD7FD00974467 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848BC7A61AFBD7FD00974467 /* AppDelegate.swift */; };
+		848BC7AA1AFBD7FD00974467 /* Warmshowers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 848BC7A81AFBD7FD00974467 /* Warmshowers.xcdatamodeld */; };
+		848BC7AC1AFBD7FD00974467 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848BC7AB1AFBD7FD00974467 /* ViewController.swift */; };
+		848BC7AF1AFBD7FD00974467 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 848BC7AD1AFBD7FD00974467 /* Main.storyboard */; };
+		848BC7B11AFBD7FD00974467 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 848BC7B01AFBD7FD00974467 /* Images.xcassets */; };
+		848BC7B41AFBD7FD00974467 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 848BC7B21AFBD7FD00974467 /* LaunchScreen.xib */; };
+		848BC7C01AFBD7FD00974467 /* WarmshowersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848BC7BF1AFBD7FD00974467 /* WarmshowersTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		848BC7BA1AFBD7FD00974467 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 848BC7991AFBD7FD00974467 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 848BC7A01AFBD7FD00974467;
+			remoteInfo = Warmshowers;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1843A9E9D94C77C73341E209 /* Pods-Warmshowers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Warmshowers.release.xcconfig"; path = "Pods/Target Support Files/Pods-Warmshowers/Pods-Warmshowers.release.xcconfig"; sourceTree = "<group>"; };
+		41CE4247DD6EEBA9135EDC97 /* Pods_Warmshowers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Warmshowers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		848BC7A11AFBD7FD00974467 /* Warmshowers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Warmshowers.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		848BC7A51AFBD7FD00974467 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		848BC7A61AFBD7FD00974467 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		848BC7A91AFBD7FD00974467 /* Warmshowers.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Warmshowers.xcdatamodel; sourceTree = "<group>"; };
+		848BC7AB1AFBD7FD00974467 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		848BC7AE1AFBD7FD00974467 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		848BC7B01AFBD7FD00974467 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		848BC7B31AFBD7FD00974467 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		848BC7B91AFBD7FD00974467 /* WarmshowersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WarmshowersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		848BC7BE1AFBD7FD00974467 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		848BC7BF1AFBD7FD00974467 /* WarmshowersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarmshowersTests.swift; sourceTree = "<group>"; };
+		D6FCB87087944DF13BD8B4DF /* Pods-Warmshowers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Warmshowers.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Warmshowers/Pods-Warmshowers.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		848BC79E1AFBD7FD00974467 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				729C10AFDF1D1FFC5F3B2F7D /* Pods_Warmshowers.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		848BC7B61AFBD7FD00974467 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		77AD621FC9BC0B7C062537FA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				41CE4247DD6EEBA9135EDC97 /* Pods_Warmshowers.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		848BC7981AFBD7FD00974467 = {
+			isa = PBXGroup;
+			children = (
+				848BC7A31AFBD7FD00974467 /* Warmshowers */,
+				848BC7BC1AFBD7FD00974467 /* WarmshowersTests */,
+				848BC7A21AFBD7FD00974467 /* Products */,
+				872482773126DB5AFA7662D5 /* Pods */,
+				77AD621FC9BC0B7C062537FA /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		848BC7A21AFBD7FD00974467 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				848BC7A11AFBD7FD00974467 /* Warmshowers.app */,
+				848BC7B91AFBD7FD00974467 /* WarmshowersTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		848BC7A31AFBD7FD00974467 /* Warmshowers */ = {
+			isa = PBXGroup;
+			children = (
+				848BC7A61AFBD7FD00974467 /* AppDelegate.swift */,
+				848BC7AB1AFBD7FD00974467 /* ViewController.swift */,
+				848BC7AD1AFBD7FD00974467 /* Main.storyboard */,
+				848BC7B01AFBD7FD00974467 /* Images.xcassets */,
+				848BC7B21AFBD7FD00974467 /* LaunchScreen.xib */,
+				848BC7A81AFBD7FD00974467 /* Warmshowers.xcdatamodeld */,
+				848BC7A41AFBD7FD00974467 /* Supporting Files */,
+			);
+			path = Warmshowers;
+			sourceTree = "<group>";
+		};
+		848BC7A41AFBD7FD00974467 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				848BC7A51AFBD7FD00974467 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		848BC7BC1AFBD7FD00974467 /* WarmshowersTests */ = {
+			isa = PBXGroup;
+			children = (
+				848BC7BF1AFBD7FD00974467 /* WarmshowersTests.swift */,
+				848BC7BD1AFBD7FD00974467 /* Supporting Files */,
+			);
+			path = WarmshowersTests;
+			sourceTree = "<group>";
+		};
+		848BC7BD1AFBD7FD00974467 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				848BC7BE1AFBD7FD00974467 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		872482773126DB5AFA7662D5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D6FCB87087944DF13BD8B4DF /* Pods-Warmshowers.debug.xcconfig */,
+				1843A9E9D94C77C73341E209 /* Pods-Warmshowers.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		848BC7A01AFBD7FD00974467 /* Warmshowers */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 848BC7C31AFBD7FD00974467 /* Build configuration list for PBXNativeTarget "Warmshowers" */;
+			buildPhases = (
+				577A48568557198801B0C797 /* Check Pods Manifest.lock */,
+				848BC79D1AFBD7FD00974467 /* Sources */,
+				848BC79E1AFBD7FD00974467 /* Frameworks */,
+				848BC79F1AFBD7FD00974467 /* Resources */,
+				8256ADC11880ACB28B890BFE /* Embed Pods Frameworks */,
+				511D06A467E6D802A9D4C4A4 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Warmshowers;
+			productName = Warmshowers;
+			productReference = 848BC7A11AFBD7FD00974467 /* Warmshowers.app */;
+			productType = "com.apple.product-type.application";
+		};
+		848BC7B81AFBD7FD00974467 /* WarmshowersTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 848BC7C61AFBD7FD00974467 /* Build configuration list for PBXNativeTarget "WarmshowersTests" */;
+			buildPhases = (
+				848BC7B51AFBD7FD00974467 /* Sources */,
+				848BC7B61AFBD7FD00974467 /* Frameworks */,
+				848BC7B71AFBD7FD00974467 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				848BC7BB1AFBD7FD00974467 /* PBXTargetDependency */,
+			);
+			name = WarmshowersTests;
+			productName = WarmshowersTests;
+			productReference = 848BC7B91AFBD7FD00974467 /* WarmshowersTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		848BC7991AFBD7FD00974467 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = mihaeu;
+				TargetAttributes = {
+					848BC7A01AFBD7FD00974467 = {
+						CreatedOnToolsVersion = 6.3;
+					};
+					848BC7B81AFBD7FD00974467 = {
+						CreatedOnToolsVersion = 6.3;
+						TestTargetID = 848BC7A01AFBD7FD00974467;
+					};
+				};
+			};
+			buildConfigurationList = 848BC79C1AFBD7FD00974467 /* Build configuration list for PBXProject "Warmshowers" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 848BC7981AFBD7FD00974467;
+			productRefGroup = 848BC7A21AFBD7FD00974467 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				848BC7A01AFBD7FD00974467 /* Warmshowers */,
+				848BC7B81AFBD7FD00974467 /* WarmshowersTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		848BC79F1AFBD7FD00974467 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				848BC7AF1AFBD7FD00974467 /* Main.storyboard in Resources */,
+				848BC7B41AFBD7FD00974467 /* LaunchScreen.xib in Resources */,
+				848BC7B11AFBD7FD00974467 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		848BC7B71AFBD7FD00974467 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		511D06A467E6D802A9D4C4A4 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Warmshowers/Pods-Warmshowers-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		577A48568557198801B0C797 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		8256ADC11880ACB28B890BFE /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Warmshowers/Pods-Warmshowers-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		848BC79D1AFBD7FD00974467 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				848BC7AC1AFBD7FD00974467 /* ViewController.swift in Sources */,
+				848BC7AA1AFBD7FD00974467 /* Warmshowers.xcdatamodeld in Sources */,
+				848BC7A71AFBD7FD00974467 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		848BC7B51AFBD7FD00974467 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				848BC7C01AFBD7FD00974467 /* WarmshowersTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		848BC7BB1AFBD7FD00974467 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 848BC7A01AFBD7FD00974467 /* Warmshowers */;
+			targetProxy = 848BC7BA1AFBD7FD00974467 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		848BC7AD1AFBD7FD00974467 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				848BC7AE1AFBD7FD00974467 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		848BC7B21AFBD7FD00974467 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				848BC7B31AFBD7FD00974467 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		848BC7C11AFBD7FD00974467 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		848BC7C21AFBD7FD00974467 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		848BC7C41AFBD7FD00974467 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D6FCB87087944DF13BD8B4DF /* Pods-Warmshowers.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Warmshowers/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		848BC7C51AFBD7FD00974467 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1843A9E9D94C77C73341E209 /* Pods-Warmshowers.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Warmshowers/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		848BC7C71AFBD7FD00974467 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = WarmshowersTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Warmshowers.app/Warmshowers";
+			};
+			name = Debug;
+		};
+		848BC7C81AFBD7FD00974467 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = WarmshowersTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Warmshowers.app/Warmshowers";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		848BC79C1AFBD7FD00974467 /* Build configuration list for PBXProject "Warmshowers" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				848BC7C11AFBD7FD00974467 /* Debug */,
+				848BC7C21AFBD7FD00974467 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		848BC7C31AFBD7FD00974467 /* Build configuration list for PBXNativeTarget "Warmshowers" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				848BC7C41AFBD7FD00974467 /* Debug */,
+				848BC7C51AFBD7FD00974467 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		848BC7C61AFBD7FD00974467 /* Build configuration list for PBXNativeTarget "WarmshowersTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				848BC7C71AFBD7FD00974467 /* Debug */,
+				848BC7C81AFBD7FD00974467 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		848BC7A81AFBD7FD00974467 /* Warmshowers.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				848BC7A91AFBD7FD00974467 /* Warmshowers.xcdatamodel */,
+			);
+			currentVersion = 848BC7A91AFBD7FD00974467 /* Warmshowers.xcdatamodel */;
+			path = Warmshowers.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 848BC7991AFBD7FD00974467 /* Project object */;
+}
