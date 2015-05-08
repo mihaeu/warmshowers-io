@@ -8,8 +8,16 @@
 
 class UserSearch
 {
-    func byLocation(longitude: Double, latitude: Double) -> [User]
-    {
+    /**
+        https://github.com/warmshowers/Warmshowers.org/wiki/Warmshowers-RESTful-Services-for-Mobile-Apps#bylocation
+    
+        :param: Double Logitude of current user.
+        :param: Double Latitude of current user.
+    
+        :returns: [User]
+    */
+    func byLocation(latitude: Double, longitude: Double) -> [User]
+    {        
         var user1 = MockData.User1
         user1.longitude = MockData.User1Latitude
         user1.latitude = MockData.User1Longitude

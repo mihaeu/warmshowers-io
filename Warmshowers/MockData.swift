@@ -13,6 +13,6 @@ struct MockData
     static let User1Latitude = -0.1830372
     
     static let User2 = User(id: 2, name: "User B")
-    static let User2Longitude = 50.2851827
+    static let User2Longitude = 51.7361
     static let User2Latitude = 0.4776874
 }
