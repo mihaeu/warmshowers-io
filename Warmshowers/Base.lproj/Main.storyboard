@@ -80,7 +80,40 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bqu-8O-UX0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1621" y="657"/>
+            <point key="canvasLocation" x="1621" y="257"/>
+        </scene>
+        <!--Other Profile View Controller-->
+        <scene sceneID="i0s-mW-YBx">
+            <objects>
+                <viewController id="ijS-BA-JNL" customClass="OtherProfileViewController" customModule="Warmshowers" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mFu-fg-YO4"/>
+                        <viewControllerLayoutGuide type="bottom" id="cp8-Oi-jir"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="XML-se-x6c">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TNR-rA-26Z">
+                                <rect key="frame" x="16" y="20" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="TNR-rA-26Z" firstAttribute="leading" secondItem="XML-se-x6c" secondAttribute="leadingMargin" id="ds8-mg-9V7"/>
+                            <constraint firstItem="TNR-rA-26Z" firstAttribute="top" secondItem="mFu-fg-YO4" secondAttribute="bottom" id="njg-sa-6ps"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="nameLabel" destination="TNR-rA-26Z" id="gQ0-Dz-MvR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xnQ-hW-14P" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2351" y="257"/>
         </scene>
         <!--Messages-->
         <scene sceneID="JmR-Vn-bVO">
@@ -111,7 +144,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pXI-sN-JEJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="563" y="1226"/>
+            <point key="canvasLocation" x="1621" y="918"/>
         </scene>
         <!--Map-->
         <scene sceneID="kXh-eG-6Nj">
@@ -140,11 +173,12 @@
                     <tabBarItem key="tabBarItem" title="Map" image="tab-map" id="MGJ-0w-VOB"/>
                     <connections>
                         <outlet property="mapView" destination="Edw-4D-QwA" id="oA5-gu-an0"/>
+                        <segue destination="ijS-BA-JNL" kind="show" identifier="Show Other Profile" id="fPJ-8A-YMD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gIP-jH-Aw2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1621" y="-6"/>
+            <point key="canvasLocation" x="1621" y="-412"/>
         </scene>
         <!--Favorites-->
         <scene sceneID="WoP-1p-OgQ">
@@ -175,7 +209,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OHe-ZE-Oyn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="563" y="-475"/>
+            <point key="canvasLocation" x="1615" y="1589"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="rLC-4e-mgf">
