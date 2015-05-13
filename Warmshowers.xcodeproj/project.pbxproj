@@ -16,6 +16,8 @@
 		846D6BF91AFD63BE00144D4F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6BF81AFD63BE00144D4F /* User.swift */; };
 		846D6BFB1AFD655C00144D4F /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6BFA1AFD655C00144D4F /* MockData.swift */; };
 		846D6BFE1AFD718000144D4F /* OtherProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6BFD1AFD718000144D4F /* OtherProfileViewController.swift */; };
+		846FB3191AFEA58A003F7B25 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846FB3181AFEA58A003F7B25 /* API.swift */; };
+		846FB31B1AFEA7E1003F7B25 /* APISpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846FB31A1AFEA7E1003F7B25 /* APISpec.swift */; };
 		8485F2381AFBDE8F0054310F /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8485F2371AFBDE8F0054310F /* AuthenticationViewController.swift */; };
 		8485F23B1AFBEB040054310F /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8485F23A1AFBEB040054310F /* Authentication.swift */; };
 		848BC7A71AFBD7FD00974467 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848BC7A61AFBD7FD00974467 /* AppDelegate.swift */; };
@@ -47,6 +49,8 @@
 		846D6BF81AFD63BE00144D4F /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		846D6BFA1AFD655C00144D4F /* MockData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		846D6BFD1AFD718000144D4F /* OtherProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherProfileViewController.swift; sourceTree = "<group>"; };
+		846FB3181AFEA58A003F7B25 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		846FB31A1AFEA7E1003F7B25 /* APISpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APISpec.swift; sourceTree = "<group>"; };
 		8485F2371AFBDE8F0054310F /* AuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthenticationViewController.swift; path = Authentication/AuthenticationViewController.swift; sourceTree = "<group>"; };
 		8485F23A1AFBEB040054310F /* Authentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		848BC7A11AFBD7FD00974467 /* Warmshowers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Warmshowers.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -156,6 +160,7 @@
 				8485F2391AFBDEF20054310F /* Authentication */,
 				846D6BF41AFD59D300144D4F /* Map */,
 				846D6BFC1AFD716800144D4F /* Profile */,
+				846FB3181AFEA58A003F7B25 /* API.swift */,
 			);
 			path = Warmshowers;
 			sourceTree = "<group>";
@@ -177,6 +182,7 @@
 			children = (
 				848BC7BD1AFBD7FD00974467 /* Supporting Files */,
 				844C1A2B1AFBF55D0013551A /* AuthenticationSpec.swift */,
+				846FB31A1AFEA7E1003F7B25 /* APISpec.swift */,
 			);
 			path = WarmshowersTests;
 			sourceTree = "<group>";
@@ -399,6 +405,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				846FB3191AFEA58A003F7B25 /* API.swift in Sources */,
 				846D6BFE1AFD718000144D4F /* OtherProfileViewController.swift in Sources */,
 				8485F2381AFBDE8F0054310F /* AuthenticationViewController.swift in Sources */,
 				846D6BF31AFD599500144D4F /* MapViewController.swift in Sources */,
@@ -417,6 +424,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				844C1A2C1AFBF55D0013551A /* AuthenticationSpec.swift in Sources */,
+				846FB31B1AFEA7E1003F7B25 /* APISpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

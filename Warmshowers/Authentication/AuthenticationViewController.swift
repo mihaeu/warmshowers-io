@@ -20,8 +20,17 @@ class AuthenticationViewController: UIViewController
 
     let authentication = Authentication()
     
-    @IBAction func attemptLogin()
+    override func viewDidLoad()
     {
+        NSNotificationCenter.defaultCenter()
+            .addObserver(self, selector: "handleLoginResponse:", name: Methods.PhotoSearchMethod, object: nil)
+    }
+    
+    @IBAction func sendLoginAttempt()
+    {
+        var api = API()
+        
+        
         let username = usernameTextField.text
         let password = passwordTextField.text
         
@@ -29,12 +38,17 @@ class AuthenticationViewController: UIViewController
             return
         }
         
+        api.login(username, password: password)
+    }
+    
+    func handleLoginRespons(notification: NSNotification)
+    {
         if authentication.login(username, password: password) {
-            log.info("Login success: \(username)")
+//            log.info("Login success: \(username)")
             
             performSegueWithIdentifier(Storyboard.ShowStartSegue, sender: nil)
         } else {
-            log.info("Login failure: \(password)")
+//            log.info("Login failure: \(password)")
             
             let alertController = UIAlertController(
                 title: "Login Problem",

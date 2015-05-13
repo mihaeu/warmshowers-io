@@ -8,14 +8,14 @@
 
 class User
 {
-    var id: Int
+    var uid: Int
     var name: String
     var longitude: Double?
     var latitude: Double?
     
-    init(id: Int, name: String)
+    init(uid: Int, name: String)
     {
-        self.id = id
+        self.uid = uid
         self.name = name
     }
 }
