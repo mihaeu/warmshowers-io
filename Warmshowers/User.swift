@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Michael Haeuslmann. All rights reserved.
 //
 
-class User
+public class User
 {
     var uid: Int
     var name: String

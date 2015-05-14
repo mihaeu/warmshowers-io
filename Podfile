@@ -7,6 +7,7 @@ target 'Warmshowers' do
 	pod 'Alamofire'
 	pod 'XCGLogger'
 	pod 'SwiftyJSON'
+    pod 'BrightFutures'
 end
 
 target 'WarmshowersTests' do

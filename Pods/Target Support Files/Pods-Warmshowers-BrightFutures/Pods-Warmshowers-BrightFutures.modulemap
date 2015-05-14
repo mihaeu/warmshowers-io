@@ -1,0 +1,6 @@
+framework module BrightFutures {
+  umbrella header "Pods-Warmshowers-BrightFutures-umbrella.h"
+
+  export *
+  module * { export * }
+}

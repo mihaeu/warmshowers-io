@@ -9,18 +9,30 @@
 import Alamofire
 import SwiftyJSON
 
-internal class API
+public class API
 {
     var manager: Manager
     var notificationCenter: NSNotificationCenter
     
-    internal let BaseURL = "https://www.warmshowers.org"
-    internal let LoginURL = "/services/rest/user/login"
+    public let BaseURL = "https://www.warmshowers.org"
+    public let LoginURL = "/services/rest/user/login"
+    public let LogoutURL = "/services/rest/user/logout"
+    public let GetPrivateMessagesURL = "/services/rest/message/get"
+    public let HostsByKeyword = "/services/rest/hosts/by_keyword"
+    public let GetUser = "/services/rest/user/"
     
-    internal var sessid: String?
-    internal var session_name: String?
+    public var sessid: String?
+    public var session_name: String?
     
-    internal init(
+    public var username: String?
+    public var password: String?
+    
+    struct Status {
+        static let AlreadyLoggedIn = 406
+        static let LoginOk = 200
+    }
+    
+    public init(
         manager: Manager = Alamofire.Manager.sharedInstance,
         notificationCenter: NSNotificationCenter = NSNotificationCenter.defaultCenter())
     {
@@ -28,32 +40,88 @@ internal class API
         self.notificationCenter = notificationCenter
     }
     
-    internal func login(username: String, password: String)
+    public func login(username: String, password: String)
     {
         Alamofire.request(.POST, BaseURL + LoginURL, parameters: ["username": username, "password": password])
-//            .validate(statusCode: 200..<300)
             .responseJSON { (request, response, json, error) in
                 if error != nil {
                     // log etc.
                     log.error(error?.description)
                 } else {
-                    var json = JSON(json!)
                     
-                    self.sessid = json["sessid"].stringValue
-                    self.session_name = json["session_name"].stringValue
+
+                    if response?.statusCode == Status.LoginOk {
+                        log.info("\(username) logged in with status \(response?.statusCode)")
+                        var json = JSON(json!)
+                        
+                        self.sessid = json["sessid"].stringValue
+                        self.session_name = json["session_name"].stringValue
+                        
+                        let user = self.deserializeUserJson(json)
+                        self.username = username
+                        self.password = password
+                    } else if response?.statusCode == Status.AlreadyLoggedIn {
+                        log.info("\(username) already logged in with status \(response?.statusCode)")
+                    } else {
+                        log.info("\(username) bad credentials with status \(response?.statusCode)")
+                    }
                     
-                    let user = self.deserializeUserJson(json)
-                    log.info(user.name)
-                    self.notificationCenter.postNotificationName(
-                        Notifications.LoginName,
-                        object: nil,
-                        userInfo: [Notifications.LoginDataKey: user]
-                    )
+                    
+//                    self.notificationCenter.postNotificationName(
+//                        Notifications.LoginName,
+//                        object: nil,
+//                        userInfo: [Notifications.LoginDataKey: user]
+//                    )
                 }
         }
     }
     
-    internal func deserializeUserJson(json: JSON) -> User
+    public func logout(username: String, password: String)
+    {
+        Alamofire.request(.POST, BaseURL + LogoutURL, parameters: ["username": username, "password": password])
+            .responseJSON { (request, response, json, error) in
+                if error != nil {
+                    // log etc.
+                    log.error(error?.description)
+                } else {
+                    log.info("Logged out \(username) with status \(response?.statusCode)")
+                }
+        }
+    }
+    
+    public func hostsByKeyword(keyword: String, limit: Int = 4, page: Int = 0)
+    {
+        Alamofire.request(.POST, BaseURL + HostsByKeyword, parameters: ["keyword": keyword, "limit": limit, "page": page])
+            .responseJSON { (request, response, json, error) in
+                if error != nil {
+                    // log etc.
+                    log.error(error?.description)
+                } else {
+                    log.info("Got hosts by keyword \(response?.statusCode)")
+                    var json = JSON(json!)
+                    let test = json.dictionaryObject
+                    
+                }
+        }
+    }
+    
+    public func getUser(userId: Int)
+    {
+        Alamofire.request(.GET, "\(BaseURL)\(GetUser)\(userId)", parameters: nil)
+            .responseJSON { (request, response, json, error) in
+                if error != nil {
+                    // log etc.
+                    log.error(error?.description)
+                } else {
+                    log.info("Got user by id \(response?.statusCode)")
+                    var json = JSON(json!)
+                    let test = json.dictionaryObject
+                    
+                }
+        }
+    }
+    
+    public func deserializeUserJson(json: JSON) -> User
     {
         var user = User(
             uid: json["user"]["uid"].intValue,
