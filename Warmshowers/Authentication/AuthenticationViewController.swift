@@ -23,13 +23,12 @@ class AuthenticationViewController: UIViewController
     override func viewDidLoad()
     {
         NSNotificationCenter.defaultCenter()
-            .addObserver(self, selector: "handleLoginResponse:", name: Methods.PhotoSearchMethod, object: nil)
+            .addObserver(self, selector: "handleLoginResponse:", name: Notifications.LoginName, object: nil)
     }
     
-    @IBAction func sendLoginAttempt()
+    @IBAction func attemptLogin()
     {
         var api = API()
-        
         
         let username = usernameTextField.text
         let password = passwordTextField.text
@@ -41,14 +40,11 @@ class AuthenticationViewController: UIViewController
         api.login(username, password: password)
     }
     
-    func handleLoginRespons(notification: NSNotification)
+    func handleLoginResponse(notification: NSNotification)
     {
-        if authentication.login(username, password: password) {
-//            log.info("Login success: \(username)")
-            
+        if true {
             performSegueWithIdentifier(Storyboard.ShowStartSegue, sender: nil)
         } else {
-//            log.info("Login failure: \(password)")
             
             let alertController = UIAlertController(
                 title: "Login Problem",
