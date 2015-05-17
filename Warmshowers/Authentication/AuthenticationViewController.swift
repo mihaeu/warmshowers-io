@@ -20,12 +20,6 @@ class AuthenticationViewController: UIViewController
 
     let authentication = Authentication()
     
-    override func viewDidLoad()
-    {
-        NSNotificationCenter.defaultCenter()
-            .addObserver(self, selector: "handleLoginResponse:", name: Notifications.LoginName, object: nil)
-    }
-    
     @IBAction func attemptLogin()
     {
         var api = API()

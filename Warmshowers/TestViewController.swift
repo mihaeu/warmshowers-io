@@ -32,6 +32,10 @@ class TestViewController: UIViewController
     
     @IBAction func searchByKeyword(sender: AnyObject)
     {
-        api.hostsByKeyword("palisade")
+        api.hostsByKeyword("palisade").onSuccess() { users in
+            for (uid, user) in users {
+                println("found: \(uid) \(user.name)")
+            }
+        }
     }
 }

@@ -10,10 +10,11 @@ import Alamofire
 import SwiftyJSON
 import BrightFutures
 
+/// Warmshowers.org API
 public class API
 {
+    /// Alamofire serves a singleton, but we want to be able to mock this
     var manager: Manager
-    var notificationCenter: NSNotificationCenter
     
     public let BaseURL = "https://www.warmshowers.org"
     public let LoginURL = "/services/rest/user/login"
@@ -33,17 +34,25 @@ public class API
         static let LoginOk = 200
     }
     
-    public init(
-        manager: Manager = Alamofire.Manager.sharedInstance,
-        notificationCenter: NSNotificationCenter = NSNotificationCenter.defaultCenter())
+    /**
+        :param: manager Alamofire Manager
+    */
+    public init(manager: Manager = Alamofire.Manager.sharedInstance)
     {
         self.manager = manager
-        self.notificationCenter = notificationCenter
     }
     
     /**
-        :params: username String
-        :params: password String
+        Login a user.
+    
+        The login is cookie based. Alamofire is handling this in the background and there
+        is nothing left to do on further requests. Trying to login while already logged in
+        will produce an error and will *NOT* return the user object again. Because of this
+        it is critical that the user object of the currently logged in user is safed on
+        the first login.
+    
+        :param: username String
+        :param: password String
     
         :returns: Future<User>
     */
@@ -64,7 +73,7 @@ public class API
                         self.sessid = json["sessid"].stringValue
                         self.session_name = json["session_name"].stringValue
                         
-                        let user = self.deserializeUserJson(json)
+                        let user = self.deserializeUserJson(json["user"])
                         self.username = username
                         self.password = password
                         
@@ -83,8 +92,10 @@ public class API
     }
     
     /**
-        :params: username String
-        :params: password String
+        Logout a user.
+    
+        :param: username String
+        :param: password String
         
         :returns: Future<Bool>
     */
@@ -106,118 +117,152 @@ public class API
         return promise.future
     }
     
-    public func hostsByKeyword(keyword: String, limit: Int = 4, page: Int = 0)
+    /**
+        Search for other user by keyword.
+    
+        The keyword can either be the username or email of a user or the name of a location.
+    
+        :param: keyword     String
+        :param: limit       Int     Default: 4
+        :param: page        Int     Default: 0
+    
+        :returns: Future<[Int:User]>
+    */
+    public func hostsByKeyword(keyword: String, limit: Int = 4, page: Int = 0) -> Future<[Int:User]>
     {
+        let promise = Promise<[Int:User]>()
+        
         Alamofire.request(.POST, BaseURL + HostsByKeyword, parameters: ["keyword": keyword, "limit": limit, "page": page])
             .responseJSON { (request, response, json, error) in
                 if error != nil {
-                    // log etc.
                     log.error(error?.description)
+                    promise.failure(error!)
                 } else {
                     log.info("Got hosts by keyword \(response?.statusCode)")
                     var json = JSON(json!)
-                    let test = json.dictionaryObject
-                    
+                    var users = [Int:User]()
+                    for (key: String, userJson: JSON) in json["accounts"] {
+                        let uid = key.toInt()
+                        let user = self.deserializeUserJson(userJson)
+                        users[uid!] = user                      
+                    }
+                    promise.success(users)
                 }
         }
+        
+        return promise.future
     }
     
-    public func getUser(userId: Int)
+    /**
+        Get a single user by Id.
+    
+        :param: userId Int
+    
+        :return: Future<User>
+    */
+    public func getUser(userId: Int) -> Future<User>
     {
+        let promise = Promise<User>()
+        
         Alamofire.request(.GET, "\(BaseURL)\(GetUser)\(userId)", parameters: nil)
             .responseJSON { (request, response, json, error) in
                 if error != nil {
-                    // log etc.
                     log.error(error?.description)
+                    promise.failure(error!)
                 } else {
                     log.info("Got user by id \(response?.statusCode)")
                     var json = JSON(json!)
-                    let test = json.dictionaryObject
-                    
+                    promise.success(self.deserializeUserJson(json))
                 }
         }
+        
+        return promise.future
     }
     
+    
+    /**
+        Deserializes the JSON user into a User object.
+    
+        // TODO: this should probably be an optional in case the JSON is messed up
+    
+        :param: json JSON Swifty JSON data from the Alamofire request.
+    
+        :returns: User
+    */
     public func deserializeUserJson(json: JSON) -> User
     {
         var user = User(
-            uid: json["user"]["uid"].intValue,
-            name: json["user"]["name"].stringValue
+            uid: json["uid"].intValue,
+            name: json["name"].stringValue
         )
         
-        user.mode = json["user"]["mode"].intValue
-        user.sort = json["user"]["sort"].intValue
-        user.threshold = json["user"]["threshold"].intValue
-        user.theme = json["user"]["theme"].intValue
-        user.signature = json["user"]["signature"].intValue
-        user.created = json["user"]["created"].intValue
-        user.access = json["user"]["access"].intValue
-        user.status = json["user"]["status"].intValue
-        user.timezone = json["user"]["timezone"].intValue
-        user.language = json["user"]["language"].stringValue
-        user.picture = json["user"]["picture"].stringValue
-        user.login = json["user"]["login"].intValue
-        user.timezone_name = json["user"]["timezone_name"].stringValue
-        user.signature_format = json["user"]["signature_format"].intValue
-        user.force_password_change = json["user"]["force_password_change"].intValue
-        user.fullname = json["user"]["fullname"].stringValue
-        user.notcurrentlyavailable = json["user"]["notcurrentlyavailable"].intValue
-        user.notcurrentlyavailable_reason = json["user"]["notcurrentlyavailable_reason"].stringValue
-        user.fax_number = json["user"]["fax_number"].stringValue
-        user.mobilephone = json["user"]["mobilephone"].stringValue
-        user.workphone = json["user"]["workphone"].stringValue
-        user.homephone = json["user"]["homephone"].stringValue
-        user.preferred_notice = json["user"]["preferred_notice"].intValue
-        user.cost = json["user"]["cost"].stringValue
-        user.maxcyclists = json["user"]["maxcyclists"].intValue
-        user.storage = json["user"]["storage"].intValue
-        user.motel = json["user"]["motel"].stringValue
-        user.campground = json["user"]["campground"].stringValue
-        user.bikeshop = json["user"]["bikeshop"].stringValue
-        user.comments = json["user"]["comments"].stringValue
-        user.shower = json["user"]["shower"].intValue
-        user.kitchenuse = json["user"]["kitchenuse"].intValue
-        user.lawnspace = json["user"]["lawnspace"].intValue
-        user.sag = json["user"]["sag"].intValue
-        user.bed = json["user"]["bed"].intValue
-        user.laundry = json["user"]["laundry"].intValue
-        user.food = json["user"]["food"].intValue
-        user.howdidyouhear = json["user"]["howdidyouhear"].stringValue
-        user.lastcorrespondence = json["user"]["lastcorrespondence"].stringValue
-        user.languagesspoken = json["user"]["languagesspoken"].stringValue
-        user.URL = json["user"]["URL"].stringValue
-        user.isstale = json["user"]["isstale"].intValue
-        user.isstale_date = json["user"]["isstale_date"].intValue
-        user.isstale_reason = json["user"]["isstale_reason"].stringValue
-        user.isunreachable = json["user"]["isunreachable"].stringValue
-        user.unreachable_date = json["user"]["unreachable_date"].stringValue
-        user.unreachable_reason = json["user"]["unreachable_reason"].stringValue
-        user.becomeavailable = json["user"]["becomeavailable"].intValue
-        user.set_unavailable_timestamp = json["user"]["set_unavailable_timestamp"].intValue
-        user.set_available_timestamp = json["user"]["set_available_timestamp"].intValue
-        user.last_unavailability_pester  = json["user"]["last_unavailability_pester"].intValue
-        user.hide_donation_status = json["user"]["hide_donation_status"].stringValue
-        user.email_opt_out = json["user"]["email_opt_out"].intValue
-        user.oid = json["user"]["oid"].intValue
-        user.type = json["user"]["type"].intValue
-        user.street = json["user"]["street"].stringValue
-        user.additional = json["user"]["additional"].stringValue
-        user.city = json["user"]["city"].stringValue
-        user.province = json["user"]["province"].stringValue
-        user.postal_code = json["user"]["postal_code"].intValue
-        user.country = json["user"]["country"].stringValue
-        user.latitude = json["user"]["latitude"].doubleValue
-        user.longitude = json["user"]["longitude"].doubleValue
-        user.source = json["user"]["source"].intValue
-        user.node_notify_mailalert = json["user"]["node_notify_mailalert"].intValue
-        user.comment_notify_mailalert = json["user"]["comment_notify_mailalert"].intValue
+        user.mode = json["mode"].intValue
+        user.sort = json["sort"].intValue
+        user.threshold = json["threshold"].intValue
+        user.theme = json["theme"].intValue
+        user.signature = json["signature"].intValue
+        user.created = json["created"].intValue
+        user.access = json["access"].intValue
+        user.status = json["status"].intValue
+        user.timezone = json["timezone"].intValue
+        user.language = json["language"].stringValue
+        user.picture = json["picture"].stringValue
+        user.login = json["login"].intValue
+        user.timezone_name = json["timezone_name"].stringValue
+        user.signature_format = json["signature_format"].intValue
+        user.force_password_change = json["force_password_change"].intValue
+        user.fullname = json["fullname"].stringValue
+        user.notcurrentlyavailable = json["notcurrentlyavailable"].intValue
+        user.notcurrentlyavailable_reason = json["notcurrentlyavailable_reason"].stringValue
+        user.fax_number = json["fax_number"].stringValue
+        user.mobilephone = json["mobilephone"].stringValue
+        user.workphone = json["workphone"].stringValue
+        user.homephone = json["homephone"].stringValue
+        user.preferred_notice = json["preferred_notice"].intValue
+        user.cost = json["cost"].stringValue
+        user.maxcyclists = json["maxcyclists"].intValue
+        user.storage = json["storage"].intValue
+        user.motel = json["motel"].stringValue
+        user.campground = json["campground"].stringValue
+        user.bikeshop = json["bikeshop"].stringValue
+        user.comments = json["comments"].stringValue
+        user.shower = json["shower"].intValue
+        user.kitchenuse = json["kitchenuse"].intValue
+        user.lawnspace = json["lawnspace"].intValue
+        user.sag = json["sag"].intValue
+        user.bed = json["bed"].intValue
+        user.laundry = json["laundry"].intValue
+        user.food = json["food"].intValue
+        user.howdidyouhear = json["howdidyouhear"].stringValue
+        user.lastcorrespondence = json["lastcorrespondence"].stringValue
+        user.languagesspoken = json["languagesspoken"].stringValue
+        user.URL = json["URL"].stringValue
+        user.isstale = json["isstale"].intValue
+        user.isstale_date = json["isstale_date"].intValue
+        user.isstale_reason = json["isstale_reason"].stringValue
+        user.isunreachable = json["isunreachable"].stringValue
+        user.unreachable_date = json["unreachable_date"].stringValue
+        user.unreachable_reason = json["unreachable_reason"].stringValue
+        user.becomeavailable = json["becomeavailable"].intValue
+        user.set_unavailable_timestamp = json["set_unavailable_timestamp"].intValue
+        user.set_available_timestamp = json["set_available_timestamp"].intValue
+        user.last_unavailability_pester  = json["last_unavailability_pester"].intValue
+        user.hide_donation_status = json["hide_donation_status"].stringValue
+        user.email_opt_out = json["email_opt_out"].intValue
+        user.oid = json["oid"].intValue
+        user.type = json["type"].intValue
+        user.street = json["street"].stringValue
+        user.additional = json["additional"].stringValue
+        user.city = json["city"].stringValue
+        user.province = json["province"].stringValue
+        user.postal_code = json["postal_code"].intValue
+        user.country = json["country"].stringValue
+        user.latitude = json["latitude"].doubleValue
+        user.longitude = json["longitude"].doubleValue
+        user.source = json["source"].intValue
+        user.node_notify_mailalert = json["node_notify_mailalert"].intValue
+        user.comment_notify_mailalert = json["comment_notify_mailalert"].intValue
         
         return user
     }
-}
-
-struct Notifications
-{
-    static let LoginName = "login"
-    static let LoginDataKey = "user"
 }
