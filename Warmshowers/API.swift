@@ -8,6 +8,7 @@
 
 import Alamofire
 import SwiftyJSON
+import BrightFutures
 
 public class API
 {
@@ -40,16 +41,22 @@ public class API
         self.notificationCenter = notificationCenter
     }
     
-    public func login(username: String, password: String)
+    /**
+        :params: username String
+        :params: password String
+    
+        :returns: Future<User>
+    */
+    public func login(username: String, password: String) -> Future<User>
     {
+        let promise = Promise<User>()
+        
         Alamofire.request(.POST, BaseURL + LoginURL, parameters: ["username": username, "password": password])
             .responseJSON { (request, response, json, error) in
                 if error != nil {
-                    // log etc.
                     log.error(error?.description)
+                    promise.failure(error!)
                 } else {
-                    
-
                     if response?.statusCode == Status.LoginOk {
                         log.info("\(username) logged in with status \(response?.statusCode)")
                         var json = JSON(json!)
@@ -60,33 +67,43 @@ public class API
                         let user = self.deserializeUserJson(json)
                         self.username = username
                         self.password = password
+                        
+                        promise.success(user)
                     } else if response?.statusCode == Status.AlreadyLoggedIn {
                         log.info("\(username) already logged in with status \(response?.statusCode)")
+                        promise.failure(NSError(domain: "User already logged in", code: Status.AlreadyLoggedIn, userInfo: nil))
                     } else {
                         log.info("\(username) bad credentials with status \(response?.statusCode)")
+                        promise.failure(NSError(domain: "User already logged in", code: Status.AlreadyLoggedIn, userInfo: nil))
                     }
-                    
-                    
-//                    self.notificationCenter.postNotificationName(
-//                        Notifications.LoginName,
-//                        object: nil,
-//                        userInfo: [Notifications.LoginDataKey: user]
-//                    )
                 }
         }
+        
+        return promise.future
     }
     
-    public func logout(username: String, password: String)
+    /**
+        :params: username String
+        :params: password String
+        
+        :returns: Future<Bool>
+    */
+    public func logout(username: String, password: String) -> Future<Bool>
     {
+        let promise = Promise<Bool>()
+        
         Alamofire.request(.POST, BaseURL + LogoutURL, parameters: ["username": username, "password": password])
             .responseJSON { (request, response, json, error) in
                 if error != nil {
-                    // log etc.
                     log.error(error?.description)
+                    promise.failure(error!)
                 } else {
                     log.info("Logged out \(username) with status \(response?.statusCode)")
+                    promise.success(true)
                 }
         }
+        
+        return promise.future
     }
     
     public func hostsByKeyword(keyword: String, limit: Int = 4, page: Int = 0)

@@ -15,6 +15,9 @@ class TestViewController: UIViewController
     @IBAction func correctLogin(sender: AnyObject)
     {
         api.login(APISecrets.username, password: APISecrets.password)
+            .onSuccess() { user in
+            log.info(user.name)
+        }
     }
     
     @IBAction func incorrectLogin(sender: AnyObject)
