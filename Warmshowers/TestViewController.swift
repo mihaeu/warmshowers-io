@@ -38,4 +38,11 @@ class TestViewController: UIViewController
             }
         }
     }
+    
+    @IBAction func searchById()
+    {
+        api.getUser(1165).onSuccess() { user in
+            println("got \(user.name)")
+        }
+    }
 }

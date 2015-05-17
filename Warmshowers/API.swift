@@ -16,12 +16,14 @@ public class API
     /// Alamofire serves a singleton, but we want to be able to mock this
     var manager: Manager
     
-    public let BaseURL = "https://www.warmshowers.org"
-    public let LoginURL = "/services/rest/user/login"
-    public let LogoutURL = "/services/rest/user/logout"
-    public let GetPrivateMessagesURL = "/services/rest/message/get"
-    public let HostsByKeyword = "/services/rest/hosts/by_keyword"
-    public let GetUser = "/services/rest/user/"
+    public struct Paths {
+        static let Login = "https://www.warmshowers.org/services/rest/user/login"
+        static let Logout = "https://www.warmshowers.org/services/rest/user/logout"
+        static let GetPrivateMessages = "https://www.warmshowers.org/services/rest/message/get"
+        static let HostsByKeyword = "https://www.warmshowers.org/services/rest/hosts/by_keyword"
+        static let GetUser = "https://www.warmshowers.org/services/rest/user/"
+    }
+
     
     public var sessid: String?
     public var session_name: String?
@@ -60,7 +62,7 @@ public class API
     {
         let promise = Promise<User>()
         
-        Alamofire.request(.POST, BaseURL + LoginURL, parameters: ["username": username, "password": password])
+        Alamofire.request(.POST, Paths.Login, parameters: ["username": username, "password": password])
             .responseJSON { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
@@ -103,7 +105,7 @@ public class API
     {
         let promise = Promise<Bool>()
         
-        Alamofire.request(.POST, BaseURL + LogoutURL, parameters: ["username": username, "password": password])
+        Alamofire.request(.POST, Paths.Logout, parameters: ["username": username, "password": password])
             .responseJSON { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
@@ -132,7 +134,7 @@ public class API
     {
         let promise = Promise<[Int:User]>()
         
-        Alamofire.request(.POST, BaseURL + HostsByKeyword, parameters: ["keyword": keyword, "limit": limit, "page": page])
+        Alamofire.request(.POST, Paths.HostsByKeyword, parameters: ["keyword": keyword, "limit": limit, "page": page])
             .responseJSON { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
@@ -164,7 +166,7 @@ public class API
     {
         let promise = Promise<User>()
         
-        Alamofire.request(.GET, "\(BaseURL)\(GetUser)\(userId)", parameters: nil)
+        Alamofire.request(.GET, "\(Paths.GetUser)\(userId)", parameters: nil)
             .responseJSON { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)

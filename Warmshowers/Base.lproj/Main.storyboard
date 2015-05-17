@@ -262,6 +262,15 @@
                                     <action selector="searchByKeyword:" destination="0hH-on-tRO" eventType="touchUpInside" id="EMq-II-nUc"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M57-rs-X2D">
+                                <rect key="frame" x="229" y="172" width="143" height="30"/>
+                                <state key="normal" title="Search for user by id">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="searchById" destination="0hH-on-tRO" eventType="touchUpInside" id="6SJ-69-HfU"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -273,8 +282,10 @@
                             <constraint firstItem="fNZ-pP-yfn" firstAttribute="top" secondItem="zdn-TZ-OKi" secondAttribute="bottom" constant="8" symbolic="YES" id="kfp-L4-Egr"/>
                             <constraint firstItem="fNZ-pP-yfn" firstAttribute="centerX" secondItem="zdn-TZ-OKi" secondAttribute="centerX" id="mGG-Xp-Yac"/>
                             <constraint firstItem="zdn-TZ-OKi" firstAttribute="centerX" secondItem="eP9-AD-9n5" secondAttribute="centerX" id="r0E-nv-D0l"/>
+                            <constraint firstItem="M57-rs-X2D" firstAttribute="leading" secondItem="zdn-TZ-OKi" secondAttribute="leading" id="tlW-XM-iFP"/>
                             <constraint firstItem="fTf-Th-CdM" firstAttribute="top" secondItem="jQb-0Z-JVt" secondAttribute="bottom" id="vce-wC-hN5"/>
                             <constraint firstItem="LEd-jG-31P" firstAttribute="top" secondItem="fTf-Th-CdM" secondAttribute="bottom" constant="8" symbolic="YES" id="wKg-ZF-ZUv"/>
+                            <constraint firstItem="M57-rs-X2D" firstAttribute="top" secondItem="fNZ-pP-yfn" secondAttribute="bottom" constant="8" symbolic="YES" id="ye0-SG-7t7"/>
                         </constraints>
                     </view>
                 </viewController>
