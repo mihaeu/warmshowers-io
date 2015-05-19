@@ -44,6 +44,8 @@ public class API
         self.manager = manager
     }
     
+    // MARK: Authentication API Methods
+    
     /**
         Login a user.
     
@@ -62,7 +64,7 @@ public class API
     {
         let promise = Promise<User>()
         
-        Alamofire.request(.POST, Paths.Login, parameters: ["username": username, "password": password])
+        manager.request(.POST, Paths.Login, parameters: ["username": username, "password": password])
             .responseJSON { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
@@ -105,7 +107,7 @@ public class API
     {
         let promise = Promise<Bool>()
         
-        Alamofire.request(.POST, Paths.Logout, parameters: ["username": username, "password": password])
+        manager.request(.POST, Paths.Logout, parameters: ["username": username, "password": password])
             .responseJSON { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
@@ -113,6 +115,34 @@ public class API
                 } else {
                     log.info("Logged out \(username) with status \(response?.statusCode)")
                     promise.success(true)
+                }
+        }
+        
+        return promise.future
+    }
+    
+    // MARK: Search API Methods
+    
+    /**
+    Get a single user by Id.
+    
+    :param: userId Int
+    
+    :return: Future<User>
+    */
+    public func getUser(userId: Int) -> Future<User>
+    {
+        let promise = Promise<User>()
+        
+        manager.request(.GET, "\(Paths.GetUser)\(userId)", parameters: nil)
+            .responseJSON { (request, response, json, error) in
+                if error != nil {
+                    log.error(error?.description)
+                    promise.failure(error!)
+                } else {
+                    log.info("Got user by id \(response?.statusCode)")
+                    var json = JSON(json!)
+                    promise.success(self.deserializeUserJson(json))
                 }
         }
         
@@ -130,11 +160,11 @@ public class API
     
         :returns: Future<[Int:User]>
     */
-    public func hostsByKeyword(keyword: String, limit: Int = 4, page: Int = 0) -> Future<[Int:User]>
+    public func searchByKeyword(keyword: String, limit: Int = 4, page: Int = 0) -> Future<[Int:User]>
     {
         let promise = Promise<[Int:User]>()
         
-        Alamofire.request(.POST, Paths.HostsByKeyword, parameters: ["keyword": keyword, "limit": limit, "page": page])
+        manager.request(.POST, Paths.HostsByKeyword, parameters: ["keyword": keyword, "limit": limit, "page": page])
             .responseJSON { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
@@ -156,31 +186,28 @@ public class API
     }
     
     /**
-        Get a single user by Id.
+        Search for users by location.
+        
+        :params:
     
-        :param: userId Int
-    
-        :return: Future<User>
+        :returns: Future<[Int:User]>
     */
-    public func getUser(userId: Int) -> Future<User>
+    public func searchByLocation()
     {
-        let promise = Promise<User>()
         
-        Alamofire.request(.GET, "\(Paths.GetUser)\(userId)", parameters: nil)
-            .responseJSON { (request, response, json, error) in
-                if error != nil {
-                    log.error(error?.description)
-                    promise.failure(error!)
-                } else {
-                    log.info("Got user by id \(response?.statusCode)")
-                    var json = JSON(json!)
-                    promise.success(self.deserializeUserJson(json))
-                }
-        }
-        
-        return promise.future
     }
+
+//    Read feedback (/user//json_recommendations)
+//    Create feedback (/services/rest/node)
     
+//    Send a private message (not replying to existing) (/services/rest/message/send)
+//    Reply to privatemsg (/services/rest/message/reply)
+//    Privatemsg unread count (/services/rest/message/unreadCount)
+//    Retrieve all privatemsgs (/services/rest/message/get)
+//    Read privatemsg thread (/services/rest/message/getThread)
+//    Mark privatemsg thread read (or unread) (/services/rest/message/markThreadRead)
+    
+    // MARK: Deserializers
     
     /**
         Deserializes the JSON user into a User object.
