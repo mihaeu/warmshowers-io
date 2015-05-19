@@ -271,12 +271,32 @@
                                     <action selector="searchById" destination="0hH-on-tRO" eventType="touchUpInside" id="6SJ-69-HfU"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VJS-5f-pDF">
+                                <rect key="frame" x="204" y="210" width="192" height="30"/>
+                                <state key="normal" title="Search for hosts by location">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="byLocation" destination="0hH-on-tRO" eventType="touchUpInside" id="Jn5-zf-h5h"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TeF-As-ION">
+                                <rect key="frame" x="231" y="248" width="138" height="30"/>
+                                <state key="normal" title="Read user feedback">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="getFeedback:" destination="0hH-on-tRO" eventType="touchUpInside" id="dFT-3z-JyH"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="zdn-TZ-OKi" firstAttribute="top" secondItem="LEd-jG-31P" secondAttribute="bottom" constant="8" symbolic="YES" id="7lY-Bf-UC8"/>
                             <constraint firstItem="zdn-TZ-OKi" firstAttribute="leading" secondItem="LEd-jG-31P" secondAttribute="leading" id="AVI-l7-spY"/>
+                            <constraint firstItem="TeF-As-ION" firstAttribute="centerX" secondItem="VJS-5f-pDF" secondAttribute="centerX" id="EET-O3-ggc"/>
                             <constraint firstItem="LEd-jG-31P" firstAttribute="trailing" secondItem="fTf-Th-CdM" secondAttribute="trailing" id="HgE-gX-Nq3"/>
+                            <constraint firstItem="TeF-As-ION" firstAttribute="top" secondItem="VJS-5f-pDF" secondAttribute="bottom" constant="8" symbolic="YES" id="aC5-Zd-QKC"/>
                             <constraint firstItem="fTf-Th-CdM" firstAttribute="leading" secondItem="LEd-jG-31P" secondAttribute="leading" id="cEZ-4T-SYH"/>
                             <constraint firstItem="LEd-jG-31P" firstAttribute="trailing" secondItem="zdn-TZ-OKi" secondAttribute="trailing" id="gKv-fu-381"/>
                             <constraint firstItem="fNZ-pP-yfn" firstAttribute="top" secondItem="zdn-TZ-OKi" secondAttribute="bottom" constant="8" symbolic="YES" id="kfp-L4-Egr"/>
@@ -285,7 +305,9 @@
                             <constraint firstItem="M57-rs-X2D" firstAttribute="leading" secondItem="zdn-TZ-OKi" secondAttribute="leading" id="tlW-XM-iFP"/>
                             <constraint firstItem="fTf-Th-CdM" firstAttribute="top" secondItem="jQb-0Z-JVt" secondAttribute="bottom" id="vce-wC-hN5"/>
                             <constraint firstItem="LEd-jG-31P" firstAttribute="top" secondItem="fTf-Th-CdM" secondAttribute="bottom" constant="8" symbolic="YES" id="wKg-ZF-ZUv"/>
+                            <constraint firstItem="VJS-5f-pDF" firstAttribute="top" secondItem="M57-rs-X2D" secondAttribute="bottom" constant="8" symbolic="YES" id="wlb-21-OXC"/>
                             <constraint firstItem="M57-rs-X2D" firstAttribute="top" secondItem="fNZ-pP-yfn" secondAttribute="bottom" constant="8" symbolic="YES" id="ye0-SG-7t7"/>
+                            <constraint firstItem="VJS-5f-pDF" firstAttribute="centerX" secondItem="M57-rs-X2D" secondAttribute="centerX" id="yvh-AI-paU"/>
                         </constraints>
                     </view>
                 </viewController>

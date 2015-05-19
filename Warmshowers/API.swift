@@ -19,9 +19,12 @@ public class API
     public struct Paths {
         static let Login = "https://www.warmshowers.org/services/rest/user/login"
         static let Logout = "https://www.warmshowers.org/services/rest/user/logout"
-        static let GetPrivateMessages = "https://www.warmshowers.org/services/rest/message/get"
-        static let HostsByKeyword = "https://www.warmshowers.org/services/rest/hosts/by_keyword"
+        
         static let GetUser = "https://www.warmshowers.org/services/rest/user/"
+        static let SearchByKeyword = "https://www.warmshowers.org/services/rest/hosts/by_keyword"
+        static let SearchByLocation = "https://www.warmshowers.org/services/rest/hosts/by_location"
+        
+        static let GetPrivateMessages = "https://www.warmshowers.org/services/rest/message/get"
     }
 
     
@@ -55,8 +58,8 @@ public class API
         it is critical that the user object of the currently logged in user is safed on
         the first login.
     
-        :param: username String
-        :param: password String
+        :param: username
+        :param: password
     
         :returns: Future<User>
     */
@@ -98,8 +101,8 @@ public class API
     /**
         Logout a user.
     
-        :param: username String
-        :param: password String
+        :param: username
+        :param: password
         
         :returns: Future<Bool>
     */
@@ -126,7 +129,7 @@ public class API
     /**
     Get a single user by Id.
     
-    :param: userId Int
+    :param: userId
     
     :return: Future<User>
     */
@@ -154,9 +157,9 @@ public class API
     
         The keyword can either be the username or email of a user or the name of a location.
     
-        :param: keyword     String
-        :param: limit       Int     Default: 4
-        :param: page        Int     Default: 0
+        :param: keyword
+        :param: limit Default: 4
+        :param: page Default: 0
     
         :returns: Future<[Int:User]>
     */
@@ -164,7 +167,7 @@ public class API
     {
         let promise = Promise<[Int:User]>()
         
-        manager.request(.POST, Paths.HostsByKeyword, parameters: ["keyword": keyword, "limit": limit, "page": page])
+        manager.request(.POST, Paths.SearchByKeyword, parameters: ["keyword": keyword, "limit": limit, "page": page])
             .responseJSON { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
@@ -188,15 +191,62 @@ public class API
     /**
         Search for users by location.
         
-        :params:
+        :params: minlat 
+        :params: maxlat
+        :params: minlon
+        :params: maxlon
+        :params: centerlat
+        :params: centerlon
+        :params: limit
     
         :returns: Future<[Int:User]>
     */
-    public func searchByLocation()
+    public func searchByLocation(minlat: Double, maxlat: Double, minlon: Double, maxlon: Double, centerlat: Double, centerlon: Double, limit: Int) -> Future<[Int:User]>
     {
-        
+        let promise = Promise<[Int:User]>()
+        let parameters: [String:AnyObject] = [
+            "minlat": minlat,
+            "maxlat": maxlat,
+            "minlon": minlon,
+            "maxlon": maxlon,
+            "centerlat": centerlat,
+            "centerlon": centerlon,
+            "limit": limit
+        ]
+        manager.request(.POST, Paths.SearchByLocation, parameters: parameters)
+            .responseJSON() { (request, response, json, error) in
+                if error != nil {
+                    log.error(error?.description)
+                    promise.failure(error!)
+                } else {
+                    log.info("Got hosts by location \(response?.statusCode)")
+                    var json = JSON(json!)
+                    var users = [Int:User]()
+                    for (key: String, userJson: JSON) in json["accounts"] {
+                        let uid = key.toInt()!
+                        let user = self.deserializeUserJson(userJson)
+                        users[uid] = user
+                    }
+                    promise.success(users)
+                }
+        }
+        return promise.future
     }
 
+    /**
+        :param: uid User ID
+    
+        :returns: Future<Feedback>
+    */
+    func getFeedbackForUser(uid: Int) -> Future<Feedback>
+    {
+        let promise = Promise<Feedback>()
+        
+        // TODO: implement magic here
+        
+        return promise.future
+    }
+    
 //    Read feedback (/user//json_recommendations)
 //    Create feedback (/services/rest/node)
     

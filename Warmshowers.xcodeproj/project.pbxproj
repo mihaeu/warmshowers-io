@@ -20,6 +20,7 @@
 		846D6BFE1AFD718000144D4F /* OtherProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6BFD1AFD718000144D4F /* OtherProfileViewController.swift */; };
 		846FB3191AFEA58A003F7B25 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846FB3181AFEA58A003F7B25 /* API.swift */; };
 		846FB31B1AFEA7E1003F7B25 /* APISpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846FB31A1AFEA7E1003F7B25 /* APISpec.swift */; };
+		847623CE1B0AF72B00D1F0A1 /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847623CD1B0AF72B00D1F0A1 /* Feedback.swift */; };
 		8485F2381AFBDE8F0054310F /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8485F2371AFBDE8F0054310F /* AuthenticationViewController.swift */; };
 		8485F23B1AFBEB040054310F /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8485F23A1AFBEB040054310F /* Authentication.swift */; };
 		848BC7A71AFBD7FD00974467 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848BC7A61AFBD7FD00974467 /* AppDelegate.swift */; };
@@ -55,6 +56,7 @@
 		846D6BFD1AFD718000144D4F /* OtherProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherProfileViewController.swift; sourceTree = "<group>"; };
 		846FB3181AFEA58A003F7B25 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		846FB31A1AFEA7E1003F7B25 /* APISpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APISpec.swift; sourceTree = "<group>"; };
+		847623CD1B0AF72B00D1F0A1 /* Feedback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
 		8485F2371AFBDE8F0054310F /* AuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthenticationViewController.swift; path = Authentication/AuthenticationViewController.swift; sourceTree = "<group>"; };
 		8485F23A1AFBEB040054310F /* Authentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		848BC7A11AFBD7FD00974467 /* Warmshowers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Warmshowers.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,6 +114,7 @@
 			children = (
 				846D6BF61AFD637A00144D4F /* UserSearch.swift */,
 				846D6BF81AFD63BE00144D4F /* User.swift */,
+				847623CD1B0AF72B00D1F0A1 /* Feedback.swift */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -423,6 +426,7 @@
 				848BC7AA1AFBD7FD00974467 /* Warmshowers.xcdatamodeld in Sources */,
 				848BC7A71AFBD7FD00974467 /* AppDelegate.swift in Sources */,
 				845A72D11B053C95003DBDE6 /* TestViewController.swift in Sources */,
+				847623CE1B0AF72B00D1F0A1 /* Feedback.swift in Sources */,
 				8485F23B1AFBEB040054310F /* Authentication.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
