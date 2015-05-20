@@ -289,13 +289,35 @@
                                     <action selector="getFeedback:" destination="0hH-on-tRO" eventType="touchUpInside" id="dFT-3z-JyH"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bhT-BQ-xbt">
+                                <rect key="frame" x="243" y="285" width="114" height="30"/>
+                                <state key="normal" title="Create feedback">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="createFeedback" destination="0hH-on-tRO" eventType="touchUpInside" id="XMc-Wj-Ma9"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XTw-ER-b6y">
+                                <rect key="frame" x="241" y="323" width="118" height="30"/>
+                                <state key="normal" title="Get all messages">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="getAllMessages" destination="0hH-on-tRO" eventType="touchUpInside" id="M0L-5Z-GpG"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="XTw-ER-b6y" firstAttribute="top" secondItem="bhT-BQ-xbt" secondAttribute="bottom" constant="8" symbolic="YES" id="1GA-F3-9QP"/>
+                            <constraint firstItem="bhT-BQ-xbt" firstAttribute="centerY" secondItem="eP9-AD-9n5" secondAttribute="centerY" id="4tF-XQ-nhA"/>
                             <constraint firstItem="zdn-TZ-OKi" firstAttribute="top" secondItem="LEd-jG-31P" secondAttribute="bottom" constant="8" symbolic="YES" id="7lY-Bf-UC8"/>
                             <constraint firstItem="zdn-TZ-OKi" firstAttribute="leading" secondItem="LEd-jG-31P" secondAttribute="leading" id="AVI-l7-spY"/>
                             <constraint firstItem="TeF-As-ION" firstAttribute="centerX" secondItem="VJS-5f-pDF" secondAttribute="centerX" id="EET-O3-ggc"/>
+                            <constraint firstItem="bhT-BQ-xbt" firstAttribute="centerX" secondItem="TeF-As-ION" secondAttribute="centerX" id="GjQ-js-XpH"/>
                             <constraint firstItem="LEd-jG-31P" firstAttribute="trailing" secondItem="fTf-Th-CdM" secondAttribute="trailing" id="HgE-gX-Nq3"/>
+                            <constraint firstItem="XTw-ER-b6y" firstAttribute="centerX" secondItem="bhT-BQ-xbt" secondAttribute="centerX" id="Oo8-6r-O0i"/>
                             <constraint firstItem="TeF-As-ION" firstAttribute="top" secondItem="VJS-5f-pDF" secondAttribute="bottom" constant="8" symbolic="YES" id="aC5-Zd-QKC"/>
                             <constraint firstItem="fTf-Th-CdM" firstAttribute="leading" secondItem="LEd-jG-31P" secondAttribute="leading" id="cEZ-4T-SYH"/>
                             <constraint firstItem="LEd-jG-31P" firstAttribute="trailing" secondItem="zdn-TZ-OKi" secondAttribute="trailing" id="gKv-fu-381"/>

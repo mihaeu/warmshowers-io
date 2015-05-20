@@ -54,11 +54,38 @@ class TestViewController: UIViewController
             }
         }
     }
+    
     @IBAction func getFeedback(sender: AnyObject)
     {
         api.getFeedbackForUser(1165).onSuccess() { feedback in
-            println("got \(feedback)")
+            for singleFeedback in feedback {
+                println("got \(singleFeedback.userForFeedback)")
+                println("\(singleFeedback.body)")
+            }
         }
 
+    }
+    
+    @IBAction func createFeedback()
+    {
+        let feedback = Feedback(
+            userIdForFeedback: 123456,
+            userForFeedback: "rfay-testuser3-es",
+            body: "Test feedback please ignore. Thx. - Michael",
+            year: 2015,
+            month: 5,
+            rating: Feedback.RatingPositive,
+            type: Feedback.TypeOther
+        )
+        api.createFeedbackForUser(feedback).onSuccess() { success in
+            println("Created feedback \(success)")
+        }.onFailure() { error in
+            println(error)
+        }
+    }
+    
+    @IBAction func getAllMessages()
+    {
+        api.getAllMessages()
     }
 }

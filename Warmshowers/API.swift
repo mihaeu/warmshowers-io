@@ -249,7 +249,7 @@ public class API
         
         let url = String(format: Paths.ReadFeedback, userId)
         manager
-            .request(.POST, Paths.SearchByLocation, parameters: nil)
+            .request(.GET, url, parameters: nil)
             .responseJSON() { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
@@ -258,7 +258,7 @@ public class API
                     var json = JSON(json!)
                     var feedback = [Feedback]()
                     for (key, feedbackJson) in json["recommendations"] {
-                        feedback.append(self.deserializeFeedbackJson(json["recommendation"]))
+                        feedback.append(self.deserializeFeedbackJson(feedbackJson["recommendation"]))
                     }
                     promise.success(feedback)
                 }
