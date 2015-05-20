@@ -16,7 +16,7 @@ public class API
     /// Alamofire serves a singleton, but we want to be able to mock this
     var manager: Manager
     
-    public struct Paths {
+    private struct Paths {
         static let Login = "https://www.warmshowers.org/services/rest/user/login"
         static let Logout = "https://www.warmshowers.org/services/rest/user/logout"
         
@@ -25,6 +25,9 @@ public class API
         static let SearchByLocation = "https://www.warmshowers.org/services/rest/hosts/by_location"
         
         static let GetPrivateMessages = "https://www.warmshowers.org/services/rest/message/get"
+        
+        static let ReadFeedback = "https://www.warmshowers.org/user/%d/json_recommendations"
+        static let CreateFeedback = "https://www.warmshowers.org/services/rest/node"
     }
 
     
@@ -233,38 +236,132 @@ public class API
         return promise.future
     }
 
+    // MARK: Feedback API Methods
+    
     /**
-        :param: uid User ID
+        :param: userId User ID
     
         :returns: Future<[Feedback]>
     */
-    func getFeedbackForUser(uid: Int) -> Future<[Feedback]>
+    func getFeedbackForUser(userId: Int) -> Future<[Feedback]>
     {
         let promise = Promise<[Feedback]>()
         
-        // TODO: implement magic here
+        let url = String(format: Paths.ReadFeedback, userId)
+        manager
+            .request(.POST, Paths.SearchByLocation, parameters: nil)
+            .responseJSON() { (request, response, json, error) in
+                if error != nil {
+                    log.error(error?.description)
+                    promise.failure(error!)
+                } else {
+                    var json = JSON(json!)
+                    var feedback = [Feedback]()
+                    for (key, feedbackJson) in json["recommendations"] {
+                        feedback.append(self.deserializeFeedbackJson(json["recommendation"]))
+                    }
+                    promise.success(feedback)
+                }
+            }
         
         return promise.future
     }
     
+    /**
+        :param: Feedback
     
+        :returns: Future<Bool>
+    */
+    func createFeedbackForUser(feedback: Feedback) -> Future<Bool>
+    {
+        let promise = Promise<Bool>()
+        
+        let parameters: [String:AnyObject] = [
+            "node[type]": "trust_referral",
+            "node[field_member_i_trust][0][uid][uid]": feedback.userForFeedback,
+            "node[body]": feedback.body,
+            "node[field_guest_or_host][value]": feedback.type,
+            "node[field_rating][value]": feedback.rating,
+            "node[field_hosting_date][0][value][year]": feedback.year,
+            "node[field_hosting_date][0][value][month]": feedback.month
+        ]
+        manager
+            .request(.POST, Paths.CreateFeedback, parameters: parameters)
+            .responseJSON() { (request, response, json, error) in
+                if error != nil {
+                    log.error(error?.description)
+                    promise.failure(error!)
+                } else {
+                    promise.success(true)
+                }
+        }
+        
+        return promise.future
+    }
+
+    // MARK: Message API Methods
     
-//    Read feedback (/user//json_recommendations)
-//    Create feedback (/services/rest/node)
+    public func sendMessage()
+    {
+        // TODO:   Send a private message (not replying to existing) (/services/rest/message/send)
+    }
     
-//    Send a private message (not replying to existing) (/services/rest/message/send)
-//    Reply to privatemsg (/services/rest/message/reply)
-//    Privatemsg unread count (/services/rest/message/unreadCount)
-//    Retrieve all privatemsgs (/services/rest/message/get)
-//    Read privatemsg thread (/services/rest/message/getThread)
-//    Mark privatemsg thread read (or unread) (/services/rest/message/markThreadRead)
+    public func replyMessage()
+    {
+        // TODO:   Reply to privatemsg (/services/rest/message/reply)
+    }
+    
+    public func getUnreadMessagesCount()
+    {
+        // TODO:   Privatemsg unread count (/services/rest/message/unreadCount)
+    }
+    
+    public func getAllMessages()
+    {
+        // TODO:   Retrieve all privatemsgs (/services/rest/message/get)
+    }
+
+    public func readConversation()
+    {
+        // TODO:   Read privatemsg thread (/services/rest/message/getThread)
+    }
+    
+    public func markConversationAsRead()
+    {
+        // TODO:   Mark privatemsg thread read (or unread) (/services/rest/message/markThreadRead)
+    }
     
     // MARK: Deserializers
     
     /**
+        :param: json
+    
+        :returns: Feedback
+    */
+    private func deserializeFeedbackJson(json: JSON) -> Feedback
+    {
+        let timestamp = json["field_hosting_date_value"].doubleValue
+        let date = NSDate(timeIntervalSince1970: timestamp)
+        let calendar = NSCalendar.currentCalendar()
+        let components = calendar.components(.CalendarUnitYear | .CalendarUnitMonth, fromDate: date)
+        let year = components.year
+        let month = components.month
+
+        return Feedback(
+            userIdForFeedback: json["uid_1"].intValue,
+            userForFeedback: json["name_1"].stringValue,
+            body: json["body"].stringValue,
+            year: year,
+            month: month,
+            rating: json["field_rating_value"].stringValue,
+            type: json["field_guest_or_host_value"].stringValue
+        )
+    }
+    
+    /**
         Deserializes the JSON user into a User object.
     
-        // TODO: this should probably be an optional in case the JSON is messed up
+        // TODO: what if the JSON is messed up?
     
         :param: json JSON Swifty JSON data from the Alamofire request.
     
