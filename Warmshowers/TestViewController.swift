@@ -14,7 +14,7 @@ class TestViewController: UIViewController
     
     @IBAction func correctLogin(sender: AnyObject)
     {
-        api.login(APISecrets.username, password: APISecrets.password)
+        api.login(APISecrets.Username, password: APISecrets.Password)
             .onSuccess() { user in
             log.info(user.name)
         }
@@ -27,7 +27,7 @@ class TestViewController: UIViewController
 
     @IBAction func logout(sender: AnyObject)
     {
-        api.logout(APISecrets.username, password: APISecrets.password)
+        api.logout(APISecrets.Username, password: APISecrets.Password)
     }
     
     @IBAction func searchByKeyword(sender: AnyObject)

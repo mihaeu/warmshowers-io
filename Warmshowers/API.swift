@@ -236,16 +236,18 @@ public class API
     /**
         :param: uid User ID
     
-        :returns: Future<Feedback>
+        :returns: Future<[Feedback]>
     */
-    func getFeedbackForUser(uid: Int) -> Future<Feedback>
+    func getFeedbackForUser(uid: Int) -> Future<[Feedback]>
     {
-        let promise = Promise<Feedback>()
+        let promise = Promise<[Feedback]>()
         
         // TODO: implement magic here
         
         return promise.future
     }
+    
+    
     
 //    Read feedback (/user//json_recommendations)
 //    Create feedback (/services/rest/node)
