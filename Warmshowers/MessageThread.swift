@@ -8,6 +8,7 @@
 
 public class MessageThread
 {
+    var id: Int
     var readAll: Bool?
     var to: Int?
     var messageCount: Int?
@@ -16,35 +17,12 @@ public class MessageThread
     
     var user: User?
     var messages: [Message]?
+    var subject: String?
+    var participants: [User]?
     
-//    "messages": [
-//    {
-//    "files": [ ],
-//    "mid": "972709",
-//    "author": {
-//    "uid": "1",
-//    "name": "rfay"
-//    },
-//    "subject": "Test to rfay-testuser on live site",
-//    "body": "test to rfay-testuser on site ",
-//    "timestamp": "1422406685",
-//    "format": "1",
-//    "is_new": "0",
-//    "thread_id": "972709"
-//    },
-//    {
-//    "files": [ ],
-//    "mid": "972711",
-//    "author": {
-//    "uid": "12075",
-//    "name": "rfay-testuser"
-//    },
-//    "subject": "Test to rfay-testuser on live site",
-//    "body": "Reply from rfay-testuser, should work ok.\ \ ",
-//    "timestamp": "1422406736",
-//    "format": "1",
-//    "is_new": "0",
-//    "thread_id": "972709"
-//}
-//],
+    // TODO: init ...
+    init(id: Int)
+    {
+        self.id = id
+    }
 }

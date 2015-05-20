@@ -26,6 +26,10 @@ public class API
         
         static let GetPrivateMessages = "https://www.warmshowers.org/services/rest/message/get"
         static let GetUnreadMessagesCount = "https://www.warmshowers.org/services/rest/message/unreadCount"
+        static let ReadMessageThread = "https://www.warmshowers.org/services/rest/message/getThread"
+        static let MarkMessageThread = "https://www.warmshowers.org/services/rest/message/markThreadRead"
+        static let SendMessage = "https://www.warmshowers.org/services/rest/message/send"
+        static let ReplyMessage = "https://www.warmshowers.org/services/rest/message/reply"
         
         static let ReadFeedback = "https://www.warmshowers.org/user/%d/json_recommendations"
         static let CreateFeedback = "https://www.warmshowers.org/services/rest/node"
@@ -55,6 +59,16 @@ public class API
         static let FeedbackRating = "node[field_rating][value]"
         static let FeedbackYear = "node[field_hosting_date][0][value][year]"
         static let FeedbackMonth = "node[field_hosting_date][0][value][month]"
+        
+        static let MessageRecipients = "recipients"
+        static let MessageSubject = "subject"
+        static let MessageBody = "body"
+        
+        static let MessageThreadId = "thread_id"
+        static let MessageThreadStatus = "status"
+        static let MessageThreadStatusRead = 0
+        static let MessageThreadStatusUnread = 1
+        
     }
     
     public var loggedInUser: User?
@@ -360,10 +374,34 @@ public class API
     
         https://github.com/warmshowers/Warmshowers.org/wiki/Warmshowers-RESTful-Services-for-Mobile-Apps#wiki-message_send
     
+        :param: recipients
+        :param: subject
+        :param: body
+    
+        :returns: Future<Bool>
     */
-    public func sendMessage()
+    public func sendMessage(recipients: [User], subject: String, body: String) -> Future<Bool>
     {
-        // TODO:   Send a private message (not replying to existing) (/services/rest/message/send)
+        let promise = Promise<Bool>()
+        let recipientsString = ",".join(recipients.map {$0.name})
+        
+        let parameters: [String:AnyObject] = [
+            Parameters.MessageRecipients: recipientsString,
+            Parameters.MessageSubject: subject,
+            Parameters.MessageBody: body
+        ]
+        manager
+            .request(.POST, Paths.SendMessage, parameters: parameters)
+            .responseJSON() { (request, response, json, error) in
+                if error != nil {
+                    log.error(error?.description)
+                    promise.failure(error!)
+                } else {
+                    promise.success(true)
+                }
+        }
+        
+        return promise.future
     }
     
     /**
@@ -373,10 +411,32 @@ public class API
         mix this and `sendMessage`.
     
         https://github.com/warmshowers/Warmshowers.org/wiki/Warmshowers-RESTful-Services-for-Mobile-Apps#wiki-privatemsg_reply
+    
+        :param: threadId
+        :param: body
+    
+        :returns: Future<Bool>
     */
-    public func replyMessage()
+    public func replyMessage(threadId: Int, body: String) -> Future<Bool>
     {
-        // TODO:   Reply to privatemsg (/services/rest/message/reply)
+        let promise =  Promise<Bool>()
+        
+        let parameters: [String:AnyObject] = [
+            Parameters.MessageThreadId: threadId,
+            Parameters.MessageBody: body
+        ]
+        manager
+            .request(.POST, Paths.ReplyMessage, parameters: parameters)
+            .responseJSON() { (request, response, json, error) in
+                if error != nil {
+                    log.error(error?.description)
+                    promise.failure(error!)
+                } else {
+                    promise.success(true)
+                }
+        }
+        
+        return promise.future
     }
     
     /**
@@ -446,9 +506,24 @@ public class API
     
         :param: threadId
     */
-    public func readMessageThread(threadId: Int)
+    public func readMessageThread(threadId: Int) -> Future<MessageThread>
     {
-        // TODO:   Read privatemsg thread (/services/rest/message/getThread)
+        let promise = Promise<MessageThread>()
+        
+        manager
+            .request(.POST, Paths.ReadMessageThread, parameters: [Parameters.MessageThreadId: threadId])
+            .responseJSON() { (request, response, json, error) in
+                if error != nil {
+                    log.error(error?.description)
+                    promise.failure(error!)
+                } else {
+                    var json = JSON(json!)
+                    var messageThread = self.deserializeMessageThreadJson(json)
+                    promise.success(messageThread)
+                }
+            }
+        
+        return promise.future
     }
     
     /**
@@ -456,12 +531,33 @@ public class API
     
         https://github.com/warmshowers/Warmshowers.org/wiki/Warmshowers-RESTful-Services-for-Mobile-Apps#wiki-markThreadRead
     
-        :param: Int threadId
-        :param: Bool True if the message thread should be marked as read or false if it should be marked unread.
+        :param: threadId
+        :param: unread True if the message thread should be marked as unread or false if it should be marked read.
+    
+        :returns: Future<Bool>
     */
-    public func markMessageThreadStatus(threadId: Int, read: Bool)
+    public func markMessageThreadStatus(threadId: Int, unread: Bool) -> Future<Bool>
     {
-        // TODO:   Mark privatemsg thread read (or unread) (/services/rest/message/markThreadRead)
+        let promise = Promise<Bool>()
+        
+        let parameters: [String:AnyObject] = [
+            Parameters.MessageThreadId: threadId,
+            Parameters.MessageThreadStatus: unread
+        ]
+        manager
+            .request(.POST, Paths.MarkMessageThread, parameters: parameters)
+            .responseJSON() { (request, response, json, error) in
+                if error != nil {
+                    log.error(error?.description)
+                    promise.failure(error!)
+                } else {
+                    var json = JSON(json!)
+                    promise.success(json.boolValue)
+                }
+        }
+        
+        return promise.future
+        
     }
     
     // MARK: Deserializers
@@ -480,13 +576,15 @@ public class API
         
         var message = Message(
             threadId: json["thread_id"].intValue,
-            subject: json["subject"].stringValue,
-            participants: users,
-            count: json["count"].intValue,
-            isNew: json["is_new"].boolValue,
-            lastUpdatedTimestamp: json["last_updated"].intValue,
-            threadStartedTimestamp: json["thread_started"].intValue
+            subject: json["subject"].stringValue
         )
+        
+        message.participants = users
+        message.count = json["count"].intValue
+        message.isNew = json["is_new"].boolValue
+        message.lastUpdatedTimestamp = json["last_updated"].intValue
+        message.threadStartedTimestamp = json["thread_started"].intValue
+        
         return message
     }
     
@@ -513,6 +611,34 @@ public class API
             rating: json["field_rating_value"].stringValue,
             type: json["field_guest_or_host_value"].stringValue
         )
+    }
+    
+    /**
+        :param: json
+    
+        :returns: MessageThread
+    */
+    private func deserializeMessageThreadJson(json: JSON) -> MessageThread
+    {
+        var participants = [User]()
+        for (key, userJson) in json["participants"] {
+            var user = User(uid: userJson["uid"].intValue, name: userJson["name"].stringValue)
+            participants.append(user)
+        }
+        
+        var user = User(uid: json["user"]["uid"].intValue, name: json["user"]["name"].stringValue)
+        
+        var messageThread = MessageThread(id: json["thread_id"].intValue)
+        messageThread.participants = participants
+        messageThread.readAll = json["read_all"].boolValue
+        messageThread.to = json["to"].intValue
+        messageThread.messageCount = json["message_count"].intValue
+        messageThread.from = json["from"].intValue
+        messageThread.start = json["start"].intValue
+        messageThread.user = user
+        messageThread.subject = json["subject"].stringValue
+        
+        return messageThread
     }
     
     /**

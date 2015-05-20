@@ -19,4 +19,14 @@ struct Storyboard
     
     // UI
     static let LeftCalloutFrame = CGRect(x: 0, y: 0, width: 59, height: 59)
+    
+    // Colors
+    static let DarkPrimaryColor = "#1976D2"
+    static let PrimaryColor = "#2196F3"
+    static let LightPrimaryColor = "#BBDEFB"
+    static let TextItemColor = "#FFFFFF"
+    static let AccentColor = "#03A9F4"
+    static let PrimaryTextColor = "#212121"
+    static let SecondaryTextColor = "#727272"
+    static let DividerColor = "#B6B6B6"
 }

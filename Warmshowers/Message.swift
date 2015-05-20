@@ -11,23 +11,18 @@ public class Message
     var threadId: Int
     var subject: String
     
-    var count: Int
-    var isNew: Bool
-    var participants: [User]
+    var count: Int?
+    var isNew: Bool?
+    var participants: [User]?
     
-    var lastUpdatedTimestamp: Int
-    var threadStartedTimestamp: Int
+    var lastUpdatedTimestamp: Int?
+    var threadStartedTimestamp: Int?
     
-    init(threadId: Int, subject: String, participants: [User], count: Int, isNew: Bool, lastUpdatedTimestamp: Int, threadStartedTimestamp: Int)
+    var author: User?
+    
+    init(threadId: Int, subject: String)
     {
         self.threadId = threadId
         self.subject = subject
-        
-        self.count = count
-        self.isNew = isNew
-        self.participants = participants
-        
-        self.lastUpdatedTimestamp = lastUpdatedTimestamp
-        self.threadStartedTimestamp = threadStartedTimestamp
     }    
 }
