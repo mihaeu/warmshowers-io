@@ -32,6 +32,28 @@ class MessageThreadViewController: UIViewController, UITableViewDataSource
         }
     }
     
+    override func viewDidLoad()
+    {
+        self.navigationItem.title = "Conversation"
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Reply", style: UIBarButtonItemStyle.Plain, target: self, action: "replyToThread")
+    }
+    
+    func replyToThread()
+    {
+        performSegueWithIdentifier(Storyboard.ShowNewMessageSegue, sender: messageThread)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
+        if segue.identifier == Storyboard.ShowNewMessageSegue {
+            if let destinationViewController = segue.destinationViewController as? NewMessageViewController {
+                if let messageThreadForReply = sender as? MessageThread {
+                    destinationViewController.messageThread = messageThreadForReply
+                }
+            }
+        }
+    }
+    
     // MARK: UITableViewDataSource
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int

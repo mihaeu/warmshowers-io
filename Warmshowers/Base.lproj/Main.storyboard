@@ -175,47 +175,47 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Subject" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fod-Kc-vsa">
-                                <rect key="frame" x="16" y="116" width="568" height="30"/>
+                                <rect key="frame" x="16" y="110" width="568" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="User" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c0R-XI-1h1">
+                                <rect key="frame" x="16" y="72" width="568" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Your message ..." translatesAutoresizingMaskIntoConstraints="NO" id="0Qp-CN-JpZ">
-                                <rect key="frame" x="16" y="154" width="568" height="389"/>
+                                <rect key="frame" x="16" y="148" width="568" height="400"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="DeX-JD-F1H">
-                                <rect key="frame" x="16" y="72" width="568" height="44"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="KeO-mv-keV" id="Cf0-dN-vpf"/>
-                                </connections>
-                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="0Qp-CN-JpZ" firstAttribute="top" secondItem="6v2-O5-DX9" secondAttribute="bottom" constant="90" id="8OX-NA-IQo"/>
-                            <constraint firstItem="0Qp-CN-JpZ" firstAttribute="leading" secondItem="reU-MG-z0J" secondAttribute="leadingMargin" id="A3v-xq-E3z"/>
-                            <constraint firstItem="uwA-gl-Mjx" firstAttribute="top" secondItem="0Qp-CN-JpZ" secondAttribute="bottom" constant="8" id="C4J-oh-BYD"/>
-                            <constraint firstItem="Fod-Kc-vsa" firstAttribute="trailing" secondItem="reU-MG-z0J" secondAttribute="trailingMargin" id="GUj-VD-lN6"/>
-                            <constraint firstItem="Fod-Kc-vsa" firstAttribute="leading" secondItem="reU-MG-z0J" secondAttribute="leadingMargin" id="KBW-eO-PeR"/>
-                            <constraint firstItem="DeX-JD-F1H" firstAttribute="trailing" secondItem="reU-MG-z0J" secondAttribute="trailingMargin" id="MKQ-Mv-0O1"/>
-                            <constraint firstItem="DeX-JD-F1H" firstAttribute="top" secondItem="6v2-O5-DX9" secondAttribute="bottom" constant="8" id="Q0N-ax-bsG"/>
-                            <constraint firstItem="0Qp-CN-JpZ" firstAttribute="trailing" secondItem="reU-MG-z0J" secondAttribute="trailingMargin" id="X9B-qB-YcI"/>
-                            <constraint firstItem="DeX-JD-F1H" firstAttribute="leading" secondItem="reU-MG-z0J" secondAttribute="leadingMargin" id="mlQ-8d-klT"/>
-                            <constraint firstItem="Fod-Kc-vsa" firstAttribute="top" secondItem="DeX-JD-F1H" secondAttribute="bottom" id="yZK-Cz-OUc"/>
+                            <constraint firstItem="Fod-Kc-vsa" firstAttribute="leading" secondItem="reU-MG-z0J" secondAttribute="leadingMargin" id="AKO-3B-bxC"/>
+                            <constraint firstItem="Fod-Kc-vsa" firstAttribute="trailing" secondItem="reU-MG-z0J" secondAttribute="trailingMargin" id="DfM-dh-dp1"/>
+                            <constraint firstItem="0Qp-CN-JpZ" firstAttribute="leading" secondItem="Fod-Kc-vsa" secondAttribute="leading" id="Mcw-BE-ozk"/>
+                            <constraint firstItem="Fod-Kc-vsa" firstAttribute="trailing" secondItem="c0R-XI-1h1" secondAttribute="trailing" id="R85-kg-kKj"/>
+                            <constraint firstItem="c0R-XI-1h1" firstAttribute="top" secondItem="6v2-O5-DX9" secondAttribute="bottom" constant="8" symbolic="YES" id="TNa-8u-PxM"/>
+                            <constraint firstItem="0Qp-CN-JpZ" firstAttribute="top" secondItem="Fod-Kc-vsa" secondAttribute="bottom" constant="8" symbolic="YES" id="WAb-oc-qTh"/>
+                            <constraint firstItem="Fod-Kc-vsa" firstAttribute="leading" secondItem="c0R-XI-1h1" secondAttribute="leading" id="f6p-cM-Ypd"/>
+                            <constraint firstItem="0Qp-CN-JpZ" firstAttribute="trailing" secondItem="Fod-Kc-vsa" secondAttribute="trailing" id="qId-1N-bQL"/>
+                            <constraint firstItem="uwA-gl-Mjx" firstAttribute="top" secondItem="0Qp-CN-JpZ" secondAttribute="bottom" constant="8" symbolic="YES" id="r7u-9Y-wU9"/>
+                            <constraint firstItem="Fod-Kc-vsa" firstAttribute="top" secondItem="c0R-XI-1h1" secondAttribute="bottom" constant="8" symbolic="YES" id="wZK-Jy-Ul0"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="bodyTextView" destination="0Qp-CN-JpZ" id="j5U-K3-uWq"/>
                         <outlet property="searchDisplayController" destination="vUZ-Iz-iNb" id="Uc9-Rq-lOr"/>
+                        <outlet property="subjectTextField" destination="Fod-Kc-vsa" id="jDZ-uK-zXf"/>
+                        <outlet property="userTextField" destination="c0R-XI-1h1" id="j5G-41-6uO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FRs-8j-fLG" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <searchDisplayController id="vUZ-Iz-iNb">
                     <connections>
                         <outlet property="delegate" destination="KeO-mv-keV" id="dTB-TV-Jcl"/>
-                        <outlet property="searchBar" destination="DeX-JD-F1H" id="Kfo-un-lRy"/>
                         <outlet property="searchContentsController" destination="KeO-mv-keV" id="QSe-4h-vyf"/>
                         <outlet property="searchResultsDataSource" destination="KeO-mv-keV" id="ATK-0e-lWS"/>
                         <outlet property="searchResultsDelegate" destination="KeO-mv-keV" id="Twv-YX-cQP"/>
@@ -233,7 +233,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Kuq-yB-2Z9"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="3vA-zt-HNa">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="3eq-oR-eiY">
@@ -253,6 +253,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="3eq-oR-eiY" id="qAd-iG-Cos"/>
+                        <segue destination="KeO-mv-keV" kind="show" identifier="Show New Message" id="w7K-ZR-gAh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hwT-pP-Nch" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -507,4 +508,7 @@
         <image name="tab-messages" width="24" height="24"/>
         <image name="tab-profile" width="24" height="24"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="w7K-ZR-gAh"/>
+    </inferredMetricsTieBreakers>
 </document>
