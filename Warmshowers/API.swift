@@ -25,6 +25,7 @@ public class API
         static let SearchByLocation = "https://www.warmshowers.org/services/rest/hosts/by_location"
         
         static let GetPrivateMessages = "https://www.warmshowers.org/services/rest/message/get"
+        static let GetUnreadMessagesCount = "https://www.warmshowers.org/services/rest/message/unreadCount"
         
         static let ReadFeedback = "https://www.warmshowers.org/user/%d/json_recommendations"
         static let CreateFeedback = "https://www.warmshowers.org/services/rest/node"
@@ -311,14 +312,52 @@ public class API
         // TODO:   Reply to privatemsg (/services/rest/message/reply)
     }
     
-    public func getUnreadMessagesCount()
+    /**
+        :returns: Future<Int>
+    */
+    public func getUnreadMessagesCount() -> Future<Int>
     {
-        // TODO:   Privatemsg unread count (/services/rest/message/unreadCount)
+        let promise = Promise<Int>()
+        
+        manager
+            .request(.POST, Paths.GetUnreadMessagesCount, parameters: nil)
+            .responseJSON() { (request, response, json, error) in
+                if error != nil {
+                    log.error(error?.description)
+                    promise.failure(error!)
+                } else {
+                    var json = JSON(json!)
+                    promise.success(json.intValue)
+                }
+        }
+
+        return promise.future
     }
     
-    public func getAllMessages()
+    /**
+        :returns: Future<Message>
+    */
+    public func getAllMessages() -> Future<[Message]>
     {
-        // TODO:   Retrieve all privatemsgs (/services/rest/message/get)
+        let promise = Promise<[Message]>()
+        
+        manager
+            .request(.POST, Paths.GetPrivateMessages, parameters: nil)
+            .responseJSON() { (request, response, json, error) in
+                if error != nil {
+                    log.error(error?.description)
+                    promise.failure(error!)
+                } else {
+                    var json = JSON(json!)
+                    var messages = [Message]()
+                    for (key, messageJson) in json {
+                        messages.append(self.deserializeMessageJson(messageJson))
+                    }
+                    promise.success(messages)
+                }
+        }
+        
+        return promise.future
     }
 
     public func readConversation()
@@ -332,6 +371,30 @@ public class API
     }
     
     // MARK: Deserializers
+    
+    /**
+        :param: json
+    
+        :returns: Message
+    */
+    private func deserializeMessageJson(json: JSON) -> Message
+    {
+        var users = [User]()
+        for (key, user) in json["participants"] {
+            users.append(User(uid: user["uid"].intValue, name: user["name"].stringValue))
+        }
+        
+        var message = Message(
+            threadId: json["thread_id"].intValue,
+            subject: json["subject"].stringValue,
+            participants: users,
+            count: json["count"].intValue,
+            isNew: json["is_new"].boolValue,
+            lastUpdatedTimestamp: json["last_updated"].intValue,
+            threadStartedTimestamp: json["thread_started"].intValue
+        )
+        return message
+    }
     
     /**
         :param: json

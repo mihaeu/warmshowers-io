@@ -41,7 +41,7 @@ class TestViewController: UIViewController
     
     @IBAction func searchById()
     {
-        api.getUser(1165).onSuccess() { user in
+        api.getUser(39681).onSuccess() { user in
             println("got \(user.name)")
         }
     }
@@ -57,7 +57,7 @@ class TestViewController: UIViewController
     
     @IBAction func getFeedback(sender: AnyObject)
     {
-        api.getFeedbackForUser(1165).onSuccess() { feedback in
+        api.getFeedbackForUser(39681).onSuccess() { feedback in
             for singleFeedback in feedback {
                 println("got \(singleFeedback.userForFeedback)")
                 println("\(singleFeedback.body)")
@@ -69,7 +69,7 @@ class TestViewController: UIViewController
     @IBAction func createFeedback()
     {
         let feedback = Feedback(
-            userIdForFeedback: 123456,
+            userIdForFeedback: 39681,
             userForFeedback: "rfay-testuser3-es",
             body: "Test feedback please ignore. Thx. - Michael",
             year: 2015,
@@ -86,6 +86,17 @@ class TestViewController: UIViewController
     
     @IBAction func getAllMessages()
     {
-        api.getAllMessages()
+        api.getAllMessages().onSuccess() { messages in
+            for message in messages {
+                println(message.subject)
+            }
+        }
+    }
+    
+    @IBAction func count()
+    {
+        api.getUnreadMessagesCount().onSuccess() { count in
+            println(count)
+        }
     }
 }

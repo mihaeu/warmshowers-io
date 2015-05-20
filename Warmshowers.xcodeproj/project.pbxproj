@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		729C10AFDF1D1FFC5F3B2F7D /* Pods_Warmshowers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41CE4247DD6EEBA9135EDC97 /* Pods_Warmshowers.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		73C979E624E10C6864594746 /* Pods_WarmshowersTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23326D4A50F1BEADD824F208 /* Pods_WarmshowersTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		8435FD9E1B0CB4E2007E2EEB /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8435FD9D1B0CB4E2007E2EEB /* Message.swift */; };
+		8435FDA01B0CB85A007E2EEB /* MessageThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8435FD9F1B0CB85A007E2EEB /* MessageThread.swift */; };
 		844C1A2C1AFBF55D0013551A /* AuthenticationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844C1A2B1AFBF55D0013551A /* AuthenticationSpec.swift */; };
 		844C1A2E1AFBFF630013551A /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844C1A2D1AFBFF630013551A /* Storyboard.swift */; };
 		845A72D11B053C95003DBDE6 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845A72D01B053C95003DBDE6 /* TestViewController.swift */; };
@@ -45,6 +47,8 @@
 		23326D4A50F1BEADD824F208 /* Pods_WarmshowersTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WarmshowersTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		393D17F1A86431DDB0201F6E /* Pods-WarmshowersTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WarmshowersTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WarmshowersTests/Pods-WarmshowersTests.release.xcconfig"; sourceTree = "<group>"; };
 		41CE4247DD6EEBA9135EDC97 /* Pods_Warmshowers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Warmshowers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8435FD9D1B0CB4E2007E2EEB /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		8435FD9F1B0CB85A007E2EEB /* MessageThread.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageThread.swift; sourceTree = "<group>"; };
 		844C1A2B1AFBF55D0013551A /* AuthenticationSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationSpec.swift; sourceTree = "<group>"; };
 		844C1A2D1AFBFF630013551A /* Storyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
 		845A72D01B053C95003DBDE6 /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
@@ -115,6 +119,8 @@
 				846D6BF61AFD637A00144D4F /* UserSearch.swift */,
 				846D6BF81AFD63BE00144D4F /* User.swift */,
 				84D7A0491B0C88C100154B51 /* Feedback.swift */,
+				8435FD9D1B0CB4E2007E2EEB /* Message.swift */,
+				8435FD9F1B0CB85A007E2EEB /* MessageThread.swift */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -425,7 +431,9 @@
 				84D7A0481B0C882200154B51 /* APISecrets.swift in Sources */,
 				848BC7AA1AFBD7FD00974467 /* Warmshowers.xcdatamodeld in Sources */,
 				848BC7A71AFBD7FD00974467 /* AppDelegate.swift in Sources */,
+				8435FDA01B0CB85A007E2EEB /* MessageThread.swift in Sources */,
 				845A72D11B053C95003DBDE6 /* TestViewController.swift in Sources */,
+				8435FD9E1B0CB4E2007E2EEB /* Message.swift in Sources */,
 				84D7A04A1B0C88C100154B51 /* Feedback.swift in Sources */,
 				8485F23B1AFBEB040054310F /* Authentication.swift in Sources */,
 			);
