@@ -13,6 +13,8 @@ struct Storyboard
     // Segues
     static let ShowStartSegue = "Show Start"
     static let ShowOtherProfileSegue = "Show Other Profile"
+    static let ShowMessageThreadSegue = "Show Message Thread"
+    static let ShowNewMessageSegue = "Show New Message"
     
     // Identifiers
     static let AnnotationViewReuseIdentifier = "OtherUser"

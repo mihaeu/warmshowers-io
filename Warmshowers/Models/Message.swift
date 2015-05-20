@@ -19,6 +19,8 @@ public class Message
     var threadStartedTimestamp: Int?
     
     var author: User?
+    var body: String?
+    var files: [String]?
     
     init(threadId: Int, subject: String)
     {
