@@ -22,7 +22,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
     
     var myLocation: CLLocationCoordinate2D? {
         didSet {
-            loadUserAnnotations()
+//            loadUserAnnotations()
         }
     }
     var users = [User]()
@@ -56,28 +56,28 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
         }
     }
 
-    func loadUserAnnotations(userSearch: UserSearch = UserSearch())
-    {
-        // if we don't know where we are, we can't search for users around us
-        if myLocation == nil {
-            return
-        }
-        
-        users = userSearch.byLocation(myLocation!.latitude, longitude: myLocation!.longitude)
-        for user in users {
-            
-            // if the user for some reason has no location, skip
-            if user.latitude == nil || user.longitude == nil {
-                continue
-            }
-            
-            var userAnnotation = MKPointAnnotation()
-            userAnnotation.title = user.name
-            userAnnotation.coordinate = CLLocationCoordinate2D(latitude: user.latitude!, longitude: user.longitude!)
-            userAnnotations.append(userAnnotation)
-        }
-        mapView.addAnnotations(userAnnotations)
-    }
+//    func loadUserAnnotations(userSearch: UserSearch = UserSearch())
+//    {
+//        // if we don't know where we are, we can't search for users around us
+//        if myLocation == nil {
+//            return
+//        }
+//        
+//        users = userSearch.byLocation(myLocation!.latitude, longitude: myLocation!.longitude)
+//        for user in users {
+//            
+//            // if the user for some reason has no location, skip
+//            if user.latitude == nil || user.longitude == nil {
+//                continue
+//            }
+//            
+//            var userAnnotation = MKPointAnnotation()
+//            userAnnotation.title = user.name
+//            userAnnotation.coordinate = CLLocationCoordinate2D(latitude: user.latitude!, longitude: user.longitude!)
+//            userAnnotations.append(userAnnotation)
+//        }
+//        mapView.addAnnotations(userAnnotations)
+//    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
     {

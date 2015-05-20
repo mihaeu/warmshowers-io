@@ -118,7 +118,7 @@
         <!--Messages-->
         <scene sceneID="JmR-Vn-bVO">
             <objects>
-                <viewController id="zTu-OQ-NEf" sceneMemberID="viewController">
+                <viewController id="zTu-OQ-NEf" customClass="MessagesViewController" customModule="Warmshowers" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HCb-u9-mOn"/>
                         <viewControllerLayoutGuide type="bottom" id="uSC-DB-dFG"/>
@@ -127,20 +127,34 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="UIC-A6-ZJQ">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="czo-53-Eyv">
+                                <rect key="frame" x="553" y="28" width="31" height="30"/>
+                                <state key="normal" title="New">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="newMessage" destination="zTu-OQ-NEf" eventType="touchUpInside" id="EDz-CU-WgV"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="NHr-zI-IwJ">
+                                <rect key="frame" x="16" y="66" width="568" height="477"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="UIC-A6-ZJQ" firstAttribute="leading" secondItem="TU2-yv-jSw" secondAttribute="leading" id="Hqk-O7-jT8"/>
-                            <constraint firstAttribute="bottom" secondItem="UIC-A6-ZJQ" secondAttribute="bottom" id="ObY-fL-EaR"/>
-                            <constraint firstAttribute="trailing" secondItem="UIC-A6-ZJQ" secondAttribute="trailing" id="rlb-iq-lnd"/>
-                            <constraint firstItem="UIC-A6-ZJQ" firstAttribute="top" secondItem="TU2-yv-jSw" secondAttribute="top" id="wF8-dB-zoP"/>
+                            <constraint firstItem="NHr-zI-IwJ" firstAttribute="top" secondItem="czo-53-Eyv" secondAttribute="bottom" constant="8" id="6sE-X5-Dkv"/>
+                            <constraint firstItem="NHr-zI-IwJ" firstAttribute="trailing" secondItem="TU2-yv-jSw" secondAttribute="trailingMargin" id="Bq2-Xi-5ac"/>
+                            <constraint firstItem="uSC-DB-dFG" firstAttribute="top" secondItem="NHr-zI-IwJ" secondAttribute="bottom" constant="8" id="Yts-LI-1Gt"/>
+                            <constraint firstItem="NHr-zI-IwJ" firstAttribute="leading" secondItem="TU2-yv-jSw" secondAttribute="leadingMargin" id="cQT-aO-qpv"/>
+                            <constraint firstItem="czo-53-Eyv" firstAttribute="top" secondItem="HCb-u9-mOn" secondAttribute="bottom" constant="8" id="csD-Bh-Tkt"/>
+                            <constraint firstItem="czo-53-Eyv" firstAttribute="trailing" secondItem="TU2-yv-jSw" secondAttribute="trailingMargin" id="lwh-52-The"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Messages" image="tab-messages" id="5gR-cl-twd"/>
+                    <connections>
+                        <outlet property="tableView" destination="NHr-zI-IwJ" id="2Vh-bx-Zcq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pXI-sN-JEJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

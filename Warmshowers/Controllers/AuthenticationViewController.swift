@@ -21,7 +21,7 @@ class AuthenticationViewController: UIViewController
     override func viewDidLoad()
     {
         usernameTextField?.text = APISecrets.Username
-        usernameTextField?.text = APISecrets.Password
+        passwordTextField?.text = APISecrets.Password
     }
     
     @IBAction func attemptLogin()
@@ -30,11 +30,7 @@ class AuthenticationViewController: UIViewController
         
         let username = usernameTextField.text
         let password = passwordTextField.text
-        
-        if username == "" || password == "" {
-            return
-        }
-        
+              
         api
             .login(username, password: password)
             .onSuccess() { user in
