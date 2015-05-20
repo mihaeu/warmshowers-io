@@ -360,12 +360,12 @@ public class API
         return promise.future
     }
 
-    public func readConversation()
+    public func readMessageThread()
     {
         // TODO:   Read privatemsg thread (/services/rest/message/getThread)
     }
     
-    public func markConversationAsRead()
+    public func markMessageThreadAsRead()
     {
         // TODO:   Mark privatemsg thread read (or unread) (/services/rest/message/markThreadRead)
     }
