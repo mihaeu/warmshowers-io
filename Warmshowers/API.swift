@@ -37,6 +37,24 @@ public class API
         static let LogoutUsername = "username"
         static let LogoutPassword = "password"
         
+        static let SearchKeyword = "keyword"
+        static let SearchLimit = "limit"
+        static let SearchPage = "page"
+        static let SearchMinLatitude = "minlat"
+        static let SearchMaxLatitude = "maxlat"
+        static let SearchMinLongitude = "minlon"
+        static let SearchMaxLongitude = "maxlon"
+        static let SearchCenterLatitude = "centerlat"
+        static let SearchCenterLongitude = "centerlon"
+        
+        static let FeedbackNodeType = "node[type]"
+        static let FeedbackNodeTypeValue = "trust_referral"
+        static let FeedbackUser = "node[field_member_i_trust][0][uid][uid]"
+        static let FeedbackBody = "node[body]"
+        static let FeedbackType = "node[field_guest_or_host][value]"
+        static let FeedbackRating = "node[field_rating][value]"
+        static let FeedbackYear = "node[field_hosting_date][0][value][year]"
+        static let FeedbackMonth = "node[field_hosting_date][0][value][month]"
     }
     
     public var loggedInUser: User?
@@ -187,7 +205,12 @@ public class API
     {
         let promise = Promise<[Int:User]>()
         
-        manager.request(.POST, Paths.SearchByKeyword, parameters: ["keyword": keyword, "limit": limit, "page": page])
+        let parameters:[String:AnyObject] = [
+            Parameters.SearchKeyword: keyword,
+            Parameters.SearchLimit: limit,
+            Parameters.SearchPage: page
+        ]
+        manager.request(.POST, Paths.SearchByKeyword, parameters: parameters)
             .responseJSON { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
@@ -226,14 +249,15 @@ public class API
     public func searchByLocation(minlat: Double, maxlat: Double, minlon: Double, maxlon: Double, centerlat: Double, centerlon: Double, limit: Int) -> Future<[Int:User]>
     {
         let promise = Promise<[Int:User]>()
+        
         let parameters: [String:AnyObject] = [
-            "minlat": minlat,
-            "maxlat": maxlat,
-            "minlon": minlon,
-            "maxlon": maxlon,
-            "centerlat": centerlat,
-            "centerlon": centerlon,
-            "limit": limit
+            Parameters.SearchMinLatitude: minlat,
+            Parameters.SearchMaxLatitude: maxlat,
+            Parameters.SearchMinLongitude: minlon,
+            Parameters.SearchMaxLongitude: maxlon,
+            Parameters.SearchCenterLatitude: centerlat,
+            Parameters.SearchCenterLongitude: centerlon,
+            Parameters.SearchLimit: limit
         ]
         manager.request(.POST, Paths.SearchByLocation, parameters: parameters)
             .responseJSON() { (request, response, json, error) in
@@ -304,13 +328,13 @@ public class API
         let promise = Promise<Bool>()
         
         let parameters: [String:AnyObject] = [
-            "node[type]": "trust_referral",
-            "node[field_member_i_trust][0][uid][uid]": feedback.userForFeedback,
-            "node[body]": feedback.body,
-            "node[field_guest_or_host][value]": feedback.type,
-            "node[field_rating][value]": feedback.rating,
-            "node[field_hosting_date][0][value][year]": feedback.year,
-            "node[field_hosting_date][0][value][month]": feedback.month
+            Parameters.FeedbackNodeType: Parameters.FeedbackNodeTypeValue,
+            Parameters.FeedbackUser: feedback.userForFeedback,
+            Parameters.FeedbackBody: feedback.body,
+            Parameters.FeedbackType: feedback.type,
+            Parameters.FeedbackRating: feedback.rating,
+            Parameters.FeedbackYear: feedback.year,
+            Parameters.FeedbackMonth: feedback.month
         ]
         manager
             .request(.POST, Paths.CreateFeedback, parameters: parameters)
