@@ -17,8 +17,6 @@ class AuthenticationViewController: UIViewController
         }
     }
     @IBOutlet weak var passwordTextField: UITextField!
-
-    let authentication = Authentication()
     
     @IBAction func attemptLogin()
     {
@@ -31,26 +29,23 @@ class AuthenticationViewController: UIViewController
             return
         }
         
-        api.login(username, password: password)
-    }
-    
-    func handleLoginResponse(notification: NSNotification)
-    {
-        if true {
-            performSegueWithIdentifier(Storyboard.ShowStartSegue, sender: nil)
-        } else {
-            
-            let alertController = UIAlertController(
-                title: "Login Problem",
-                message: "Incorrect username or password. Please try again ...",
-                preferredStyle: UIAlertControllerStyle.Alert
-            )
-            alertController.addAction(
-                UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil)
-            )
-            
-            presentViewController(alertController, animated: true, completion: nil)
-        }
+        api
+            .login(username, password: password)
+            .onSuccess() { user in
+                self.performSegueWithIdentifier(Storyboard.ShowStartSegue, sender: nil)
+            }
+            .onFailure() { error in
+                let alertController = UIAlertController(
+                    title: "Login Problem",
+                    message: "Incorrect username or password. Please try again ...",
+                    preferredStyle: UIAlertControllerStyle.Alert
+                )
+                alertController.addAction(
+                    UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil)
+                )
+                
+                self.presentViewController(alertController, animated: true, completion: nil)
+            }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
