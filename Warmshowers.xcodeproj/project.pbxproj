@@ -17,7 +17,6 @@
 		846D6BF31AFD599500144D4F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6BF21AFD599500144D4F /* MapViewController.swift */; };
 		846D6BF71AFD637A00144D4F /* UserSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6BF61AFD637A00144D4F /* UserSearch.swift */; };
 		846D6BF91AFD63BE00144D4F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6BF81AFD63BE00144D4F /* User.swift */; };
-		846D6BFB1AFD655C00144D4F /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6BFA1AFD655C00144D4F /* MockData.swift */; };
 		846D6BFE1AFD718000144D4F /* OtherProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6BFD1AFD718000144D4F /* OtherProfileViewController.swift */; };
 		846FB3191AFEA58A003F7B25 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846FB3181AFEA58A003F7B25 /* API.swift */; };
 		8485F2381AFBDE8F0054310F /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8485F2371AFBDE8F0054310F /* AuthenticationViewController.swift */; };
@@ -53,7 +52,6 @@
 		846D6BF21AFD599500144D4F /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapViewController.swift; path = Map/MapViewController.swift; sourceTree = "<group>"; };
 		846D6BF61AFD637A00144D4F /* UserSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSearch.swift; sourceTree = "<group>"; };
 		846D6BF81AFD63BE00144D4F /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		846D6BFA1AFD655C00144D4F /* MockData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		846D6BFD1AFD718000144D4F /* OtherProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherProfileViewController.swift; sourceTree = "<group>"; };
 		846FB3181AFEA58A003F7B25 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		8485F2371AFBDE8F0054310F /* AuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthenticationViewController.swift; path = Authentication/AuthenticationViewController.swift; sourceTree = "<group>"; };
@@ -161,7 +159,6 @@
 			isa = PBXGroup;
 			children = (
 				844C1A2D1AFBFF630013551A /* Storyboard.swift */,
-				846D6BFA1AFD655C00144D4F /* MockData.swift */,
 				848BC7AD1AFBD7FD00974467 /* Main.storyboard */,
 				848BC7A41AFBD7FD00974467 /* Supporting Files */,
 				846D6BF51AFD635E00144D4F /* API */,
@@ -420,7 +417,6 @@
 				846D6BF31AFD599500144D4F /* MapViewController.swift in Sources */,
 				846D6BF71AFD637A00144D4F /* UserSearch.swift in Sources */,
 				844C1A2E1AFBFF630013551A /* Storyboard.swift in Sources */,
-				846D6BFB1AFD655C00144D4F /* MockData.swift in Sources */,
 				846D6BF91AFD63BE00144D4F /* User.swift in Sources */,
 				84D7A0481B0C882200154B51 /* APISecrets.swift in Sources */,
 				848BC7AA1AFBD7FD00974467 /* Warmshowers.xcdatamodeld in Sources */,

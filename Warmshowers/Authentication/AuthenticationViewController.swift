@@ -18,6 +18,12 @@ class AuthenticationViewController: UIViewController
     }
     @IBOutlet weak var passwordTextField: UITextField!
     
+    override func viewDidLoad()
+    {
+        usernameTextField?.text = APISecrets.Username
+        usernameTextField?.text = APISecrets.Password
+    }
+    
     @IBAction func attemptLogin()
     {
         var api = API()
