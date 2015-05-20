@@ -13,18 +13,16 @@
 		8435FDA01B0CB85A007E2EEB /* MessageThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8435FD9F1B0CB85A007E2EEB /* MessageThread.swift */; };
 		8435FDA21B0CC21A007E2EEB /* APITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8435FDA11B0CC21A007E2EEB /* APITest.swift */; };
 		844C1A2E1AFBFF630013551A /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844C1A2D1AFBFF630013551A /* Storyboard.swift */; };
-		845A72D11B053C95003DBDE6 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845A72D01B053C95003DBDE6 /* TestViewController.swift */; };
-		846D6BF31AFD599500144D4F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6BF21AFD599500144D4F /* MapViewController.swift */; };
-		846D6BF71AFD637A00144D4F /* UserSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6BF61AFD637A00144D4F /* UserSearch.swift */; };
 		846D6BF91AFD63BE00144D4F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6BF81AFD63BE00144D4F /* User.swift */; };
-		846D6BFE1AFD718000144D4F /* OtherProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6BFD1AFD718000144D4F /* OtherProfileViewController.swift */; };
 		846FB3191AFEA58A003F7B25 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846FB3181AFEA58A003F7B25 /* API.swift */; };
-		8485F2381AFBDE8F0054310F /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8485F2371AFBDE8F0054310F /* AuthenticationViewController.swift */; };
 		848BC7A71AFBD7FD00974467 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848BC7A61AFBD7FD00974467 /* AppDelegate.swift */; };
 		848BC7AA1AFBD7FD00974467 /* Warmshowers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 848BC7A81AFBD7FD00974467 /* Warmshowers.xcdatamodeld */; };
 		848BC7AF1AFBD7FD00974467 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 848BC7AD1AFBD7FD00974467 /* Main.storyboard */; };
 		848BC7B11AFBD7FD00974467 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 848BC7B01AFBD7FD00974467 /* Images.xcassets */; };
 		848BC7B41AFBD7FD00974467 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 848BC7B21AFBD7FD00974467 /* LaunchScreen.xib */; };
+		84CFCD671B0D017100647959 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CFCD661B0D017100647959 /* AuthenticationViewController.swift */; };
+		84CFCD6A1B0D01F400647959 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CFCD681B0D01F400647959 /* MapViewController.swift */; };
+		84CFCD6B1B0D01F400647959 /* OtherProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CFCD691B0D01F400647959 /* OtherProfileViewController.swift */; };
 		84D7A0481B0C882200154B51 /* APISecrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D7A0471B0C882200154B51 /* APISecrets.swift */; };
 		84D7A04A1B0C88C100154B51 /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D7A0491B0C88C100154B51 /* Feedback.swift */; };
 /* End PBXBuildFile section */
@@ -48,13 +46,8 @@
 		8435FD9F1B0CB85A007E2EEB /* MessageThread.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageThread.swift; sourceTree = "<group>"; };
 		8435FDA11B0CC21A007E2EEB /* APITest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APITest.swift; sourceTree = "<group>"; };
 		844C1A2D1AFBFF630013551A /* Storyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
-		845A72D01B053C95003DBDE6 /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
-		846D6BF21AFD599500144D4F /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapViewController.swift; path = Map/MapViewController.swift; sourceTree = "<group>"; };
-		846D6BF61AFD637A00144D4F /* UserSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSearch.swift; sourceTree = "<group>"; };
 		846D6BF81AFD63BE00144D4F /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		846D6BFD1AFD718000144D4F /* OtherProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherProfileViewController.swift; sourceTree = "<group>"; };
 		846FB3181AFEA58A003F7B25 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
-		8485F2371AFBDE8F0054310F /* AuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthenticationViewController.swift; path = Authentication/AuthenticationViewController.swift; sourceTree = "<group>"; };
 		848BC7A11AFBD7FD00974467 /* Warmshowers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Warmshowers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		848BC7A51AFBD7FD00974467 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		848BC7A61AFBD7FD00974467 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -64,6 +57,9 @@
 		848BC7B31AFBD7FD00974467 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		848BC7B91AFBD7FD00974467 /* WarmshowersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WarmshowersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		848BC7BE1AFBD7FD00974467 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84CFCD661B0D017100647959 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthenticationViewController.swift; path = Controllers/AuthenticationViewController.swift; sourceTree = "<group>"; };
+		84CFCD681B0D01F400647959 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapViewController.swift; path = Controllers/MapViewController.swift; sourceTree = "<group>"; };
+		84CFCD691B0D01F400647959 /* OtherProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OtherProfileViewController.swift; path = Controllers/OtherProfileViewController.swift; sourceTree = "<group>"; };
 		84D7A0471B0C882200154B51 /* APISecrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APISecrets.swift; sourceTree = "<group>"; };
 		84D7A0491B0C88C100154B51 /* Feedback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
 		D6FCB87087944DF13BD8B4DF /* Pods-Warmshowers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Warmshowers.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Warmshowers/Pods-Warmshowers.debug.xcconfig"; sourceTree = "<group>"; };
@@ -99,40 +95,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		846D6BF41AFD59D300144D4F /* Map */ = {
-			isa = PBXGroup;
-			children = (
-				846D6BF21AFD599500144D4F /* MapViewController.swift */,
-			);
-			name = Map;
-			sourceTree = "<group>";
-		};
 		846D6BF51AFD635E00144D4F /* API */ = {
 			isa = PBXGroup;
 			children = (
-				846D6BF61AFD637A00144D4F /* UserSearch.swift */,
 				846D6BF81AFD63BE00144D4F /* User.swift */,
 				84D7A0491B0C88C100154B51 /* Feedback.swift */,
 				8435FD9D1B0CB4E2007E2EEB /* Message.swift */,
 				8435FD9F1B0CB85A007E2EEB /* MessageThread.swift */,
 			);
 			name = API;
-			sourceTree = "<group>";
-		};
-		846D6BFC1AFD716800144D4F /* Profile */ = {
-			isa = PBXGroup;
-			children = (
-				846D6BFD1AFD718000144D4F /* OtherProfileViewController.swift */,
-			);
-			name = Profile;
-			sourceTree = "<group>";
-		};
-		8485F2391AFBDEF20054310F /* Authentication */ = {
-			isa = PBXGroup;
-			children = (
-				8485F2371AFBDE8F0054310F /* AuthenticationViewController.swift */,
-			);
-			name = Authentication;
 			sourceTree = "<group>";
 		};
 		848BC7981AFBD7FD00974467 = {
@@ -158,15 +129,12 @@
 		848BC7A31AFBD7FD00974467 /* Warmshowers */ = {
 			isa = PBXGroup;
 			children = (
+				84CFCD651B0D011200647959 /* Controllers */,
 				844C1A2D1AFBFF630013551A /* Storyboard.swift */,
 				848BC7AD1AFBD7FD00974467 /* Main.storyboard */,
 				848BC7A41AFBD7FD00974467 /* Supporting Files */,
 				846D6BF51AFD635E00144D4F /* API */,
-				8485F2391AFBDEF20054310F /* Authentication */,
-				846D6BF41AFD59D300144D4F /* Map */,
-				846D6BFC1AFD716800144D4F /* Profile */,
 				846FB3181AFEA58A003F7B25 /* API.swift */,
-				845A72D01B053C95003DBDE6 /* TestViewController.swift */,
 				84D7A0471B0C882200154B51 /* APISecrets.swift */,
 			);
 			path = Warmshowers;
@@ -199,6 +167,16 @@
 				848BC7BE1AFBD7FD00974467 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		84CFCD651B0D011200647959 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				84CFCD681B0D01F400647959 /* MapViewController.swift */,
+				84CFCD691B0D01F400647959 /* OtherProfileViewController.swift */,
+				84CFCD661B0D017100647959 /* AuthenticationViewController.swift */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 		872482773126DB5AFA7662D5 /* Pods */ = {
@@ -412,17 +390,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				846FB3191AFEA58A003F7B25 /* API.swift in Sources */,
-				846D6BFE1AFD718000144D4F /* OtherProfileViewController.swift in Sources */,
-				8485F2381AFBDE8F0054310F /* AuthenticationViewController.swift in Sources */,
-				846D6BF31AFD599500144D4F /* MapViewController.swift in Sources */,
-				846D6BF71AFD637A00144D4F /* UserSearch.swift in Sources */,
+				84CFCD6B1B0D01F400647959 /* OtherProfileViewController.swift in Sources */,
 				844C1A2E1AFBFF630013551A /* Storyboard.swift in Sources */,
 				846D6BF91AFD63BE00144D4F /* User.swift in Sources */,
 				84D7A0481B0C882200154B51 /* APISecrets.swift in Sources */,
 				848BC7AA1AFBD7FD00974467 /* Warmshowers.xcdatamodeld in Sources */,
 				848BC7A71AFBD7FD00974467 /* AppDelegate.swift in Sources */,
+				84CFCD6A1B0D01F400647959 /* MapViewController.swift in Sources */,
 				8435FDA01B0CB85A007E2EEB /* MessageThread.swift in Sources */,
-				845A72D11B053C95003DBDE6 /* TestViewController.swift in Sources */,
+				84CFCD671B0D017100647959 /* AuthenticationViewController.swift in Sources */,
 				8435FD9E1B0CB4E2007E2EEB /* Message.swift in Sources */,
 				84D7A04A1B0C88C100154B51 /* Feedback.swift in Sources */,
 			);
