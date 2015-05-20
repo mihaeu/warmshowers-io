@@ -13,5 +13,6 @@ end
 target 'WarmshowersTests' do
 	pod 'Quick'
 	pod 'Nimble'
+    pod 'BrightFutures'
 end
 

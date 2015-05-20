@@ -30,13 +30,16 @@ public class API
         static let ReadFeedback = "https://www.warmshowers.org/user/%d/json_recommendations"
         static let CreateFeedback = "https://www.warmshowers.org/services/rest/node"
     }
-
     
-    public var sessid: String?
-    public var session_name: String?
+    private struct Parameters {
+        static let LoginUsername = "username"
+        static let LoginPassword = "password"
+        static let LogoutUsername = "username"
+        static let LogoutPassword = "password"
+        
+    }
     
-    public var username: String?
-    public var password: String?
+    public var loggedInUser: User?
     
     struct Status {
         static let AlreadyLoggedIn = 406
@@ -62,6 +65,8 @@ public class API
         it is critical that the user object of the currently logged in user is safed on
         the first login.
     
+        https://github.com/warmshowers/Warmshowers.org/wiki/Warmshowers-RESTful-Services-for-Mobile-Apps#wiki-login
+    
         :param: username
         :param: password
     
@@ -71,7 +76,11 @@ public class API
     {
         let promise = Promise<User>()
         
-        manager.request(.POST, Paths.Login, parameters: ["username": username, "password": password])
+        let parameters = [
+            Parameters.LoginUsername: username,
+            Parameters.LoginPassword: password
+        ]
+        manager.request(.POST, Paths.Login, parameters: parameters)
             .responseJSON { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
@@ -81,12 +90,9 @@ public class API
                         log.info("\(username) logged in with status \(response?.statusCode)")
                         var json = JSON(json!)
                         
-                        self.sessid = json["sessid"].stringValue
-                        self.session_name = json["session_name"].stringValue
-                        
                         let user = self.deserializeUserJson(json["user"])
-                        self.username = username
-                        self.password = password
+                        user.password = password
+                        self.loggedInUser = user
                         
                         promise.success(user)
                     } else if response?.statusCode == Status.AlreadyLoggedIn {
@@ -105,6 +111,8 @@ public class API
     /**
         Logout a user.
     
+        https://github.com/warmshowers/Warmshowers.org/wiki/Warmshowers-RESTful-Services-for-Mobile-Apps#wiki-logout
+    
         :param: username
         :param: password
         
@@ -114,7 +122,11 @@ public class API
     {
         let promise = Promise<Bool>()
         
-        manager.request(.POST, Paths.Logout, parameters: ["username": username, "password": password])
+        let parameters = [
+            Parameters.LogoutUsername: username,
+            Parameters.LogoutPassword: password
+        ]
+        manager.request(.POST, Paths.Logout, parameters: parameters)
             .responseJSON { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
@@ -131,11 +143,13 @@ public class API
     // MARK: Search API Methods
     
     /**
-    Get a single user by Id.
+        Get a single user by Id.
     
-    :param: userId
-    
-    :return: Future<User>
+        https://github.com/warmshowers/Warmshowers.org/wiki/Warmshowers-RESTful-Services-for-Mobile-Apps#wiki-userretrieve
+        
+        :param: userId
+        
+        :return: Future<User>
     */
     public func getUser(userId: Int) -> Future<User>
     {
@@ -160,6 +174,8 @@ public class API
         Search for other user by keyword.
     
         The keyword can either be the username or email of a user or the name of a location.
+    
+        https://github.com/warmshowers/Warmshowers.org/wiki/Warmshowers-RESTful-Services-for-Mobile-Apps#wiki-bykeyword
     
         :param: keyword
         :param: limit Default: 4
@@ -194,6 +210,8 @@ public class API
     
     /**
         Search for users by location.
+    
+        https://github.com/warmshowers/Warmshowers.org/wiki/Warmshowers-RESTful-Services-for-Mobile-Apps#wiki-bylocation
         
         :params: minlat 
         :params: maxlat
@@ -240,6 +258,10 @@ public class API
     // MARK: Feedback API Methods
     
     /**
+        Get all the feedback of a user.
+    
+        https://github.com/warmshowers/Warmshowers.org/wiki/Warmshowers-RESTful-Services-for-Mobile-Apps#wiki-json_recommendations
+    
         :param: userId User ID
     
         :returns: Future<[Feedback]>
@@ -269,6 +291,10 @@ public class API
     }
     
     /**
+        Create new feedback for a user.
+    
+        https://github.com/warmshowers/Warmshowers.org/wiki/Warmshowers-RESTful-Services-for-Mobile-Apps#wiki-create_feedback
+    
         :param: Feedback
     
         :returns: Future<Bool>
@@ -302,17 +328,40 @@ public class API
 
     // MARK: Message API Methods
     
+    /**
+        Sends a private message to another user.
+    
+        Sending a message starts a new message thread (imagine GMail Conversations) and cannot be used for
+        answering messages. Use the `replyMessage` for this purpose.
+    
+        https://github.com/warmshowers/Warmshowers.org/wiki/Warmshowers-RESTful-Services-for-Mobile-Apps#wiki-message_send
+    
+    */
     public func sendMessage()
     {
         // TODO:   Send a private message (not replying to existing) (/services/rest/message/send)
     }
     
+    /**
+        Reply to a message in a message thread.
+    
+        This is like sending a message, but for message threads that have already been created. Do not
+        mix this and `sendMessage`.
+    
+        https://github.com/warmshowers/Warmshowers.org/wiki/Warmshowers-RESTful-Services-for-Mobile-Apps#wiki-privatemsg_reply
+    */
     public func replyMessage()
     {
         // TODO:   Reply to privatemsg (/services/rest/message/reply)
     }
     
     /**
+        Get the number of unread messages.
+    
+        This is quicker than getting all the messages and checking which are unread. Use when checking for new messages.
+    
+        https://github.com/warmshowers/Warmshowers.org/wiki/Warmshowers-RESTful-Services-for-Mobile-Apps#wiki-message_unread
+    
         :returns: Future<Int>
     */
     public func getUnreadMessagesCount() -> Future<Int>
@@ -335,6 +384,12 @@ public class API
     }
     
     /**
+        Get all messages.
+    
+        This will return all message threads, but not the full thread itself.
+    
+        https://github.com/warmshowers/Warmshowers.org/wiki/Warmshowers-RESTful-Services-for-Mobile-Apps#wiki-message_get_all
+    
         :returns: Future<Message>
     */
     public func getAllMessages() -> Future<[Message]>
@@ -360,12 +415,27 @@ public class API
         return promise.future
     }
 
-    public func readMessageThread()
+    /**
+        Get all full messages in a message thread.
+    
+        https://github.com/warmshowers/Warmshowers.org/wiki/Warmshowers-RESTful-Services-for-Mobile-Apps#wiki-message_get_thread
+    
+        :param: threadId
+    */
+    public func readMessageThread(threadId: Int)
     {
         // TODO:   Read privatemsg thread (/services/rest/message/getThread)
     }
     
-    public func markMessageThreadAsRead()
+    /**
+        Mark message threads as read or unread.
+    
+        https://github.com/warmshowers/Warmshowers.org/wiki/Warmshowers-RESTful-Services-for-Mobile-Apps#wiki-markThreadRead
+    
+        :param: Int threadId
+        :param: Bool True if the message thread should be marked as read or false if it should be marked unread.
+    */
+    public func markMessageThreadStatus(threadId: Int, read: Bool)
     {
         // TODO:   Mark privatemsg thread read (or unread) (/services/rest/message/markThreadRead)
     }

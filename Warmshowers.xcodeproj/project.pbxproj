@@ -11,6 +11,7 @@
 		73C979E624E10C6864594746 /* Pods_WarmshowersTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23326D4A50F1BEADD824F208 /* Pods_WarmshowersTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		8435FD9E1B0CB4E2007E2EEB /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8435FD9D1B0CB4E2007E2EEB /* Message.swift */; };
 		8435FDA01B0CB85A007E2EEB /* MessageThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8435FD9F1B0CB85A007E2EEB /* MessageThread.swift */; };
+		8435FDA21B0CC21A007E2EEB /* APITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8435FDA11B0CC21A007E2EEB /* APITest.swift */; };
 		844C1A2E1AFBFF630013551A /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844C1A2D1AFBFF630013551A /* Storyboard.swift */; };
 		845A72D11B053C95003DBDE6 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845A72D01B053C95003DBDE6 /* TestViewController.swift */; };
 		846D6BF31AFD599500144D4F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6BF21AFD599500144D4F /* MapViewController.swift */; };
@@ -47,6 +48,7 @@
 		41CE4247DD6EEBA9135EDC97 /* Pods_Warmshowers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Warmshowers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8435FD9D1B0CB4E2007E2EEB /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		8435FD9F1B0CB85A007E2EEB /* MessageThread.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageThread.swift; sourceTree = "<group>"; };
+		8435FDA11B0CC21A007E2EEB /* APITest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APITest.swift; sourceTree = "<group>"; };
 		844C1A2D1AFBFF630013551A /* Storyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
 		845A72D01B053C95003DBDE6 /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		846D6BF21AFD599500144D4F /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapViewController.swift; path = Map/MapViewController.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				848BC7BD1AFBD7FD00974467 /* Supporting Files */,
+				8435FDA11B0CC21A007E2EEB /* APITest.swift */,
 			);
 			path = WarmshowersTests;
 			sourceTree = "<group>";
@@ -437,6 +440,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8435FDA21B0CC21A007E2EEB /* APITest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -582,6 +586,7 @@
 			baseConfigurationReference = DF533D9EE4906563B6D713FA /* Pods-WarmshowersTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -593,6 +598,7 @@
 				INFOPLIST_FILE = WarmshowersTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Warmshowers.app/Warmshowers";
 			};
 			name = Debug;
@@ -602,6 +608,7 @@
 			baseConfigurationReference = 393D17F1A86431DDB0201F6E /* Pods-WarmshowersTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",

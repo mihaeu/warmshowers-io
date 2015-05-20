@@ -8,8 +8,17 @@
 
 public class User
 {
-    var uid: Int
-    var name: String
+    public var uid: Int
+    public var name: String
+    
+    init(uid: Int, name: String)
+    {
+        self.uid = uid
+        self.name = name
+    }
+    
+    // this is only set for the logged in user
+    var password: String?
     
     var mode: Int?
     var sort: Int?
@@ -77,10 +86,4 @@ public class User
     var source: Int?
     var node_notify_mailalert: Int?
     var comment_notify_mailalert: Int?
-    
-    init(uid: Int, name: String)
-    {
-        self.uid = uid
-        self.name = name
-    }
 }
