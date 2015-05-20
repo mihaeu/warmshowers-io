@@ -11,12 +11,19 @@ import XCGLogger
 
 class AuthenticationViewController: UIViewController
 {
+    private var api = API()
+    
     @IBOutlet weak var usernameTextField: UITextField! {
         didSet {
             usernameTextField.resignFirstResponder()
         }
     }
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var spinner: UIActivityIndicatorView! {
+        didSet {
+            spinner.hidesWhenStopped = true
+        }
+    }
     
     override func viewDidLoad()
     {
@@ -26,14 +33,12 @@ class AuthenticationViewController: UIViewController
     
     @IBAction func attemptLogin()
     {
-        var api = API()
-        
-        let username = usernameTextField.text
-        let password = passwordTextField.text
+        spinner.startAnimating()
               
         api
-            .login(username, password: password)
+            .login(usernameTextField.text, password: passwordTextField.text)
             .onSuccess() { user in
+                self.spinner.stopAnimating()
                 self.performSegueWithIdentifier(Storyboard.ShowStartSegue, sender: nil)
             }
             .onFailure() { error in
@@ -46,6 +51,7 @@ class AuthenticationViewController: UIViewController
                     UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil)
                 )
                 
+                self.spinner.stopAnimating()
                 self.presentViewController(alertController, animated: true, completion: nil)
             }
     }
