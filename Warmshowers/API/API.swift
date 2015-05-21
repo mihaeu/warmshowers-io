@@ -262,7 +262,7 @@ public class API
     
         :returns: Future<[Int:User]>
     */
-    public func searchByLocation(minlat: Double, maxlat: Double, minlon: Double, maxlon: Double, centerlat: Double, centerlon: Double, limit: Int) -> Future<[Int:User]>
+    public func searchByLocation(minlat: Double, maxlat: Double, minlon: Double, maxlon: Double, centerlat: Double, centerlon: Double, limit: Int = 100) -> Future<[Int:User]>
     {
         let promise = Promise<[Int:User]>()
         
