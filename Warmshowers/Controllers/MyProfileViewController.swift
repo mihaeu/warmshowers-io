@@ -21,11 +21,12 @@ class MyProfileViewController: UIViewController
     
     override func viewDidLoad()
     {
-        userLabel.text = api.loggedInUser?.name
-        languagesSpokenLabel.text = api.loggedInUser?.languagesspoken
-        descriptionLabel.text = api.loggedInUser?.comments
+        let user = api.loggedInUser!
+        userLabel.text =  user.name
+        languagesSpokenLabel.text = user.languagesspoken
+        descriptionLabel.text = user.comments
         
-        let url = NSURL(string: "https://www.warmshowers.org/files/imagecache/profile_picture/pictures/picture-1.jpg")!
+        let url = NSURL(string: user.thumbnailURL)!
         userPictureImageView.hnk_setImageFromURL(url)
     }
 }

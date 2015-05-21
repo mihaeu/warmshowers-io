@@ -8,6 +8,8 @@
 
 public class User
 {
+    private let ThumbnailURLBase = "https://www.warmshowers.org/files/imagecache/profile_picture/pictures/picture-%d.jpg"
+    
     public var uid: Int
     public var name: String
     
@@ -15,6 +17,7 @@ public class User
     {
         self.uid = uid
         self.name = name
+        self.thumbnailURL = String(format: ThumbnailURLBase, uid)
     }
     
     // this is only set for the logged in user
@@ -31,6 +34,7 @@ public class User
     var timezone: Int?
     var language: String?
     var picture: String?
+    var thumbnailURL: String
     var login: Int?
     var timezone_name: String?
     var signature_format: Int?
