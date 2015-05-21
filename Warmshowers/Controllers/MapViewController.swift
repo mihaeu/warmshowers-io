@@ -65,6 +65,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
 
     func loadUserAnnotations()
     {
+        mapView.removeAnnotations(userAnnotations)
+        userAnnotations.removeAll()
+        
         for (id, user) in users {
             // if the user for some reason has no location, skip
             if user.latitude == nil || user.longitude == nil {
