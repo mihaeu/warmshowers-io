@@ -22,11 +22,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
     
     var myLocation: CLLocationCoordinate2D? {
         didSet {
-//            loadUserAnnotations()
+            loadUserAnnotations()
         }
     }
     var users = [User]()
     var userAnnotations = [MKAnnotation]()
+    var api = API.sharedInstance
     
     override func viewDidLoad()
     {
@@ -56,28 +57,28 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
         }
     }
 
-//    func loadUserAnnotations(userSearch: UserSearch = UserSearch())
-//    {
-//        // if we don't know where we are, we can't search for users around us
-//        if myLocation == nil {
-//            return
-//        }
-//        
+    func loadUserAnnotations()
+    {
+        // if we don't know where we are, we can't search for users around us
+        if myLocation == nil {
+            return
+        }
+        
 //        users = userSearch.byLocation(myLocation!.latitude, longitude: myLocation!.longitude)
-//        for user in users {
-//            
-//            // if the user for some reason has no location, skip
-//            if user.latitude == nil || user.longitude == nil {
-//                continue
-//            }
-//            
-//            var userAnnotation = MKPointAnnotation()
-//            userAnnotation.title = user.name
-//            userAnnotation.coordinate = CLLocationCoordinate2D(latitude: user.latitude!, longitude: user.longitude!)
-//            userAnnotations.append(userAnnotation)
-//        }
-//        mapView.addAnnotations(userAnnotations)
-//    }
+        for user in users {
+            
+            // if the user for some reason has no location, skip
+            if user.latitude == nil || user.longitude == nil {
+                continue
+            }
+            
+            var userAnnotation = MKPointAnnotation()
+            userAnnotation.title = user.name
+            userAnnotation.coordinate = CLLocationCoordinate2D(latitude: user.latitude!, longitude: user.longitude!)
+            userAnnotations.append(userAnnotation)
+        }
+        mapView.addAnnotations(userAnnotations)
+    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
     {
@@ -93,6 +94,42 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
 
 extension MapViewController: MKMapViewDelegate
 {
+    // MARK: Zooming and pinching
+    
+    func mapView(mapView: MKMapView!, regionDidChangeAnimated animated: Bool)
+    {
+        let region = mapView.region
+        
+        let centerLongitude = region.center.longitude
+        let centerLatitude = region.center.latitude
+        
+        let minlat = region.center.latitude - (region.span.latitudeDelta / 2)
+        let minlon = region.center.longitude - (region.span.longitudeDelta / 2)
+        
+        let maxlat = region.center.latitude + (region.span.latitudeDelta / 2)
+        let maxlon = region.center.longitude + (region.span.longitudeDelta / 2)
+        
+        let limit = 100
+        
+        api.searchByLocation(
+            minlat,
+            maxlat: maxlat,
+            minlon: minlon,
+            maxlon: maxlon,
+            centerlat: centerLatitude,
+            centerlon: centerLongitude,
+            limit: limit
+        ).onSuccess() { users in
+            for (id, user) in users {
+                println(id)
+                println(user.name)
+            }
+        }
+    }
+    
+    
+    // MARK: Annotations
+    
     func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView!
     {
         var view = mapView.dequeueReusableAnnotationViewWithIdentifier(Storyboard.AnnotationViewReuseIdentifier)
