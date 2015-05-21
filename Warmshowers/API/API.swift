@@ -16,6 +16,8 @@ public class API
     /// Alamofire serves a singleton, but we want to be able to mock this
     var manager: Manager
     
+    static let sharedInstance = API()
+    
     private struct Paths {
         static let Login = "https://www.warmshowers.org/services/rest/user/login"
         static let Logout = "https://www.warmshowers.org/services/rest/user/logout"

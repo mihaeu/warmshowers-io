@@ -11,7 +11,7 @@ import XCGLogger
 
 class AuthenticationViewController: UIViewController
 {
-    private var api = API()
+    private var api = API.sharedInstance
     
     @IBOutlet weak var usernameTextField: UITextField! {
         didSet {

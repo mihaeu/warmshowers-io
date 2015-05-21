@@ -13,7 +13,7 @@ class MyProfileViewController: UIViewController
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var commentsTextView: UITextView!
     
-    var api = API()
+    var api = API.sharedInstance
     
     override func viewDidLoad()
     {
