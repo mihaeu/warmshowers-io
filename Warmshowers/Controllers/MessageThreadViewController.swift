@@ -35,7 +35,11 @@ class MessageThreadViewController: UIViewController, UITableViewDataSource
     override func viewDidLoad()
     {
         self.navigationItem.title = "Conversation"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Reply", style: UIBarButtonItemStyle.Plain, target: self, action: "replyToThread")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: UIBarButtonSystemItem.Reply,
+            target: self,
+            action: "replyToThread"
+        )
     }
     
     func replyToThread()

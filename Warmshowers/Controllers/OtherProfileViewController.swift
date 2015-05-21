@@ -20,5 +20,6 @@ class OtherProfileViewController: UIViewController
     override func viewDidLoad()
     {
         nameLabel.text = user?.name
+        self.navigationController?.navigationBarHidden = false
     }
 }

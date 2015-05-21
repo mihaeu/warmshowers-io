@@ -179,7 +179,7 @@
             </objects>
             <point key="canvasLocation" x="2351" y="257"/>
         </scene>
-        <!--Messages View Controller-->
+        <!--Messages-->
         <scene sceneID="JmR-Vn-bVO">
             <objects>
                 <viewController id="zTu-OQ-NEf" customClass="MessagesViewController" customModule="Warmshowers" customModuleProvider="target" sceneMemberID="viewController">
@@ -204,8 +204,8 @@
                             <constraint firstItem="NHr-zI-IwJ" firstAttribute="bottom" secondItem="uSC-DB-dFG" secondAttribute="top" id="ksU-nG-8eG"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="nbr-9U-43m">
-                        <barButtonItem key="rightBarButtonItem" title="New" id="gD9-jZ-MUS">
+                    <navigationItem key="navigationItem" title="Messages" id="nbr-9U-43m">
+                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="gD9-jZ-MUS">
                             <connections>
                                 <segue destination="KeO-mv-keV" kind="show" identifier="Show New Message" id="aln-sR-7h2"/>
                             </connections>
@@ -342,7 +342,7 @@
                             <constraint firstItem="Edw-4D-QwA" firstAttribute="leading" secondItem="7J8-60-JdL" secondAttribute="leading" id="gBK-PY-WC5"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Map" image="tab-map" id="MGJ-0w-VOB"/>
+                    <navigationItem key="navigationItem" id="v6c-CS-OF6"/>
                     <connections>
                         <outlet property="mapView" destination="Edw-4D-QwA" id="oA5-gu-an0"/>
                         <segue destination="ijS-BA-JNL" kind="show" identifier="Show Other Profile" id="fPJ-8A-YMD"/>
@@ -350,7 +350,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gIP-jH-Aw2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1621" y="-412"/>
+            <point key="canvasLocation" x="2433" y="-412"/>
         </scene>
         <!--Favorites-->
         <scene sceneID="WoP-1p-OgQ">
@@ -530,7 +530,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="sTG-Wc-qTw" kind="relationship" relationship="viewControllers" id="NuT-HY-G2m"/>
+                        <segue destination="lc3-r4-IRi" kind="relationship" relationship="viewControllers" id="NuT-HY-G2m"/>
                         <segue destination="Evt-pu-3df" kind="relationship" relationship="viewControllers" id="Uky-ij-mxK"/>
                         <segue destination="a0f-i6-YhJ" kind="relationship" relationship="viewControllers" id="o7q-pE-Xed"/>
                         <segue destination="tmE-gj-Jjl" kind="relationship" relationship="viewControllers" id="x4D-zR-hYu"/>
@@ -559,6 +559,25 @@
             </objects>
             <point key="canvasLocation" x="1621" y="918"/>
         </scene>
+        <!--Map-->
+        <scene sceneID="sXU-iu-9ZO">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="lc3-r4-IRi" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Map" image="tab-map" id="MGJ-0w-VOB"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Xba-Q8-C8O">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="sTG-Wc-qTw" kind="relationship" relationship="rootViewController" id="ANj-fb-BHY"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZlB-8K-BHZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1621" y="-412"/>
+        </scene>
     </scenes>
     <resources>
         <image name="tab-favorite" width="24" height="24"/>
@@ -567,6 +586,6 @@
         <image name="tab-profile" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="w7K-ZR-gAh"/>
+        <segue reference="aln-sR-7h2"/>
     </inferredMetricsTieBreakers>
 </document>
