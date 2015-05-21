@@ -8,6 +8,7 @@ target 'Warmshowers' do
 	pod 'XCGLogger'
 	pod 'SwiftyJSON'
     pod 'BrightFutures'
+    pod 'HanekeSwift'
 end
 
 target 'WarmshowersTests' do

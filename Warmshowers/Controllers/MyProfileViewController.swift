@@ -17,7 +17,6 @@ class MyProfileViewController: UIViewController
     
     override func viewDidLoad()
     {
-        // TODO: API is not a singleton so the logged in user doesn't exist on this instance
         nameTextField.text = api.loggedInUser?.name
         commentsTextView.text = api.loggedInUser?.comments
     }
