@@ -281,10 +281,12 @@ public class API
                     log.error(error?.description)
                     promise.failure(error!)
                 } else {
-                    log.info("Got hosts by location \(response?.statusCode)")
                     var json = JSON(json!)
+                    let accounts = json["accounts"]
+                    log.info("Search by location (\(minlat),\(minlon) to \(maxlat),\(maxlon)) and found \(accounts.count) [Status: \(response?.statusCode)]")
+                    
                     var users = [Int:User]()
-                    for (key: String, userJson: JSON) in json["accounts"] {
+                    for (key: String, userJson: JSON) in accounts {
                         let uid = key.toInt()!
                         let user = self.deserializeUserJson(userJson)
                         users[uid] = user

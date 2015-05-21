@@ -100,6 +100,10 @@ extension MapViewController: MKMapViewDelegate
     
     func mapView(mapView: MKMapView!, regionDidChangeAnimated animated: Bool)
     {
+        if didAdjustInitialZoomLevel == false {
+            return
+        }
+        
         let region = mapView.region
         
         let centerLongitude = region.center.longitude
