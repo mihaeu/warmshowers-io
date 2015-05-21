@@ -25,9 +25,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
             loadUserAnnotations()
         }
     }
-    var users = [User]()
+    var users = [Int:User]() {
+        didSet {
+            loadUserAnnotations()
+        }
+    }
     var userAnnotations = [MKAnnotation]()
     var api = API.sharedInstance
+    var didAdjustInitialZoomLevel = false
     
     override func viewDidLoad()
     {
@@ -54,19 +59,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
     {
         if let firstLocation = locations.first as? CLLocation {
             myLocation = firstLocation.coordinate
+            locationManager.stopUpdatingLocation()
         }
     }
 
     func loadUserAnnotations()
     {
-        // if we don't know where we are, we can't search for users around us
-        if myLocation == nil {
-            return
-        }
-        
-//        users = userSearch.byLocation(myLocation!.latitude, longitude: myLocation!.longitude)
-        for user in users {
-            
+        for (id, user) in users {
             // if the user for some reason has no location, skip
             if user.latitude == nil || user.longitude == nil {
                 continue
@@ -121,9 +120,19 @@ extension MapViewController: MKMapViewDelegate
             limit: limit
         ).onSuccess() { users in
             for (id, user) in users {
-                println(id)
-                println(user.name)
+                self.users = users
             }
+        }
+    }
+    
+    func mapViewDidFinishLoadingMap(mapView: MKMapView!)
+    {
+        if didAdjustInitialZoomLevel == false {
+            var region = mapView.region
+            region.span.latitudeDelta = region.span.latitudeDelta / 10
+            region.span.longitudeDelta = region.span.longitudeDelta / 10
+            mapView.setRegion(region, animated: true)
+            didAdjustInitialZoomLevel = true
         }
     }
     
@@ -151,7 +160,7 @@ extension MapViewController: MKMapViewDelegate
     
     func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!)
     {
-        for user in users {
+        for (id, user) in users {
             if user.name == view.annotation.title {
                 performSegueWithIdentifier(Storyboard.ShowOtherProfileSegue, sender: user)
             }
