@@ -7,17 +7,25 @@
 //
 
 import UIKit
+import Haneke
 
 class MyProfileViewController: UIViewController
 {
-    @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var commentsTextView: UITextView!
+    @IBOutlet weak var userLabel: UILabel!
+    @IBOutlet weak var languagesSpokenLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+
+    @IBOutlet weak var userPictureImageView: UIImageView!
     
     var api = API.sharedInstance
     
     override func viewDidLoad()
     {
-        nameTextField.text = api.loggedInUser?.name
-        commentsTextView.text = api.loggedInUser?.comments
+        userLabel.text = api.loggedInUser?.name
+        languagesSpokenLabel.text = api.loggedInUser?.languagesspoken
+        descriptionLabel.text = api.loggedInUser?.comments
+        
+        let url = NSURL(string: "https://www.warmshowers.org/files/imagecache/profile_picture/pictures/picture-1.jpg")!
+        userPictureImageView.hnk_setImageFromURL(url)
     }
 }

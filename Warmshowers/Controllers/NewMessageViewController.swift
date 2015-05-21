@@ -22,9 +22,11 @@ class NewMessageViewController: UIViewController
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Send", style: UIBarButtonItemStyle.Plain, target: self, action: "sendMessage")
         
         if messageThread != nil {
-            subjectTextField.enabled = false
             userTextField.enabled = false
             userTextField.text = messageThread?.user?.name
+            
+            subjectTextField.enabled = false
+            subjectTextField.text = messageThread?.subject
         }
     }
     
