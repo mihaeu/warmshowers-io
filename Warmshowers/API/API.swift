@@ -17,40 +17,7 @@ public class API
     var manager: Manager
     
     static let sharedInstance = API()
-    
-    private struct Paths {
-        static let GetPrivateMessages = "https://www.warmshowers.org/services/rest/message/get"
-        static let GetUnreadMessagesCount = "https://www.warmshowers.org/services/rest/message/unreadCount"
-        static let ReadMessageThread = "https://www.warmshowers.org/services/rest/message/getThread"
-        static let MarkMessageThread = "https://www.warmshowers.org/services/rest/message/markThreadRead"
-        static let SendMessage = "https://www.warmshowers.org/services/rest/message/send"
-        static let ReplyMessage = "https://www.warmshowers.org/services/rest/message/reply"
-        
-        static let ReadFeedback = "https://www.warmshowers.org/user/%d/json_recommendations"
-        static let CreateFeedback = "https://www.warmshowers.org/services/rest/node"
-    }
-    
-    private struct Parameters {
-        static let FeedbackNodeType = "node[type]"
-        static let FeedbackNodeTypeValue = "trust_referral"
-        static let FeedbackUser = "node[field_member_i_trust][0][uid][uid]"
-        static let FeedbackBody = "node[body]"
-        static let FeedbackType = "node[field_guest_or_host][value]"
-        static let FeedbackRating = "node[field_rating][value]"
-        static let FeedbackYear = "node[field_hosting_date][0][value][year]"
-        static let FeedbackMonth = "node[field_hosting_date][0][value][month]"
-        
-        static let MessageRecipients = "recipients"
-        static let MessageSubject = "subject"
-        static let MessageBody = "body"
-        
-        static let MessageThreadId = "thread_id"
-        static let MessageThreadStatus = "status"
-        static let MessageThreadStatusRead = 0
-        static let MessageThreadStatusUnread = 1
-        
-    }
-    
+
     public var loggedInUser: User?
     
     struct Status {
@@ -268,9 +235,8 @@ public class API
     {
         let promise = Promise<[Feedback]>()
         
-        let url = String(format: Paths.ReadFeedback, userId)
         manager
-            .request(.GET, url, parameters: nil)
+            .request(Router.ReadFeedback(userId: userId))
             .responseJSON() { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
@@ -301,17 +267,8 @@ public class API
     {
         let promise = Promise<Bool>()
         
-        let parameters: [String:AnyObject] = [
-            Parameters.FeedbackNodeType: Parameters.FeedbackNodeTypeValue,
-            Parameters.FeedbackUser: feedback.userForFeedback,
-            Parameters.FeedbackBody: feedback.body,
-            Parameters.FeedbackType: feedback.type,
-            Parameters.FeedbackRating: feedback.rating,
-            Parameters.FeedbackYear: feedback.year,
-            Parameters.FeedbackMonth: feedback.month
-        ]
         manager
-            .request(.POST, Paths.CreateFeedback, parameters: parameters)
+            .request(Router.CreateFeedback(feedback: feedback))
             .responseJSON() { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
@@ -343,15 +300,9 @@ public class API
     public func sendMessage(recipients: [User], subject: String, body: String) -> Future<Bool>
     {
         let promise = Promise<Bool>()
-        let recipientsString = ",".join(recipients.map {$0.name})
         
-        let parameters: [String:AnyObject] = [
-            Parameters.MessageRecipients: recipientsString,
-            Parameters.MessageSubject: subject,
-            Parameters.MessageBody: body
-        ]
         manager
-            .request(.POST, Paths.SendMessage, parameters: parameters)
+            .request(Router.SendMessage(recipients: recipients, subject: subject, body: body))
             .responseJSON() { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
@@ -381,12 +332,8 @@ public class API
     {
         let promise =  Promise<Bool>()
         
-        let parameters: [String:AnyObject] = [
-            Parameters.MessageThreadId: threadId,
-            Parameters.MessageBody: body
-        ]
         manager
-            .request(.POST, Paths.ReplyMessage, parameters: parameters)
+            .request(Router.ReplyMessage(threadId: threadId, body: body))
             .responseJSON() { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
@@ -413,7 +360,7 @@ public class API
         let promise = Promise<Int>()
         
         manager
-            .request(.POST, Paths.GetUnreadMessagesCount, parameters: nil)
+            .request(Router.GetUnreadMessageCount)
             .responseJSON() { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
@@ -441,7 +388,7 @@ public class API
         let promise = Promise<[Message]>()
         
         manager
-            .request(.POST, Paths.GetPrivateMessages, parameters: nil)
+            .request(Router.ReadMessages)
             .responseJSON() { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
@@ -471,7 +418,7 @@ public class API
         let promise = Promise<MessageThread>()
         
         manager
-            .request(.POST, Paths.ReadMessageThread, parameters: [Parameters.MessageThreadId: threadId])
+            .request(Router.ReadMessageThread(threadId: threadId))
             .responseJSON() { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
@@ -500,12 +447,8 @@ public class API
     {
         let promise = Promise<Bool>()
         
-        let parameters: [String:AnyObject] = [
-            Parameters.MessageThreadId: threadId,
-            Parameters.MessageThreadStatus: unread
-        ]
         manager
-            .request(.POST, Paths.MarkMessageThread, parameters: parameters)
+            .request(Router.MarkMessageThread(threadId: threadId, unread: unread))
             .responseJSON() { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
