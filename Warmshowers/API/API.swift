@@ -19,9 +19,6 @@ public class API
     static let sharedInstance = API()
     
     private struct Paths {
-        static let SearchByKeyword = "https://www.warmshowers.org/services/rest/hosts/by_keyword"
-        static let SearchByLocation = "https://www.warmshowers.org/services/rest/hosts/by_location"
-        
         static let GetPrivateMessages = "https://www.warmshowers.org/services/rest/message/get"
         static let GetUnreadMessagesCount = "https://www.warmshowers.org/services/rest/message/unreadCount"
         static let ReadMessageThread = "https://www.warmshowers.org/services/rest/message/getThread"
@@ -34,16 +31,6 @@ public class API
     }
     
     private struct Parameters {
-        static let SearchKeyword = "keyword"
-        static let SearchLimit = "limit"
-        static let SearchPage = "page"
-        static let SearchMinLatitude = "minlat"
-        static let SearchMaxLatitude = "maxlat"
-        static let SearchMinLongitude = "minlon"
-        static let SearchMaxLongitude = "maxlon"
-        static let SearchCenterLatitude = "centerlat"
-        static let SearchCenterLongitude = "centerlon"
-        
         static let FeedbackNodeType = "node[type]"
         static let FeedbackNodeTypeValue = "trust_referral"
         static let FeedbackUser = "node[field_member_i_trust][0][uid][uid]"
@@ -204,12 +191,7 @@ public class API
     {
         let promise = Promise<[Int:User]>()
         
-        let parameters:[String:AnyObject] = [
-            Parameters.SearchKeyword: keyword,
-            Parameters.SearchLimit: limit,
-            Parameters.SearchPage: page
-        ]
-        manager.request(.POST, Paths.SearchByKeyword, parameters: parameters)
+        manager.request(Router.SearchByKeyword(keyword: keyword, limit: limit, page: page))
             .responseJSON { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
@@ -249,16 +231,7 @@ public class API
     {
         let promise = Promise<[Int:User]>()
         
-        let parameters: [String:AnyObject] = [
-            Parameters.SearchMinLatitude: minlat,
-            Parameters.SearchMaxLatitude: maxlat,
-            Parameters.SearchMinLongitude: minlon,
-            Parameters.SearchMaxLongitude: maxlon,
-            Parameters.SearchCenterLatitude: centerlat,
-            Parameters.SearchCenterLongitude: centerlon,
-            Parameters.SearchLimit: limit
-        ]
-        manager.request(.POST, Paths.SearchByLocation, parameters: parameters)
+        manager.request(Router.SearchByLocation(minlat: minlat, maxlat: maxlat, minlon: minlon, maxlon: maxlon, centerlat: centerlat, centerlon: centerlon, limit: limit))
             .responseJSON() { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
