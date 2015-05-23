@@ -11,28 +11,17 @@ import MapKit
 
 class MapViewController: UIViewController, CLLocationManagerDelegate
 {
-    @IBOutlet weak var mapView: MKMapView! {
-        didSet {
-            mapView.showsUserLocation = true
-            mapView.delegate = self
-        }
-    }
+    @IBOutlet weak var mapView: MKMapView!
+    
+    var users = [Int:User]()
+    var userAnnotations = [MKAnnotation]()
+    
+    var api = API.sharedInstance
+    
+    var didAdjustInitialZoomLevel = false
+    var myLocation: CLLocationCoordinate2D?
     
     let locationManager = CLLocationManager()
-    
-    var myLocation: CLLocationCoordinate2D? {
-        didSet {
-            loadUserAnnotations()
-        }
-    }
-    var users = [Int:User]() {
-        didSet {
-            loadUserAnnotations()
-        }
-    }
-    var userAnnotations = [MKAnnotation]()
-    var api = API.sharedInstance
-    var didAdjustInitialZoomLevel = false
     
     override func viewDidLoad()
     {
@@ -40,6 +29,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
         
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        
+        mapView.showsUserLocation = true
+        mapView.delegate = self
 
         if CLLocationManager.authorizationStatus() == .NotDetermined {
             locationManager.requestWhenInUseAuthorization()
@@ -63,7 +55,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
         }
     }
 
-    func loadUserAnnotations()
+    func loadUserAnnotations(users: [Int:User])
     {
         mapView.removeAnnotations(userAnnotations)
         userAnnotations.removeAll()
@@ -126,9 +118,8 @@ extension MapViewController: MKMapViewDelegate
             centerlon: centerLongitude,
             limit: limit
         ).onSuccess() { users in
-            for (id, user) in users {
-                self.users = users
-            }
+            self.users = users
+            self.loadUserAnnotations(users)
         }
     }
     
