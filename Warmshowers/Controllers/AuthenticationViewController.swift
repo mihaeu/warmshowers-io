@@ -19,11 +19,6 @@ class AuthenticationViewController: UIViewController
         }
     }
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var spinner: UIActivityIndicatorView! {
-        didSet {
-            spinner.hidesWhenStopped = true
-        }
-    }
     
     override func viewDidLoad()
     {
@@ -33,12 +28,9 @@ class AuthenticationViewController: UIViewController
     
     @IBAction func attemptLogin()
     {
-        spinner.startAnimating()
-              
         api
             .login(usernameTextField.text, password: passwordTextField.text)
             .onSuccess() { user in
-                self.spinner.stopAnimating()
                 self.performSegueWithIdentifier(Storyboard.ShowStartSegue, sender: nil)
             }
             .onFailure() { error in
@@ -50,8 +42,7 @@ class AuthenticationViewController: UIViewController
                 alertController.addAction(
                     UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil)
                 )
-                
-                self.spinner.stopAnimating()
+
                 self.presentViewController(alertController, animated: true, completion: nil)
             }
     }

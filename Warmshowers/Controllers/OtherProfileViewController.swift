@@ -10,16 +10,23 @@ import UIKit
 
 class OtherProfileViewController: UIViewController
 {
-    
-//    TODO: I would like to see the tab bar while browsing other views, how do I do that?
-    
-    @IBOutlet weak var nameLabel: UILabel!
-    
     var user: User?
+    
+    @IBOutlet weak var userLabel: UILabel!
+    @IBOutlet weak var languagesSpokenLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    
+    @IBOutlet weak var userPictureImageView: UIImageView!
     
     override func viewDidLoad()
     {
-        nameLabel.text = user?.name
-        self.navigationController?.navigationBarHidden = false
+        if user != nil {
+            userLabel.text =  user!.name
+            languagesSpokenLabel.text = user!.languagesspoken
+            descriptionLabel.text = user!.comments
+            
+            let url = NSURL(string: user!.thumbnailURL)!
+            userPictureImageView.hnk_setImageFromURL(url)
+        }
     }
 }
