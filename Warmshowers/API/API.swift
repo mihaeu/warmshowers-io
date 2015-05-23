@@ -19,7 +19,6 @@ public class API
     static let sharedInstance = API()
     
     private struct Paths {
-        static let Login = "https://www.warmshowers.org/services/rest/user/login"
         static let Logout = "https://www.warmshowers.org/services/rest/user/logout"
         
         static let GetUser = "https://www.warmshowers.org/services/rest/user/"
@@ -38,8 +37,6 @@ public class API
     }
     
     private struct Parameters {
-        static let LoginUsername = "username"
-        static let LoginPassword = "password"
         static let LogoutUsername = "username"
         static let LogoutPassword = "password"
         
@@ -110,11 +107,7 @@ public class API
     {
         let promise = Promise<User>()
         
-        let parameters = [
-            Parameters.LoginUsername: username,
-            Parameters.LoginPassword: password
-        ]
-        manager.request(.POST, Paths.Login, parameters: parameters)
+        manager.request(Router.Login(username: username, password: password))
             .responseJSON { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
