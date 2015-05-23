@@ -16,6 +16,8 @@
 		848BC7AF1AFBD7FD00974467 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 848BC7AD1AFBD7FD00974467 /* Main.storyboard */; };
 		848BC7B11AFBD7FD00974467 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 848BC7B01AFBD7FD00974467 /* Images.xcassets */; };
 		848BC7B41AFBD7FD00974467 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 848BC7B21AFBD7FD00974467 /* LaunchScreen.xib */; };
+		84AC12BA1B10621B00DA8BCE /* UserSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AC12B91B10621B00DA8BCE /* UserSerialization.swift */; };
+		84AC12BC1B10642700DA8BCE /* MessageThreadSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AC12BB1B10642700DA8BCE /* MessageThreadSerialization.swift */; };
 		84CFCD671B0D017100647959 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CFCD661B0D017100647959 /* AuthenticationViewController.swift */; };
 		84CFCD6A1B0D01F400647959 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CFCD681B0D01F400647959 /* MapViewController.swift */; };
 		84CFCD6B1B0D01F400647959 /* OtherProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CFCD691B0D01F400647959 /* OtherProfileViewController.swift */; };
@@ -58,6 +60,8 @@
 		848BC7B31AFBD7FD00974467 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		848BC7B91AFBD7FD00974467 /* WarmshowersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WarmshowersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		848BC7BE1AFBD7FD00974467 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84AC12B91B10621B00DA8BCE /* UserSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSerialization.swift; sourceTree = "<group>"; };
+		84AC12BB1B10642700DA8BCE /* MessageThreadSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageThreadSerialization.swift; sourceTree = "<group>"; };
 		84CFCD661B0D017100647959 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthenticationViewController.swift; path = Controllers/AuthenticationViewController.swift; sourceTree = "<group>"; };
 		84CFCD681B0D01F400647959 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapViewController.swift; path = Controllers/MapViewController.swift; sourceTree = "<group>"; };
 		84CFCD691B0D01F400647959 /* OtherProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OtherProfileViewController.swift; path = Controllers/OtherProfileViewController.swift; sourceTree = "<group>"; };
@@ -110,6 +114,8 @@
 			children = (
 				84CFCD751B0D2B7F00647959 /* API.swift */,
 				84CFCD761B0D2B7F00647959 /* APISecrets.swift */,
+				84AC12B91B10621B00DA8BCE /* UserSerialization.swift */,
+				84AC12BB1B10642700DA8BCE /* MessageThreadSerialization.swift */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -421,9 +427,11 @@
 				848BC7AA1AFBD7FD00974467 /* Warmshowers.xcdatamodeld in Sources */,
 				84CFCD7E1B0D386600647959 /* NewMessageViewController.swift in Sources */,
 				84CFCD801B0D38D000647959 /* MessageThreadViewController.swift in Sources */,
+				84AC12BA1B10621B00DA8BCE /* UserSerialization.swift in Sources */,
 				848BC7A71AFBD7FD00974467 /* AppDelegate.swift in Sources */,
 				84CFCD7C1B0D2E1700647959 /* MessagesViewController.swift in Sources */,
 				84CFCD741B0D2B0700647959 /* User.swift in Sources */,
+				84AC12BC1B10642700DA8BCE /* MessageThreadSerialization.swift in Sources */,
 				84CFCD721B0D2B0700647959 /* Message.swift in Sources */,
 				84CFCD6A1B0D01F400647959 /* MapViewController.swift in Sources */,
 				84DDD6721B0D56A6005A8EEE /* MyProfileViewController.swift in Sources */,

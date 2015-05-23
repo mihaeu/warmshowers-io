@@ -124,7 +124,7 @@ public class API
                         log.info("\(username) logged in with status \(response?.statusCode)")
                         var json = JSON(json!)
                         
-                        let user = self.deserializeUserJson(json["user"])
+                        let user = UserSerialization.deserializeJSON(json["user"])
                         user.password = password
                         self.loggedInUser = user
                         
@@ -197,7 +197,7 @@ public class API
                 } else {
                     log.info("Got user by id \(response?.statusCode)")
                     var json = JSON(json!)
-                    promise.success(self.deserializeUserJson(json))
+                    promise.success(UserSerialization.deserializeJSON(json))
                 }
         }
         
@@ -237,7 +237,7 @@ public class API
                     var users = [Int:User]()
                     for (key: String, userJson: JSON) in json["accounts"] {
                         let uid = key.toInt()
-                        let user = self.deserializeUserJson(userJson)
+                        let user = UserSerialization.deserializeJSON(userJson)
                         users[uid!] = user                      
                     }
                     promise.success(users)
@@ -288,7 +288,7 @@ public class API
                     var users = [Int:User]()
                     for (key: String, userJson: JSON) in accounts {
                         let uid = key.toInt()!
-                        let user = self.deserializeUserJson(userJson)
+                        let user = UserSerialization.deserializeJSON(json)
                         users[uid] = user
                     }
                     promise.success(users)
@@ -522,7 +522,7 @@ public class API
                     promise.failure(error!)
                 } else {
                     var json = JSON(json!)
-                    var messageThread = self.deserializeMessageThreadJson(json)
+                    var messageThread = MessageThreadSerialization.deserializeJSON(json)
                     promise.success(messageThread)
                 }
             }
@@ -617,129 +617,5 @@ public class API
             rating: json["field_rating_value"].stringValue,
             type: json["field_guest_or_host_value"].stringValue
         )
-    }
-    
-    /**
-        :param: json
-    
-        :returns: MessageThread
-    */
-    private func deserializeMessageThreadJson(json: JSON) -> MessageThread
-    {
-        var messageThread = MessageThread(id: json["thread_id"].intValue)
-        
-        var participants = [User]()
-        for (key, userJson) in json["participants"] {
-            var user = User(uid: userJson["uid"].intValue, name: userJson["name"].stringValue)
-            participants.append(user)
-        }
-                messageThread.participants = participants
-        
-        var messages = [Message]()
-        for (key, messageJson) in json["messages"] {
-            var message = Message(threadId: messageJson["thread_id"].intValue, subject: messageJson["subject"].stringValue)
-            message.body = messageJson["body"].stringValue
-            message.author = User(uid: messageJson["author"]["uid"].intValue, name: messageJson["author"]["name"].stringValue)
-            messages.append(message)
-        }
-        messageThread.messages = messages
-        
-        var user = User(uid: json["user"]["uid"].intValue, name: json["user"]["name"].stringValue)
-                messageThread.user = user
-        
-        messageThread.readAll = json["read_all"].boolValue
-        messageThread.to = json["to"].intValue
-        messageThread.messageCount = json["message_count"].intValue
-        messageThread.from = json["from"].intValue
-        messageThread.start = json["start"].intValue
-        messageThread.subject = json["subject"].stringValue
-        
-        return messageThread
-    }
-    
-    /**
-        Deserializes the JSON user into a User object.
-    
-        // TODO: what if the JSON is messed up?
-    
-        :param: json JSON Swifty JSON data from the Alamofire request.
-    
-        :returns: User
-    */
-    public func deserializeUserJson(json: JSON) -> User
-    {
-        var user = User(
-            uid: json["uid"].intValue,
-            name: json["name"].stringValue
-        )
-        
-        user.mode = json["mode"].intValue
-        user.sort = json["sort"].intValue
-        user.threshold = json["threshold"].intValue
-        user.theme = json["theme"].intValue
-        user.signature = json["signature"].intValue
-        user.created = json["created"].intValue
-        user.access = json["access"].intValue
-        user.status = json["status"].intValue
-        user.timezone = json["timezone"].intValue
-        user.language = json["language"].stringValue
-        user.picture = json["picture"].stringValue
-        user.login = json["login"].intValue
-        user.timezone_name = json["timezone_name"].stringValue
-        user.signature_format = json["signature_format"].intValue
-        user.force_password_change = json["force_password_change"].intValue
-        user.fullname = json["fullname"].stringValue
-        user.notcurrentlyavailable = json["notcurrentlyavailable"].intValue
-        user.notcurrentlyavailable_reason = json["notcurrentlyavailable_reason"].stringValue
-        user.fax_number = json["fax_number"].stringValue
-        user.mobilephone = json["mobilephone"].stringValue
-        user.workphone = json["workphone"].stringValue
-        user.homephone = json["homephone"].stringValue
-        user.preferred_notice = json["preferred_notice"].intValue
-        user.cost = json["cost"].stringValue
-        user.maxcyclists = json["maxcyclists"].intValue
-        user.storage = json["storage"].intValue
-        user.motel = json["motel"].stringValue
-        user.campground = json["campground"].stringValue
-        user.bikeshop = json["bikeshop"].stringValue
-        user.comments = json["comments"].stringValue
-        user.shower = json["shower"].intValue
-        user.kitchenuse = json["kitchenuse"].intValue
-        user.lawnspace = json["lawnspace"].intValue
-        user.sag = json["sag"].intValue
-        user.bed = json["bed"].intValue
-        user.laundry = json["laundry"].intValue
-        user.food = json["food"].intValue
-        user.howdidyouhear = json["howdidyouhear"].stringValue
-        user.lastcorrespondence = json["lastcorrespondence"].stringValue
-        user.languagesspoken = json["languagesspoken"].stringValue
-        user.URL = json["URL"].stringValue
-        user.isstale = json["isstale"].intValue
-        user.isstale_date = json["isstale_date"].intValue
-        user.isstale_reason = json["isstale_reason"].stringValue
-        user.isunreachable = json["isunreachable"].stringValue
-        user.unreachable_date = json["unreachable_date"].stringValue
-        user.unreachable_reason = json["unreachable_reason"].stringValue
-        user.becomeavailable = json["becomeavailable"].intValue
-        user.set_unavailable_timestamp = json["set_unavailable_timestamp"].intValue
-        user.set_available_timestamp = json["set_available_timestamp"].intValue
-        user.last_unavailability_pester  = json["last_unavailability_pester"].intValue
-        user.hide_donation_status = json["hide_donation_status"].stringValue
-        user.email_opt_out = json["email_opt_out"].intValue
-        user.oid = json["oid"].intValue
-        user.type = json["type"].intValue
-        user.street = json["street"].stringValue
-        user.additional = json["additional"].stringValue
-        user.city = json["city"].stringValue
-        user.province = json["province"].stringValue
-        user.postal_code = json["postal_code"].intValue
-        user.country = json["country"].stringValue
-        user.latitude = json["latitude"].doubleValue
-        user.longitude = json["longitude"].doubleValue
-        user.source = json["source"].intValue
-        user.node_notify_mailalert = json["node_notify_mailalert"].intValue
-        user.comment_notify_mailalert = json["comment_notify_mailalert"].intValue
-        
-        return user
     }
 }
