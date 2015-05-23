@@ -2,13 +2,13 @@
 //  MessageThreadSerialization.swift
 //  Warmshowers
 //
-//  Created by admin on 23/05/15.
-//  Copyright (c) 2015 mihaeu. All rights reserved.
+//  Created by Michael Haeuslmann on 23/05/15.
+//  Copyright (c) 2015 Michael Haeuslmann. All rights reserved.
 //
 
 import SwiftyJSON
 
-class MessageThreadSerialization
+public class MessageThreadSerialization
 {
     public static func deserializeJSON(json: JSON) -> MessageThread
     {

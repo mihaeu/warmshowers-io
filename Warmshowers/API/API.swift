@@ -323,7 +323,7 @@ public class API
                     var json = JSON(json!)
                     var feedback = [Feedback]()
                     for (key, feedbackJson) in json["recommendations"] {
-                        feedback.append(self.deserializeFeedbackJson(feedbackJson["recommendation"]))
+                        feedback.append(FeedbackSerialization.deserializeJSON(feedbackJson["recommendation"]))
                     }
                     promise.success(feedback)
                 }
@@ -494,7 +494,7 @@ public class API
                     var json = JSON(json!)
                     var messages = [Message]()
                     for (key, messageJson) in json {
-                        messages.append(self.deserializeMessageJson(messageJson))
+                        messages.append(MessageSerialization.deserializeJSON(messageJson))
                     }
                     promise.success(messages)
                 }
@@ -562,60 +562,5 @@ public class API
         
         return promise.future
         
-    }
-    
-    // MARK: Deserializers
-    
-    /**
-        :param: json
-    
-        :returns: Message
-    */
-    private func deserializeMessageJson(json: JSON) -> Message
-    {
-        var users = [User]()
-        for (key, user) in json["participants"] {
-            users.append(User(uid: user["uid"].intValue, name: user["name"].stringValue))
-        }
-        
-        var message = Message(
-            threadId: json["thread_id"].intValue,
-            subject: json["subject"].stringValue
-        )
-        
-        message.participants = users
-        message.count = json["count"].intValue
-        message.isNew = json["is_new"].boolValue
-        message.lastUpdatedTimestamp = json["last_updated"].intValue
-        message.threadStartedTimestamp = json["thread_started"].intValue
-        
-        message.body = json["body"].string
-        
-        return message
-    }
-    
-    /**
-        :param: json
-    
-        :returns: Feedback
-    */
-    private func deserializeFeedbackJson(json: JSON) -> Feedback
-    {
-        let timestamp = json["field_hosting_date_value"].doubleValue
-        let date = NSDate(timeIntervalSince1970: timestamp)
-        let calendar = NSCalendar.currentCalendar()
-        let components = calendar.components(.CalendarUnitYear | .CalendarUnitMonth, fromDate: date)
-        let year = components.year
-        let month = components.month
-
-        return Feedback(
-            userIdForFeedback: json["uid_1"].intValue,
-            userForFeedback: json["name_1"].stringValue,
-            body: json["body"].stringValue,
-            year: year,
-            month: month,
-            rating: json["field_rating_value"].stringValue,
-            type: json["field_guest_or_host_value"].stringValue
-        )
     }
 }
