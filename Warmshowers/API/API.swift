@@ -19,9 +19,6 @@ public class API
     static let sharedInstance = API()
     
     private struct Paths {
-        static let Logout = "https://www.warmshowers.org/services/rest/user/logout"
-        
-        static let GetUser = "https://www.warmshowers.org/services/rest/user/"
         static let SearchByKeyword = "https://www.warmshowers.org/services/rest/hosts/by_keyword"
         static let SearchByLocation = "https://www.warmshowers.org/services/rest/hosts/by_location"
         
@@ -37,9 +34,6 @@ public class API
     }
     
     private struct Parameters {
-        static let LogoutUsername = "username"
-        static let LogoutPassword = "password"
-        
         static let SearchKeyword = "keyword"
         static let SearchLimit = "limit"
         static let SearchPage = "page"
@@ -149,11 +143,7 @@ public class API
     {
         let promise = Promise<Bool>()
         
-        let parameters = [
-            Parameters.LogoutUsername: username,
-            Parameters.LogoutPassword: password
-        ]
-        manager.request(.POST, Paths.Logout, parameters: parameters)
+        manager.request(Router.Logout(username: username, password: password))
             .responseJSON { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
@@ -182,7 +172,7 @@ public class API
     {
         let promise = Promise<User>()
         
-        manager.request(.GET, "\(Paths.GetUser)\(userId)", parameters: nil)
+        manager.request(Router.ReadUser(userId: userId))
             .responseJSON { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
