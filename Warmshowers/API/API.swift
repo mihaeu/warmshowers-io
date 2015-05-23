@@ -287,9 +287,8 @@ public class API
                     
                     var users = [Int:User]()
                     for (key: String, userJson: JSON) in accounts {
-                        let uid = key.toInt()!
-                        let user = UserSerialization.deserializeJSON(json)
-                        users[uid] = user
+                        let user = UserSerialization.deserializeJSON(userJson)
+                        users[user.uid] = user
                     }
                     promise.success(users)
                 }

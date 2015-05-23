@@ -48,7 +48,7 @@ class TestViewController: UIViewController
     
     @IBAction func byLocation()
     {
-        api.searchByLocation(30, maxlat: 40, minlon: -100, maxlon: -90, centerlat: 35, centerlon: -95, limit: 50).onSuccess() {users in
+        api.searchByLocation(30, maxlat: 40, minlon: -100, maxlon: -90, centerlat: 35, centerlon: -95, limit: 50).onSuccess() { users in
             for (uid, user) in users {
                 println("found: \(uid) \(user.name)")
             }
