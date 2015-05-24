@@ -12,11 +12,11 @@ class OtherProfileViewController: UIViewController
 {
     var user: User?
     
-    @IBOutlet weak var userLabel: UILabel!
-    @IBOutlet weak var languagesSpokenLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    
     @IBOutlet weak var userPictureImageView: UIImageView!
+
+    @IBOutlet weak var userLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var languagesSpokenLabel: UILabel!
     
     override func viewDidLoad()
     {

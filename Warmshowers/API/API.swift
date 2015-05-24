@@ -17,62 +17,7 @@ public class API
     var manager: Manager
     
     static let sharedInstance = API()
-    
-    private struct Paths {
-        static let Login = "https://www.warmshowers.org/services/rest/user/login"
-        static let Logout = "https://www.warmshowers.org/services/rest/user/logout"
-        
-        static let GetUser = "https://www.warmshowers.org/services/rest/user/"
-        static let SearchByKeyword = "https://www.warmshowers.org/services/rest/hosts/by_keyword"
-        static let SearchByLocation = "https://www.warmshowers.org/services/rest/hosts/by_location"
-        
-        static let GetPrivateMessages = "https://www.warmshowers.org/services/rest/message/get"
-        static let GetUnreadMessagesCount = "https://www.warmshowers.org/services/rest/message/unreadCount"
-        static let ReadMessageThread = "https://www.warmshowers.org/services/rest/message/getThread"
-        static let MarkMessageThread = "https://www.warmshowers.org/services/rest/message/markThreadRead"
-        static let SendMessage = "https://www.warmshowers.org/services/rest/message/send"
-        static let ReplyMessage = "https://www.warmshowers.org/services/rest/message/reply"
-        
-        static let ReadFeedback = "https://www.warmshowers.org/user/%d/json_recommendations"
-        static let CreateFeedback = "https://www.warmshowers.org/services/rest/node"
-    }
-    
-    private struct Parameters {
-        static let LoginUsername = "username"
-        static let LoginPassword = "password"
-        static let LogoutUsername = "username"
-        static let LogoutPassword = "password"
-        
-        static let SearchKeyword = "keyword"
-        static let SearchLimit = "limit"
-        static let SearchPage = "page"
-        static let SearchMinLatitude = "minlat"
-        static let SearchMaxLatitude = "maxlat"
-        static let SearchMinLongitude = "minlon"
-        static let SearchMaxLongitude = "maxlon"
-        static let SearchCenterLatitude = "centerlat"
-        static let SearchCenterLongitude = "centerlon"
-        
-        static let FeedbackNodeType = "node[type]"
-        static let FeedbackNodeTypeValue = "trust_referral"
-        static let FeedbackUser = "node[field_member_i_trust][0][uid][uid]"
-        static let FeedbackBody = "node[body]"
-        static let FeedbackType = "node[field_guest_or_host][value]"
-        static let FeedbackRating = "node[field_rating][value]"
-        static let FeedbackYear = "node[field_hosting_date][0][value][year]"
-        static let FeedbackMonth = "node[field_hosting_date][0][value][month]"
-        
-        static let MessageRecipients = "recipients"
-        static let MessageSubject = "subject"
-        static let MessageBody = "body"
-        
-        static let MessageThreadId = "thread_id"
-        static let MessageThreadStatus = "status"
-        static let MessageThreadStatusRead = 0
-        static let MessageThreadStatusUnread = 1
-        
-    }
-    
+
     public var loggedInUser: User?
     
     struct Status {
@@ -110,11 +55,7 @@ public class API
     {
         let promise = Promise<User>()
         
-        let parameters = [
-            Parameters.LoginUsername: username,
-            Parameters.LoginPassword: password
-        ]
-        manager.request(.POST, Paths.Login, parameters: parameters)
+        manager.request(Router.Login(username: username, password: password))
             .responseJSON { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
@@ -124,7 +65,7 @@ public class API
                         log.info("\(username) logged in with status \(response?.statusCode)")
                         var json = JSON(json!)
                         
-                        let user = self.deserializeUserJson(json["user"])
+                        let user = UserSerialization.deserializeJSON(json["user"])
                         user.password = password
                         self.loggedInUser = user
                         
@@ -156,11 +97,7 @@ public class API
     {
         let promise = Promise<Bool>()
         
-        let parameters = [
-            Parameters.LogoutUsername: username,
-            Parameters.LogoutPassword: password
-        ]
-        manager.request(.POST, Paths.Logout, parameters: parameters)
+        manager.request(Router.Logout(username: username, password: password))
             .responseJSON { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
@@ -189,7 +126,7 @@ public class API
     {
         let promise = Promise<User>()
         
-        manager.request(.GET, "\(Paths.GetUser)\(userId)", parameters: nil)
+        manager.request(Router.ReadUser(userId: userId))
             .responseJSON { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
@@ -197,7 +134,7 @@ public class API
                 } else {
                     log.info("Got user by id \(response?.statusCode)")
                     var json = JSON(json!)
-                    promise.success(self.deserializeUserJson(json))
+                    promise.success(UserSerialization.deserializeJSON(json))
                 }
         }
         
@@ -221,12 +158,7 @@ public class API
     {
         let promise = Promise<[Int:User]>()
         
-        let parameters:[String:AnyObject] = [
-            Parameters.SearchKeyword: keyword,
-            Parameters.SearchLimit: limit,
-            Parameters.SearchPage: page
-        ]
-        manager.request(.POST, Paths.SearchByKeyword, parameters: parameters)
+        manager.request(Router.SearchByKeyword(keyword: keyword, limit: limit, page: page))
             .responseJSON { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
@@ -237,7 +169,7 @@ public class API
                     var users = [Int:User]()
                     for (key: String, userJson: JSON) in json["accounts"] {
                         let uid = key.toInt()
-                        let user = self.deserializeUserJson(userJson)
+                        let user = UserSerialization.deserializeJSON(userJson)
                         users[uid!] = user                      
                     }
                     promise.success(users)
@@ -266,16 +198,7 @@ public class API
     {
         let promise = Promise<[Int:User]>()
         
-        let parameters: [String:AnyObject] = [
-            Parameters.SearchMinLatitude: minlat,
-            Parameters.SearchMaxLatitude: maxlat,
-            Parameters.SearchMinLongitude: minlon,
-            Parameters.SearchMaxLongitude: maxlon,
-            Parameters.SearchCenterLatitude: centerlat,
-            Parameters.SearchCenterLongitude: centerlon,
-            Parameters.SearchLimit: limit
-        ]
-        manager.request(.POST, Paths.SearchByLocation, parameters: parameters)
+        manager.request(Router.SearchByLocation(minlat: minlat, maxlat: maxlat, minlon: minlon, maxlon: maxlon, centerlat: centerlat, centerlon: centerlon, limit: limit))
             .responseJSON() { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
@@ -287,10 +210,10 @@ public class API
                     
                     var users = [Int:User]()
                     for (key: String, userJson: JSON) in accounts {
-                        let uid = key.toInt()!
-                        let user = self.deserializeUserJson(userJson)
-                        users[uid] = user
+                        let user = UserSerialization.deserializeJSON(userJson)
+                        users[user.uid] = user
                     }
+                    println(users.count)
                     promise.success(users)
                 }
         }
@@ -312,9 +235,8 @@ public class API
     {
         let promise = Promise<[Feedback]>()
         
-        let url = String(format: Paths.ReadFeedback, userId)
         manager
-            .request(.GET, url, parameters: nil)
+            .request(Router.ReadFeedback(userId: userId))
             .responseJSON() { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
@@ -323,7 +245,7 @@ public class API
                     var json = JSON(json!)
                     var feedback = [Feedback]()
                     for (key, feedbackJson) in json["recommendations"] {
-                        feedback.append(self.deserializeFeedbackJson(feedbackJson["recommendation"]))
+                        feedback.append(FeedbackSerialization.deserializeJSON(feedbackJson["recommendation"]))
                     }
                     promise.success(feedback)
                 }
@@ -345,17 +267,8 @@ public class API
     {
         let promise = Promise<Bool>()
         
-        let parameters: [String:AnyObject] = [
-            Parameters.FeedbackNodeType: Parameters.FeedbackNodeTypeValue,
-            Parameters.FeedbackUser: feedback.userForFeedback,
-            Parameters.FeedbackBody: feedback.body,
-            Parameters.FeedbackType: feedback.type,
-            Parameters.FeedbackRating: feedback.rating,
-            Parameters.FeedbackYear: feedback.year,
-            Parameters.FeedbackMonth: feedback.month
-        ]
         manager
-            .request(.POST, Paths.CreateFeedback, parameters: parameters)
+            .request(Router.CreateFeedback(feedback: feedback))
             .responseJSON() { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
@@ -387,15 +300,9 @@ public class API
     public func sendMessage(recipients: [User], subject: String, body: String) -> Future<Bool>
     {
         let promise = Promise<Bool>()
-        let recipientsString = ",".join(recipients.map {$0.name})
         
-        let parameters: [String:AnyObject] = [
-            Parameters.MessageRecipients: recipientsString,
-            Parameters.MessageSubject: subject,
-            Parameters.MessageBody: body
-        ]
         manager
-            .request(.POST, Paths.SendMessage, parameters: parameters)
+            .request(Router.SendMessage(recipients: recipients, subject: subject, body: body))
             .responseJSON() { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
@@ -425,12 +332,8 @@ public class API
     {
         let promise =  Promise<Bool>()
         
-        let parameters: [String:AnyObject] = [
-            Parameters.MessageThreadId: threadId,
-            Parameters.MessageBody: body
-        ]
         manager
-            .request(.POST, Paths.ReplyMessage, parameters: parameters)
+            .request(Router.ReplyMessage(threadId: threadId, body: body))
             .responseJSON() { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
@@ -457,7 +360,7 @@ public class API
         let promise = Promise<Int>()
         
         manager
-            .request(.POST, Paths.GetUnreadMessagesCount, parameters: nil)
+            .request(Router.GetUnreadMessageCount)
             .responseJSON() { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
@@ -485,7 +388,7 @@ public class API
         let promise = Promise<[Message]>()
         
         manager
-            .request(.POST, Paths.GetPrivateMessages, parameters: nil)
+            .request(Router.ReadMessages)
             .responseJSON() { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
@@ -494,7 +397,7 @@ public class API
                     var json = JSON(json!)
                     var messages = [Message]()
                     for (key, messageJson) in json {
-                        messages.append(self.deserializeMessageJson(messageJson))
+                        messages.append(MessageSerialization.deserializeJSON(messageJson))
                     }
                     promise.success(messages)
                 }
@@ -515,14 +418,14 @@ public class API
         let promise = Promise<MessageThread>()
         
         manager
-            .request(.POST, Paths.ReadMessageThread, parameters: [Parameters.MessageThreadId: threadId])
+            .request(Router.ReadMessageThread(threadId: threadId))
             .responseJSON() { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
                     promise.failure(error!)
                 } else {
                     var json = JSON(json!)
-                    var messageThread = self.deserializeMessageThreadJson(json)
+                    var messageThread = MessageThreadSerialization.deserializeJSON(json)
                     promise.success(messageThread)
                 }
             }
@@ -544,12 +447,8 @@ public class API
     {
         let promise = Promise<Bool>()
         
-        let parameters: [String:AnyObject] = [
-            Parameters.MessageThreadId: threadId,
-            Parameters.MessageThreadStatus: unread
-        ]
         manager
-            .request(.POST, Paths.MarkMessageThread, parameters: parameters)
+            .request(Router.MarkMessageThread(threadId: threadId, unread: unread))
             .responseJSON() { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
@@ -562,184 +461,5 @@ public class API
         
         return promise.future
         
-    }
-    
-    // MARK: Deserializers
-    
-    /**
-        :param: json
-    
-        :returns: Message
-    */
-    private func deserializeMessageJson(json: JSON) -> Message
-    {
-        var users = [User]()
-        for (key, user) in json["participants"] {
-            users.append(User(uid: user["uid"].intValue, name: user["name"].stringValue))
-        }
-        
-        var message = Message(
-            threadId: json["thread_id"].intValue,
-            subject: json["subject"].stringValue
-        )
-        
-        message.participants = users
-        message.count = json["count"].intValue
-        message.isNew = json["is_new"].boolValue
-        message.lastUpdatedTimestamp = json["last_updated"].intValue
-        message.threadStartedTimestamp = json["thread_started"].intValue
-        
-        message.body = json["body"].string
-        
-        return message
-    }
-    
-    /**
-        :param: json
-    
-        :returns: Feedback
-    */
-    private func deserializeFeedbackJson(json: JSON) -> Feedback
-    {
-        let timestamp = json["field_hosting_date_value"].doubleValue
-        let date = NSDate(timeIntervalSince1970: timestamp)
-        let calendar = NSCalendar.currentCalendar()
-        let components = calendar.components(.CalendarUnitYear | .CalendarUnitMonth, fromDate: date)
-        let year = components.year
-        let month = components.month
-
-        return Feedback(
-            userIdForFeedback: json["uid_1"].intValue,
-            userForFeedback: json["name_1"].stringValue,
-            body: json["body"].stringValue,
-            year: year,
-            month: month,
-            rating: json["field_rating_value"].stringValue,
-            type: json["field_guest_or_host_value"].stringValue
-        )
-    }
-    
-    /**
-        :param: json
-    
-        :returns: MessageThread
-    */
-    private func deserializeMessageThreadJson(json: JSON) -> MessageThread
-    {
-        var messageThread = MessageThread(id: json["thread_id"].intValue)
-        
-        var participants = [User]()
-        for (key, userJson) in json["participants"] {
-            var user = User(uid: userJson["uid"].intValue, name: userJson["name"].stringValue)
-            participants.append(user)
-        }
-                messageThread.participants = participants
-        
-        var messages = [Message]()
-        for (key, messageJson) in json["messages"] {
-            var message = Message(threadId: messageJson["thread_id"].intValue, subject: messageJson["subject"].stringValue)
-            message.body = messageJson["body"].stringValue
-            message.author = User(uid: messageJson["author"]["uid"].intValue, name: messageJson["author"]["name"].stringValue)
-            messages.append(message)
-        }
-        messageThread.messages = messages
-        
-        var user = User(uid: json["user"]["uid"].intValue, name: json["user"]["name"].stringValue)
-                messageThread.user = user
-        
-        messageThread.readAll = json["read_all"].boolValue
-        messageThread.to = json["to"].intValue
-        messageThread.messageCount = json["message_count"].intValue
-        messageThread.from = json["from"].intValue
-        messageThread.start = json["start"].intValue
-        messageThread.subject = json["subject"].stringValue
-        
-        return messageThread
-    }
-    
-    /**
-        Deserializes the JSON user into a User object.
-    
-        // TODO: what if the JSON is messed up?
-    
-        :param: json JSON Swifty JSON data from the Alamofire request.
-    
-        :returns: User
-    */
-    public func deserializeUserJson(json: JSON) -> User
-    {
-        var user = User(
-            uid: json["uid"].intValue,
-            name: json["name"].stringValue
-        )
-        
-        user.mode = json["mode"].intValue
-        user.sort = json["sort"].intValue
-        user.threshold = json["threshold"].intValue
-        user.theme = json["theme"].intValue
-        user.signature = json["signature"].intValue
-        user.created = json["created"].intValue
-        user.access = json["access"].intValue
-        user.status = json["status"].intValue
-        user.timezone = json["timezone"].intValue
-        user.language = json["language"].stringValue
-        user.picture = json["picture"].stringValue
-        user.login = json["login"].intValue
-        user.timezone_name = json["timezone_name"].stringValue
-        user.signature_format = json["signature_format"].intValue
-        user.force_password_change = json["force_password_change"].intValue
-        user.fullname = json["fullname"].stringValue
-        user.notcurrentlyavailable = json["notcurrentlyavailable"].intValue
-        user.notcurrentlyavailable_reason = json["notcurrentlyavailable_reason"].stringValue
-        user.fax_number = json["fax_number"].stringValue
-        user.mobilephone = json["mobilephone"].stringValue
-        user.workphone = json["workphone"].stringValue
-        user.homephone = json["homephone"].stringValue
-        user.preferred_notice = json["preferred_notice"].intValue
-        user.cost = json["cost"].stringValue
-        user.maxcyclists = json["maxcyclists"].intValue
-        user.storage = json["storage"].intValue
-        user.motel = json["motel"].stringValue
-        user.campground = json["campground"].stringValue
-        user.bikeshop = json["bikeshop"].stringValue
-        user.comments = json["comments"].stringValue
-        user.shower = json["shower"].intValue
-        user.kitchenuse = json["kitchenuse"].intValue
-        user.lawnspace = json["lawnspace"].intValue
-        user.sag = json["sag"].intValue
-        user.bed = json["bed"].intValue
-        user.laundry = json["laundry"].intValue
-        user.food = json["food"].intValue
-        user.howdidyouhear = json["howdidyouhear"].stringValue
-        user.lastcorrespondence = json["lastcorrespondence"].stringValue
-        user.languagesspoken = json["languagesspoken"].stringValue
-        user.URL = json["URL"].stringValue
-        user.isstale = json["isstale"].intValue
-        user.isstale_date = json["isstale_date"].intValue
-        user.isstale_reason = json["isstale_reason"].stringValue
-        user.isunreachable = json["isunreachable"].stringValue
-        user.unreachable_date = json["unreachable_date"].stringValue
-        user.unreachable_reason = json["unreachable_reason"].stringValue
-        user.becomeavailable = json["becomeavailable"].intValue
-        user.set_unavailable_timestamp = json["set_unavailable_timestamp"].intValue
-        user.set_available_timestamp = json["set_available_timestamp"].intValue
-        user.last_unavailability_pester  = json["last_unavailability_pester"].intValue
-        user.hide_donation_status = json["hide_donation_status"].stringValue
-        user.email_opt_out = json["email_opt_out"].intValue
-        user.oid = json["oid"].intValue
-        user.type = json["type"].intValue
-        user.street = json["street"].stringValue
-        user.additional = json["additional"].stringValue
-        user.city = json["city"].stringValue
-        user.province = json["province"].stringValue
-        user.postal_code = json["postal_code"].intValue
-        user.country = json["country"].stringValue
-        user.latitude = json["latitude"].doubleValue
-        user.longitude = json["longitude"].doubleValue
-        user.source = json["source"].intValue
-        user.node_notify_mailalert = json["node_notify_mailalert"].intValue
-        user.comment_notify_mailalert = json["comment_notify_mailalert"].intValue
-        
-        return user
     }
 }
