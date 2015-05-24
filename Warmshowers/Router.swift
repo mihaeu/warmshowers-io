@@ -104,7 +104,9 @@ enum Router: URLRequestConvertible
         mutableURLRequest.HTTPMethod = method.rawValue
         
         switch self {
+            
             // Authentication
+            
             case .Login(let username, let password):
                 return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: [
                         "username": username,
@@ -118,6 +120,7 @@ enum Router: URLRequestConvertible
                     ]).0
             
             // User
+            
             case .ReadUser(let userId):
                 return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: nil).0
             
@@ -128,14 +131,15 @@ enum Router: URLRequestConvertible
                     "page": page
                 ]).0
             
-            case .SearchByLocation(let minlat, let minlon, let maxlat, let maxlon, let centerlat, let centerlon, let limit):
+            case .SearchByLocation(let minlat, let maxlat,let minlon, let maxlon, let centerlat, let centerlon, let limit):
                 return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: [
                         "minlat": minlat,
                         "maxlat": maxlat,
                         "minlon": minlon,
                         "maxlon": maxlon,
                         "centerlat": centerlat,
-                        "centerlon": centerlon
+                        "centerlon": centerlon,
+                        "limit": limit
                     ]).0
             
             // Feedback
