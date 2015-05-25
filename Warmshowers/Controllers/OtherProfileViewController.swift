@@ -15,7 +15,7 @@ class OtherProfileViewController: UIViewController
     @IBOutlet weak var userPictureImageView: UIImageView!
 
     @IBOutlet weak var userLabel: UILabel!
-    @IBOutlet weak var profileDescriptionTextView: UITextView!
+    @IBOutlet weak var profileDescriptionLabel: UILabel!
 
     override func viewDidLoad()
     {
@@ -36,7 +36,12 @@ class OtherProfileViewController: UIViewController
     private func displayUserData()
     {
         if user != nil {
-            profileDescriptionTextView.text = user!.comments
+            profileDescriptionLabel.attributedText = NSAttributedString(
+                data: user!.comments!.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: true)!,
+                options: [ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],
+                documentAttributes: nil,
+                error: nil
+            )
         }
     }
 }
