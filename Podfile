@@ -9,6 +9,7 @@ target 'Warmshowers' do
 	pod 'SwiftyJSON'
     pod 'BrightFutures'
     pod 'HanekeSwift'
+    pod 'Cartography'
 end
 
 target 'WarmshowersTests' do

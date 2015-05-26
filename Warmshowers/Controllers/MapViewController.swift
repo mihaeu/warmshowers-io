@@ -61,16 +61,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
         userAnnotations.removeAll()
         
         for (id, user) in users {
-            // if the user for some reason has no location, skip
-            if user.latitude == nil || user.longitude == nil {
-                continue
+            if user.latitude != nil && user.longitude != nil {
+                userAnnotations.append(UserAnnotation(user: user))
             }
-            
-            var userAnnotation = MKPointAnnotation()
-            userAnnotation.title = user.name
-            userAnnotation.coordinate = CLLocationCoordinate2D(latitude: user.latitude!, longitude: user.longitude!)
-            userAnnotations.append(userAnnotation)
         }
+        
         mapView.addAnnotations(userAnnotations)
     }
     
@@ -148,9 +143,14 @@ extension MapViewController: MKMapViewDelegate
             view.annotation = annotation
         }
         
-        var leftCalloutFrame = UIImageView(frame: Storyboard.LeftCalloutFrame)
-        leftCalloutFrame.image = UIImage(named: "tab-profile")
-        view.leftCalloutAccessoryView = leftCalloutFrame
+        if let userAnnotation = annotation as? UserAnnotation {
+            var leftCalloutFrame = UIImageView(frame: Storyboard.LeftCalloutFrame)
+            let thumbnailURL = NSURL(string: userAnnotation.user!.thumbnailURL)
+            
+            leftCalloutFrame.hnk_setImageFromURL(thumbnailURL!, placeholder: UIImage(named: "tab-profile"))
+            view.leftCalloutAccessoryView = leftCalloutFrame
+        }
+
         view.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as! UIButton
         
         return view

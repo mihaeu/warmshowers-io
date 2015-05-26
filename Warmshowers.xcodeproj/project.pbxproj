@@ -20,7 +20,8 @@
 		849970971B11C407005D2601 /* MessageSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849970931B11C407005D2601 /* MessageSerialization.swift */; };
 		849970981B11C407005D2601 /* MessageThreadSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849970941B11C407005D2601 /* MessageThreadSerialization.swift */; };
 		849970991B11C407005D2601 /* UserSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849970951B11C407005D2601 /* UserSerialization.swift */; };
-		84AC12C21B10733600DA8BCE /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AC12C11B10733600DA8BCE /* Router.swift */; };
+		84A8D96A1B14791A00E54581 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A8D9691B14791A00E54581 /* Router.swift */; };
+		84A8D96C1B14792D00E54581 /* UserAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A8D96B1B14792D00E54581 /* UserAnnotation.swift */; };
 		84CFCD671B0D017100647959 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CFCD661B0D017100647959 /* AuthenticationViewController.swift */; };
 		84CFCD6A1B0D01F400647959 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CFCD681B0D01F400647959 /* MapViewController.swift */; };
 		84CFCD6B1B0D01F400647959 /* OtherProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CFCD691B0D01F400647959 /* OtherProfileViewController.swift */; };
@@ -67,7 +68,8 @@
 		849970931B11C407005D2601 /* MessageSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageSerialization.swift; path = API/MessageSerialization.swift; sourceTree = "<group>"; };
 		849970941B11C407005D2601 /* MessageThreadSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageThreadSerialization.swift; path = API/MessageThreadSerialization.swift; sourceTree = "<group>"; };
 		849970951B11C407005D2601 /* UserSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserSerialization.swift; path = API/UserSerialization.swift; sourceTree = "<group>"; };
-		84AC12C11B10733600DA8BCE /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		84A8D9691B14791A00E54581 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Router.swift; path = API/Router.swift; sourceTree = "<group>"; };
+		84A8D96B1B14792D00E54581 /* UserAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserAnnotation.swift; path = Views/UserAnnotation.swift; sourceTree = "<group>"; };
 		84CFCD661B0D017100647959 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthenticationViewController.swift; path = Controllers/AuthenticationViewController.swift; sourceTree = "<group>"; };
 		84CFCD681B0D01F400647959 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapViewController.swift; path = Controllers/MapViewController.swift; sourceTree = "<group>"; };
 		84CFCD691B0D01F400647959 /* OtherProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OtherProfileViewController.swift; path = Controllers/OtherProfileViewController.swift; sourceTree = "<group>"; };
@@ -120,7 +122,7 @@
 			children = (
 				84CFCD751B0D2B7F00647959 /* API.swift */,
 				84CFCD761B0D2B7F00647959 /* APISecrets.swift */,
-				84AC12C11B10733600DA8BCE /* Router.swift */,
+				84A8D9691B14791A00E54581 /* Router.swift */,
 				849970951B11C407005D2601 /* UserSerialization.swift */,
 				849970921B11C407005D2601 /* FeedbackSerialization.swift */,
 				849970931B11C407005D2601 /* MessageSerialization.swift */,
@@ -155,6 +157,7 @@
 				848BC7AD1AFBD7FD00974467 /* Main.storyboard */,
 				844C1A2D1AFBFF630013551A /* Storyboard.swift */,
 				84CFCD6C1B0D2A9E00647959 /* Models */,
+				84A8D9661B14785100E54581 /* Views */,
 				84CFCD651B0D011200647959 /* Controllers */,
 				846D6BF51AFD635E00144D4F /* API */,
 				848BC7A41AFBD7FD00974467 /* Supporting Files */,
@@ -189,6 +192,14 @@
 				848BC7BE1AFBD7FD00974467 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		84A8D9661B14785100E54581 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				84A8D96B1B14792D00E54581 /* UserAnnotation.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		84CFCD651B0D011200647959 /* Controllers */ = {
@@ -427,7 +438,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84AC12C21B10733600DA8BCE /* Router.swift in Sources */,
+				84A8D96A1B14791A00E54581 /* Router.swift in Sources */,
 				84CFCD771B0D2B7F00647959 /* API.swift in Sources */,
 				84CFCD6B1B0D01F400647959 /* OtherProfileViewController.swift in Sources */,
 				84CFCD711B0D2B0700647959 /* Feedback.swift in Sources */,
@@ -440,6 +451,7 @@
 				848BC7AA1AFBD7FD00974467 /* Warmshowers.xcdatamodeld in Sources */,
 				84CFCD7E1B0D386600647959 /* NewMessageViewController.swift in Sources */,
 				84CFCD801B0D38D000647959 /* MessageThreadViewController.swift in Sources */,
+				84A8D96C1B14792D00E54581 /* UserAnnotation.swift in Sources */,
 				848BC7A71AFBD7FD00974467 /* AppDelegate.swift in Sources */,
 				84CFCD7C1B0D2E1700647959 /* MessagesViewController.swift in Sources */,
 				84CFCD741B0D2B0700647959 /* User.swift in Sources */,
