@@ -18,6 +18,12 @@
 #define COCOAPODS_VERSION_MINOR_BrightFutures 0
 #define COCOAPODS_VERSION_PATCH_BrightFutures 1
 
+// Cartography
+#define COCOAPODS_POD_AVAILABLE_Cartography
+#define COCOAPODS_VERSION_MAJOR_Cartography 0
+#define COCOAPODS_VERSION_MINOR_Cartography 5
+#define COCOAPODS_VERSION_PATCH_Cartography 0
+
 // HanekeSwift
 #define COCOAPODS_POD_AVAILABLE_HanekeSwift
 #define COCOAPODS_VERSION_MAJOR_HanekeSwift 0

@@ -1,6 +1,7 @@
 PODS:
   - Alamofire (1.2.2)
   - BrightFutures (1.0.1)
+  - Cartography (0.5.0)
   - HanekeSwift (0.9.1)
   - Nimble (0.4.2)
   - Quick (0.3.1)
@@ -10,6 +11,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - BrightFutures
+  - Cartography
   - HanekeSwift
   - Nimble
   - Quick
@@ -19,6 +21,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Alamofire: 11a6022f5089887d92ffb5a3014c97a0a915ab98
   BrightFutures: 76c1b0f2ff9694959c8359dad80f42c6e60c4a59
+  Cartography: 774e5cc446f5a6bca5d4345c5aa6af9a1fe74dc6
   HanekeSwift: 50d37bfbc4432edc649167e538c259feccb4a2bb
   Nimble: 49b7a7da8919f42823d37c6d68cc6d15a7009f32
   Quick: 824572d3d198d51e52cf4aa722cebf7e59952a35
