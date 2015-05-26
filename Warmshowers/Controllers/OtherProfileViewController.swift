@@ -12,6 +12,9 @@ class OtherProfileViewController: UIViewController
 {
     var user: User?
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var scrollViewContentView: UIView!
+    
     @IBOutlet weak var userPictureImageView: UIImageView!
 
     @IBOutlet weak var userLabel: UILabel!
@@ -42,6 +45,7 @@ class OtherProfileViewController: UIViewController
                 documentAttributes: nil,
                 error: nil
             )
+            profileDescriptionLabel.sizeToFit()
         }
     }
 }
