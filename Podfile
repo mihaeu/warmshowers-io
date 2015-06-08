@@ -4,17 +4,16 @@
 use_frameworks!
 
 target 'Warmshowers' do
-	pod 'Alamofire'
-	pod 'XCGLogger'
-	pod 'SwiftyJSON'
+    pod 'Alamofire'
+    pod 'XCGLogger'
+    pod 'SwiftyJSON'
     pod 'BrightFutures'
     pod 'HanekeSwift'
     pod 'Cartography'
 end
 
 target 'WarmshowersTests' do
-	pod 'Quick'
-	pod 'Nimble'
+    pod 'Quick'
+    pod 'Nimble'
     pod 'BrightFutures'
 end
-

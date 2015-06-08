@@ -10,10 +10,12 @@ import Alamofire
 
 enum Router: URLRequestConvertible
 {
-    static let baseURLString = "https://www.warmshowers.org"
-    
+//    static let baseURLString = "https://www.warmshowers.org"
+    static let baseURLString = "http://www.wsupg.net"
+        
     case Login(username: String, password: String)
     case Logout(username: String, password: String)
+    case RequestCsrfToken()
     
     case ReadUser(userId: Int)
     case SearchByKeyword(keyword: String, limit: Int, page: Int)
@@ -35,6 +37,8 @@ enum Router: URLRequestConvertible
                 return "/services/rest/user/login"
             case .Logout:
                 return "/services/rest/user/logout"
+            case .RequestCsrfToken:
+                return "/services/session/token"
             
             case .ReadUser(let userId):
                 return "/services/rest/user/\(userId)"
@@ -69,6 +73,8 @@ enum Router: URLRequestConvertible
                 return .POST
             case .Logout:
                 return .POST
+            case .RequestCsrfToken:
+                return .GET
             
             case .ReadUser:
                 return .GET
@@ -118,6 +124,9 @@ enum Router: URLRequestConvertible
                     "username": username,
                     "password": password
                     ]).0
+            
+            case .RequestCsrfToken():
+                return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: nil).0
             
             // User
             

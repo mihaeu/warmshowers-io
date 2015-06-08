@@ -96,7 +96,7 @@ public class API
     public func logout(username: String, password: String) -> Future<Bool>
     {
         let promise = Promise<Bool>()
-        
+
         manager.request(Router.Logout(username: username, password: password))
             .responseJSON { (request, response, json, error) in
                 if error != nil {

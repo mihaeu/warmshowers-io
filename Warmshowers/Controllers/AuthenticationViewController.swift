@@ -46,11 +46,4 @@ class AuthenticationViewController: UIViewController
                 self.presentViewController(alertController, animated: true, completion: nil)
             }
     }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
-    {
-        if segue.identifier == Storyboard.ShowStartSegue {
-            // TODO: handover the logged in user
-        }
-    }
 }
