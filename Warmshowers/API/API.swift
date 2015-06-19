@@ -19,6 +19,7 @@ public class API
     static let sharedInstance = API()
 
     public var loggedInUser: User?
+    public var csrfToken: String?
     
     struct Status {
         static let AlreadyLoggedIn = 406
@@ -69,13 +70,26 @@ public class API
                         user.password = password
                         self.loggedInUser = user
                         
+                        self.csrfToken = "12345"
                         promise.success(user)
+//                        Not yet supported by stable API Server
+//
+//                        self.requestCsrfToken()
+//                            .onSuccess() { token in
+//                                self.csrfToken = token
+//                                promise.success(user)
+//                            }
+//                            .onFailure() { error in
+//                                promise.failure(NSError(domain: "Couldn't request CSRF token.", code: Status.LoginOk, userInfo: nil))
+//                            }
+                        
+                        
                     } else if response?.statusCode == Status.AlreadyLoggedIn {
                         log.info("\(username) already logged in with status \(response?.statusCode)")
                         promise.failure(NSError(domain: "User already logged in", code: Status.AlreadyLoggedIn, userInfo: nil))
                     } else {
                         log.info("\(username) bad credentials with status \(response?.statusCode)")
-                        promise.failure(NSError(domain: "User already logged in", code: Status.AlreadyLoggedIn, userInfo: nil))
+                        promise.failure(NSError(domain: "Bas user credentials in", code: Status.AlreadyLoggedIn, userInfo: nil))
                     }
                 }
         }
@@ -97,7 +111,7 @@ public class API
     {
         let promise = Promise<Bool>()
 
-        manager.request(Router.Logout(username: username, password: password))
+        manager.request(Router.Logout(username: username, password: password, token: csrfToken!))
             .responseJSON { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
@@ -108,6 +122,31 @@ public class API
                 }
         }
         
+        return promise.future
+    }
+    
+    /**
+     * Request a CSRF Token that has to be used on every request after the login (even logout).
+     * Has to be called immidiately after login, before any other request.
+     *
+     * https://github.com/warmshowers/Warmshowers.org/wiki/Warmshowers-RESTful-Services-for-Mobile-Apps#csrf
+     *
+     * :returns: Future<String>
+     */
+    public func requestCsrfToken() -> Future<String>
+    {
+        let promise = Promise<String>()
+        
+        manager.request(Router.RequestCsrfToken())
+            .responseString { (request, response, token, error) in
+                if error != nil {
+                    log.error(error?.description)
+                    promise.failure(error!)
+                } else {
+                    log.info("Got CSRF Token: \(token)")
+                    promise.success(token!)
+                }
+        }
         return promise.future
     }
     
@@ -126,7 +165,7 @@ public class API
     {
         let promise = Promise<User>()
         
-        manager.request(Router.ReadUser(userId: userId))
+        manager.request(Router.ReadUser(userId: userId, token: csrfToken!))
             .responseJSON { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
@@ -158,7 +197,7 @@ public class API
     {
         let promise = Promise<[Int:User]>()
         
-        manager.request(Router.SearchByKeyword(keyword: keyword, limit: limit, page: page))
+        manager.request(Router.SearchByKeyword(keyword: keyword, limit: limit, page: page, token: csrfToken!))
             .responseJSON { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
@@ -198,7 +237,7 @@ public class API
     {
         let promise = Promise<[Int:User]>()
         
-        manager.request(Router.SearchByLocation(minlat: minlat, maxlat: maxlat, minlon: minlon, maxlon: maxlon, centerlat: centerlat, centerlon: centerlon, limit: limit))
+        manager.request(Router.SearchByLocation(minlat: minlat, maxlat: maxlat, minlon: minlon, maxlon: maxlon, centerlat: centerlat, centerlon: centerlon, limit: limit, token: csrfToken!))
             .responseJSON() { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
@@ -236,7 +275,7 @@ public class API
         let promise = Promise<[Feedback]>()
         
         manager
-            .request(Router.ReadFeedback(userId: userId))
+            .request(Router.ReadFeedback(userId: userId, token: csrfToken!))
             .responseJSON() { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
@@ -268,7 +307,7 @@ public class API
         let promise = Promise<Bool>()
         
         manager
-            .request(Router.CreateFeedback(feedback: feedback))
+            .request(Router.CreateFeedback(feedback: feedback, token: csrfToken!))
             .responseJSON() { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
@@ -302,7 +341,7 @@ public class API
         let promise = Promise<Bool>()
         
         manager
-            .request(Router.SendMessage(recipients: recipients, subject: subject, body: body))
+            .request(Router.SendMessage(recipients: recipients, subject: subject, body: body, token: csrfToken!))
             .responseJSON() { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
@@ -333,7 +372,7 @@ public class API
         let promise =  Promise<Bool>()
         
         manager
-            .request(Router.ReplyMessage(threadId: threadId, body: body))
+            .request(Router.ReplyMessage(threadId: threadId, body: body, token: csrfToken!))
             .responseJSON() { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
@@ -360,7 +399,7 @@ public class API
         let promise = Promise<Int>()
         
         manager
-            .request(Router.GetUnreadMessageCount)
+            .request(Router.GetUnreadMessageCount(token: csrfToken!))
             .responseJSON() { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
@@ -388,7 +427,7 @@ public class API
         let promise = Promise<[Message]>()
         
         manager
-            .request(Router.ReadMessages)
+            .request(Router.ReadMessages(token: csrfToken!))
             .responseJSON() { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
@@ -418,7 +457,7 @@ public class API
         let promise = Promise<MessageThread>()
         
         manager
-            .request(Router.ReadMessageThread(threadId: threadId))
+            .request(Router.ReadMessageThread(threadId: threadId, token: csrfToken!))
             .responseJSON() { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
@@ -448,7 +487,7 @@ public class API
         let promise = Promise<Bool>()
         
         manager
-            .request(Router.MarkMessageThread(threadId: threadId, unread: unread))
+            .request(Router.MarkMessageThread(threadId: threadId, unread: unread, token: csrfToken!))
             .responseJSON() { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)

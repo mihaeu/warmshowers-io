@@ -10,10 +10,10 @@ target 'Warmshowers' do
     pod 'BrightFutures'
     pod 'HanekeSwift'
     pod 'Cartography'
+    pod 'RealmSwift'
 end
 
 target 'WarmshowersTests' do
-    pod 'Quick'
     pod 'Nimble'
     pod 'BrightFutures'
 end
