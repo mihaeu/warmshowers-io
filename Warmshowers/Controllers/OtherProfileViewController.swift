@@ -20,7 +20,9 @@ class OtherProfileViewController: UIViewController
     var scrollContainerView: UIView!
     var userPictureImageView: UIImageView!
     var profileDescriptionLabel: UILabel!
-
+    
+    let realm = Realm()
+  
     override func viewDidLoad()
     {
         if user != nil {
@@ -73,14 +75,27 @@ class OtherProfileViewController: UIViewController
                 profileDescriptionLabel.width == 200
             }
             
-            let realm = Realm()
             realm.write {
-                realm.add(self.user!, update: true)
+                self.realm.add(self.user!, update: true)
             }
-            
-            var fetchedUser = realm.objects(User).first
-            println(fetchedUser?.name)
-            
         }
     }
+    
+    @IBAction func favorite(sender: UIButton)
+    {
+        if user != nil {
+            if user?.isFavorite == true {
+                user?.isFavorite = false
+                sender.setTitleColor(UIColor.redColor(), forState: .Normal)
+            } else {
+                user?.isFavorite = true
+                sender.setTitleColor(UIColor.greenColor(), forState: .Normal)
+            }
+            
+            realm.write {
+                self.realm.add(self.user!, update: true)
+            }
+        }
+    }
+
 }
