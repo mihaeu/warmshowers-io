@@ -75,10 +75,11 @@ class OtherProfileViewController: UIViewController
             
             let realm = Realm()
             realm.write {
-                realm.add(self.user!)
+                realm.add(self.user!, update: true)
             }
             
-            var result = realm.objects(User)
+            var fetchedUser = realm.objects(User).first
+            println(fetchedUser?.name)
             
         }
     }

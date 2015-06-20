@@ -43,4 +43,14 @@ public class User: Object
     var longitude = 0.0
     
     var isFavorite = false
+    
+    override public static func primaryKey() -> String?
+    {
+        return "uid"
+    }
+    
+    override public static func indexedProperties() -> [String]
+    {
+        return ["name", "email"]
+    }
 }

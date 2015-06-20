@@ -30,7 +30,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             fileLogLevel: .Debug
         )
         
-        setSchemaVersion(1, Realm.defaultPath, { migration, oldSchemaVersion in
+        log.info("Default Realm database at: \(Realm.defaultPath)")
+        setSchemaVersion(3, Realm.defaultPath, { migration, oldSchemaVersion in
             // We haven’t migrated anything yet, so oldSchemaVersion == 0
 //            if oldSchemaVersion < 1 {
                 // Nothing to do!
