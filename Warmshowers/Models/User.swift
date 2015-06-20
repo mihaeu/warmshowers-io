@@ -41,4 +41,6 @@ public class User: Object
     
     var latitude = 0.0
     var longitude = 0.0
+    
+    var isFavorite = false
 }

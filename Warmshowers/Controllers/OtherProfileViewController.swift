@@ -8,6 +8,7 @@
 
 import UIKit
 import Cartography
+import RealmSwift
 
 class OtherProfileViewController: UIViewController
 {
@@ -71,6 +72,14 @@ class OtherProfileViewController: UIViewController
                 profileDescriptionLabel.centerX == userPictureImageView.centerX
                 profileDescriptionLabel.width == 200
             }
+            
+            let realm = Realm()
+            realm.write {
+                realm.add(self.user!)
+            }
+            
+            var result = realm.objects(User)
+            
         }
     }
 }
