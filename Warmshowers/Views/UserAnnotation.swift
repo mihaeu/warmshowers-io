@@ -18,6 +18,6 @@ class UserAnnotation: MKPointAnnotation
         
         self.user = user
         title = user.name
-        coordinate = CLLocationCoordinate2D(latitude: user.latitude!, longitude: user.longitude!)
+        coordinate = CLLocationCoordinate2D(latitude: user.latitude, longitude: user.longitude)
     }
 }

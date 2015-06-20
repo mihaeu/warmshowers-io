@@ -26,7 +26,7 @@ class MyProfileViewController: UIViewController
         userLabel.text =  user.name
         languagesSpokenLabel.text = user.languagesspoken
         descriptionLabel.attributedText = NSAttributedString(
-            data: user.comments!.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: true)!,
+            data: user.comments.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: true)!,
             options: [ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],
             documentAttributes: nil,
             error: nil

@@ -50,7 +50,7 @@ class OtherProfileViewController: UIViewController
         if user != nil {
             profileDescriptionLabel = UILabel()
             profileDescriptionLabel.attributedText = NSAttributedString(
-                data: user!.comments!.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: true)!,
+                data: user!.comments.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: true)!,
                 options: [ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],
                 documentAttributes: nil,
                 error: nil

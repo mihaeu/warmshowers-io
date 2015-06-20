@@ -21,20 +21,20 @@ class APITest: XCTestCase
     
     func testLogsInAndLogsOutUserWithCorrectCredentials()
     {
-        api
-            .login(APISecrets.Username, password: APISecrets.Password)
-            .onSuccess() { user in
-                XCTAssertEqual(APISecrets.Username, user.name)
-                
-                self.api
-                    .logout(APISecrets.Username, password: APISecrets.Password)
-                    .onSuccess() { status in
-                        XCTAssertTrue(status)
-                    }
-            }
-            .onFailure() { error in
-                XCTFail(error.description)
-            }
+//        api
+//            .login(APISecrets.Username, password: APISecrets.Password)
+//            .onSuccess() { user in
+//                XCTAssertEqual(APISecrets.Username, user.name)
+//                
+//                self.api
+//                    .logout(APISecrets.Username, password: APISecrets.Password)
+//                    .onSuccess() { status in
+//                        XCTAssertTrue(status)
+//                    }
+//            }
+//            .onFailure() { error in
+//                XCTFail(error.description)
+//            }
     }
     
     func testFailsToLogInUserWithIncorrectCredentials()
