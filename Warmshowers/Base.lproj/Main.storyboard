@@ -445,7 +445,7 @@
         <!--Favorites-->
         <scene sceneID="WoP-1p-OgQ">
             <objects>
-                <viewController id="tmE-gj-Jjl" sceneMemberID="viewController">
+                <viewController id="tmE-gj-Jjl" customClass="FavoriteViewController" customModule="Warmshowers" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hsL-Rr-YEY"/>
                         <viewControllerLayoutGuide type="bottom" id="BD2-x8-ljA"/>
@@ -468,6 +468,9 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Favorites" image="tab-favorite" id="3Ay-lO-5UQ"/>
+                    <connections>
+                        <outlet property="tableView" destination="yqM-Aj-4nD" id="LCB-8i-rrv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OHe-ZE-Oyn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

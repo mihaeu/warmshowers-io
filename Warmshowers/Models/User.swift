@@ -37,7 +37,7 @@ public class User: Object
         return thumbnailURL;
     }
     
-    var languagesspoken = ""
+    dynamic var languagesspoken = ""
     
     var latitude = 0.0
     var longitude = 0.0

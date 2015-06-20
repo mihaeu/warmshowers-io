@@ -12,6 +12,7 @@
 		8435FDA21B0CC21A007E2EEB /* APITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8435FDA11B0CC21A007E2EEB /* APITest.swift */; };
 		844C1A2E1AFBFF630013551A /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844C1A2D1AFBFF630013551A /* Storyboard.swift */; };
 		846D2C8F1B34227D009FADEF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D2C8E1B34227D009FADEF /* User.swift */; };
+		847D25EA1B35724700E72F87 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D25E91B35724700E72F87 /* FavoriteViewController.swift */; };
 		848BC7A71AFBD7FD00974467 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848BC7A61AFBD7FD00974467 /* AppDelegate.swift */; };
 		848BC7AA1AFBD7FD00974467 /* Warmshowers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 848BC7A81AFBD7FD00974467 /* Warmshowers.xcdatamodeld */; };
 		848BC7AF1AFBD7FD00974467 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 848BC7AD1AFBD7FD00974467 /* Main.storyboard */; };
@@ -56,6 +57,7 @@
 		8435FDA11B0CC21A007E2EEB /* APITest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APITest.swift; sourceTree = "<group>"; };
 		844C1A2D1AFBFF630013551A /* Storyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
 		846D2C8E1B34227D009FADEF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Models/User.swift; sourceTree = "<group>"; };
+		847D25E91B35724700E72F87 /* FavoriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FavoriteViewController.swift; path = Controllers/FavoriteViewController.swift; sourceTree = "<group>"; };
 		848BC7A11AFBD7FD00974467 /* Warmshowers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Warmshowers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		848BC7A51AFBD7FD00974467 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		848BC7A61AFBD7FD00974467 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -122,11 +124,11 @@
 			children = (
 				84CFCD751B0D2B7F00647959 /* API.swift */,
 				84CFCD761B0D2B7F00647959 /* APISecrets.swift */,
-				84A8D9691B14791A00E54581 /* Router.swift */,
-				849970951B11C407005D2601 /* UserSerialization.swift */,
 				849970921B11C407005D2601 /* FeedbackSerialization.swift */,
 				849970931B11C407005D2601 /* MessageSerialization.swift */,
 				849970941B11C407005D2601 /* MessageThreadSerialization.swift */,
+				84A8D9691B14791A00E54581 /* Router.swift */,
+				849970951B11C407005D2601 /* UserSerialization.swift */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -206,12 +208,13 @@
 			isa = PBXGroup;
 			children = (
 				84CFCD661B0D017100647959 /* AuthenticationViewController.swift */,
+				847D25E91B35724700E72F87 /* FavoriteViewController.swift */,
 				84CFCD681B0D01F400647959 /* MapViewController.swift */,
-				84DDD6711B0D56A6005A8EEE /* MyProfileViewController.swift */,
-				84CFCD691B0D01F400647959 /* OtherProfileViewController.swift */,
 				84CFCD7B1B0D2E1700647959 /* MessagesViewController.swift */,
-				84CFCD7D1B0D386600647959 /* NewMessageViewController.swift */,
 				84CFCD7F1B0D38D000647959 /* MessageThreadViewController.swift */,
+				84DDD6711B0D56A6005A8EEE /* MyProfileViewController.swift */,
+				84CFCD7D1B0D386600647959 /* NewMessageViewController.swift */,
+				84CFCD691B0D01F400647959 /* OtherProfileViewController.swift */,
 				84CFCD791B0D2C7F00647959 /* TestViewController.swift */,
 			);
 			name = Controllers;
@@ -465,6 +468,7 @@
 				84CFCD781B0D2B7F00647959 /* APISecrets.swift in Sources */,
 				84CFCD671B0D017100647959 /* AuthenticationViewController.swift in Sources */,
 				849970961B11C407005D2601 /* FeedbackSerialization.swift in Sources */,
+				847D25EA1B35724700E72F87 /* FavoriteViewController.swift in Sources */,
 				846D2C8F1B34227D009FADEF /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

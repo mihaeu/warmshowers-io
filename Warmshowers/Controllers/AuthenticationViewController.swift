@@ -8,6 +8,7 @@
 
 import UIKit
 import XCGLogger
+import RealmSwift
 
 class AuthenticationViewController: UIViewController
 {
@@ -20,8 +21,14 @@ class AuthenticationViewController: UIViewController
     }
     @IBOutlet weak var passwordTextField: UITextField!
     
-    override func viewDidLoad()
+    override func viewDidAppear(antimated: Bool)
     {
+        let result = Realm().objects(User).filter("password != ''")
+        println(result.count)
+        if result.count == 1 {
+            performSegueWithIdentifier(Storyboard.ShowStartSegue, sender: nil)
+        }
+        
         usernameTextField?.text = APISecrets.Username
         passwordTextField?.text = APISecrets.Password
     }
@@ -31,6 +38,9 @@ class AuthenticationViewController: UIViewController
         api
             .login(usernameTextField.text, password: passwordTextField.text)
             .onSuccess() { user in
+                Realm().write {
+                    Realm().add(user, update: true)
+                }
                 self.performSegueWithIdentifier(Storyboard.ShowStartSegue, sender: nil)
             }
             .onFailure() { error in
