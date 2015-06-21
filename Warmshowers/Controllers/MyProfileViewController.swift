@@ -11,7 +11,6 @@ import Haneke
 
 class MyProfileViewController: UIViewController
 {
-
     @IBOutlet weak var userPictureImageView: UIImageView!
 
     @IBOutlet weak var userLabel: UILabel!
