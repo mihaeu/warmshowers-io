@@ -61,7 +61,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
         userAnnotations.removeAll()
         
         for (id, user) in users {
-            if user.latitude != nil && user.longitude != nil {
+            if user.longitude != 0.0 {
                 userAnnotations.append(UserAnnotation(user: user))
             }
         }

@@ -13,8 +13,6 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
     var api = API()
     var messages = [Message]()
     
-    let messageCellIdentifier = "messageCell"
-    
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.delegate = self
@@ -55,9 +53,9 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        var cell = tableView.dequeueReusableCellWithIdentifier(messageCellIdentifier) as? UITableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.MessageCellIdentifier) as? UITableViewCell
         if cell == nil {
-            cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: messageCellIdentifier)
+            cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: Storyboard.MessageCellIdentifier)
         }
         cell!.textLabel?.text = messages[indexPath.row].subject
         

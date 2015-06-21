@@ -16,4 +16,5 @@ end
 target 'WarmshowersTests' do
     pod 'Nimble'
     pod 'BrightFutures'
+    pod 'RealmSwift'
 end

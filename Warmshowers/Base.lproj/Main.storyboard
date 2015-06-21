@@ -209,6 +209,9 @@
                                 <state key="normal" title="Favorite">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="favorite:" destination="ijS-BA-JNL" eventType="touchUpInside" id="cse-WL-Pzi"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -258,6 +261,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="favoriteButton" destination="Mmc-QS-Y45" id="Y2v-gS-hJN"/>
                         <outlet property="scrollView" destination="p5d-Np-xJx" id="IFN-0h-hEU"/>
                         <outlet property="userLabel" destination="zGO-KY-7PA" id="3MM-Je-12P"/>
                     </connections>
@@ -442,7 +446,7 @@
         <!--Favorites-->
         <scene sceneID="WoP-1p-OgQ">
             <objects>
-                <viewController id="tmE-gj-Jjl" sceneMemberID="viewController">
+                <viewController id="tmE-gj-Jjl" customClass="FavoriteViewController" customModule="Warmshowers" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hsL-Rr-YEY"/>
                         <viewControllerLayoutGuide type="bottom" id="BD2-x8-ljA"/>
@@ -465,6 +469,10 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Favorites" image="tab-favorite" id="3Ay-lO-5UQ"/>
+                    <connections>
+                        <outlet property="tableView" destination="yqM-Aj-4nD" id="LCB-8i-rrv"/>
+                        <segue destination="ijS-BA-JNL" kind="presentation" identifier="Show Other Profile" id="m84-mQ-wzf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OHe-ZE-Oyn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -673,6 +681,7 @@
         <image name="tab-profile" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="m84-mQ-wzf"/>
         <segue reference="aln-sR-7h2"/>
     </inferredMetricsTieBreakers>
 </document>
