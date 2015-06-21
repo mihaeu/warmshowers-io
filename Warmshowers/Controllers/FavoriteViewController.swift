@@ -25,12 +25,23 @@ class FavoriteViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.reloadData()
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
+        if segue.identifier == Storyboard.ShowOtherProfileSegue {
+            if let otherProfileViewController = segue.destinationViewController as? OtherProfileViewController {
+                if let user = sender as? User {
+                    otherProfileViewController.user = user
+                }
+            }
+        }
+    }
+    
     // MARK: UITableViewDelegate
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-//        let messageThreadId = messages[indexPath.row].threadId
-//        performSegueWithIdentifier(Storyboard.ShowMessageThreadSegue, sender: messageThreadId)
+        let user = favoriteUsers[indexPath.row]
+        performSegueWithIdentifier(Storyboard.ShowOtherProfileSegue, sender: user)
     }
     
     // MARK: UITableViewDataSource

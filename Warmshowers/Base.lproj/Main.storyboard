@@ -471,6 +471,7 @@
                     <tabBarItem key="tabBarItem" title="Favorites" image="tab-favorite" id="3Ay-lO-5UQ"/>
                     <connections>
                         <outlet property="tableView" destination="yqM-Aj-4nD" id="LCB-8i-rrv"/>
+                        <segue destination="ijS-BA-JNL" kind="presentation" identifier="Show Other Profile" id="m84-mQ-wzf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OHe-ZE-Oyn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -680,6 +681,7 @@
         <image name="tab-profile" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="m84-mQ-wzf"/>
         <segue reference="aln-sR-7h2"/>
     </inferredMetricsTieBreakers>
 </document>
