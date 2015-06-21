@@ -39,10 +39,10 @@ public class User: Object
     
     dynamic var languagesspoken = ""
     
-    var latitude = 0.0
-    var longitude = 0.0
+    dynamic var latitude = 0.0
+    dynamic var longitude = 0.0
     
-    var isFavorite = false
+    dynamic var isFavorite = false
     
     override public static func primaryKey() -> String?
     {

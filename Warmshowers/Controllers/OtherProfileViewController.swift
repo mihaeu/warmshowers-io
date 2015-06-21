@@ -84,16 +84,11 @@ class OtherProfileViewController: UIViewController
     @IBAction func favorite(sender: UIButton)
     {
         if user != nil {
-            
             let newColor = user?.isFavorite == true ? UIColor.redColor() : UIColor.greenColor()
-            sender.setTitleColor(UIColor.greenColor(), forState: .Normal)
+            sender.setTitleColor(newColor, forState: .Normal)
             
-            let results = Realm().objects(User).filter("uid = \(self.user!.uid)")
-            var currentUser = results.first
-            println(currentUser?.name)
             realm.write {
-                currentUser?.isFavorite = true
-//                self.realm.add(currentUser!, update: true)
+                self.user!.isFavorite = !self.user!.isFavorite
             }
         }
     }

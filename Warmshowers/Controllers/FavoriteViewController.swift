@@ -58,8 +58,9 @@ class FavoriteViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath)
     {
-        if (editingStyle == UITableViewCellEditingStyle.Delete) {
-            Realm().write {
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            let realm = Realm()
+            realm.write {
                 self.favoriteUsers[indexPath.row].isFavorite = false
             }
             
