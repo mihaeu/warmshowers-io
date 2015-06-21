@@ -177,35 +177,35 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gxO-bp-fJ5">
-                                <rect key="frame" x="226" y="20" width="149" height="29"/>
+                                <rect key="frame" x="225" y="48" width="149" height="29"/>
                                 <segments>
                                     <segment title="Profile"/>
                                     <segment title="Feedback"/>
                                 </segments>
+                                <connections>
+                                    <action selector="selectedSegmentedControl:" destination="ijS-BA-JNL" eventType="valueChanged" id="84s-K8-fNw"/>
+                                </connections>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zGO-KY-7PA">
-                                <rect key="frame" x="263" y="56" width="76" height="20"/>
+                                <rect key="frame" x="262" y="20" width="76" height="20"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oWi-pn-sQL">
-                                <rect key="frame" x="254" y="84" width="94" height="30"/>
+                                <rect key="frame" x="253" y="84" width="94" height="30"/>
                                 <state key="normal" title="Host Request">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aQv-2s-dB0">
-                                <rect key="frame" x="356" y="84" width="94" height="30"/>
+                                <rect key="frame" x="355" y="84" width="94" height="30"/>
                                 <state key="normal" title="Message">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p5d-Np-xJx">
-                                <rect key="frame" x="16" y="122" width="568" height="421"/>
-                            </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mmc-QS-Y45">
-                                <rect key="frame" x="152" y="84" width="94" height="30"/>
+                                <rect key="frame" x="151" y="84" width="94" height="30"/>
                                 <state key="normal" title="Favorite">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -213,35 +213,38 @@
                                     <action selector="favorite:" destination="ijS-BA-JNL" eventType="touchUpInside" id="cse-WL-Pzi"/>
                                 </connections>
                             </button>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p5d-Np-xJx">
+                                <rect key="frame" x="16" y="122" width="568" height="470"/>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="oWi-pn-sQL" firstAttribute="leading" secondItem="Mmc-QS-Y45" secondAttribute="trailing" constant="8" symbolic="YES" id="1SX-8q-klO"/>
-                            <constraint firstItem="p5d-Np-xJx" firstAttribute="top" secondItem="oWi-pn-sQL" secondAttribute="bottom" constant="8" symbolic="YES" id="3Vu-8G-IyF"/>
-                            <constraint firstItem="aQv-2s-dB0" firstAttribute="leading" secondItem="oWi-pn-sQL" secondAttribute="trailing" constant="8" symbolic="YES" id="3ew-TA-TeV"/>
-                            <constraint firstItem="Mmc-QS-Y45" firstAttribute="baseline" secondItem="oWi-pn-sQL" secondAttribute="baseline" id="7rL-t2-Ysw"/>
-                            <constraint firstItem="aQv-2s-dB0" firstAttribute="baseline" secondItem="oWi-pn-sQL" secondAttribute="baseline" id="BV1-dh-UTH"/>
-                            <constraint firstItem="p5d-Np-xJx" firstAttribute="trailing" secondItem="XML-se-x6c" secondAttribute="trailingMargin" id="CXA-bD-nye"/>
+                            <constraint firstAttribute="centerX" secondItem="zGO-KY-7PA" secondAttribute="centerX" id="5xO-QH-K7a"/>
+                            <constraint firstItem="oWi-pn-sQL" firstAttribute="width" secondItem="Mmc-QS-Y45" secondAttribute="width" id="9Gb-PH-YUQ"/>
                             <constraint firstItem="zGO-KY-7PA" firstAttribute="top" secondItem="gxO-bp-fJ5" secondAttribute="bottom" constant="8" id="E5x-Vk-pVF">
                                 <variation key="widthClass=compact" constant="8" symbolic="YES"/>
                             </constraint>
                             <constraint firstItem="gxO-bp-fJ5" firstAttribute="top" secondItem="mFu-fg-YO4" secondAttribute="bottom" id="Exb-RI-Ywm"/>
-                            <constraint firstItem="p5d-Np-xJx" firstAttribute="leading" secondItem="XML-se-x6c" secondAttribute="leadingMargin" id="NLx-GT-wsE"/>
-                            <constraint firstItem="gxO-bp-fJ5" firstAttribute="top" secondItem="mFu-fg-YO4" secondAttribute="bottom" id="NTd-Dc-TER"/>
+                            <constraint firstItem="oWi-pn-sQL" firstAttribute="centerX" secondItem="gxO-bp-fJ5" secondAttribute="centerX" id="HWB-El-pgr"/>
+                            <constraint firstItem="zGO-KY-7PA" firstAttribute="top" secondItem="mFu-fg-YO4" secondAttribute="bottom" id="T2v-YI-n0T"/>
+                            <constraint firstItem="aQv-2s-dB0" firstAttribute="leading" secondItem="oWi-pn-sQL" secondAttribute="trailing" constant="8" symbolic="YES" id="T4k-4o-wYY"/>
                             <constraint firstAttribute="centerX" secondItem="gxO-bp-fJ5" secondAttribute="centerX" constant="-0.5" id="Ui1-sA-3vO">
                                 <variation key="widthClass=compact" constant="0.0"/>
                             </constraint>
-                            <constraint firstItem="cp8-Oi-jir" firstAttribute="top" secondItem="p5d-Np-xJx" secondAttribute="bottom" constant="8" symbolic="YES" id="ZAO-4E-c1a"/>
-                            <constraint firstItem="oWi-pn-sQL" firstAttribute="centerX" secondItem="zGO-KY-7PA" secondAttribute="centerX" id="bUV-3j-hHB"/>
-                            <constraint firstItem="zGO-KY-7PA" firstAttribute="top" secondItem="gxO-bp-fJ5" secondAttribute="bottom" constant="8" symbolic="YES" id="dbm-hM-vDu"/>
-                            <constraint firstItem="oWi-pn-sQL" firstAttribute="top" secondItem="zGO-KY-7PA" secondAttribute="bottom" constant="8" symbolic="YES" id="fz4-Rb-Y70"/>
+                            <constraint firstItem="oWi-pn-sQL" firstAttribute="width" secondItem="aQv-2s-dB0" secondAttribute="width" id="X8q-jg-FUh"/>
+                            <constraint firstItem="gxO-bp-fJ5" firstAttribute="top" secondItem="zGO-KY-7PA" secondAttribute="bottom" constant="8" symbolic="YES" id="a3V-Ch-yn0"/>
+                            <constraint firstItem="gxO-bp-fJ5" firstAttribute="centerX" secondItem="zGO-KY-7PA" secondAttribute="centerX" id="aBW-T9-fgJ"/>
                             <constraint firstItem="zGO-KY-7PA" firstAttribute="centerX" secondItem="gxO-bp-fJ5" secondAttribute="centerX" constant="-0.5" id="g9u-i8-ZOq">
                                 <variation key="widthClass=compact" constant="0.0"/>
                             </constraint>
-                            <constraint firstItem="Mmc-QS-Y45" firstAttribute="width" secondItem="oWi-pn-sQL" secondAttribute="width" id="hE2-KK-NPA"/>
-                            <constraint firstAttribute="centerX" secondItem="gxO-bp-fJ5" secondAttribute="centerX" id="lDk-KC-4Cv"/>
-                            <constraint firstItem="gxO-bp-fJ5" firstAttribute="centerX" secondItem="zGO-KY-7PA" secondAttribute="centerX" id="mHc-Zq-Zbc"/>
-                            <constraint firstItem="aQv-2s-dB0" firstAttribute="width" secondItem="oWi-pn-sQL" secondAttribute="width" id="uIS-UJ-dNH"/>
+                            <constraint firstItem="p5d-Np-xJx" firstAttribute="centerX" secondItem="oWi-pn-sQL" secondAttribute="centerX" id="jlm-NI-Eqy"/>
+                            <constraint firstItem="cp8-Oi-jir" firstAttribute="top" secondItem="p5d-Np-xJx" secondAttribute="bottom" constant="8" symbolic="YES" id="kIR-Vu-wsD"/>
+                            <constraint firstItem="p5d-Np-xJx" firstAttribute="leading" secondItem="XML-se-x6c" secondAttribute="leadingMargin" id="o8b-bp-SJI"/>
+                            <constraint firstItem="oWi-pn-sQL" firstAttribute="baseline" secondItem="Mmc-QS-Y45" secondAttribute="baseline" id="op4-ya-Q0d"/>
+                            <constraint firstItem="p5d-Np-xJx" firstAttribute="top" secondItem="oWi-pn-sQL" secondAttribute="bottom" constant="8" symbolic="YES" id="otE-Ur-sTj"/>
+                            <constraint firstItem="oWi-pn-sQL" firstAttribute="top" secondItem="gxO-bp-fJ5" secondAttribute="bottom" constant="8" symbolic="YES" id="sFW-YD-D5J"/>
+                            <constraint firstItem="oWi-pn-sQL" firstAttribute="leading" secondItem="Mmc-QS-Y45" secondAttribute="trailing" constant="8" symbolic="YES" id="tq7-mv-f2Q"/>
+                            <constraint firstItem="oWi-pn-sQL" firstAttribute="baseline" secondItem="aQv-2s-dB0" secondAttribute="baseline" id="ySO-rj-RTS"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -263,6 +266,7 @@
                     <connections>
                         <outlet property="favoriteButton" destination="Mmc-QS-Y45" id="Y2v-gS-hJN"/>
                         <outlet property="scrollView" destination="p5d-Np-xJx" id="IFN-0h-hEU"/>
+                        <outlet property="segmentedControl" destination="gxO-bp-fJ5" id="IU7-6x-lBH"/>
                         <outlet property="userLabel" destination="zGO-KY-7PA" id="3MM-Je-12P"/>
                     </connections>
                 </viewController>

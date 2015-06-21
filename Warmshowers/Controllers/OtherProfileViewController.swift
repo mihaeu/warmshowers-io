@@ -17,6 +17,7 @@ class OtherProfileViewController: UIViewController
     @IBOutlet weak var userLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var favoriteButton: UIButton!
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
     
     var scrollContainerView: UIView!
     var userPictureImageView: UIImageView!
@@ -100,4 +101,16 @@ class OtherProfileViewController: UIViewController
         }
     }
 
+    @IBAction func selectedSegmentedControl(sender: AnyObject)
+    {
+        switch segmentedControl.selectedSegmentIndex
+        {
+            case 0:
+                println("Show Profile")
+            case 1:
+                println("Show Feedback")
+            default:
+                break;
+        }
+    }
 }
