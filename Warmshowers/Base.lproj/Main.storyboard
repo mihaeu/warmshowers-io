@@ -261,6 +261,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="favoriteButton" destination="Mmc-QS-Y45" id="Y2v-gS-hJN"/>
                         <outlet property="scrollView" destination="p5d-Np-xJx" id="IFN-0h-hEU"/>
                         <outlet property="userLabel" destination="zGO-KY-7PA" id="3MM-Je-12P"/>
                     </connections>

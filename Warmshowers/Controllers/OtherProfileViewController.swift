@@ -16,6 +16,7 @@ class OtherProfileViewController: UIViewController
     
     @IBOutlet weak var userLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var favoriteButton: UIButton!
     
     var scrollContainerView: UIView!
     var userPictureImageView: UIImageView!
@@ -45,6 +46,9 @@ class OtherProfileViewController: UIViewController
             scrollView.addSubview(userPictureImageView)
             
             scrollView.contentSize = containerSize;
+            
+            let newColor = user?.isFavorite == true ? UIColor.greenColor() : UIColor.redColor()
+            favoriteButton.setTitleColor(newColor, forState: .Normal)
         }
     }
     
