@@ -153,7 +153,7 @@
             </objects>
             <point key="canvasLocation" x="1621" y="326"/>
         </scene>
-        <!--Other Profile View Controller-->
+        <!--Profile-->
         <scene sceneID="i0s-mW-YBx">
             <objects>
                 <viewController id="ijS-BA-JNL" customClass="OtherProfileViewController" customModule="Warmshowers" customModuleProvider="target" sceneMemberID="viewController">
@@ -165,83 +165,53 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Username" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zGO-KY-7PA">
-                                <rect key="frame" x="261" y="20" width="76" height="20"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oWi-pn-sQL">
-                                <rect key="frame" x="253" y="84" width="94" height="30"/>
-                                <state key="normal" title="Host Request">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aQv-2s-dB0">
-                                <rect key="frame" x="355" y="84" width="94" height="30"/>
-                                <state key="normal" title="Message">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mmc-QS-Y45">
-                                <rect key="frame" x="151" y="84" width="94" height="30"/>
-                                <state key="normal" title="Favorite">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="favorite:" destination="ijS-BA-JNL" eventType="touchUpInside" id="cse-WL-Pzi"/>
-                                </connections>
-                            </button>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p5d-Np-xJx">
-                                <rect key="frame" x="16" y="122" width="568" height="458"/>
-                            </scrollView>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gxO-bp-fJ5">
-                                <rect key="frame" x="225" y="48" width="149" height="29"/>
-                                <segments>
-                                    <segment title="Profile"/>
-                                    <segment title="Feedback"/>
-                                </segments>
-                                <connections>
-                                    <action selector="selectedSegmentedControl:" destination="ijS-BA-JNL" eventType="valueChanged" id="84s-K8-fNw"/>
-                                </connections>
-                            </segmentedControl>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qCt-3f-d5W">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <items>
+                                    <barButtonItem title="Favorite" id="7HK-AZ-hOp">
+                                        <connections>
+                                            <action selector="addToFavorites:" destination="ijS-BA-JNL" id="dm1-B2-9Yx"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Message" id="DsX-Jk-MHI"/>
+                                    <barButtonItem title="Feedback" id="GAm-4g-t2v"/>
+                                    <barButtonItem title="Visit" id="bDO-fR-uBc"/>
+                                </items>
+                            </toolbar>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fUj-a9-L0c">
+                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
+                                <items>
+                                    <navigationItem title="Title" id="QIX-VC-eyu">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="E0J-cw-bxc">
+                                            <connections>
+                                                <action selector="back:" destination="ijS-BA-JNL" id="E8E-VQ-dK3"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jzg-8z-AqM">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="20"/>
+                                <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="zGO-KY-7PA" firstAttribute="top" secondItem="gxO-bp-fJ5" secondAttribute="bottom" constant="8" id="E5x-Vk-pVF">
-                                <variation key="widthClass=compact" constant="8" symbolic="YES"/>
-                            </constraint>
-                            <constraint firstItem="gxO-bp-fJ5" firstAttribute="top" secondItem="mFu-fg-YO4" secondAttribute="bottom" id="Exb-RI-Ywm"/>
-                            <constraint firstAttribute="centerX" secondItem="gxO-bp-fJ5" secondAttribute="centerX" constant="-0.5" id="Ui1-sA-3vO">
-                                <variation key="widthClass=compact" constant="0.0"/>
-                            </constraint>
-                            <constraint firstItem="zGO-KY-7PA" firstAttribute="centerX" secondItem="gxO-bp-fJ5" secondAttribute="centerX" constant="-0.5" id="g9u-i8-ZOq">
-                                <variation key="widthClass=compact" constant="0.0"/>
-                            </constraint>
+                            <constraint firstItem="fUj-a9-L0c" firstAttribute="leading" secondItem="XML-se-x6c" secondAttribute="leading" id="HZk-pM-ZkH"/>
+                            <constraint firstItem="qCt-3f-d5W" firstAttribute="bottom" secondItem="cp8-Oi-jir" secondAttribute="top" id="LIR-4t-WfB"/>
+                            <constraint firstItem="fUj-a9-L0c" firstAttribute="leading" secondItem="qCt-3f-d5W" secondAttribute="leading" id="M0Z-By-bxG"/>
+                            <constraint firstItem="fUj-a9-L0c" firstAttribute="top" secondItem="mFu-fg-YO4" secondAttribute="bottom" id="NbU-oZ-ouz"/>
+                            <constraint firstItem="fUj-a9-L0c" firstAttribute="trailing" secondItem="qCt-3f-d5W" secondAttribute="trailing" id="qLB-6A-fYi"/>
+                            <constraint firstAttribute="trailing" secondItem="fUj-a9-L0c" secondAttribute="trailing" id="xEH-QR-BDV"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="Exb-RI-Ywm"/>
-                                <exclude reference="Ui1-sA-3vO"/>
-                                <exclude reference="E5x-Vk-pVF"/>
-                                <exclude reference="g9u-i8-ZOq"/>
-                            </mask>
-                        </variation>
-                        <variation key="widthClass=compact">
-                            <mask key="constraints">
-                                <include reference="Exb-RI-Ywm"/>
-                                <include reference="Ui1-sA-3vO"/>
-                                <include reference="E5x-Vk-pVF"/>
-                                <include reference="g9u-i8-ZOq"/>
-                            </mask>
-                        </variation>
                     </view>
-                    <connections>
-                        <outlet property="favoriteButton" destination="Mmc-QS-Y45" id="Y2v-gS-hJN"/>
-                        <outlet property="scrollView" destination="p5d-Np-xJx" id="IFN-0h-hEU"/>
-                        <outlet property="segmentedControl" destination="gxO-bp-fJ5" id="IU7-6x-lBH"/>
-                        <outlet property="userLabel" destination="zGO-KY-7PA" id="3MM-Je-12P"/>
-                    </connections>
+                    <navigationItem key="navigationItem" title="Profile" id="WKf-it-CQ9">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="v20-9p-pjD">
+                            <connections>
+                                <action selector="back:" destination="ijS-BA-JNL" id="qBo-IO-Rih"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xnQ-hW-14P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -348,7 +318,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="3099" y="326"/>
+            <point key="canvasLocation" x="3099" y="1772"/>
         </scene>
         <!--Message Thread View Controller-->
         <scene sceneID="l3O-Wl-OHE">
@@ -413,7 +383,7 @@
                     <navigationItem key="navigationItem" id="v6c-CS-OF6"/>
                     <connections>
                         <outlet property="mapView" destination="Edw-4D-QwA" id="oA5-gu-an0"/>
-                        <segue destination="ijS-BA-JNL" kind="show" identifier="Show Other Profile" id="fPJ-8A-YMD"/>
+                        <segue destination="ijS-BA-JNL" kind="presentation" identifier="Show Other Profile" id="uyn-a3-iaD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gIP-jH-Aw2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -448,7 +418,7 @@
                     <navigationItem key="navigationItem" title="Favorites" id="7Fm-47-cbJ"/>
                     <connections>
                         <outlet property="tableView" destination="yqM-Aj-4nD" id="LCB-8i-rrv"/>
-                        <segue destination="ijS-BA-JNL" kind="presentation" identifier="Show Other Profile" id="m84-mQ-wzf"/>
+                        <segue destination="ijS-BA-JNL" kind="presentation" identifier="Show Other Profile" id="EYS-6L-Ma1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OHe-ZE-Oyn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -542,6 +512,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="w7K-ZR-gAh"/>
-        <segue reference="m84-mQ-wzf"/>
+        <segue reference="EYS-6L-Ma1"/>
     </inferredMetricsTieBreakers>
 </document>
