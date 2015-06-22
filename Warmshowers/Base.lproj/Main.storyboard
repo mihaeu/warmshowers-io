@@ -190,18 +190,42 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jzg-8z-AqM">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jzg-8z-AqM">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="20"/>
                                 <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vbA-ng-fw2">
+                                <rect key="frame" x="0.0" y="64" width="600" height="492"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="laT-tJ-32w">
+                                        <rect key="frame" x="8" y="8" width="584" height="484"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </tableView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="laT-tJ-32w" secondAttribute="bottom" id="8bH-9m-cAP"/>
+                                    <constraint firstItem="laT-tJ-32w" firstAttribute="leading" secondItem="vbA-ng-fw2" secondAttribute="leadingMargin" id="UEo-vX-fg9"/>
+                                    <constraint firstItem="laT-tJ-32w" firstAttribute="top" secondItem="vbA-ng-fw2" secondAttribute="topMargin" id="cgn-Ca-WQp"/>
+                                    <constraint firstItem="laT-tJ-32w" firstAttribute="trailing" secondItem="vbA-ng-fw2" secondAttribute="trailingMargin" id="nXq-4L-pVk"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="vbA-ng-fw2" firstAttribute="trailing" secondItem="fUj-a9-L0c" secondAttribute="trailing" id="1d6-Jv-EbN"/>
+                            <constraint firstItem="jzg-8z-AqM" firstAttribute="leading" secondItem="fUj-a9-L0c" secondAttribute="leading" id="3G7-nB-APQ"/>
+                            <constraint firstItem="vbA-ng-fw2" firstAttribute="bottom" secondItem="qCt-3f-d5W" secondAttribute="top" id="4mM-en-YJP"/>
                             <constraint firstItem="fUj-a9-L0c" firstAttribute="leading" secondItem="XML-se-x6c" secondAttribute="leading" id="HZk-pM-ZkH"/>
+                            <constraint firstItem="vbA-ng-fw2" firstAttribute="leading" secondItem="fUj-a9-L0c" secondAttribute="leading" id="KV5-TS-1wU"/>
                             <constraint firstItem="qCt-3f-d5W" firstAttribute="bottom" secondItem="cp8-Oi-jir" secondAttribute="top" id="LIR-4t-WfB"/>
                             <constraint firstItem="fUj-a9-L0c" firstAttribute="leading" secondItem="qCt-3f-d5W" secondAttribute="leading" id="M0Z-By-bxG"/>
                             <constraint firstItem="fUj-a9-L0c" firstAttribute="top" secondItem="mFu-fg-YO4" secondAttribute="bottom" id="NbU-oZ-ouz"/>
+                            <constraint firstItem="jzg-8z-AqM" firstAttribute="bottom" secondItem="fUj-a9-L0c" secondAttribute="top" id="UzU-ft-JQD"/>
+                            <constraint firstItem="jzg-8z-AqM" firstAttribute="trailing" secondItem="fUj-a9-L0c" secondAttribute="trailing" id="V2c-pW-fTL"/>
                             <constraint firstItem="fUj-a9-L0c" firstAttribute="trailing" secondItem="qCt-3f-d5W" secondAttribute="trailing" id="qLB-6A-fYi"/>
+                            <constraint firstItem="vbA-ng-fw2" firstAttribute="top" secondItem="fUj-a9-L0c" secondAttribute="bottom" id="rb2-BH-rce"/>
+                            <constraint firstItem="jzg-8z-AqM" firstAttribute="top" secondItem="XML-se-x6c" secondAttribute="top" id="upg-k1-qaj"/>
                             <constraint firstAttribute="trailing" secondItem="fUj-a9-L0c" secondAttribute="trailing" id="xEH-QR-BDV"/>
                         </constraints>
                     </view>
@@ -212,6 +236,12 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="favoriteButton" destination="7HK-AZ-hOp" id="lSh-Tw-6ch"/>
+                        <outlet property="navigationBar" destination="QIX-VC-eyu" id="TTC-W1-A1G"/>
+                        <outlet property="navigationItem" destination="QIX-VC-eyu" id="WNk-T0-N9e"/>
+                        <outlet property="tableView" destination="laT-tJ-32w" id="1SK-yE-3ya"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xnQ-hW-14P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

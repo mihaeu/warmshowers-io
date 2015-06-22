@@ -23,17 +23,16 @@ class AuthenticationViewController: UIViewController
     
     override func viewDidAppear(antimated: Bool)
     {
+        usernameTextField?.text = APISecrets.Username
+        passwordTextField?.text = APISecrets.Password
+        
         let result = Realm().objects(User).filter("password != ''")
-        println(result.count)
         if result.count == 1 {
             let user = result.first!
             api.login(user.name, password: user.password).onSuccess { user in
                 self.performSegueWithIdentifier(Storyboard.ShowStartSegue, sender: nil)
             }
         }
-        
-        usernameTextField?.text = APISecrets.Username
-        passwordTextField?.text = APISecrets.Password
     }
     
     @IBAction func attemptLogin()

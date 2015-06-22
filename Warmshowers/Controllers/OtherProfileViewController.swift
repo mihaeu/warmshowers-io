@@ -15,42 +15,74 @@ class OtherProfileViewController: UIViewController
     var user: User?
     
     var scrollContainerView: UIView!
-    var userPictureImageView: UIImageView!
     var profileDescriptionLabel: UILabel!
+    
+    @IBOutlet weak var navigationBar: UINavigationItem!
+    @IBOutlet weak var userPictureImageView: UIImageView!
+    @IBOutlet weak var favoriteButton: UIBarButtonItem!
+    
+    @IBOutlet weak var tableView: UITableView! {
+        didSet {
+            tableView.dataSource = self
+        }
+    }
     
     let realm = Realm()
   
+    var tableData = [String]()
+    
     override func viewDidLoad()
     {
         if user != nil {
+            navigationBar.title = user!.name
+   
             // if the user is not cached, get it from the API
             if user?.comments == nil || user?.comments == "" {
                 API.sharedInstance.getUser(user!.uid)
                     .onSuccess() { completeUser in
                         self.user = completeUser
-//                        self.displayUserData()
                         
+                        let results = self.realm.objects(User).filter("uid = \(completeUser.uid)")
+                        if results.count == 1 {
+                            let userFromDb = results.first!
+                            self.user?.isFavorite = userFromDb.isFavorite
+                        }
                         self.realm.write {
                             self.realm.add(self.user!, update: true)
                         }
+                        
+                        self.displayUserData()
                 }
             } else {
-//                displayUserData()
+                displayUserData()
             }
         }
+        
+        tableData.append(user!.name)
+        tableData.append(user!.comments)
+        tableData.append(user!.languagesspoken)
+        tableData.append(user!.latitude.description)
+        tableData.append(user!.longitude.description)
         
         super.viewDidLoad()
     }
     
-//    private func displayUserData()
-//    {
+    private func displayUserData()
+    {
+        favoriteButton.style = user!.isFavorite == true
+            ? UIBarButtonItemStyle.Done
+            : UIBarButtonItemStyle.Plain
+        
+        
+        
 //        let containerSize = CGSize(width: 250.0, height: 250.0)
 //        scrollContainerView = UIView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size:containerSize))
 //        scrollView.addSubview(scrollContainerView)
 //        
-//        let url = NSURL(string: user!.thumbnailURL)!
+//        let url = NSURL(string: user!.mobilePictureURL)!
 //        userPictureImageView = UIImageView()
 //        userPictureImageView.frame = CGRectMake(0, 0, 179, 200)
+//        userPictureImageView.contentMode = .ScaleAspectFit
 //        userPictureImageView.hnk_setImageFromURL(url)
 //        scrollView.addSubview(userPictureImageView)
 //        
@@ -82,7 +114,7 @@ class OtherProfileViewController: UIViewController
 //            profileDescriptionLabel.centerX == userPictureImageView.centerX
 //            profileDescriptionLabel.width == 200
 //        }
-//    }
+    }
     
     @IBAction func back(sender: AnyObject)
     {
@@ -99,5 +131,24 @@ class OtherProfileViewController: UIViewController
                 ? UIBarButtonItemStyle.Done
                 : UIBarButtonItemStyle.Plain
         }
+    }
+}
+
+extension OtherProfileViewController: UITableViewDataSource
+{
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    {
+        var cell = tableView.dequeueReusableCellWithIdentifier("User Cell") as? UITableViewCell
+        if cell == nil {
+            cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "User Cell")
+        }
+        cell!.textLabel?.text = tableData[indexPath.row]
+        
+        return cell!
+    }
+
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        return tableData.count
     }
 }
