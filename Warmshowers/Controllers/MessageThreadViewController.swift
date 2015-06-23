@@ -71,7 +71,7 @@ class MessageThreadViewController: UIViewController, UITableViewDataSource
         if cell == nil {
             cell = UITableViewCell()
         }
-        cell?.textLabel?.text = messageThread?.messages![0].body
+        cell?.textLabel?.text = messageThread?.messages![indexPath.row].body
         return cell!
     }
 }
