@@ -259,9 +259,52 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="181" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="NHr-zI-IwJ">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="67" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="NHr-zI-IwJ">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Message Cell" rowHeight="100" id="2Xa-Mc-uDy" customClass="MessageCell" customModule="Warmshowers" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2Xa-Mc-uDy" id="OF0-Ni-Mhl">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="33V-n6-2ie">
+                                                    <rect key="frame" x="66" y="8" width="76" height="20"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subject" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gnq-pT-WUj">
+                                                    <rect key="frame" x="66" y="37" width="50" height="17"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6ka-5G-35Q">
+                                                    <rect key="frame" x="8" y="8" width="50" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="50" id="5lF-a4-ZK1"/>
+                                                        <constraint firstAttribute="height" constant="50" id="ov7-eV-nQG"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="33V-n6-2ie" firstAttribute="leading" secondItem="6ka-5G-35Q" secondAttribute="trailing" constant="8" symbolic="YES" id="6ZI-qX-5YV"/>
+                                                <constraint firstItem="gnq-pT-WUj" firstAttribute="top" secondItem="33V-n6-2ie" secondAttribute="bottom" constant="9" id="K3u-zy-cLq"/>
+                                                <constraint firstItem="33V-n6-2ie" firstAttribute="top" secondItem="OF0-Ni-Mhl" secondAttribute="topMargin" id="Wxv-fO-Yzp"/>
+                                                <constraint firstItem="6ka-5G-35Q" firstAttribute="top" secondItem="OF0-Ni-Mhl" secondAttribute="topMargin" id="ZnJ-HQ-zCY"/>
+                                                <constraint firstItem="gnq-pT-WUj" firstAttribute="leading" secondItem="33V-n6-2ie" secondAttribute="leading" id="cJw-IS-Bru"/>
+                                                <constraint firstItem="6ka-5G-35Q" firstAttribute="leading" secondItem="OF0-Ni-Mhl" secondAttribute="leadingMargin" id="fhZ-cv-qkf"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="subjectLabel" destination="gnq-pT-WUj" id="0Zq-Ye-MZK"/>
+                                            <outlet property="userPictureImageView" destination="6ka-5G-35Q" id="vxA-4x-xqv"/>
+                                            <outlet property="usernameLabel" destination="33V-n6-2ie" id="UKD-BN-6ge"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
