@@ -17,6 +17,8 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
         didSet {
             tableView.delegate = self
             tableView.dataSource = self
+            
+            tableView.rowHeight = UITableViewAutomaticDimension
         }
     }
     

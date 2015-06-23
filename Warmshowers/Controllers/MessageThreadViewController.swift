@@ -18,6 +18,8 @@ class MessageThreadViewController: UIViewController, UITableViewDataSource
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.dataSource = self
+            tableView.rowHeight = UITableViewAutomaticDimension
+            tableView.estimatedRowHeight = 160.0
         }
     }
     
@@ -71,7 +73,18 @@ class MessageThreadViewController: UIViewController, UITableViewDataSource
         if cell == nil {
             cell = UITableViewCell()
         }
-        cell?.textLabel?.text = messageThread?.messages![indexPath.row].body
+        
+        let messageBody = messageThread?.messages![indexPath.row].body
+        cell?.textLabel!.attributedText = NSAttributedString(
+            data: messageBody!.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: true)!,
+            options: [ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],
+            documentAttributes: nil,
+            error: nil
+        )
+
+        cell?.textLabel!.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        cell?.textLabel!.numberOfLines = 0
+        
         return cell!
     }
 }
