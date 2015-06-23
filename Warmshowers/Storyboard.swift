@@ -20,6 +20,8 @@ struct Storyboard
     static let AnnotationViewReuseIdentifier = "OtherUser"
     static let FavoriteCellIdentifier = "Favorite Cell"
     static let MessageCellIdentifier = "Message Cell"
+    static let MessageBodyFromCellIdentifier = "Message Body From Cell"
+    static let MessageBodyToCellIdentifier = "Message Body To Cell"
     
     // UI
     static let LeftCalloutFrame = CGRect(x: 0, y: 0, width: 59, height: 59)

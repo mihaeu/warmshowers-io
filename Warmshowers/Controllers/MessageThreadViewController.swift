@@ -18,8 +18,6 @@ class MessageThreadViewController: UIViewController, UITableViewDataSource
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.dataSource = self
-            tableView.rowHeight = UITableViewAutomaticDimension
-            tableView.estimatedRowHeight = 160.0
         }
     }
     
@@ -33,6 +31,8 @@ class MessageThreadViewController: UIViewController, UITableViewDataSource
                 }
         }
     }
+    
+    var messageParticipants = [Int:User]()
     
     override func viewDidLoad()
     {
@@ -69,21 +69,36 @@ class MessageThreadViewController: UIViewController, UITableViewDataSource
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        var cell = tableView.dequeueReusableCellWithIdentifier(messageCell) as? UITableViewCell
-        if cell == nil {
-            cell = UITableViewCell()
+        let message = messageThread?.messages![indexPath.row]
+//        var cell: MessageBodyCell?
+        
+        // I am sending the message
+//        if messageThread?.user?.uid == message?.author?.uid {
+//            var cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.MessageBodyToCellIdentifier) as? MessageBodyCell
+//            if cell == nil {
+//                cell = MessageBodyCell(style: UITableViewCellStyle.Default, reuseIdentifier: Storyboard.MessageBodyToCellIdentifier)
+//            }
+        // someone sent the message to me
+//        } else {
+            var cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.MessageBodyFromCellIdentifier) as? MessageBodyCell
+            if cell == nil {
+                cell = MessageBodyCell(style: UITableViewCellStyle.Default, reuseIdentifier: Storyboard.MessageBodyFromCellIdentifier)
+            }
+//        }
+
+        API.sharedInstance.getUser(message!.author!.uid).onSuccess() { user in
+            let url = NSURL(string: user.thumbnailURL)!
+            cell?.userPictureImageView.hnk_setImageFromURL(url)
         }
         
-        let messageBody = messageThread?.messages![indexPath.row].body
-        cell?.textLabel!.attributedText = NSAttributedString(
-            data: messageBody!.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: true)!,
+        cell?.bodyLabel.attributedText = NSAttributedString(
+            data: message!.body!.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: true)!,
             options: [ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],
             documentAttributes: nil,
             error: nil
         )
-
-        cell?.textLabel!.lineBreakMode = NSLineBreakMode.ByWordWrapping
-        cell?.textLabel!.numberOfLines = 0
+        
+        cell?.sizeToFit()
         
         return cell!
     }

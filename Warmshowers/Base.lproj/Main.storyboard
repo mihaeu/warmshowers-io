@@ -408,6 +408,42 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="3eq-oR-eiY">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Message Body From Cell" rowHeight="147" id="pDz-N9-c0g" customClass="MessageBodyCell" customModule="Warmshowers" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pDz-N9-c0g" id="Oz8-cO-mdS">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="udM-DP-iJE">
+                                                    <rect key="frame" x="8" y="8" width="50" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="50" id="08W-sY-a9O"/>
+                                                        <constraint firstAttribute="height" constant="50" id="g9O-cF-l2D"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Body" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aVJ-Md-eSN">
+                                                    <rect key="frame" x="66" y="8" width="526" height="130"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="udM-DP-iJE" firstAttribute="leading" secondItem="Oz8-cO-mdS" secondAttribute="leadingMargin" id="2m4-Dq-sDY"/>
+                                                <constraint firstItem="aVJ-Md-eSN" firstAttribute="top" secondItem="Oz8-cO-mdS" secondAttribute="topMargin" id="ByZ-79-K0p"/>
+                                                <constraint firstItem="aVJ-Md-eSN" firstAttribute="trailing" secondItem="Oz8-cO-mdS" secondAttribute="trailingMargin" id="QWI-AZ-S3T"/>
+                                                <constraint firstItem="aVJ-Md-eSN" firstAttribute="bottom" secondItem="Oz8-cO-mdS" secondAttribute="bottomMargin" id="TKc-hk-RZo"/>
+                                                <constraint firstItem="aVJ-Md-eSN" firstAttribute="leading" secondItem="udM-DP-iJE" secondAttribute="trailing" constant="8" symbolic="YES" id="c1S-yG-0jh"/>
+                                                <constraint firstItem="udM-DP-iJE" firstAttribute="top" secondItem="Oz8-cO-mdS" secondAttribute="topMargin" id="igg-8H-DCb"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="bodyLabel" destination="aVJ-Md-eSN" id="NTW-sI-TxJ"/>
+                                            <outlet property="userPictureImageView" destination="udM-DP-iJE" id="IUi-my-68w"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

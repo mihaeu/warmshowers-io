@@ -2,8 +2,8 @@
 //  MessageCell.swift
 //  Warmshowers
 //
-//  Created by admin on 23/06/15.
-//  Copyright (c) 2015 mihaeu. All rights reserved.
+//  Created by Michael Haeuslmann on 23/06/15.
+//  Copyright (c) 2015 Michael Haeuslmann. All rights reserved.
 //
 
 import UIKit

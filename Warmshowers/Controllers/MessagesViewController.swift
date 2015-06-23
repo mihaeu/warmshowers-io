@@ -17,9 +17,6 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
         didSet {
             tableView.delegate = self
             tableView.dataSource = self
-            
-//            tableView.rowHeight = UITableViewAutomaticDimension
-//            tableView.estimatedRowHeight = 160
         }
     }
     
@@ -70,8 +67,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
             }
             cell?.usernameLabel.text = authors!.first?.name
         }
-        
-//        cell?.userPictureImageView.contentMode = .ScaleAspectFit
+
         cell?.subjectLabel.text = messages[indexPath.row].subject
         cell?.sizeToFit()
         return cell!
