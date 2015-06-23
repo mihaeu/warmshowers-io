@@ -32,7 +32,6 @@ class NewMessageViewController: UIViewController
     
     func sendMessage()
     {
-        println(subjectTextField.text)
-        println(bodyTextView.text)
+        // TDODO: send message ...
     }
 }

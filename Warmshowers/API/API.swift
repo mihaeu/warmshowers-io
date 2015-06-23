@@ -213,7 +213,6 @@ public class API
                         let user = UserSerialization.deserializeJSON(userJson)
                         users[user.uid] = user
                     }
-                    println(users.count)
                     promise.success(users)
                 }
         }
