@@ -10,14 +10,15 @@ import UIKit
 
 class MessageThreadViewController: UIViewController, UITableViewDataSource
 {
-    private var api = API()
+    private var api = API.sharedInstance
     private var messageThread: MessageThread?
-    
-    private let messageCell = "messageCell"
     
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.dataSource = self
+            
+            tableView.rowHeight = UITableViewAutomaticDimension
+            tableView.estimatedRowHeight = 160
         }
     }
     
@@ -31,8 +32,6 @@ class MessageThreadViewController: UIViewController, UITableViewDataSource
                 }
         }
     }
-    
-    var messageParticipants = [Int:User]()
     
     override func viewDidLoad()
     {
@@ -70,27 +69,22 @@ class MessageThreadViewController: UIViewController, UITableViewDataSource
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let message = messageThread?.messages![indexPath.row]
-//        var cell: MessageBodyCell?
+        var cell: MessageBodyCell?
         
         // I am sending the message
-//        if messageThread?.user?.uid == message?.author?.uid {
-//            var cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.MessageBodyToCellIdentifier) as? MessageBodyCell
-//            if cell == nil {
-//                cell = MessageBodyCell(style: UITableViewCellStyle.Default, reuseIdentifier: Storyboard.MessageBodyToCellIdentifier)
-//            }
+        if messageThread?.user?.uid == message?.author?.uid {
+            cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.MessageBodyToCellIdentifier) as? MessageBodyCell
+            if cell == nil {
+                cell = MessageBodyCell(style: UITableViewCellStyle.Default, reuseIdentifier: Storyboard.MessageBodyToCellIdentifier)
+            }
         // someone sent the message to me
-//        } else {
-            var cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.MessageBodyFromCellIdentifier) as? MessageBodyCell
+        } else {
+            cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.MessageBodyFromCellIdentifier) as? MessageBodyCell
             if cell == nil {
                 cell = MessageBodyCell(style: UITableViewCellStyle.Default, reuseIdentifier: Storyboard.MessageBodyFromCellIdentifier)
             }
-//        }
-
-        API.sharedInstance.getUser(message!.author!.uid).onSuccess() { user in
-            let url = NSURL(string: user.thumbnailURL)!
-            cell?.userPictureImageView.hnk_setImageFromURL(url)
         }
-        
+
         cell?.bodyLabel.attributedText = NSAttributedString(
             data: message!.body!.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: true)!,
             options: [ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],
@@ -98,7 +92,10 @@ class MessageThreadViewController: UIViewController, UITableViewDataSource
             error: nil
         )
         
-        cell?.sizeToFit()
+        api.getUser(message!.author!.uid).onSuccess() { user in
+            let url = NSURL(string: user.thumbnailURL)!
+            cell?.userPictureImageView.hnk_setImageFromURL(url)
+        }
         
         return cell!
     }
