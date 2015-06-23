@@ -29,7 +29,7 @@ class OtherProfileViewController: UIViewController
     
     let realm = Realm()
   
-    var tableData = [String]()
+    var tableData = [[String]]()
     
     override func viewDidLoad()
     {
@@ -58,11 +58,15 @@ class OtherProfileViewController: UIViewController
             }
         }
         
-        tableData.append(user!.name)
-        tableData.append(user!.comments)
-        tableData.append(user!.languagesspoken)
-        tableData.append(user!.latitude.description)
-        tableData.append(user!.longitude.description)
+        var userData = [String]()
+        userData.append(user!.name)
+        userData.append(user!.comments)
+        userData.append(user!.languagesspoken)
+        userData.append(user!.latitude.description)
+        userData.append(user!.longitude.description)
+        
+        tableData.append(userData)
+        tableData.append(["a","b"])
         
         super.viewDidLoad()
     }
@@ -142,12 +146,26 @@ extension OtherProfileViewController: UITableViewDataSource
         if cell == nil {
             cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "User Cell")
         }
-        cell!.textLabel?.text = tableData[indexPath.row]
+        cell!.textLabel?.text = tableData[indexPath.section][indexPath.row]
         
         return cell!
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        return tableData[section].count
+    }
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String?
+    {
+        let headerTitles = [
+            "User Information",
+            "Feedback"
+        ];
+        return headerTitles[section]
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int
     {
         return tableData.count
     }
