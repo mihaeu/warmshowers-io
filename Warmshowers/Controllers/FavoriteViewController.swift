@@ -28,9 +28,11 @@ class FavoriteViewController: UIViewController, UITableViewDataSource, UITableVi
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
     {
         if segue.identifier == Storyboard.ShowOtherProfileSegue {
-            if let otherProfileViewController = segue.destinationViewController as? OtherProfileViewController {
-                if let user = sender as? User {
-                    otherProfileViewController.user = user
+            if let navigationController = segue.destinationViewController as? UINavigationController {
+                if let otherProfileViewController = navigationController.topViewController as? OtherProfileViewController {
+                    if let user = sender as? User {
+                        otherProfileViewController.user = user
+                    }
                 }
             }
         }
