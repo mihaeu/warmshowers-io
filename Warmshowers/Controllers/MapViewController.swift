@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import Haneke
 
 class MapViewController: UIViewController, CLLocationManagerDelegate
 {

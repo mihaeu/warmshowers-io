@@ -21,6 +21,7 @@ public class UserSerialization
         user.latitude = json["latitude"].doubleValue
         user.longitude = json["longitude"].doubleValue
         user.comments = json["comments"].stringValue
+        user.fullname = json["fullname"].stringValue
         
         return user
     }

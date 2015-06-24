@@ -22,6 +22,7 @@ public class User: Object
     // this is only set for the logged in user
     dynamic var password = ""
     dynamic var comments = ""
+    dynamic var fullname = ""
     
     dynamic var picture = ""
     

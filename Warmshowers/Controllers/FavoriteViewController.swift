@@ -52,7 +52,7 @@ class FavoriteViewController: UIViewController, UITableViewDataSource, UITableVi
         if cell == nil {
             cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: Storyboard.FavoriteCellIdentifier)
         }
-        cell!.textLabel?.text = favoriteUsers[indexPath.row].name
+        cell!.textLabel?.text = favoriteUsers[indexPath.row].fullname
         
         return cell!
     }

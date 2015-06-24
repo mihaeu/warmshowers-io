@@ -27,14 +27,17 @@ class OtherProfileViewController: UIViewController
         }
     }
     
-    let realm = Realm()
-  
     var tableData = [[String]]()
+    
+    let realm = Realm()
+    let headerTitles = [
+        "User Information",
+        "Feedback"
+    ];
     
     override func viewDidLoad()
     {
         if user != nil {
-            navigationBar.title = user!.name
    
             // if the user is not cached, get it from the API
             if user?.comments == nil || user?.comments == "" {
@@ -58,16 +61,6 @@ class OtherProfileViewController: UIViewController
             }
         }
         
-        var userData = [String]()
-        userData.append(user!.name)
-        userData.append(user!.comments)
-        userData.append(user!.languagesspoken)
-        userData.append(user!.latitude.description)
-        userData.append(user!.longitude.description)
-        
-        tableData.append(userData)
-        tableData.append(["a","b"])
-        
         super.viewDidLoad()
     }
     
@@ -77,7 +70,26 @@ class OtherProfileViewController: UIViewController
             ? UIBarButtonItemStyle.Done
             : UIBarButtonItemStyle.Plain
         
+        navigationBar.title = user!.fullname
         
+        var userData = [String]()
+        userData.append(user!.fullname)
+        userData.append(user!.comments)
+        userData.append(user!.languagesspoken)
+        userData.append(user!.latitude.description)
+        userData.append(user!.longitude.description)
+        
+        tableData = [[String]]()
+        tableData.append(userData)
+        
+        API.sharedInstance.getFeedbackForUser(user!.uid).onSuccess() { userFeedback in
+            var feedbackData = [String]()
+            for feedback in userFeedback {
+                feedbackData.append(feedback.body)
+            }
+            self.tableData.append(feedbackData)
+            self.tableView.reloadData()
+        }
         
 //        let containerSize = CGSize(width: 250.0, height: 250.0)
 //        scrollContainerView = UIView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size:containerSize))
@@ -118,6 +130,8 @@ class OtherProfileViewController: UIViewController
 //            profileDescriptionLabel.centerX == userPictureImageView.centerX
 //            profileDescriptionLabel.width == 200
 //        }
+        
+        tableView.reloadData()
     }
     
     @IBAction func back(sender: AnyObject)
@@ -142,9 +156,9 @@ extension OtherProfileViewController: UITableViewDataSource
 {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        var cell = tableView.dequeueReusableCellWithIdentifier("User Cell") as? UITableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.UserCellIdentifier) as? UITableViewCell
         if cell == nil {
-            cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "User Cell")
+            cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: Storyboard.UserCellIdentifier)
         }
         cell!.textLabel?.text = tableData[indexPath.section][indexPath.row]
         
@@ -158,10 +172,6 @@ extension OtherProfileViewController: UITableViewDataSource
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String?
     {
-        let headerTitles = [
-            "User Information",
-            "Feedback"
-        ];
         return headerTitles[section]
     }
     
