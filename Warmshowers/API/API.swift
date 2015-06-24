@@ -71,10 +71,10 @@ public class API
                         
                         promise.success(user)
                     } else if response?.statusCode == Status.AlreadyLoggedIn {
-                        log.info("\(username) already logged in with status \(response?.statusCode)")
+                        log.info("\(username) already logged (Status: \(response?.statusCode))")
                         promise.failure(NSError(domain: "User already logged in", code: Status.AlreadyLoggedIn, userInfo: nil))
                     } else {
-                        log.info("\(username) bad credentials with status \(response?.statusCode)")
+                        log.info("\(username) bad credentials(Status: \(response?.statusCode))")
                         promise.failure(NSError(domain: "User already logged in", code: Status.AlreadyLoggedIn, userInfo: nil))
                     }
                 }
@@ -103,7 +103,7 @@ public class API
                     log.error(error?.description)
                     promise.failure(error!)
                 } else {
-                    log.info("Logged out \(username) with status \(response?.statusCode)")
+                    log.info("Logged out \(username) (Status: \(response?.statusCode))")
                     promise.success(true)
                 }
         }
@@ -132,7 +132,7 @@ public class API
                     log.error(error?.description)
                     promise.failure(error!)
                 } else {
-                    log.info("Got user by id \(response?.statusCode)")
+                    log.info("Got user with id: \(userId) (Status: \(response?.statusCode))")
                     var json = JSON(json!)
                     promise.success(UserSerialization.deserializeJSON(json))
                 }
@@ -164,7 +164,7 @@ public class API
                     log.error(error?.description)
                     promise.failure(error!)
                 } else {
-                    log.info("Got hosts by keyword \(response?.statusCode)")
+                    log.info("Got hosts by keyword (Status: \(response?.statusCode))")
                     var json = JSON(json!)
                     var users = [Int:User]()
                     for (key: String, userJson: JSON) in json["accounts"] {
@@ -206,14 +206,13 @@ public class API
                 } else {
                     var json = JSON(json!)
                     let accounts = json["accounts"]
-                    log.info("Search by location (\(minlat),\(minlon) to \(maxlat),\(maxlon)) and found \(accounts.count) [Status: \(response?.statusCode)]")
+                    log.info("Search by location (\(minlat),\(minlon) to \(maxlat),\(maxlon)) and found \(accounts.count) (Status: \(response?.statusCode))")
                     
                     var users = [Int:User]()
                     for (key: String, userJson: JSON) in accounts {
                         let user = UserSerialization.deserializeJSON(userJson)
                         users[user.uid] = user
                     }
-                    println(users.count)
                     promise.success(users)
                 }
         }

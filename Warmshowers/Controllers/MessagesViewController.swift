@@ -53,12 +53,23 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        var cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.MessageCellIdentifier) as? UITableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.MessageCellIdentifier) as? MessageCell
         if cell == nil {
-            cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: Storyboard.MessageCellIdentifier)
+            cell = MessageCell(style: UITableViewCellStyle.Default, reuseIdentifier: Storyboard.MessageCellIdentifier)
         }
-        cell!.textLabel?.text = messages[indexPath.row].subject
+    
+        let authors = messages[indexPath.row].participants
         
+        if authors != nil && authors!.count > 0 {
+            api.getUser(authors!.first!.uid).onSuccess() { user in
+                let url = NSURL(string: user.thumbnailURL)!
+                cell?.userPictureImageView.hnk_setImageFromURL(url)
+            }
+            cell?.usernameLabel.text = authors!.first?.name
+        }
+
+        cell?.subjectLabel.text = messages[indexPath.row].subject
+        cell?.sizeToFit()
         return cell!
     }
     

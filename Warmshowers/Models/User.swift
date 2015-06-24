@@ -22,6 +22,7 @@ public class User: Object
     // this is only set for the logged in user
     dynamic var password = ""
     dynamic var comments = ""
+    dynamic var fullname = ""
     
     dynamic var picture = ""
     
@@ -35,6 +36,18 @@ public class User: Object
         }
         
         return thumbnailURL;
+    }
+    
+    var mobilePictureURL: String {
+        var mobilePictureURL = "https://www.warmshowers.org/files/imagecache/map_infoWindow/files/default_picture.jpg"
+        
+        if picture != "" {
+            var urlParts = split(picture) { $0 == "/" }
+            let mobilePictureURL = "https://www.warmshowers.org/" + urlParts.removeAtIndex(0) + "/imagecache/mobile_photo_4x3/" + "/".join(urlParts)
+            return mobilePictureURL
+        }
+        
+        return mobilePictureURL;
     }
     
     dynamic var languagesspoken = ""
@@ -52,5 +65,9 @@ public class User: Object
     override public static func indexedProperties() -> [String]
     {
         return ["name", "email"]
+    }
+    
+    override public static func ignoredProperties() -> [String] {
+        return ["thumbnailURL", "mobilePictureURL"]
     }
 }
