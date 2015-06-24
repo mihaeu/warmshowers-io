@@ -18,8 +18,8 @@ class NewMessageViewController: UIViewController
     
     override func viewDidLoad()
     {
-        self.navigationItem.title = "Message"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Send", style: UIBarButtonItemStyle.Plain, target: self, action: "sendMessage")
+        navigationItem.title = "Message"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Send", style: UIBarButtonItemStyle.Plain, target: self, action: "sendMessage")
         
         if messageThread != nil {
             userTextField.enabled = false

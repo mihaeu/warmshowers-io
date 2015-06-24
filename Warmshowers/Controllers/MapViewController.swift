@@ -80,11 +80,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
                     }
                 }
             }
-            if let otherProfileViewController = segue.destinationViewController as? OtherProfileViewController {
-                if let user = sender as? User {
-                    otherProfileViewController.user = user
-                }
-            }
         }
     }
 }
