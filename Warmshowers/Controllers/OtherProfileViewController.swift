@@ -70,7 +70,7 @@ class OtherProfileViewController: UIViewController
             ? UIBarButtonItemStyle.Done
             : UIBarButtonItemStyle.Plain
         
-        navigationBar.title = user!.fullname
+        self.title = user!.fullname
         
         var userData = [String]()
         userData.append(user!.fullname)

@@ -25,14 +25,6 @@ class AuthenticationViewController: UIViewController
     {
         usernameTextField?.text = APISecrets.Username
         passwordTextField?.text = APISecrets.Password
-        
-        let result = Realm().objects(User).filter("password != ''")
-        if result.count == 1 {
-            let user = result.first!
-            api.login(user.name, password: user.password).onSuccess { user in
-                self.performSegueWithIdentifier(Storyboard.ShowStartSegue, sender: nil)
-            }
-        }
     }
     
     @IBAction func attemptLogin()
