@@ -24,6 +24,9 @@ class OtherProfileViewController: UIViewController
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.dataSource = self
+            
+            tableView.estimatedRowHeight = 80
+            tableView.rowHeight = UITableViewAutomaticDimension
         }
     }
     
@@ -175,7 +178,9 @@ extension OtherProfileViewController: UITableViewDataSource
             cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: Storyboard.UserCellIdentifier)
         }
         cell!.textLabel?.text = tableData[indexPath.section][indexPath.row]
-        
+        cell?.textLabel?.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        cell?.textLabel?.numberOfLines = 0
+
         return cell!
     }
 
