@@ -15,6 +15,7 @@ struct Storyboard
     static let ShowOtherProfileSegue = "Show Other Profile"
     static let ShowMessageThreadSegue = "Show Message Thread"
     static let ShowNewMessageSegue = "Show New Message"
+    static let ShowNewFeedbackSegue = "Show New Feedback"
     
     // Identifiers
     static let AnnotationViewReuseIdentifier = "OtherUser"

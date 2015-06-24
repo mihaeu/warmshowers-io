@@ -87,6 +87,11 @@ class OtherProfileViewController: UIViewController
             for feedback in userFeedback {
                 feedbackData.append(feedback.body)
             }
+            
+            if feedbackData.count == 0 {
+                feedbackData.append("This user doesn't have any feedback.")
+            }
+            
             self.tableData.append(feedbackData)
             self.tableView.reloadData()
         }
@@ -148,6 +153,15 @@ class OtherProfileViewController: UIViewController
             sender.style = user?.isFavorite == true
                 ? UIBarButtonItemStyle.Done
                 : UIBarButtonItemStyle.Plain
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
+        if segue.identifier == Storyboard.ShowNewFeedbackSegue {
+            if let newFeedbackViewController = segue.destinationViewController as? NewFeedbackViewController {
+                newFeedbackViewController.user = user
+            }
         }
     }
 }

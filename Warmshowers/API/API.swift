@@ -62,7 +62,7 @@ public class API
                     promise.failure(error!)
                 } else {
                     if response?.statusCode == Status.LoginOk {
-                        log.info("\(username) logged in with status \(response?.statusCode)")
+                        log.info("\(username) logged in (Status: \(response?.statusCode))")
                         var json = JSON(json!)
                         
                         let user = UserSerialization.deserializeJSON(json["user"])
@@ -272,7 +272,12 @@ public class API
                 if error != nil {
                     log.error(error?.description)
                     promise.failure(error!)
+                } else if response?.statusCode != 200 {
+                    let error = NSError(domain: "Did not get a 200 response from the server.", code: response!.statusCode, userInfo: nil)
+                    log.error(error.description)
+                    promise.failure(error)
                 } else {
+                    log.info("Created feedback for \(feedback.userForFeedback) at node (Status: \(response?.statusCode))")
                     promise.success(true)
                 }
         }

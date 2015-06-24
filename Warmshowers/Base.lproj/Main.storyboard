@@ -180,7 +180,7 @@
                                     </barButtonItem>
                                     <barButtonItem title="Feedback" id="GAm-4g-t2v">
                                         <connections>
-                                            <segue destination="EfE-xR-bQI" kind="show" identifier="Show Create Feedback" id="D9z-UO-Bnk"/>
+                                            <segue destination="EfE-xR-bQI" kind="show" identifier="Show New Feedback" id="D9z-UO-Bnk"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem title="Visit" id="bDO-fR-uBc"/>
