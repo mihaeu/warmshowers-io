@@ -58,6 +58,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
 
     func loadUserAnnotations(users: [Int:User])
     {
+        // todo
         mapView.removeAnnotations(userAnnotations)
         userAnnotations.removeAll()
         

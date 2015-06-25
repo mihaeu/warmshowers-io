@@ -85,6 +85,9 @@ class MessageThreadViewController: UIViewController, UITableViewDataSource
             }
         }
 
+        // this is a workaround so that the automated row height can be calculated
+        cell?.bodyLabel.text = message?.body
+        
         cell?.bodyLabel.attributedText = NSAttributedString(
             data: message!.body!.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: true)!,
             options: [ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],

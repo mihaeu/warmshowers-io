@@ -10,7 +10,8 @@ import UIKit
 
 class MessagesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
 {
-    var api = API()
+    let messageRepository = MessageRepository()
+    let userRepository = UserRepository()
     var messages = [Message]()
     
     @IBOutlet weak var tableView: UITableView! {
@@ -20,14 +21,13 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
-    override func viewDidLoad()
+    override func viewDidAppear(animated: Bool)
     {
-        api
-            .getAllMessages()
-            .onSuccess() { messages in
-                self.messages = messages
-                self.tableView.reloadData()
-            }
+        messageRepository.getAll().onSuccess() { messages in
+            self.messages = messages
+            self.tableView.reloadData()
+        }
+
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
@@ -61,7 +61,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
         let authors = messages[indexPath.row].participants
         
         if authors != nil && authors!.count > 0 {
-            api.getUser(authors!.first!.uid).onSuccess() { user in
+            userRepository.findById(authors!.first!.uid).onSuccess() { user in
                 let url = NSURL(string: user.thumbnailURL)!
                 cell?.userPictureImageView.hnk_setImageFromURL(url)
             }
