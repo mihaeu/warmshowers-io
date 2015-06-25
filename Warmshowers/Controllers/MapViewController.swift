@@ -14,15 +14,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
 {
     @IBOutlet weak var mapView: MKMapView!
     
-    var users = [Int:User]()
-    var userAnnotations = [MKAnnotation]()
+    private var users = [Int:User]()
+    private var userAnnotations = [MKAnnotation]()
     
-    var api = API.sharedInstance
+    private var didAdjustInitialZoomLevel = false
+    private var myLocation: CLLocationCoordinate2D?
     
-    var didAdjustInitialZoomLevel = false
-    var myLocation: CLLocationCoordinate2D?
-    
-    let locationManager = CLLocationManager()
+    private let userRepository = UserRepository()
+    private let locationManager = CLLocationManager()
     
     override func viewDidLoad()
     {
@@ -108,7 +107,7 @@ extension MapViewController: MKMapViewDelegate
         
         let limit = 100
         
-        api.searchByLocation(
+        userRepository.findByLocation(
             minlat,
             maxlat: maxlat,
             minlon: minlon,

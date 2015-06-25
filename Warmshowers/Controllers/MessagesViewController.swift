@@ -10,9 +10,9 @@ import UIKit
 
 class MessagesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
 {
-    let messageRepository = MessageRepository()
-    let userRepository = UserRepository()
-    var messages = [Message]()
+    private let messageRepository = MessageRepository()
+    private let userRepository = UserRepository()
+    private var messages = [Message]()
     
     @IBOutlet weak var tableView: UITableView! {
         didSet {

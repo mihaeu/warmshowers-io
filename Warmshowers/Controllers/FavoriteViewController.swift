@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import RealmSwift
 
 class FavoriteViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
 {
@@ -18,10 +17,13 @@ class FavoriteViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
-    var favoriteUsers = Realm().objects(User).filter("isFavorite == true")
+    var favoriteUsers = [User]()
+    
+    let userRepository = UserRepository()
     
     override func viewWillAppear(animated: Bool)
     {
+        favoriteUsers = userRepository.findByFavorite()
         tableView.reloadData()
     }
     
@@ -72,12 +74,10 @@ class FavoriteViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath)
     {
         if editingStyle == UITableViewCellEditingStyle.Delete {
-            let realm = Realm()
-            realm.write {
-                self.favoriteUsers[indexPath.row].isFavorite = false
-            }
+            self.favoriteUsers[indexPath.row].isFavorite = false
+            userRepository.save(self.favoriteUsers[indexPath.row])
             
-            favoriteUsers = Realm().objects(User).filter("isFavorite == true")
+            favoriteUsers = userRepository.findByFavorite()
             tableView.reloadData()
         }
     }

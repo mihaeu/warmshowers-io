@@ -8,11 +8,11 @@
 
 import UIKit
 import XCGLogger
-import RealmSwift
 
 class AuthenticationViewController: UIViewController
 {
-    private var api = API.sharedInstance
+    private let api = API.sharedInstance
+    private let userRepository = UserRepository()
     
     @IBOutlet weak var usernameTextField: UITextField! {
         didSet {
@@ -32,9 +32,7 @@ class AuthenticationViewController: UIViewController
         api
             .login(usernameTextField.text, password: passwordTextField.text)
             .onSuccess() { user in
-                Realm().write {
-                    Realm().add(user, update: true)
-                }
+                self.userRepository.save(user)
                 self.performSegueWithIdentifier(Storyboard.ShowStartSegue, sender: nil)
             }
             .onFailure() { error in
