@@ -26,6 +26,10 @@ public class FeedbackSerialization
             type: json["field_guest_or_host_value"].stringValue
         )
 
+        feedback.fromUserId = json["uid"].intValue
+        feedback.fromUserName = json["name"].stringValue
+        feedback.fromFullName = json["fullname"].stringValue
+        
         return feedback
     }
     
