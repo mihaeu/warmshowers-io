@@ -17,14 +17,38 @@ class FavoriteViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
-    var favoriteUsers = [User]()
+    // matching table for section headers, contains all country codes of favorited users
+    // 0 : na
+    // 1 : za
+    // 2 : de
+    var countries = [String:Int]()
+    
+    var tableData = [[User]]()
     
     let userRepository = UserRepository()
     
     override func viewWillAppear(animated: Bool)
     {
-        favoriteUsers = userRepository.findByFavorite()
+        setTableData()
         tableView.reloadData()
+    }
+    
+    func setTableData()
+    {
+        tableData = [[User]]()
+        countries = [String:Int]()
+        for user in userRepository.findByFavorite() {
+            var key = user.country == "" ? "na" : user.country
+            if countries[key] == nil {
+                countries[key] = countries.count
+            }
+            
+            if tableData.count < countries.count {
+                tableData.append([user])
+            } else {
+                tableData[countries[key]!].append(user)
+            }
+        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
@@ -44,7 +68,7 @@ class FavoriteViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-        let user = favoriteUsers[indexPath.row]
+        let user = tableData[indexPath.section][indexPath.row]
         performSegueWithIdentifier(Storyboard.ShowOtherProfileSegue, sender: user)
     }
     
@@ -52,18 +76,24 @@ class FavoriteViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        var cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.FavoriteCellIdentifier) as? UITableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.FavoriteCellIdentifier) as? FavoriteCell
         if cell == nil {
-            cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: Storyboard.FavoriteCellIdentifier)
+            cell = FavoriteCell(style: UITableViewCellStyle.Default, reuseIdentifier: Storyboard.FavoriteCellIdentifier)
         }
-        cell!.textLabel?.text = favoriteUsers[indexPath.row].fullname
         
+        let user = tableData[indexPath.section][indexPath.row]
+        let url = NSURL(string: user.thumbnailURL)!
+        cell!.userPictureImageView.hnk_setImageFromURL(url)
+        cell!.userLabel.text = user.fullname
+        cell!.addressLabel.text = user.city
+        
+        cell!.sizeToFit()
         return cell!
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return favoriteUsers.count
+        return tableData[section].count
     }
 
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool
@@ -74,10 +104,25 @@ class FavoriteViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath)
     {
         if editingStyle == UITableViewCellEditingStyle.Delete {
-            userRepository.update(self.favoriteUsers[indexPath.row], key: "isFavorite", value: false)
+            userRepository.update(self.tableData[indexPath.section][indexPath.row], key: "isFavorite", value: false)
             
-            favoriteUsers = userRepository.findByFavorite()
+            setTableData()
             tableView.reloadData()
         }
+    }
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String?
+    {
+        for (shortCode, index) in countries {
+            if index == section {
+                return Constants.CountryCodes[shortCode]
+            }
+        }
+        return "N/A"
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    {
+        return tableData.count
     }
 }

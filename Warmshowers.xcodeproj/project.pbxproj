@@ -10,6 +10,8 @@
 		729C10AFDF1D1FFC5F3B2F7D /* Pods_Warmshowers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41CE4247DD6EEBA9135EDC97 /* Pods_Warmshowers.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		73C979E624E10C6864594746 /* Pods_WarmshowersTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23326D4A50F1BEADD824F208 /* Pods_WarmshowersTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		841E85D61B3A9CA8001DBF5A /* NewFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E85D51B3A9CA8001DBF5A /* NewFeedbackViewController.swift */; };
+		84338C7E1B3D4A75003C0411 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84338C7D1B3D4A75003C0411 /* FavoriteCell.swift */; };
+		84338C811B3D5030003C0411 /* MiscConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84338C801B3D5030003C0411 /* MiscConstants.swift */; };
 		8435FDA21B0CC21A007E2EEB /* APITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8435FDA11B0CC21A007E2EEB /* APITest.swift */; };
 		844C1A2E1AFBFF630013551A /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844C1A2D1AFBFF630013551A /* Storyboard.swift */; };
 		846D2C8F1B34227D009FADEF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D2C8E1B34227D009FADEF /* User.swift */; };
@@ -59,6 +61,8 @@
 		393D17F1A86431DDB0201F6E /* Pods-WarmshowersTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WarmshowersTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WarmshowersTests/Pods-WarmshowersTests.release.xcconfig"; sourceTree = "<group>"; };
 		41CE4247DD6EEBA9135EDC97 /* Pods_Warmshowers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Warmshowers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		841E85D51B3A9CA8001DBF5A /* NewFeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewFeedbackViewController.swift; path = Controllers/NewFeedbackViewController.swift; sourceTree = "<group>"; };
+		84338C7D1B3D4A75003C0411 /* FavoriteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FavoriteCell.swift; path = Views/FavoriteCell.swift; sourceTree = "<group>"; };
+		84338C801B3D5030003C0411 /* MiscConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiscConstants.swift; sourceTree = "<group>"; };
 		8435FDA11B0CC21A007E2EEB /* APITest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APITest.swift; sourceTree = "<group>"; };
 		844C1A2D1AFBFF630013551A /* Storyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
 		846D2C8E1B34227D009FADEF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Models/User.swift; sourceTree = "<group>"; };
@@ -172,6 +176,7 @@
 				84CFCD651B0D011200647959 /* Controllers */,
 				846D6BF51AFD635E00144D4F /* API */,
 				848BC7A41AFBD7FD00974467 /* Supporting Files */,
+				84338C801B3D5030003C0411 /* MiscConstants.swift */,
 			);
 			path = Warmshowers;
 			sourceTree = "<group>";
@@ -207,6 +212,7 @@
 		84A8D9661B14785100E54581 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				84338C7D1B3D4A75003C0411 /* FavoriteCell.swift */,
 				847E786D1B39A4820094C329 /* MessageBodyCell.swift */,
 				847E786F1B39A4DB0094C329 /* MessageCell.swift */,
 				84A8D96B1B14792D00E54581 /* UserAnnotation.swift */,
@@ -471,6 +477,7 @@
 				84B0C6A41B3C095500497DE0 /* UserRepository.swift in Sources */,
 				848BC7AA1AFBD7FD00974467 /* Warmshowers.xcdatamodeld in Sources */,
 				84B491D31B3ABD2F00BC4445 /* MessageRepository.swift in Sources */,
+				84338C811B3D5030003C0411 /* MiscConstants.swift in Sources */,
 				84CFCD7E1B0D386600647959 /* NewMessageViewController.swift in Sources */,
 				847E78701B39A4DB0094C329 /* MessageCell.swift in Sources */,
 				84CFCD801B0D38D000647959 /* MessageThreadViewController.swift in Sources */,
@@ -480,6 +487,7 @@
 				84CFCD721B0D2B0700647959 /* Message.swift in Sources */,
 				84CFCD6A1B0D01F400647959 /* MapViewController.swift in Sources */,
 				847E786E1B39A4820094C329 /* MessageBodyCell.swift in Sources */,
+				84338C7E1B3D4A75003C0411 /* FavoriteCell.swift in Sources */,
 				84DDD6721B0D56A6005A8EEE /* MyProfileViewController.swift in Sources */,
 				84CFCD781B0D2B7F00647959 /* APISecrets.swift in Sources */,
 				84CFCD671B0D017100647959 /* AuthenticationViewController.swift in Sources */,

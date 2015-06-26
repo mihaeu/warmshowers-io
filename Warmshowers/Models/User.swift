@@ -52,6 +52,11 @@ public class User: Object
     
     dynamic var languagesspoken = ""
     
+    dynamic var street = ""
+    dynamic var city = ""
+    dynamic var zipCode = ""
+    dynamic var country = ""
+    
     dynamic var latitude = 0.0
     dynamic var longitude = 0.0
     
