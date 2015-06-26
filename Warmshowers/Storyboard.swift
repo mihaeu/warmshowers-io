@@ -12,6 +12,7 @@ struct Storyboard
 {
     // Segues
     static let ShowStartSegue = "Show Start"
+    static let ShowLogin = "Show Login"
     static let ShowOtherProfileSegue = "Show Other Profile"
     static let ShowMessageThreadSegue = "Show Message Thread"
     static let ShowNewMessageSegue = "Show New Message"

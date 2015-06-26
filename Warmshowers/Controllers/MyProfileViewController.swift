@@ -17,7 +17,8 @@ class MyProfileViewController: UIViewController
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var languagesSpokenLabel: UILabel!
     
-    var api = API.sharedInstance
+    private let api = API.sharedInstance
+    private let userRepository = UserRepository()
     
     override func viewDidLoad()
     {
@@ -33,5 +34,13 @@ class MyProfileViewController: UIViewController
         
         let url = NSURL(string: user.thumbnailURL)!
         userPictureImageView.hnk_setImageFromURL(url)
+    }
+    
+    @IBAction func logout(sender: AnyObject)
+    {
+        userRepository.update(api.loggedInUser!, key: "password", value: "")
+        api.logout(api.loggedInUser!.name, password: api.loggedInUser!.password).onSuccess() { success in
+            self.performSegueWithIdentifier(Storyboard.ShowLogin, sender: nil)
+        }
     }
 }

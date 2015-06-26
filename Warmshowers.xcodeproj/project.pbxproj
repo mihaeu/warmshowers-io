@@ -164,6 +164,7 @@
 		848BC7A31AFBD7FD00974467 /* Warmshowers */ = {
 			isa = PBXGroup;
 			children = (
+				848BC7A61AFBD7FD00974467 /* AppDelegate.swift */,
 				848BC7AD1AFBD7FD00974467 /* Main.storyboard */,
 				844C1A2D1AFBFF630013551A /* Storyboard.swift */,
 				84CFCD6C1B0D2A9E00647959 /* Models */,
@@ -178,7 +179,6 @@
 		848BC7A41AFBD7FD00974467 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				848BC7A61AFBD7FD00974467 /* AppDelegate.swift */,
 				848BC7B01AFBD7FD00974467 /* Images.xcassets */,
 				848BC7B21AFBD7FD00974467 /* LaunchScreen.xib */,
 				848BC7A81AFBD7FD00974467 /* Warmshowers.xcdatamodeld */,
