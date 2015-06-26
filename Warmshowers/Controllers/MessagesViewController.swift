@@ -62,10 +62,11 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
         
         if authors != nil && authors!.count > 0 {
             userRepository.findById(authors!.first!.uid).onSuccess() { user in
+                cell?.usernameLabel.text = user.fullname
+                
                 let url = NSURL(string: user.thumbnailURL)!
                 cell?.userPictureImageView.hnk_setImageFromURL(url)
             }
-            cell?.usernameLabel.text = authors!.first?.name
         }
 
         cell?.subjectLabel.text = messages[indexPath.row].subject
