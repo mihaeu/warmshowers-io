@@ -17,8 +17,8 @@ class MessageThreadViewController: UIViewController, UITableViewDataSource
         didSet {
             tableView.dataSource = self
             
-            tableView.rowHeight = UITableViewAutomaticDimension
             tableView.estimatedRowHeight = 160
+            tableView.rowHeight = UITableViewAutomaticDimension;
         }
     }
     
@@ -84,22 +84,11 @@ class MessageThreadViewController: UIViewController, UITableViewDataSource
                 cell = MessageBodyCell(style: UITableViewCellStyle.Default, reuseIdentifier: Storyboard.MessageBodyFromCellIdentifier)
             }
         }
-
-        // this is a workaround so that the automated row height can be calculated
-        cell?.bodyLabel.text = message?.body
         
-        cell?.bodyLabel.attributedText = NSAttributedString(
-            data: message!.body!.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: true)!,
-            options: [ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],
-            documentAttributes: nil,
-            error: nil
-        )
+        cell?.bodyLabel.attributedText = Utils.htmlToAttributedText(message!.body!)
+        cell?.userPictureImageView.hnk_setImageFromURL(User.thumbnailURLFromId(message!.author!.uid), placeholder: Storyboard.DefaultUserThumbnail)
         
-        api.getUser(message!.author!.uid).onSuccess() { user in
-            let url = NSURL(string: user.thumbnailURL)!
-            cell?.userPictureImageView.hnk_setImageFromURL(url)
-        }
-        
+        cell?.sizeToFit()
         return cell!
     }
 }

@@ -75,4 +75,18 @@ public class User: Object
     override public static func ignoredProperties() -> [String] {
         return ["thumbnailURL", "mobilePictureURL"]
     }
+    
+    static func thumbnailURLFromId(id: Int) -> NSURL
+    {
+        let baseUrl = "https://www.warmshowers.org/files/imagecache/profile_picture/pictures/picture-%d.jpg"
+        let url = NSURL(string: NSString(format: baseUrl, id) as String)
+        return url!;
+    }
+    
+    static func mobileURLFromId(id: Int) -> NSURL
+    {
+        let baseUrl = "https://www.warmshowers.org/files/imagecache/mobile_photo_4x3/pictures/picture-%d.jpg"
+        let url = NSURL(string: NSString(format: baseUrl, id) as String)
+        return url!;
+    }
 }

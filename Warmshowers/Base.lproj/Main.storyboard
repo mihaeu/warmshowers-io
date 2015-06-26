@@ -194,9 +194,70 @@
                                     <barButtonItem title="Visit" id="bDO-fR-uBc"/>
                                 </items>
                             </toolbar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="laT-tJ-32w">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="96" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="laT-tJ-32w">
                                 <rect key="frame" x="8" y="72" width="584" height="474"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Feedback Cell" rowHeight="96" id="9AE-gI-Glu" customClass="FeedbackCell" customModule="Warmshowers" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="584" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9AE-gI-Glu" id="lyZ-Bw-dL6">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="T4w-6S-hYg">
+                                                    <rect key="frame" x="8" y="8" width="50" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="DlP-lD-nLf"/>
+                                                        <constraint firstAttribute="width" constant="50" id="Fo9-HI-A3m"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MLd-X8-xnr">
+                                                    <rect key="frame" x="66" y="8" width="35" height="20"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5KW-7g-TKx">
+                                                    <rect key="frame" x="66" y="36" width="510" height="31"/>
+                                                    <attributedString key="attributedText">
+                                                        <fragment content="Feedback">
+                                                            <attributes>
+                                                                <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Created on" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LU6-cG-fHD">
+                                                    <rect key="frame" x="526" y="75" width="50" height="12"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="10"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="LU6-cG-fHD" firstAttribute="trailing" secondItem="lyZ-Bw-dL6" secondAttribute="trailingMargin" id="BX2-Hd-taK"/>
+                                                <constraint firstItem="5KW-7g-TKx" firstAttribute="leading" secondItem="T4w-6S-hYg" secondAttribute="trailing" constant="8" id="IiQ-E6-qQB"/>
+                                                <constraint firstItem="LU6-cG-fHD" firstAttribute="top" secondItem="5KW-7g-TKx" secondAttribute="bottom" constant="8" id="NPX-rS-GF6"/>
+                                                <constraint firstItem="MLd-X8-xnr" firstAttribute="leading" secondItem="T4w-6S-hYg" secondAttribute="trailing" constant="8" id="brG-Im-aH5"/>
+                                                <constraint firstItem="5KW-7g-TKx" firstAttribute="top" secondItem="MLd-X8-xnr" secondAttribute="bottom" constant="8" id="fIl-ow-VZd"/>
+                                                <constraint firstItem="T4w-6S-hYg" firstAttribute="leading" secondItem="lyZ-Bw-dL6" secondAttribute="leadingMargin" id="flo-63-O0f"/>
+                                                <constraint firstItem="5KW-7g-TKx" firstAttribute="trailing" secondItem="lyZ-Bw-dL6" secondAttribute="trailingMargin" id="hqF-5q-Pj6"/>
+                                                <constraint firstItem="MLd-X8-xnr" firstAttribute="top" secondItem="lyZ-Bw-dL6" secondAttribute="topMargin" id="pyG-uW-mJX"/>
+                                                <constraint firstItem="T4w-6S-hYg" firstAttribute="top" secondItem="lyZ-Bw-dL6" secondAttribute="topMargin" id="uD8-NQ-KOZ"/>
+                                                <constraint firstItem="LU6-cG-fHD" firstAttribute="bottom" secondItem="lyZ-Bw-dL6" secondAttribute="bottomMargin" id="w6R-M8-al8"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="createdOnLabel" destination="LU6-cG-fHD" id="Hbx-wU-VR3"/>
+                                            <outlet property="feedbackLabel" destination="5KW-7g-TKx" id="2cN-cf-58f"/>
+                                            <outlet property="userLabel" destination="MLd-X8-xnr" id="93U-74-GsS"/>
+                                            <outlet property="userPictureImageView" destination="T4w-6S-hYg" id="j1R-CW-Tmd"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -334,7 +395,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" text="Your message ..." translatesAutoresizingMaskIntoConstraints="NO" id="0Qp-CN-JpZ">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Your message ..." translatesAutoresizingMaskIntoConstraints="NO" id="0Qp-CN-JpZ">
                                 <rect key="frame" x="16" y="148" width="568" height="400"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -471,19 +532,30 @@
                                                         <constraint firstAttribute="height" constant="50" id="g9O-cF-l2D"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Body" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aVJ-Md-eSN">
-                                                    <rect key="frame" x="66" y="8" width="526" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aVJ-Md-eSN">
+                                                    <rect key="frame" x="66" y="8" width="526" height="130"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="epv-5F-Ae5"/>
+                                                    </constraints>
+                                                    <attributedString key="attributedText">
+                                                        <fragment content="Body">
+                                                            <attributes>
+                                                                <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="udM-DP-iJE" firstAttribute="leading" secondItem="Oz8-cO-mdS" secondAttribute="leadingMargin" id="2m4-Dq-sDY"/>
-                                                <constraint firstItem="aVJ-Md-eSN" firstAttribute="leading" secondItem="udM-DP-iJE" secondAttribute="trailing" constant="8" id="BEO-Yr-8U9"/>
+                                                <constraint firstItem="aVJ-Md-eSN" firstAttribute="leading" secondItem="udM-DP-iJE" secondAttribute="trailing" constant="8" symbolic="YES" id="BEO-Yr-8U9"/>
                                                 <constraint firstItem="aVJ-Md-eSN" firstAttribute="top" secondItem="Oz8-cO-mdS" secondAttribute="topMargin" id="Kn7-9V-SgF"/>
                                                 <constraint firstItem="udM-DP-iJE" firstAttribute="top" secondItem="Oz8-cO-mdS" secondAttribute="topMargin" id="igg-8H-DCb"/>
                                                 <constraint firstItem="aVJ-Md-eSN" firstAttribute="trailing" secondItem="Oz8-cO-mdS" secondAttribute="trailingMargin" id="paH-GT-Bpn"/>
+                                                <constraint firstItem="aVJ-Md-eSN" firstAttribute="bottom" secondItem="Oz8-cO-mdS" secondAttribute="bottomMargin" id="xUh-tS-TMy"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -504,10 +576,20 @@
                                                         <constraint firstAttribute="width" constant="50" id="jxM-YI-l3m"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Body" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hMX-2E-LJ0">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hMX-2E-LJ0">
                                                     <rect key="frame" x="8" y="8" width="526" height="130"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="d5b-4M-ZSO"/>
+                                                    </constraints>
+                                                    <attributedString key="attributedText">
+                                                        <fragment content="Body">
+                                                            <attributes>
+                                                                <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -783,7 +865,7 @@
         <image name="tab-profile" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="aln-sR-7h2"/>
+        <segue reference="w7K-ZR-gAh"/>
         <segue reference="EYS-6L-Ma1"/>
     </inferredMetricsTieBreakers>
 </document>

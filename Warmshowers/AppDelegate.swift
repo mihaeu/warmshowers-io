@@ -10,6 +10,7 @@ import UIKit
 import XCGLogger
 import CoreData
 import RealmSwift
+import Haneke
 
 let log = XCGLogger.defaultInstance()
 
@@ -31,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         )
 
         log.info("Default Realm database at: \(Realm.defaultPath)")
-        setSchemaVersion(6, Realm.defaultPath, { migration, oldSchemaVersion in
+        setSchemaVersion(7, Realm.defaultPath, { migration, oldSchemaVersion in
             // We haven’t migrated anything yet, so oldSchemaVersion == 0
 //            if oldSchemaVersion < 1 {
                 // Nothing to do!

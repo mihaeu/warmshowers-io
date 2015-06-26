@@ -16,6 +16,10 @@ public class Feedback
     var rating: String
     var type: String
     
+    var fromUserId = 0
+    var fromUserName = ""
+    var fromFullName = ""
+    
     static let RatingPositive = "Positive"
     static let RatingNegative = "Negative"
     static let RatingNeutral = "Neutral"

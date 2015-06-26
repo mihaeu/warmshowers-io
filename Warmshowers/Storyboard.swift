@@ -21,6 +21,7 @@ struct Storyboard
     // Identifiers
     static let AnnotationViewReuseIdentifier = "OtherUser"
     static let FavoriteCellIdentifier = "Favorite Cell"
+    static let FeedbackCellIdentifier = "Feedback Cell"
     static let MessageCellIdentifier = "Message Cell"
     static let MessageBodyFromCellIdentifier = "Message Body From Cell"
     static let MessageBodyToCellIdentifier = "Message Body To Cell"
@@ -38,4 +39,7 @@ struct Storyboard
     static let PrimaryTextColor = "#212121"
     static let SecondaryTextColor = "#727272"
     static let DividerColor = "#B6B6B6"
+    
+    static let DefaultUserThumbnail = UIImage(named: "no-image-64")
+    static let DefaultUserPicture = UIImage(named: "no-image-512")
 }

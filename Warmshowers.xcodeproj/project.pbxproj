@@ -12,6 +12,12 @@
 		841E85D61B3A9CA8001DBF5A /* NewFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E85D51B3A9CA8001DBF5A /* NewFeedbackViewController.swift */; };
 		84338C7E1B3D4A75003C0411 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84338C7D1B3D4A75003C0411 /* FavoriteCell.swift */; };
 		84338C811B3D5030003C0411 /* MiscConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84338C801B3D5030003C0411 /* MiscConstants.swift */; };
+		84338C831B3D8015003C0411 /* FeedbackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84338C821B3D8014003C0411 /* FeedbackCell.swift */; };
+		84338C891B3D95C6003C0411 /* FeedbackSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84338C851B3D95C6003C0411 /* FeedbackSerialization.swift */; };
+		84338C8A1B3D95C6003C0411 /* MessageSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84338C861B3D95C6003C0411 /* MessageSerialization.swift */; };
+		84338C8B1B3D95C6003C0411 /* MessageThreadSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84338C871B3D95C6003C0411 /* MessageThreadSerialization.swift */; };
+		84338C8C1B3D95C6003C0411 /* UserSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84338C881B3D95C6003C0411 /* UserSerialization.swift */; };
+		84338C8E1B3D96BA003C0411 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84338C8D1B3D96BA003C0411 /* Utils.swift */; };
 		8435FDA21B0CC21A007E2EEB /* APITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8435FDA11B0CC21A007E2EEB /* APITest.swift */; };
 		844C1A2E1AFBFF630013551A /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844C1A2D1AFBFF630013551A /* Storyboard.swift */; };
 		846D2C8F1B34227D009FADEF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D2C8E1B34227D009FADEF /* User.swift */; };
@@ -23,10 +29,6 @@
 		848BC7AF1AFBD7FD00974467 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 848BC7AD1AFBD7FD00974467 /* Main.storyboard */; };
 		848BC7B11AFBD7FD00974467 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 848BC7B01AFBD7FD00974467 /* Images.xcassets */; };
 		848BC7B41AFBD7FD00974467 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 848BC7B21AFBD7FD00974467 /* LaunchScreen.xib */; };
-		849970961B11C407005D2601 /* FeedbackSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849970921B11C407005D2601 /* FeedbackSerialization.swift */; };
-		849970971B11C407005D2601 /* MessageSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849970931B11C407005D2601 /* MessageSerialization.swift */; };
-		849970981B11C407005D2601 /* MessageThreadSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849970941B11C407005D2601 /* MessageThreadSerialization.swift */; };
-		849970991B11C407005D2601 /* UserSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849970951B11C407005D2601 /* UserSerialization.swift */; };
 		84A8D96A1B14791A00E54581 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A8D9691B14791A00E54581 /* Router.swift */; };
 		84A8D96C1B14792D00E54581 /* UserAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A8D96B1B14792D00E54581 /* UserAnnotation.swift */; };
 		84B0C6A41B3C095500497DE0 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B0C6A31B3C095500497DE0 /* UserRepository.swift */; };
@@ -63,6 +65,12 @@
 		841E85D51B3A9CA8001DBF5A /* NewFeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewFeedbackViewController.swift; path = Controllers/NewFeedbackViewController.swift; sourceTree = "<group>"; };
 		84338C7D1B3D4A75003C0411 /* FavoriteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FavoriteCell.swift; path = Views/FavoriteCell.swift; sourceTree = "<group>"; };
 		84338C801B3D5030003C0411 /* MiscConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiscConstants.swift; sourceTree = "<group>"; };
+		84338C821B3D8014003C0411 /* FeedbackCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedbackCell.swift; path = Views/FeedbackCell.swift; sourceTree = "<group>"; };
+		84338C851B3D95C6003C0411 /* FeedbackSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedbackSerialization.swift; path = API/Serialization/FeedbackSerialization.swift; sourceTree = "<group>"; };
+		84338C861B3D95C6003C0411 /* MessageSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageSerialization.swift; path = API/Serialization/MessageSerialization.swift; sourceTree = "<group>"; };
+		84338C871B3D95C6003C0411 /* MessageThreadSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageThreadSerialization.swift; path = API/Serialization/MessageThreadSerialization.swift; sourceTree = "<group>"; };
+		84338C881B3D95C6003C0411 /* UserSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserSerialization.swift; path = API/Serialization/UserSerialization.swift; sourceTree = "<group>"; };
+		84338C8D1B3D96BA003C0411 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		8435FDA11B0CC21A007E2EEB /* APITest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APITest.swift; sourceTree = "<group>"; };
 		844C1A2D1AFBFF630013551A /* Storyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
 		846D2C8E1B34227D009FADEF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Models/User.swift; sourceTree = "<group>"; };
@@ -78,10 +86,6 @@
 		848BC7B31AFBD7FD00974467 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		848BC7B91AFBD7FD00974467 /* WarmshowersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WarmshowersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		848BC7BE1AFBD7FD00974467 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		849970921B11C407005D2601 /* FeedbackSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedbackSerialization.swift; path = API/FeedbackSerialization.swift; sourceTree = "<group>"; };
-		849970931B11C407005D2601 /* MessageSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageSerialization.swift; path = API/MessageSerialization.swift; sourceTree = "<group>"; };
-		849970941B11C407005D2601 /* MessageThreadSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageThreadSerialization.swift; path = API/MessageThreadSerialization.swift; sourceTree = "<group>"; };
-		849970951B11C407005D2601 /* UserSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserSerialization.swift; path = API/UserSerialization.swift; sourceTree = "<group>"; };
 		84A8D9691B14791A00E54581 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Router.swift; path = API/Router.swift; sourceTree = "<group>"; };
 		84A8D96B1B14792D00E54581 /* UserAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserAnnotation.swift; path = Views/UserAnnotation.swift; sourceTree = "<group>"; };
 		84B0C6A31B3C095500497DE0 /* UserRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserRepository.swift; path = Models/UserRepository.swift; sourceTree = "<group>"; };
@@ -131,16 +135,24 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		84338C841B3D9567003C0411 /* Serialization */ = {
+			isa = PBXGroup;
+			children = (
+				84338C851B3D95C6003C0411 /* FeedbackSerialization.swift */,
+				84338C861B3D95C6003C0411 /* MessageSerialization.swift */,
+				84338C871B3D95C6003C0411 /* MessageThreadSerialization.swift */,
+				84338C881B3D95C6003C0411 /* UserSerialization.swift */,
+			);
+			name = Serialization;
+			sourceTree = "<group>";
+		};
 		846D6BF51AFD635E00144D4F /* API */ = {
 			isa = PBXGroup;
 			children = (
+				84338C841B3D9567003C0411 /* Serialization */,
 				84CFCD751B0D2B7F00647959 /* API.swift */,
 				84CFCD761B0D2B7F00647959 /* APISecrets.swift */,
-				849970921B11C407005D2601 /* FeedbackSerialization.swift */,
-				849970931B11C407005D2601 /* MessageSerialization.swift */,
-				849970941B11C407005D2601 /* MessageThreadSerialization.swift */,
 				84A8D9691B14791A00E54581 /* Router.swift */,
-				849970951B11C407005D2601 /* UserSerialization.swift */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -177,6 +189,7 @@
 				846D6BF51AFD635E00144D4F /* API */,
 				848BC7A41AFBD7FD00974467 /* Supporting Files */,
 				84338C801B3D5030003C0411 /* MiscConstants.swift */,
+				84338C8D1B3D96BA003C0411 /* Utils.swift */,
 			);
 			path = Warmshowers;
 			sourceTree = "<group>";
@@ -216,6 +229,7 @@
 				847E786D1B39A4820094C329 /* MessageBodyCell.swift */,
 				847E786F1B39A4DB0094C329 /* MessageCell.swift */,
 				84A8D96B1B14792D00E54581 /* UserAnnotation.swift */,
+				84338C821B3D8014003C0411 /* FeedbackCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -467,13 +481,11 @@
 				84A8D96A1B14791A00E54581 /* Router.swift in Sources */,
 				84CFCD771B0D2B7F00647959 /* API.swift in Sources */,
 				84CFCD6B1B0D01F400647959 /* OtherProfileViewController.swift in Sources */,
+				84338C8C1B3D95C6003C0411 /* UserSerialization.swift in Sources */,
 				84CFCD711B0D2B0700647959 /* Feedback.swift in Sources */,
-				849970971B11C407005D2601 /* MessageSerialization.swift in Sources */,
 				844C1A2E1AFBFF630013551A /* Storyboard.swift in Sources */,
 				84CFCD731B0D2B0700647959 /* MessageThread.swift in Sources */,
-				849970991B11C407005D2601 /* UserSerialization.swift in Sources */,
 				841E85D61B3A9CA8001DBF5A /* NewFeedbackViewController.swift in Sources */,
-				849970981B11C407005D2601 /* MessageThreadSerialization.swift in Sources */,
 				84B0C6A41B3C095500497DE0 /* UserRepository.swift in Sources */,
 				848BC7AA1AFBD7FD00974467 /* Warmshowers.xcdatamodeld in Sources */,
 				84B491D31B3ABD2F00BC4445 /* MessageRepository.swift in Sources */,
@@ -481,17 +493,21 @@
 				84CFCD7E1B0D386600647959 /* NewMessageViewController.swift in Sources */,
 				847E78701B39A4DB0094C329 /* MessageCell.swift in Sources */,
 				84CFCD801B0D38D000647959 /* MessageThreadViewController.swift in Sources */,
+				84338C8A1B3D95C6003C0411 /* MessageSerialization.swift in Sources */,
 				84A8D96C1B14792D00E54581 /* UserAnnotation.swift in Sources */,
+				84338C8B1B3D95C6003C0411 /* MessageThreadSerialization.swift in Sources */,
 				848BC7A71AFBD7FD00974467 /* AppDelegate.swift in Sources */,
 				84CFCD7C1B0D2E1700647959 /* MessagesViewController.swift in Sources */,
 				84CFCD721B0D2B0700647959 /* Message.swift in Sources */,
 				84CFCD6A1B0D01F400647959 /* MapViewController.swift in Sources */,
 				847E786E1B39A4820094C329 /* MessageBodyCell.swift in Sources */,
+				84338C8E1B3D96BA003C0411 /* Utils.swift in Sources */,
 				84338C7E1B3D4A75003C0411 /* FavoriteCell.swift in Sources */,
+				84338C831B3D8015003C0411 /* FeedbackCell.swift in Sources */,
 				84DDD6721B0D56A6005A8EEE /* MyProfileViewController.swift in Sources */,
 				84CFCD781B0D2B7F00647959 /* APISecrets.swift in Sources */,
 				84CFCD671B0D017100647959 /* AuthenticationViewController.swift in Sources */,
-				849970961B11C407005D2601 /* FeedbackSerialization.swift in Sources */,
+				84338C891B3D95C6003C0411 /* FeedbackSerialization.swift in Sources */,
 				847D25EA1B35724700E72F87 /* FavoriteViewController.swift in Sources */,
 				846D2C8F1B34227D009FADEF /* User.swift in Sources */,
 			);

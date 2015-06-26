@@ -13,4 +13,14 @@ class MessageCell: UITableViewCell
     @IBOutlet weak var userPictureImageView: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var subjectLabel: UILabel!
+    
+    init(message: Message)
+    {
+        super.init(style: UITableViewCellStyle.Default, reuseIdentifier: Storyboard.MessageCellIdentifier)
+    }
+
+    required init(coder aDecoder: NSCoder)
+    {
+        fatalError("init(coder:) has not been implemented")
+    }
 }

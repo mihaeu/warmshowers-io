@@ -30,9 +30,13 @@ class OtherProfileViewController: UIViewController
         }
     }
     
-    var tableData = [[String]]()
+    var tableData = [[AnyObject]]()
     
     let realm = Realm()
+    let userRepository = UserRepository()
+    
+    let UserInformationIndex = 0
+    let FeedbackIndex = 1
     let headerTitles = [
         "User Information",
         "Feedback"
@@ -82,20 +86,11 @@ class OtherProfileViewController: UIViewController
         userData.append(user!.latitude.description)
         userData.append(user!.longitude.description)
         
-        tableData = [[String]]()
+        tableData = [[AnyObject]]()
         tableData.append(userData)
         
         API.sharedInstance.getFeedbackForUser(user!.uid).onSuccess() { userFeedback in
-            var feedbackData = [String]()
-            for feedback in userFeedback {
-                feedbackData.append(feedback.body)
-            }
-            
-            if feedbackData.count == 0 {
-                feedbackData.append("This user doesn't have any feedback.")
-            }
-            
-            self.tableData.append(feedbackData)
+            self.tableData.append(userFeedback)
             self.tableView.reloadData()
         }
         
@@ -173,14 +168,46 @@ extension OtherProfileViewController: UITableViewDataSource
 {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
+        if indexPath.section == UserInformationIndex {
+            // TODO: special format with 2 columns except for the first column plzzz
+            var cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.UserCellIdentifier) as? UITableViewCell
+            if cell == nil {
+                cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: Storyboard.UserCellIdentifier)
+            }
+            
+            cell!.textLabel?.text = tableData[indexPath.section][indexPath.row] as? String
+            cell!.textLabel?.lineBreakMode = NSLineBreakMode.ByWordWrapping
+            cell!.textLabel?.numberOfLines = 0
+            
+            return cell!
+        }
+        
+        if indexPath.section == FeedbackIndex {
+            // TODO: refactor into init()s which set their property, thanks!
+            var cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.FeedbackCellIdentifier) as? FeedbackCell
+            if cell == nil {
+                cell = FeedbackCell(style: UITableViewCellStyle.Default, reuseIdentifier: Storyboard.FeedbackCellIdentifier)
+            }
+            
+            let feedback = tableData[indexPath.section][indexPath.row] as! Feedback
+            cell?.userLabel.text = "\(feedback.fromFullName)"
+            cell?.feedbackLabel.attributedText = Utils.htmlToAttributedText(feedback.body)
+            cell?.createdOnLabel.text = "\(feedback.rating) feedback written in \(Constants.Months[feedback.month]!) \(feedback.year)"
+            cell?.userPictureImageView.hnk_setImageFromURL(User.thumbnailURLFromId(feedback.fromUserId))
+            println(User.thumbnailURLFromId(feedback.fromUserId))
+
+            return cell!
+        }
+        
         var cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.UserCellIdentifier) as? UITableViewCell
         if cell == nil {
             cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: Storyboard.UserCellIdentifier)
         }
-        cell!.textLabel?.text = tableData[indexPath.section][indexPath.row]
-        cell?.textLabel?.lineBreakMode = NSLineBreakMode.ByWordWrapping
-        cell?.textLabel?.numberOfLines = 0
-
+        
+        cell!.textLabel?.text = tableData[indexPath.section][indexPath.row] as? String
+        cell!.textLabel?.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        cell!.textLabel?.numberOfLines = 0
+        
         return cell!
     }
 

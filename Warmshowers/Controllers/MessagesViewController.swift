@@ -7,6 +7,11 @@
 //
 
 import UIKit
+import Haneke
+
+let iconFormat = Format<UIImage>(name: "thumbnail", diskCapacity: 10 * 1024 * 1024) { image in
+    return image
+}
 
 class MessagesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
 {
@@ -55,17 +60,19 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
     {
         var cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.MessageCellIdentifier) as? MessageCell
         if cell == nil {
-            cell = MessageCell(style: UITableViewCellStyle.Default, reuseIdentifier: Storyboard.MessageCellIdentifier)
+            cell = MessageCell(message: messages[indexPath.row])
         }
     
         let authors = messages[indexPath.row].participants
         
         if authors != nil && authors!.count > 0 {
+            cell?.userPictureImageView.hnk_setImageFromURL(
+                User.thumbnailURLFromId(authors!.first!.uid),
+                placeholder: Storyboard.DefaultUserThumbnail,
+                format: iconFormat
+            )
             userRepository.findById(authors!.first!.uid).onSuccess() { user in
                 cell?.usernameLabel.text = user.fullname
-                
-                let url = NSURL(string: user.thumbnailURL)!
-                cell?.userPictureImageView.hnk_setImageFromURL(url)
             }
         }
 
