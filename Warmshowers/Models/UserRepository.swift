@@ -27,4 +27,32 @@ class UserRepository
         
         return api.getUser(id)
     }
+    
+    func findByLocation(minlat: Double, maxlat: Double, minlon: Double, maxlon: Double, centerlat: Double, centerlon: Double, limit: Int) -> Future<[Int:User]>
+    {
+        return api.searchByLocation(minlat, maxlat: maxlat, minlon: minlon, maxlon: maxlon, centerlat: centerlat, centerlon: centerlon, limit: limit)
+    }
+    
+    func findByFavorite() -> [User]
+    {
+        var users = [User]()
+        for user in Realm().objects(User).filter("isFavorite == true") {
+            users.append(user)
+        }
+        return users
+    }
+    
+    func save(user: User)
+    {
+        Realm().write {
+            Realm().add(user, update: true)
+        }
+    }
+    
+    func update(user: User, key: String, value: AnyObject?)
+    {
+        Realm().write {
+            user.setValue(value, forKey: key)
+        }
+    }
 }

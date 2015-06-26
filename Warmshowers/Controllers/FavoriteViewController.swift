@@ -74,8 +74,7 @@ class FavoriteViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath)
     {
         if editingStyle == UITableViewCellEditingStyle.Delete {
-            self.favoriteUsers[indexPath.row].isFavorite = false
-            userRepository.save(self.favoriteUsers[indexPath.row])
+            userRepository.update(self.favoriteUsers[indexPath.row], key: "isFavorite", value: false)
             
             favoriteUsers = userRepository.findByFavorite()
             tableView.reloadData()
