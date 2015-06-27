@@ -75,6 +75,9 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
                 placeholder: Storyboard.DefaultUserThumbnail,
                 format: iconFormat
             )
+            cell?.userPictureImageView.layer.cornerRadius = 8
+            cell?.userPictureImageView.clipsToBounds = true
+            cell?.userPictureImageView.layer.borderWidth = 1.0;
             userRepository.findById(authors!.first!.uid).onSuccess() { user in
                 cell?.usernameLabel.text = user.fullname
             }

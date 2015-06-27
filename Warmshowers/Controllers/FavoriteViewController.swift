@@ -82,10 +82,14 @@ class FavoriteViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         
         let user = tableData[indexPath.section][indexPath.row]
-        let url = NSURL(string: user.thumbnailURL)!
-        cell!.userPictureImageView.hnk_setImageFromURL(url)
         cell!.userLabel.text = user.fullname
         cell!.addressLabel.text = user.city
+
+        let url = NSURL(string: user.thumbnailURL)!
+        cell!.userPictureImageView.hnk_setImageFromURL(url)
+        cell?.userPictureImageView.layer.cornerRadius = 8
+        cell?.userPictureImageView.clipsToBounds = true
+        cell?.userPictureImageView.layer.borderWidth = 1.0;
         
         cell!.sizeToFit()
         return cell!
