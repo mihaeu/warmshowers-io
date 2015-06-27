@@ -544,8 +544,14 @@
                                                         <constraint firstAttribute="height" constant="50" id="g9O-cF-l2D"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aVJ-Md-eSN">
-                                                    <rect key="frame" x="66" y="8" width="526" height="130"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message sent date" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gYM-I9-mq8">
+                                                    <rect key="frame" x="506" y="124" width="86" height="12"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="10"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aVJ-Md-eSN">
+                                                    <rect key="frame" x="66" y="8" width="526" height="108"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="epv-5F-Ae5"/>
                                                     </constraints>
@@ -564,14 +570,17 @@
                                             <constraints>
                                                 <constraint firstItem="udM-DP-iJE" firstAttribute="leading" secondItem="Oz8-cO-mdS" secondAttribute="leadingMargin" id="2m4-Dq-sDY"/>
                                                 <constraint firstItem="aVJ-Md-eSN" firstAttribute="leading" secondItem="udM-DP-iJE" secondAttribute="trailing" constant="8" symbolic="YES" id="BEO-Yr-8U9"/>
+                                                <constraint firstItem="gYM-I9-mq8" firstAttribute="trailing" secondItem="Oz8-cO-mdS" secondAttribute="trailingMargin" id="Dob-S8-Ngh"/>
                                                 <constraint firstItem="aVJ-Md-eSN" firstAttribute="top" secondItem="Oz8-cO-mdS" secondAttribute="topMargin" id="Kn7-9V-SgF"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="gYM-I9-mq8" secondAttribute="bottom" constant="2" id="PYs-Ms-0AX"/>
                                                 <constraint firstItem="udM-DP-iJE" firstAttribute="top" secondItem="Oz8-cO-mdS" secondAttribute="topMargin" id="igg-8H-DCb"/>
+                                                <constraint firstItem="gYM-I9-mq8" firstAttribute="top" secondItem="aVJ-Md-eSN" secondAttribute="bottom" constant="8" id="lh2-ay-w2l"/>
                                                 <constraint firstItem="aVJ-Md-eSN" firstAttribute="trailing" secondItem="Oz8-cO-mdS" secondAttribute="trailingMargin" id="paH-GT-Bpn"/>
-                                                <constraint firstItem="aVJ-Md-eSN" firstAttribute="bottom" secondItem="Oz8-cO-mdS" secondAttribute="bottomMargin" id="xUh-tS-TMy"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="bodyLabel" destination="aVJ-Md-eSN" id="NTW-sI-TxJ"/>
+                                            <outlet property="messageSentLabel" destination="gYM-I9-mq8" id="GP3-dE-Joh"/>
                                             <outlet property="userPictureImageView" destination="udM-DP-iJE" id="IUi-my-68w"/>
                                         </connections>
                                     </tableViewCell>
@@ -588,8 +597,8 @@
                                                         <constraint firstAttribute="width" constant="50" id="jxM-YI-l3m"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hMX-2E-LJ0">
-                                                    <rect key="frame" x="8" y="8" width="526" height="130"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hMX-2E-LJ0">
+                                                    <rect key="frame" x="8" y="8" width="526" height="103"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="d5b-4M-ZSO"/>
                                                     </constraints>
@@ -604,18 +613,27 @@
                                                     </attributedString>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message sent date" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZIq-RM-jA7">
+                                                    <rect key="frame" x="506" y="126" width="86" height="12"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="10"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="DbM-dS-BFM" firstAttribute="trailing" secondItem="J7d-ir-2om" secondAttribute="trailingMargin" id="7wM-sx-htj"/>
                                                 <constraint firstItem="hMX-2E-LJ0" firstAttribute="top" secondItem="J7d-ir-2om" secondAttribute="topMargin" id="Lg7-eb-UEF"/>
                                                 <constraint firstItem="hMX-2E-LJ0" firstAttribute="leading" secondItem="J7d-ir-2om" secondAttribute="leadingMargin" id="RPr-TK-By3"/>
+                                                <constraint firstItem="ZIq-RM-jA7" firstAttribute="top" secondItem="hMX-2E-LJ0" secondAttribute="bottom" constant="15" id="Y5x-SO-qr5"/>
                                                 <constraint firstItem="DbM-dS-BFM" firstAttribute="top" secondItem="J7d-ir-2om" secondAttribute="topMargin" id="acb-41-qyq"/>
-                                                <constraint firstItem="hMX-2E-LJ0" firstAttribute="bottom" secondItem="J7d-ir-2om" secondAttribute="bottomMargin" id="p52-nj-Ftw"/>
+                                                <constraint firstItem="ZIq-RM-jA7" firstAttribute="trailing" secondItem="J7d-ir-2om" secondAttribute="trailingMargin" id="ew0-E0-n6Z"/>
+                                                <constraint firstItem="ZIq-RM-jA7" firstAttribute="bottom" secondItem="J7d-ir-2om" secondAttribute="bottomMargin" id="nON-0u-PyF"/>
                                                 <constraint firstItem="DbM-dS-BFM" firstAttribute="leading" secondItem="hMX-2E-LJ0" secondAttribute="trailing" constant="8" symbolic="YES" id="vUD-qC-XbL"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="bodyLabel" destination="hMX-2E-LJ0" id="cDZ-aZ-mCH"/>
+                                            <outlet property="messageSentLabel" destination="ZIq-RM-jA7" id="2E1-oX-iBy"/>
                                             <outlet property="userPictureImageView" destination="DbM-dS-BFM" id="0YK-Uo-wMg"/>
                                         </connections>
                                     </tableViewCell>

@@ -87,6 +87,7 @@ class MessageThreadViewController: UIViewController, UITableViewDataSource
         
         cell?.bodyLabel.attributedText = Utils.htmlToAttributedText(message!.body!)
         cell?.userPictureImageView.hnk_setImageFromURL(User.thumbnailURLFromId(message!.author!.uid), placeholder: Storyboard.DefaultUserThumbnail)
+        cell?.messageSentLabel.text = Utils.longDateFromTimestamp(message!.timestamp)
         
         cell?.sizeToFit()
         return cell!

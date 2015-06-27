@@ -15,6 +15,7 @@ public class Message
     var isNew: Bool?
     var participants: [User]?
     
+    var timestamp: Int = 0
     var lastUpdatedTimestamp: Int?
     var threadStartedTimestamp: Int?
     

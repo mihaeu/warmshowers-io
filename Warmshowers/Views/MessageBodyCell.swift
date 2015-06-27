@@ -12,5 +12,5 @@ class MessageBodyCell: UITableViewCell
 {
     @IBOutlet weak var userPictureImageView: UIImageView!
     @IBOutlet weak var bodyLabel: UILabel!
-
+    @IBOutlet weak var messageSentLabel: UILabel!
 }

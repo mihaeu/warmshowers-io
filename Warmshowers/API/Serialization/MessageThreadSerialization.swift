@@ -26,6 +26,7 @@ public class MessageThreadSerialization
             var message = Message(threadId: messageJson["thread_id"].intValue, subject: messageJson["subject"].stringValue)
             message.body = messageJson["body"].stringValue
             message.author = User(uid: messageJson["author"]["uid"].intValue, name: messageJson["author"]["name"].stringValue)
+            message.timestamp = messageJson["timestamp"].intValue
             messages.append(message)
         }
         messageThread.messages = messages
