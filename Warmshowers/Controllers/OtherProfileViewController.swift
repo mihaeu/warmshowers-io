@@ -194,7 +194,9 @@ extension OtherProfileViewController: UITableViewDataSource
             cell?.feedbackLabel.attributedText = Utils.htmlToAttributedText(feedback.body)
             cell?.createdOnLabel.text = "\(feedback.rating) feedback written in \(Constants.Months[feedback.month]!) \(feedback.year)"
             cell?.userPictureImageView.hnk_setImageFromURL(User.thumbnailURLFromId(feedback.fromUserId))
-            println(User.thumbnailURLFromId(feedback.fromUserId))
+            cell?.userPictureImageView.layer.cornerRadius = 8
+            cell?.userPictureImageView.clipsToBounds = true
+            cell?.userPictureImageView.layer.borderWidth = 1.0;
 
             return cell!
         }
