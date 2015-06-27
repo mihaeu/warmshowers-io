@@ -75,8 +75,8 @@ class OtherProfileViewController: UIViewController
     {
         let buttons = [
             UIBarButtonItem(image: user!.isFavorite ? isFavoriteImage : isNoFavoriteImage, style: .Plain, target: self, action: "favorite:"),
-            UIBarButtonItem(image: UIImage(named: "nav-message"), style: .Plain, target: self, action: "message"),
-            UIBarButtonItem(image: UIImage(named: "nav-feedback"), style: .Plain, target: self, action: "feedback")
+            UIBarButtonItem(image: UIImage(named: "nav-feedback"), style: .Plain, target: self, action: "feedback"),
+            UIBarButtonItem(image: UIImage(named: "nav-message"), style: .Plain, target: self, action: "message")
         ]
         navigationItem.setRightBarButtonItems(buttons, animated: true)
         

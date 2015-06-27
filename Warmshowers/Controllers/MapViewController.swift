@@ -12,7 +12,12 @@ import Haneke
 
 class MapViewController: UIViewController, CLLocationManagerDelegate
 {
-    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var mapView: MKMapView! {
+        didSet {
+            mapView.showsUserLocation = true
+            mapView.delegate = self
+        }
+    }
     
     private var users = [Int:User]()
     private var userAnnotations = [MKAnnotation]()
@@ -29,9 +34,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
         
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-        
-        mapView.showsUserLocation = true
-        mapView.delegate = self
 
         if CLLocationManager.authorizationStatus() == .NotDetermined {
             locationManager.requestWhenInUseAuthorization()
@@ -45,6 +47,20 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
 //
         locationManager.pausesLocationUpdatesAutomatically = true
         locationManager.startUpdatingLocation()
+        
+        if let user = userRepository.findByActiveUser() {
+            if Utils.phoneIsConnectedToNetwork() {
+               println("Connected to internet")
+            } else {
+                println("NOOOOOT connected to internet")
+            }
+            
+            API.sharedInstance.login(user.name, password: user.password).onFailure() { error in
+                self.performSegueWithIdentifier(Storyboard.ShowLogin, sender: nil)
+            }
+        } else {
+            performSegueWithIdentifier(Storyboard.ShowLogin, sender: nil)
+        }
     }
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!)

@@ -11,7 +11,7 @@ import RealmSwift
 
 class UserRepository
 {
-    let api = API.sharedInstance
+    private let api = API.sharedInstance
     
     func findById(id: Int, refresh: Bool = false) -> Future<User>
     {
@@ -39,6 +39,12 @@ class UserRepository
             users.append(user)
         }
         return users
+    }
+    
+    func findByActiveUser() -> User?
+    {
+        let result = Realm().objects(User).filter("password != ''")
+        return result.first!
     }
     
     func save(user: User)
