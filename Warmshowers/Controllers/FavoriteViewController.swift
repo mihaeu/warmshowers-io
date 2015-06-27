@@ -38,7 +38,7 @@ class FavoriteViewController: UIViewController, UITableViewDataSource, UITableVi
         tableData = [[User]]()
         countries = [String:Int]()
         for user in userRepository.findByFavorite() {
-            var key = user.country == "" ? "na" : user.country
+            var key = user.country == "" ? "N/A" : user.country
             if countries[key] == nil {
                 countries[key] = countries.count
             }
