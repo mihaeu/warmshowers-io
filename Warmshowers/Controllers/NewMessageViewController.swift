@@ -11,6 +11,7 @@ import UIKit
 class NewMessageViewController: UIViewController
 {
     var messageThread: MessageThread?
+    var user: User?
 
     @IBOutlet weak var userTextField: UITextField!
     @IBOutlet weak var subjectTextField: UITextField!
@@ -27,6 +28,13 @@ class NewMessageViewController: UIViewController
             
             subjectTextField.enabled = false
             subjectTextField.text = messageThread?.subject
+        }
+        
+        if user !== nil {
+            userTextField.enabled = false
+            userTextField.text = user!.name
+            
+            subjectTextField.becomeFirstResponder()
         }
     }
     

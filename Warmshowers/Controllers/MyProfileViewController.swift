@@ -25,13 +25,7 @@ class MyProfileViewController: UIViewController
         let user = api.loggedInUser!
         userLabel.text =  user.name
         languagesSpokenLabel.text = user.languagesspoken
-        descriptionLabel.attributedText = NSAttributedString(
-            data: user.comments.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: true)!,
-            options: [ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],
-            documentAttributes: nil,
-            error: nil
-        )
-        
+        descriptionLabel.attributedText = Utils.htmlToAttributedText(user.comments)
         let url = NSURL(string: user.thumbnailURL)!
         userPictureImageView.hnk_setImageFromURL(url)
     }

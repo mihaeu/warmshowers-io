@@ -25,6 +25,7 @@ struct Storyboard
     static let MessageCellIdentifier = "Message Cell"
     static let MessageBodyFromCellIdentifier = "Message Body From Cell"
     static let MessageBodyToCellIdentifier = "Message Body To Cell"
+    static let ProfileOverviewCellIdentifier = "Profile Overview Cell"
     static let UserCellIdentifier = "User Cell"
     
     // UI

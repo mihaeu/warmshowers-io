@@ -14,12 +14,8 @@ class OtherProfileViewController: UIViewController
 {
     var user: User?
     
-    var scrollContainerView: UIView!
-    var profileDescriptionLabel: UILabel!
-    
     @IBOutlet weak var navigationBar: UINavigationItem!
     @IBOutlet weak var userPictureImageView: UIImageView!
-    @IBOutlet weak var favoriteButton: UIBarButtonItem!
     
     @IBOutlet weak var tableView: UITableView! {
         didSet {
@@ -35,9 +31,14 @@ class OtherProfileViewController: UIViewController
     let realm = Realm()
     let userRepository = UserRepository()
     
-    let UserInformationIndex = 0
-    let FeedbackIndex = 1
+    let isFavoriteImage = UIImage(named: "nav-star-full")
+    let isNoFavoriteImage = UIImage(named: "nav-star-empty")
+    
+    let ProfileOverviewIndex = 0
+    let UserInformationIndex = 1
+    let FeedbackIndex = 2
     let headerTitles = [
+        "Profile Overview",
         "User Information",
         "Feedback"
     ];
@@ -45,7 +46,6 @@ class OtherProfileViewController: UIViewController
     override func viewDidLoad()
     {
         if user != nil {
-   
             // if the user is not cached, get it from the API
             if user?.comments == nil || user?.comments == "" {
                 API.sharedInstance.getUser(user!.uid)
@@ -73,68 +73,27 @@ class OtherProfileViewController: UIViewController
     
     private func displayUserData()
     {
-        favoriteButton.style = user!.isFavorite == true
-            ? UIBarButtonItemStyle.Done
-            : UIBarButtonItemStyle.Plain
-        
-        self.title = user!.fullname
+        let buttons = [
+            UIBarButtonItem(image: user!.isFavorite ? isFavoriteImage : isNoFavoriteImage, style: .Plain, target: self, action: "favorite:"),
+            UIBarButtonItem(image: UIImage(named: "nav-message"), style: .Plain, target: self, action: "message"),
+            UIBarButtonItem(image: UIImage(named: "nav-feedback"), style: .Plain, target: self, action: "feedback")
+        ]
+        navigationItem.setRightBarButtonItems(buttons, animated: true)
         
         var userData = [String]()
-        userData.append(user!.fullname)
-        userData.append(user!.comments)
         userData.append(user!.languagesspoken)
         userData.append(user!.latitude.description)
         userData.append(user!.longitude.description)
         
         tableData = [[AnyObject]]()
+        tableData.append([user!])
         tableData.append(userData)
+        tableView.reloadData()
         
         API.sharedInstance.getFeedbackForUser(user!.uid).onSuccess() { userFeedback in
             self.tableData.append(userFeedback)
             self.tableView.reloadData()
         }
-        
-//        let containerSize = CGSize(width: 250.0, height: 250.0)
-//        scrollContainerView = UIView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size:containerSize))
-//        scrollView.addSubview(scrollContainerView)
-//        
-//        let url = NSURL(string: user!.mobilePictureURL)!
-//        userPictureImageView = UIImageView()
-//        userPictureImageView.frame = CGRectMake(0, 0, 179, 200)
-//        userPictureImageView.contentMode = .ScaleAspectFit
-//        userPictureImageView.hnk_setImageFromURL(url)
-//        scrollView.addSubview(userPictureImageView)
-//        
-//        scrollView.contentSize = containerSize;
-//        
-//        let newColor = user?.isFavorite == true ? UIColor.greenColor() : UIColor.redColor()
-//        favoriteButton.setTitleColor(newColor, forState: .Normal)
-//        
-//        profileDescriptionLabel = UILabel()
-//        profileDescriptionLabel.attributedText = NSAttributedString(
-//            data: user!.comments.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: true)!,
-//            options: [ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],
-//            documentAttributes: nil,
-//            error: nil
-//        )
-//
-//        profileDescriptionLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
-//        profileDescriptionLabel.numberOfLines = 0
-//        
-//        scrollView.addSubview(profileDescriptionLabel)
-//        
-//        layout(userPictureImageView, profileDescriptionLabel) { userPictureImageView, profileDescriptionLabel in
-//            userPictureImageView.top == userPictureImageView.superview!.top
-//            userPictureImageView.centerX == userPictureImageView.superview!.centerX
-//            userPictureImageView.width == 179
-//            userPictureImageView.height == 200
-//            
-//            profileDescriptionLabel.top == userPictureImageView.bottom + 8
-//            profileDescriptionLabel.centerX == userPictureImageView.centerX
-//            profileDescriptionLabel.width == 200
-//        }
-        
-        tableView.reloadData()
     }
     
     @IBAction func back(sender: AnyObject)
@@ -142,16 +101,24 @@ class OtherProfileViewController: UIViewController
         presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    @IBAction func addToFavorites(sender: UIBarButtonItem)
+    func favorite(sender: UIBarButtonItem)
     {
         if user != nil {
             realm.write {
                 self.user!.isFavorite = !self.user!.isFavorite
             }
-            sender.style = user?.isFavorite == true
-                ? UIBarButtonItemStyle.Done
-                : UIBarButtonItemStyle.Plain
+            sender.image = user?.isFavorite == true ? isFavoriteImage : isNoFavoriteImage
         }
+    }
+    
+    func message()
+    {
+        performSegueWithIdentifier(Storyboard.ShowNewMessageSegue, sender: user)
+    }
+    
+    func feedback()
+    {
+        performSegueWithIdentifier(Storyboard.ShowNewFeedbackSegue, sender: user)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
@@ -160,7 +127,12 @@ class OtherProfileViewController: UIViewController
             if let newFeedbackViewController = segue.destinationViewController as? NewFeedbackViewController {
                 newFeedbackViewController.user = user
             }
+        } else if segue.identifier == Storyboard.ShowNewMessageSegue {
+            if let newMessageViewController = segue.destinationViewController as? NewMessageViewController {
+                newMessageViewController.user = user
+            }
         }
+        
     }
 }
 
@@ -168,16 +140,20 @@ extension OtherProfileViewController: UITableViewDataSource
 {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        if indexPath.section == UserInformationIndex {
+        if indexPath.section == ProfileOverviewIndex {
             // TODO: special format with 2 columns except for the first column plzzz
-            var cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.UserCellIdentifier) as? UITableViewCell
+            var cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.ProfileOverviewCellIdentifier) as? ProfileOverviewCell
             if cell == nil {
-                cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: Storyboard.UserCellIdentifier)
+                cell = ProfileOverviewCell(style: UITableViewCellStyle.Default, reuseIdentifier: Storyboard.ProfileOverviewCellIdentifier)
             }
             
-            cell!.textLabel?.text = tableData[indexPath.section][indexPath.row] as? String
-            cell!.textLabel?.lineBreakMode = NSLineBreakMode.ByWordWrapping
-            cell!.textLabel?.numberOfLines = 0
+            let user = tableData[indexPath.section][indexPath.row] as! User
+            cell!.fullnameLabel.text = user.fullname
+            cell!.descriptionLabel.text = user.comments
+            cell?.userPictureImageView.hnk_setImageFromURL(User.mobileURLFromId(user.uid), placeholder: Storyboard.DefaultUserPicture)
+            cell?.userPictureImageView.layer.cornerRadius = 8
+            cell?.userPictureImageView.clipsToBounds = true
+            cell?.userPictureImageView.layer.borderWidth = 1.0;
             
             return cell!
         }
@@ -193,7 +169,8 @@ extension OtherProfileViewController: UITableViewDataSource
             cell?.userLabel.text = "\(feedback.fromFullName)"
             cell?.feedbackLabel.attributedText = Utils.htmlToAttributedText(feedback.body)
             cell?.createdOnLabel.text = "\(feedback.rating) feedback written in \(Constants.Months[feedback.month]!) \(feedback.year)"
-            cell?.userPictureImageView.hnk_setImageFromURL(User.thumbnailURLFromId(feedback.fromUserId))
+            
+            cell?.userPictureImageView.hnk_setImageFromURL(User.thumbnailURLFromId(feedback.fromUserId), placeholder: Storyboard.DefaultUserThumbnail)
             cell?.userPictureImageView.layer.cornerRadius = 8
             cell?.userPictureImageView.clipsToBounds = true
             cell?.userPictureImageView.layer.borderWidth = 1.0;
@@ -215,11 +192,17 @@ extension OtherProfileViewController: UITableViewDataSource
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
+        if section == ProfileOverviewIndex {
+            return 1
+        }
         return tableData[section].count
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String?
     {
+        if section == ProfileOverviewIndex {
+            return nil
+        }
         return headerTitles[section]
     }
     
