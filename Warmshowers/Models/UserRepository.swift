@@ -13,7 +13,7 @@ class UserRepository
 {
     private let api = API.sharedInstance
     
-    func findById(id: Int, refresh: Bool = false) -> Future<User>
+    func findById(id: Int, refresh: Bool = false) -> Future<User, NSError>
     {
 //        if refresh == false {
 //            let result = Realm().objects(User).filter("uid = \(id)")
@@ -27,7 +27,7 @@ class UserRepository
         return api.getUser(id)
     }
     
-    func findByLocation(minlat: Double, maxlat: Double, minlon: Double, maxlon: Double, centerlat: Double, centerlon: Double, limit: Int) -> Future<[Int:User]>
+    func findByLocation(minlat: Double, maxlat: Double, minlon: Double, maxlon: Double, centerlat: Double, centerlon: Double, limit: Int) -> Future<[Int:User], NSError>
     {
         return api.searchByLocation(minlat, maxlat: maxlat, minlon: minlon, maxlon: maxlon, centerlat: centerlat, centerlon: centerlon, limit: limit)
     }

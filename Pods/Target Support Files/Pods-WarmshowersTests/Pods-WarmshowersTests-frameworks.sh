@@ -48,14 +48,18 @@ code_sign() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework 'Box.framework'
   install_framework 'BrightFutures.framework'
   install_framework 'Nimble.framework'
   install_framework 'Realm.framework'
   install_framework 'RealmSwift.framework'
+  install_framework 'Result.framework'
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework 'Box.framework'
   install_framework 'BrightFutures.framework'
   install_framework 'Nimble.framework'
   install_framework 'Realm.framework'
   install_framework 'RealmSwift.framework'
+  install_framework 'Result.framework'
 fi

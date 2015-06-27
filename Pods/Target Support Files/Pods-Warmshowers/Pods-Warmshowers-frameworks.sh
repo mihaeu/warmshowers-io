@@ -49,21 +49,27 @@ code_sign() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'Alamofire.framework'
+  install_framework 'Box.framework'
   install_framework 'BrightFutures.framework'
   install_framework 'Cartography.framework'
   install_framework 'Haneke.framework'
+  install_framework 'IJReachability.framework'
   install_framework 'Realm.framework'
   install_framework 'RealmSwift.framework'
+  install_framework 'Result.framework'
   install_framework 'SwiftyJSON.framework'
   install_framework 'XCGLogger.framework'
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'Alamofire.framework'
+  install_framework 'Box.framework'
   install_framework 'BrightFutures.framework'
   install_framework 'Cartography.framework'
   install_framework 'Haneke.framework'
+  install_framework 'IJReachability.framework'
   install_framework 'Realm.framework'
   install_framework 'RealmSwift.framework'
+  install_framework 'Result.framework'
   install_framework 'SwiftyJSON.framework'
   install_framework 'XCGLogger.framework'
 fi

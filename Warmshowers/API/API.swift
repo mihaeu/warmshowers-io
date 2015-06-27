@@ -51,9 +51,9 @@ public class API
     
         :returns: Future<User>
     */
-    public func login(username: String, password: String) -> Future<User>
+    public func login(username: String, password: String) -> Future<User, NSError>
     {
-        let promise = Promise<User>()
+        let promise = Promise<User, NSError>()
         
         manager.request(Router.Login(username: username, password: password))
             .responseJSON { (request, response, json, error) in
@@ -93,9 +93,9 @@ public class API
         
         :returns: Future<Bool>
     */
-    public func logout(username: String, password: String) -> Future<Bool>
+    public func logout(username: String, password: String) -> Future<Bool, NSError>
     {
-        let promise = Promise<Bool>()
+        let promise = Promise<Bool, NSError>()
         
         manager.request(Router.Logout(username: username, password: password))
             .responseJSON { (request, response, json, error) in
@@ -122,9 +122,9 @@ public class API
         
         :return: Future<User>
     */
-    public func getUser(userId: Int) -> Future<User>
+    public func getUser(userId: Int) -> Future<User, NSError>
     {
-        let promise = Promise<User>()
+        let promise = Promise<User, NSError>()
         
         manager.request(Router.ReadUser(userId: userId))
             .responseJSON { (request, response, json, error) in
@@ -154,9 +154,9 @@ public class API
     
         :returns: Future<[Int:User]>
     */
-    public func searchByKeyword(keyword: String, limit: Int = 4, page: Int = 0) -> Future<[Int:User]>
+    public func searchByKeyword(keyword: String, limit: Int = 4, page: Int = 0) -> Future<[Int:User], NSError>
     {
-        let promise = Promise<[Int:User]>()
+        let promise = Promise<[Int:User], NSError>()
         
         manager.request(Router.SearchByKeyword(keyword: keyword, limit: limit, page: page))
             .responseJSON { (request, response, json, error) in
@@ -194,9 +194,9 @@ public class API
     
         :returns: Future<[Int:User]>
     */
-    public func searchByLocation(minlat: Double, maxlat: Double, minlon: Double, maxlon: Double, centerlat: Double, centerlon: Double, limit: Int = 100) -> Future<[Int:User]>
+    public func searchByLocation(minlat: Double, maxlat: Double, minlon: Double, maxlon: Double, centerlat: Double, centerlon: Double, limit: Int = 100) -> Future<[Int:User], NSError>
     {
-        let promise = Promise<[Int:User]>()
+        let promise = Promise<[Int:User], NSError>()
         
         manager.request(Router.SearchByLocation(minlat: minlat, maxlat: maxlat, minlon: minlon, maxlon: maxlon, centerlat: centerlat, centerlon: centerlon, limit: limit))
             .responseJSON() { (request, response, json, error) in
@@ -230,9 +230,9 @@ public class API
     
         :returns: Future<[Feedback]>
     */
-    func getFeedbackForUser(userId: Int) -> Future<[Feedback]>
+    func getFeedbackForUser(userId: Int) -> Future<[Feedback], NSError>
     {
-        let promise = Promise<[Feedback]>()
+        let promise = Promise<[Feedback], NSError>()
         
         manager
             .request(Router.ReadFeedback(userId: userId))
@@ -262,9 +262,9 @@ public class API
     
         :returns: Future<Bool>
     */
-    func createFeedbackForUser(feedback: Feedback) -> Future<Bool>
+    func createFeedbackForUser(feedback: Feedback) -> Future<Bool, NSError>
     {
-        let promise = Promise<Bool>()
+        let promise = Promise<Bool, NSError>()
         
         manager
             .request(Router.CreateFeedback(feedback: feedback))
@@ -301,9 +301,9 @@ public class API
     
         :returns: Future<Bool>
     */
-    public func sendMessage(recipients: [User], subject: String, body: String) -> Future<Bool>
+    public func sendMessage(recipients: [User], subject: String, body: String) -> Future<Bool, NSError>
     {
-        let promise = Promise<Bool>()
+        let promise = Promise<Bool, NSError>()
         
         manager
             .request(Router.SendMessage(recipients: recipients, subject: subject, body: body))
@@ -332,9 +332,9 @@ public class API
     
         :returns: Future<Bool>
     */
-    public func replyMessage(threadId: Int, body: String) -> Future<Bool>
+    public func replyMessage(threadId: Int, body: String) -> Future<Bool, NSError>
     {
-        let promise =  Promise<Bool>()
+        let promise =  Promise<Bool, NSError>()
         
         manager
             .request(Router.ReplyMessage(threadId: threadId, body: body))
@@ -359,9 +359,9 @@ public class API
     
         :returns: Future<Int>
     */
-    public func getUnreadMessagesCount() -> Future<Int>
+    public func getUnreadMessagesCount() -> Future<Int, NSError>
     {
-        let promise = Promise<Int>()
+        let promise = Promise<Int, NSError>()
         
         manager
             .request(Router.GetUnreadMessageCount)
@@ -387,9 +387,9 @@ public class API
     
         :returns: Future<Message>
     */
-    public func getAllMessages() -> Future<[Message]>
+    public func getAllMessages() -> Future<[Message], NSError>
     {
-        let promise = Promise<[Message]>()
+        let promise = Promise<[Message], NSError>()
         
         manager
             .request(Router.ReadMessages)
@@ -417,9 +417,9 @@ public class API
     
         :param: threadId
     */
-    public func readMessageThread(threadId: Int) -> Future<MessageThread>
+    public func readMessageThread(threadId: Int) -> Future<MessageThread, NSError>
     {
-        let promise = Promise<MessageThread>()
+        let promise = Promise<MessageThread, NSError>()
         
         manager
             .request(Router.ReadMessageThread(threadId: threadId))
@@ -447,9 +447,9 @@ public class API
     
         :returns: Future<Bool>
     */
-    public func markMessageThreadStatus(threadId: Int, unread: Bool) -> Future<Bool>
+    public func markMessageThreadStatus(threadId: Int, unread: Bool) -> Future<Bool, NSError>
     {
-        let promise = Promise<Bool>()
+        let promise = Promise<Bool, NSError>()
         
         manager
             .request(Router.MarkMessageThread(threadId: threadId, unread: unread))

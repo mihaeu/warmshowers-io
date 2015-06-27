@@ -17,7 +17,7 @@ class MessageRepository
         // TODO: implement
     }
     
-    func getAll() -> Future<[Message]>
+    func getAll() -> Future<[Message], NSError>
     {
         return api.getAllMessages()
     }

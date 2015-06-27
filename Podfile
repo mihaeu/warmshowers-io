@@ -11,6 +11,7 @@ target 'Warmshowers' do
     pod 'HanekeSwift'
     pod 'Cartography'
     pod 'RealmSwift'
+    pod 'IJReachability', :git => 'https://github.com/Isuru-Nanayakkara/IJReachability.git'
 end
 
 target 'WarmshowersTests' do

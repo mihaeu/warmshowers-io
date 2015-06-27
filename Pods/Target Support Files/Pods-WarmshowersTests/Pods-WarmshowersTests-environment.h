@@ -6,11 +6,17 @@
 // project.
 
 
+// Box
+#define COCOAPODS_POD_AVAILABLE_Box
+#define COCOAPODS_VERSION_MAJOR_Box 1
+#define COCOAPODS_VERSION_MINOR_Box 2
+#define COCOAPODS_VERSION_PATCH_Box 2
+
 // BrightFutures
 #define COCOAPODS_POD_AVAILABLE_BrightFutures
-#define COCOAPODS_VERSION_MAJOR_BrightFutures 1
+#define COCOAPODS_VERSION_MAJOR_BrightFutures 2
 #define COCOAPODS_VERSION_MINOR_BrightFutures 0
-#define COCOAPODS_VERSION_PATCH_BrightFutures 1
+#define COCOAPODS_VERSION_PATCH_BrightFutures 0
 
 // Nimble
 #define COCOAPODS_POD_AVAILABLE_Nimble
@@ -35,4 +41,10 @@
 #define COCOAPODS_VERSION_MAJOR_RealmSwift 0
 #define COCOAPODS_VERSION_MINOR_RealmSwift 93
 #define COCOAPODS_VERSION_PATCH_RealmSwift 2
+
+// Result
+#define COCOAPODS_POD_AVAILABLE_Result
+#define COCOAPODS_VERSION_MAJOR_Result 0
+#define COCOAPODS_VERSION_MINOR_Result 4
+#define COCOAPODS_VERSION_PATCH_Result 4
 

@@ -12,11 +12,17 @@
 #define COCOAPODS_VERSION_MINOR_Alamofire 2
 #define COCOAPODS_VERSION_PATCH_Alamofire 3
 
+// Box
+#define COCOAPODS_POD_AVAILABLE_Box
+#define COCOAPODS_VERSION_MAJOR_Box 1
+#define COCOAPODS_VERSION_MINOR_Box 2
+#define COCOAPODS_VERSION_PATCH_Box 2
+
 // BrightFutures
 #define COCOAPODS_POD_AVAILABLE_BrightFutures
-#define COCOAPODS_VERSION_MAJOR_BrightFutures 1
+#define COCOAPODS_VERSION_MAJOR_BrightFutures 2
 #define COCOAPODS_VERSION_MINOR_BrightFutures 0
-#define COCOAPODS_VERSION_PATCH_BrightFutures 1
+#define COCOAPODS_VERSION_PATCH_BrightFutures 0
 
 // Cartography
 #define COCOAPODS_POD_AVAILABLE_Cartography
@@ -29,6 +35,12 @@
 #define COCOAPODS_VERSION_MAJOR_HanekeSwift 0
 #define COCOAPODS_VERSION_MINOR_HanekeSwift 9
 #define COCOAPODS_VERSION_PATCH_HanekeSwift 1
+
+// IJReachability
+#define COCOAPODS_POD_AVAILABLE_IJReachability
+#define COCOAPODS_VERSION_MAJOR_IJReachability 0
+#define COCOAPODS_VERSION_MINOR_IJReachability 1
+#define COCOAPODS_VERSION_PATCH_IJReachability 0
 
 // Realm
 #define COCOAPODS_POD_AVAILABLE_Realm
@@ -47,6 +59,12 @@
 #define COCOAPODS_VERSION_MAJOR_RealmSwift 0
 #define COCOAPODS_VERSION_MINOR_RealmSwift 93
 #define COCOAPODS_VERSION_PATCH_RealmSwift 2
+
+// Result
+#define COCOAPODS_POD_AVAILABLE_Result
+#define COCOAPODS_VERSION_MAJOR_Result 0
+#define COCOAPODS_VERSION_MINOR_Result 4
+#define COCOAPODS_VERSION_PATCH_Result 4
 
 // SwiftyJSON
 #define COCOAPODS_POD_AVAILABLE_SwiftyJSON
