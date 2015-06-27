@@ -60,7 +60,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
     {
         var cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.MessageCellIdentifier) as? MessageCell
         if cell == nil {
-            cell = MessageCell(message: messages[indexPath.row])
+            cell = MessageCell(style: UITableViewCellStyle.Default, reuseIdentifier: Storyboard.MessageCellIdentifier)
         }
     
         let authors = messages[indexPath.row].participants
