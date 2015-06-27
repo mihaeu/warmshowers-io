@@ -13,4 +13,5 @@ class MessageCell: UITableViewCell
     @IBOutlet weak var userPictureImageView: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var subjectLabel: UILabel!
+    @IBOutlet weak var lastMessageLabel: UILabel!
 }

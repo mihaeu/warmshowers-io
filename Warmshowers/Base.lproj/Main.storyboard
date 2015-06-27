@@ -312,35 +312,47 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="33V-n6-2ie">
-                                                    <rect key="frame" x="66" y="8" width="76" height="20"/>
+                                                    <rect key="frame" x="66" y="8" width="526" height="20"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subject" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gnq-pT-WUj">
-                                                    <rect key="frame" x="66" y="37" width="50" height="17"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6ka-5G-35Q">
                                                     <rect key="frame" x="8" y="8" width="50" height="50"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="50" id="5lF-a4-ZK1"/>
-                                                        <constraint firstAttribute="height" constant="50" id="ov7-eV-nQG"/>
+                                                        <constraint firstAttribute="height" constant="50" id="SFj-Cf-4ah"/>
+                                                        <constraint firstAttribute="width" constant="50" id="U3K-LK-ygj"/>
                                                     </constraints>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message sent date" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yLu-nr-mxI">
+                                                    <rect key="frame" x="506" y="79" width="86" height="12"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="10"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="700" text="Subject" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gnq-pT-WUj">
+                                                    <rect key="frame" x="66" y="36" width="526" height="35"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="33V-n6-2ie" firstAttribute="leading" secondItem="6ka-5G-35Q" secondAttribute="trailing" constant="8" symbolic="YES" id="6ZI-qX-5YV"/>
-                                                <constraint firstItem="gnq-pT-WUj" firstAttribute="top" secondItem="33V-n6-2ie" secondAttribute="bottom" constant="9" id="K3u-zy-cLq"/>
-                                                <constraint firstItem="33V-n6-2ie" firstAttribute="top" secondItem="OF0-Ni-Mhl" secondAttribute="topMargin" id="Wxv-fO-Yzp"/>
-                                                <constraint firstItem="6ka-5G-35Q" firstAttribute="top" secondItem="OF0-Ni-Mhl" secondAttribute="topMargin" id="ZnJ-HQ-zCY"/>
-                                                <constraint firstItem="gnq-pT-WUj" firstAttribute="leading" secondItem="33V-n6-2ie" secondAttribute="leading" id="cJw-IS-Bru"/>
-                                                <constraint firstItem="6ka-5G-35Q" firstAttribute="leading" secondItem="OF0-Ni-Mhl" secondAttribute="leadingMargin" id="fhZ-cv-qkf"/>
+                                                <constraint firstItem="33V-n6-2ie" firstAttribute="leading" secondItem="6ka-5G-35Q" secondAttribute="trailing" constant="8" id="2Ua-e8-f3S"/>
+                                                <constraint firstItem="yLu-nr-mxI" firstAttribute="bottom" secondItem="OF0-Ni-Mhl" secondAttribute="bottomMargin" id="IbS-eW-Sc6"/>
+                                                <constraint firstItem="gnq-pT-WUj" firstAttribute="top" secondItem="33V-n6-2ie" secondAttribute="bottom" constant="8" id="NZ8-NS-Uuj"/>
+                                                <constraint firstItem="6ka-5G-35Q" firstAttribute="top" secondItem="OF0-Ni-Mhl" secondAttribute="topMargin" id="T1l-V9-IhV"/>
+                                                <constraint firstItem="yLu-nr-mxI" firstAttribute="top" secondItem="gnq-pT-WUj" secondAttribute="bottom" constant="8" id="V7J-dh-m8m"/>
+                                                <constraint firstItem="yLu-nr-mxI" firstAttribute="trailing" secondItem="OF0-Ni-Mhl" secondAttribute="trailingMargin" id="WML-Ji-2wz"/>
+                                                <constraint firstItem="gnq-pT-WUj" firstAttribute="leading" secondItem="6ka-5G-35Q" secondAttribute="trailing" constant="8" id="hCm-E8-M8w"/>
+                                                <constraint firstItem="6ka-5G-35Q" firstAttribute="leading" secondItem="OF0-Ni-Mhl" secondAttribute="leadingMargin" id="lp0-CR-ZJn"/>
+                                                <constraint firstItem="33V-n6-2ie" firstAttribute="top" secondItem="OF0-Ni-Mhl" secondAttribute="topMargin" id="lu8-RO-AQ4"/>
+                                                <constraint firstItem="33V-n6-2ie" firstAttribute="trailing" secondItem="OF0-Ni-Mhl" secondAttribute="trailingMargin" id="ogH-rE-nXV"/>
+                                                <constraint firstItem="gnq-pT-WUj" firstAttribute="trailing" secondItem="OF0-Ni-Mhl" secondAttribute="trailingMargin" id="wR0-Xa-s93"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="lastMessageLabel" destination="yLu-nr-mxI" id="yt0-2b-6Nj"/>
                                             <outlet property="subjectLabel" destination="gnq-pT-WUj" id="0Zq-Ye-MZK"/>
                                             <outlet property="userPictureImageView" destination="6ka-5G-35Q" id="vxA-4x-xqv"/>
                                             <outlet property="usernameLabel" destination="33V-n6-2ie" id="UKD-BN-6ge"/>
@@ -865,7 +877,7 @@
         <image name="tab-profile" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="w7K-ZR-gAh"/>
+        <segue reference="aln-sR-7h2"/>
         <segue reference="EYS-6L-Ma1"/>
     </inferredMetricsTieBreakers>
 </document>

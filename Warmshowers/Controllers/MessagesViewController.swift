@@ -23,6 +23,9 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
         didSet {
             tableView.delegate = self
             tableView.dataSource = self
+            
+            tableView.estimatedRowHeight = 160
+            tableView.rowHeight = UITableViewAutomaticDimension;
         }
     }
     
@@ -63,7 +66,8 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
             cell = MessageCell(style: UITableViewCellStyle.Default, reuseIdentifier: Storyboard.MessageCellIdentifier)
         }
     
-        let authors = messages[indexPath.row].participants
+        let message = messages[indexPath.row]
+        let authors = message.participants
         
         if authors != nil && authors!.count > 0 {
             cell?.userPictureImageView.hnk_setImageFromURL(
@@ -76,7 +80,9 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
             }
         }
 
+        cell?.lastMessageLabel.text = Utils.longDateFromTimestamp(message.lastUpdatedTimestamp!)
         cell?.subjectLabel.text = messages[indexPath.row].subject
+        
         cell?.sizeToFit()
         return cell!
     }

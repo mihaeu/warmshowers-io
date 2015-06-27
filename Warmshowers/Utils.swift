@@ -19,4 +19,12 @@ class Utils
             error: nil
         )!
     }
+    
+    static func longDateFromTimestamp(timestamp: Int) -> String
+    {
+        let lastMessageDate = NSDate(timeIntervalSince1970: Double(timestamp))
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "h:mm a d MMMM yyyy"
+        return dateFormatter.stringFromDate(lastMessageDate)
+    }
 }
