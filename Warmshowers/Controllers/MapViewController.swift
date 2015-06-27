@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import Haneke
+import IJReachability
 
 class MapViewController: UIViewController, CLLocationManagerDelegate
 {
@@ -49,15 +50,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
         locationManager.startUpdatingLocation()
         
         if let user = userRepository.findByActiveUser() {
-            if Utils.phoneIsConnectedToNetwork() {
-               println("Connected to internet")
+            if IJReachability.isConnectedToNetwork() {
+                API.sharedInstance.login(user.name, password: user.password).onFailure() { error in
+                    self.performSegueWithIdentifier(Storyboard.ShowLogin, sender: nil)
+                }
             } else {
-                println("NOOOOOT connected to internet")
+                if let mapTabBarItem = self.tabBarController?.tabBar.items?.first as? UITabBarItem {
+                    mapTabBarItem.enabled = false
+                }
+                self.performSegueWithIdentifier(Storyboard.ShowFavoriteSegue, sender: nil)
             }
             
-            API.sharedInstance.login(user.name, password: user.password).onFailure() { error in
-                self.performSegueWithIdentifier(Storyboard.ShowLogin, sender: nil)
-            }
+            
         } else {
             performSegueWithIdentifier(Storyboard.ShowLogin, sender: nil)
         }

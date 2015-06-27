@@ -712,6 +712,7 @@
                     <connections>
                         <outlet property="mapView" destination="Edw-4D-QwA" id="oA5-gu-an0"/>
                         <segue destination="OvG-RX-cPr" kind="presentation" identifier="Show Other Profile" id="uyn-a3-iaD"/>
+                        <segue destination="obc-7N-gOO" kind="show" identifier="Show Favorites" id="mCs-oj-EZd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gIP-jH-Aw2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -920,6 +921,7 @@
         <image name="tab-profile" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="mCs-oj-EZd"/>
         <segue reference="uyn-a3-iaD"/>
         <segue reference="ggf-jH-iKU"/>
     </inferredMetricsTieBreakers>
