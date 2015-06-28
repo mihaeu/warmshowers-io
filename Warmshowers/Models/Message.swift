@@ -8,8 +8,8 @@
 
 public class Message
 {
-    var threadId: Int
-    var subject: String
+    var threadId = 0
+    var subject = ""
     
     var count: Int?
     var isNew: Bool?
@@ -22,10 +22,4 @@ public class Message
     var author: User?
     var body: String?
     var files: [String]?
-    
-    init(threadId: Int, subject: String)
-    {
-        self.threadId = threadId
-        self.subject = subject
-    }    
 }

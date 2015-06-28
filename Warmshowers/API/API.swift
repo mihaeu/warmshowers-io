@@ -293,18 +293,16 @@ public class API
     
         https://github.com/warmshowers/Warmshowers.org/wiki/Warmshowers-RESTful-Services-for-Mobile-Apps#wiki-message_send
     
-        :param: recipients
-        :param: subject
-        :param: body
+        :param: message
     
         :returns: Future<Bool>
     */
-    public func sendMessage(recipients: [User], subject: String, body: String) -> Future<Bool, NSError>
+    public func sendMessage(message: Message) -> Future<Bool, NSError>
     {
         let promise = Promise<Bool, NSError>()
         
         manager
-            .request(Router.SendMessage(recipients: recipients, subject: subject, body: body))
+            .request(Router.SendMessage(message: message))
             .responseJSON() { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
@@ -325,17 +323,16 @@ public class API
     
         https://github.com/warmshowers/Warmshowers.org/wiki/Warmshowers-RESTful-Services-for-Mobile-Apps#wiki-privatemsg_reply
     
-        :param: threadId
-        :param: body
+        :param: message
     
         :returns: Future<Bool>
     */
-    public func replyMessage(threadId: Int, body: String) -> Future<Bool, NSError>
+    public func replyMessage(message: Message) -> Future<Bool, NSError>
     {
         let promise =  Promise<Bool, NSError>()
         
         manager
-            .request(Router.ReplyMessage(threadId: threadId, body: body))
+            .request(Router.ReplyMessage(message: message))
             .responseJSON() { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)

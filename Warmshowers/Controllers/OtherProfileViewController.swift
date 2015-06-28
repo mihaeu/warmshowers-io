@@ -128,7 +128,7 @@ class OtherProfileViewController: UIViewController
             }
         } else if segue.identifier == Storyboard.ShowNewMessageSegue {
             if let newMessageViewController = segue.destinationViewController as? NewMessageViewController {
-                newMessageViewController.user = user
+                newMessageViewController.toUser = user
             }
         }
         

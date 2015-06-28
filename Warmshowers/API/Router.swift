@@ -26,8 +26,8 @@ enum Router: URLRequestConvertible
     case GetUnreadMessageCount
     case ReadMessageThread(threadId: Int)
     case MarkMessageThread(threadId: Int, unread: Bool)
-    case SendMessage(recipients: [User], subject: String, body: String)
-    case ReplyMessage(threadId: Int, body: String)
+    case SendMessage(message: Message)
+    case ReplyMessage(message: Message)
     
     var path: String {
         switch self {
@@ -172,16 +172,16 @@ enum Router: URLRequestConvertible
             case .MarkMessageThread(let threadId, let unread):
                 return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: ["thread_id": threadId, "status": unread]).0
             
-            case .SendMessage(let recipients, let subject, let body):
-                let recipientsString = ",".join(recipients.map {$0.name})
+            case .SendMessage(let message):
+                let recipientsString = ",".join(message.participants!.map {$0.name})
                 return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: [
                     "recipients": recipientsString,
-                    "subject": subject,
-                    "body": body
+                    "subject": message.subject,
+                    "body": message.body!
                 ]).0
             
-            case .ReplyMessage(let threadId, let body):
-                return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: ["thread_id": threadId, "body": body]).0
+            case .ReplyMessage(let message):
+                return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: ["thread_id": message.threadId, "body": message.body!]).0
             
             // Default (just in case)
             

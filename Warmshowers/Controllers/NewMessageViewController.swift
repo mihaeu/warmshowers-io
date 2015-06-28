@@ -11,11 +11,13 @@ import UIKit
 class NewMessageViewController: UIViewController
 {
     var messageThread: MessageThread?
-    var user: User?
+    var toUser: User?
 
     @IBOutlet weak var userTextField: UITextField!
     @IBOutlet weak var subjectTextField: UITextField!
     @IBOutlet weak var bodyTextView: UITextView!
+    
+    let messageRepository = MessageRepository()
     
     override func viewDidLoad()
     {
@@ -30,9 +32,9 @@ class NewMessageViewController: UIViewController
             subjectTextField.text = messageThread?.subject
         }
         
-        if user !== nil {
+        if toUser !== nil {
             userTextField.enabled = false
-            userTextField.text = user!.name
+            userTextField.text = toUser!.name
             
             subjectTextField.becomeFirstResponder()
         }
@@ -40,6 +42,33 @@ class NewMessageViewController: UIViewController
     
     func sendMessage()
     {
-        // TDODO: send message ...
+        var message = Message()
+        if userWantsToSendNewMessage() {
+            message.subject = subjectTextField.text
+            message.body = bodyTextView.text
+            message.participants = [toUser!]
+            messageRepository.save(message)
+        } else if userWantsToReply() {
+            message.threadId = messageThread!.id
+            message.body = bodyTextView.text
+            API.sharedInstance.replyMessage(message)
+        }
+        navigationController?.popViewControllerAnimated(true)
+    }
+    
+    /**
+        The API is handling this differently so we need to check what to do.
+    */
+    private func userWantsToReply() -> Bool
+    {
+        return toUser == nil && messageThread != nil
+    }
+    
+    /**
+        The API is handling this differently so we need to check what to do.
+    */
+    private func userWantsToSendNewMessage() -> Bool
+    {
+        return toUser != nil && messageThread == nil
     }
 }

@@ -153,10 +153,10 @@
 		846D6BF51AFD635E00144D4F /* API */ = {
 			isa = PBXGroup;
 			children = (
-				84338C841B3D9567003C0411 /* Serialization */,
 				84CFCD751B0D2B7F00647959 /* API.swift */,
 				84CFCD761B0D2B7F00647959 /* APISecrets.swift */,
 				84A8D9691B14791A00E54581 /* Router.swift */,
+				84338C841B3D9567003C0411 /* Serialization */,
 			);
 			name = API;
 			sourceTree = "<group>";

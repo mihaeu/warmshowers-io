@@ -14,7 +14,7 @@ class MessageRepository
     
     func save(message: Message)
     {
-        // TODO: implement
+        api.sendMessage(message)
     }
     
     func getAll() -> Future<[Message], NSError>
