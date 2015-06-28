@@ -85,11 +85,11 @@ class FavoriteViewController: UIViewController, UITableViewDataSource, UITableVi
         cell!.userLabel.text = user.fullname
         cell!.addressLabel.text = user.city
 
-        let url = NSURL(string: user.thumbnailURL)!
-        cell!.userPictureImageView.hnk_setImageFromURL(url)
-        cell?.userPictureImageView.layer.cornerRadius = 8
-        cell?.userPictureImageView.clipsToBounds = true
-        cell?.userPictureImageView.layer.borderWidth = 1.0;
+        UserPictureCache.sharedInstance.thumbnailById(user.uid).onSuccess { image in
+            cell?.userPictureImageView.image = image
+        }.onFailure { error in
+            cell?.userPictureImageView.image = UserPictureCache.defaultThumbnail
+        }
         
         cell!.sizeToFit()
         return cell!

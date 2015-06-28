@@ -88,10 +88,11 @@ class MessageThreadViewController: UIViewController, UITableViewDataSource
         cell?.bodyLabel.attributedText = Utils.htmlToAttributedText(message!.body!)
         cell?.messageSentLabel.text = Utils.longDateFromTimestamp(message!.timestamp)
         
-        cell?.userPictureImageView.hnk_setImageFromURL(User.thumbnailURLFromId(message!.author!.uid), placeholder: Storyboard.DefaultUserThumbnail)
-        cell?.userPictureImageView.layer.cornerRadius = 8
-        cell?.userPictureImageView.clipsToBounds = true
-        cell?.userPictureImageView.layer.borderWidth = 1.0;
+        UserPictureCache.sharedInstance.thumbnailById(message!.author!.uid).onSuccess { image in
+            cell?.userPictureImageView.image = image
+        }.onFailure { error in
+            cell?.userPictureImageView.image = UserPictureCache.defaultThumbnail
+        }
         
         cell?.sizeToFit()
         return cell!

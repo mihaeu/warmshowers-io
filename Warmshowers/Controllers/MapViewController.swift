@@ -171,10 +171,12 @@ extension MapViewController: MKMapViewDelegate
             
             UserPictureCache.sharedInstance.thumbnailById(userAnnotation.user!.uid).onSuccess { image in
                 leftCalloutFrame.image = image
-                view.leftCalloutAccessoryView = leftCalloutFrame
+                
+            }.onFailure { error in
+                leftCalloutFrame.image = UserPictureCache.defaultThumbnail
             }
+            view.leftCalloutAccessoryView = leftCalloutFrame
         }
-
         view.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as! UIButton
         
         return view

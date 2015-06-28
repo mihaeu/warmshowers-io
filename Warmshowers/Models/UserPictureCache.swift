@@ -9,18 +9,36 @@
 import Haneke
 import Toucan
 
+/**
+    Picture Caching using Haneke and manipulation using Toucan.
+
+    Images are
+*/
 class UserPictureCache
 {
     static let sharedInstance = UserPictureCache()
     
-    let cache = Shared.imageCache
-    let thumbnailFormat = Format<UIImage>(name: "thumbnail", diskCapacity: 10 * 1024 * 1024) { image in
+    private let cache = Shared.imageCache
+    private let thumbnailFormat = Format<UIImage>(name: "thumbnail", diskCapacity: 10 * 1024 * 1024) { image in
         let resizedImage = Toucan.Resize.resizeImage(image, size: CGSize(width: 50, height: 50))
-        return Toucan.Mask.maskImageWithRoundedRect(resizedImage, cornerRadius: 8, borderWidth: 1, borderColor: UIColor(rgba: Storyboard.PrimaryColor))
+        return Toucan.Mask.maskImageWithRoundedRect(resizedImage, cornerRadius: 8, borderWidth: 1, borderColor: UIColor(rgba: Storyboard.PrimaryTextColor))
     }
-    let normalPictureFormat = Format<UIImage>(name: "normal", diskCapacity: 10 * 1024 * 1024) { image in
+    private let normalPictureFormat = Format<UIImage>(name: "normal", diskCapacity: 10 * 1024 * 1024) { image in
         let resizedImage = Toucan.Resize.resizeImage(image, size: CGSize(width: 200, height: 200))
-        return Toucan.Mask.maskImageWithRoundedRect(resizedImage, cornerRadius: 8, borderWidth: 1, borderColor: UIColor(rgba: Storyboard.PrimaryColor))
+        return Toucan.Mask.maskImageWithRoundedRect(resizedImage, cornerRadius: 8, borderWidth: 1, borderColor: UIColor(rgba: Storyboard.PrimaryTextColor))
+    }
+    
+    static var defaultThumbnail: UIImage {
+        get {
+            let resizedImage = Toucan.Resize.resizeImage(Storyboard.DefaultUserThumbnail!, size: CGSize(width: 50, height: 50))
+            return Toucan.Mask.maskImageWithRoundedRect(resizedImage, cornerRadius: 8, borderWidth: 1, borderColor: UIColor(rgba: Storyboard.PrimaryTextColor))
+        }
+    }
+    static var defaultPicture: UIImage {
+        get {
+            let resizedImage = Toucan.Resize.resizeImage(Storyboard.DefaultUserPicture!, size: CGSize(width: 200, height: 200))
+            return Toucan.Mask.maskImageWithRoundedRect(resizedImage, cornerRadius: 8, borderWidth: 1, borderColor: UIColor(rgba: Storyboard.PrimaryTextColor))
+        }
     }
     
     init()
@@ -28,7 +46,6 @@ class UserPictureCache
         cache.addFormat(thumbnailFormat)
         cache.addFormat(normalPictureFormat)
     }
-    
     
     /**
         Fetch, cache and resize user thumbnails.
