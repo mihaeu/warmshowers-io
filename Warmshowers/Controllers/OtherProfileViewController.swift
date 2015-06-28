@@ -149,10 +149,11 @@ extension OtherProfileViewController: UITableViewDataSource
             let user = tableData[indexPath.section][indexPath.row] as! User
             cell!.fullnameLabel.text = user.fullname
             cell!.descriptionLabel.text = user.comments
-            cell?.userPictureImageView.hnk_setImageFromURL(User.mobileURLFromId(user.uid), placeholder: Storyboard.DefaultUserPicture)
-            cell?.userPictureImageView.layer.cornerRadius = 8
-            cell?.userPictureImageView.clipsToBounds = true
-            cell?.userPictureImageView.layer.borderWidth = 1.0;
+            UserPictureCache.sharedInstance.pictureById(user.uid).onSuccess { image in
+                cell?.userPictureImageView.image = image
+            }.onFailure { error in
+                cell?.userPictureImageView.image = UserPictureCache.defaultPicture
+            }
             
             return cell!
         }

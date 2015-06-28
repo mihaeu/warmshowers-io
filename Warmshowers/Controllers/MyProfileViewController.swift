@@ -26,8 +26,12 @@ class MyProfileViewController: UIViewController
         userLabel.text =  user.name
         languagesSpokenLabel.text = user.languagesspoken
         descriptionLabel.attributedText = Utils.htmlToAttributedText(user.comments)
-        let url = NSURL(string: user.thumbnailURL)!
-        userPictureImageView.hnk_setImageFromURL(url)
+        
+        UserPictureCache.sharedInstance.pictureById(user.uid).onSuccess { image in
+            self.userPictureImageView.image = image
+        }.onFailure { error in
+                self.userPictureImageView.image = UserPictureCache.defaultPicture
+        }
     }
     
     @IBAction func logout(sender: AnyObject)

@@ -66,9 +66,9 @@ class UserPictureCache
         
         :returns: Fetch<UIImage> Promised UIImage for async processing, image will be 200x200
     */
-    func pictureById(userId: Int) -> UIImage
+    func pictureById(userId: Int) -> Fetch<UIImage>
     {
-        return UIImage()
+        return cache.fetch(URL: mobileURLFromId(userId), formatName: "normal")
     }
     
     /**
