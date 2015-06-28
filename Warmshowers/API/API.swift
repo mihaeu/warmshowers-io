@@ -88,22 +88,20 @@ public class API
     
         https://github.com/warmshowers/Warmshowers.org/wiki/Warmshowers-RESTful-Services-for-Mobile-Apps#wiki-logout
     
-        :param: username
-        :param: password
-        
         :returns: Future<Bool>
     */
-    public func logout(username: String, password: String) -> Future<Bool, NSError>
+    public func logout() -> Future<Bool, NSError>
     {
         let promise = Promise<Bool, NSError>()
         
-        manager.request(Router.Logout(username: username, password: password))
+        manager.request(Router.Logout(username: loggedInUser!.name, password: loggedInUser!.password))
             .responseJSON { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
                     promise.failure(error!)
                 } else {
-                    log.info("Logged out \(username) (Status: \(response?.statusCode))")
+                    log.info("Logged out \(self.loggedInUser!.name) (Status: \(response?.statusCode))")
+                    self.loggedInUser = nil
                     promise.success(true)
                 }
         }

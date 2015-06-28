@@ -33,11 +33,11 @@ class MyProfileViewController: UIViewController
                 self.userPictureImageView.image = UserPictureCache.defaultPicture
         }
     }
-    
+
     @IBAction func logout(sender: AnyObject)
     {
         userRepository.update(api.loggedInUser!, key: "password", value: "")
-        api.logout(api.loggedInUser!.name, password: api.loggedInUser!.password).onSuccess() { success in
+        api.logout().onSuccess() { success in
             self.performSegueWithIdentifier(Storyboard.ShowLogin, sender: nil)
         }
     }
