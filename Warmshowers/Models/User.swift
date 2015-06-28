@@ -13,42 +13,21 @@ public class User: Object
     dynamic var uid = 0
     dynamic var name = ""
     
-    convenience init(uid: Int, name: String) {
+    convenience init(uid: Int, name: String)
+    {
         self.init()
+        
         self.uid = uid
         self.name = name
     }
     
     // this is only set for the logged in user
     dynamic var password = ""
+    
     dynamic var comments = ""
     dynamic var fullname = ""
     
     dynamic var picture = ""
-    
-    var thumbnailURL: String {
-        var thumbnailURL = "https://www.warmshowers.org/files/imagecache/map_infoWindow/files/default_picture.jpg"
-        
-        if picture != "" {
-            var urlParts = split(picture) { $0 == "/" }
-            let thumbnailURL = "https://www.warmshowers.org/" + urlParts.removeAtIndex(0) + "/imagecache/profile_picture/" + "/".join(urlParts)
-            return thumbnailURL
-        }
-        
-        return thumbnailURL;
-    }
-    
-    var mobilePictureURL: String {
-        var mobilePictureURL = "https://www.warmshowers.org/files/imagecache/map_infoWindow/files/default_picture.jpg"
-        
-        if picture != "" {
-            var urlParts = split(picture) { $0 == "/" }
-            let mobilePictureURL = "https://www.warmshowers.org/" + urlParts.removeAtIndex(0) + "/imagecache/mobile_photo_4x3/" + "/".join(urlParts)
-            return mobilePictureURL
-        }
-        
-        return mobilePictureURL;
-    }
     
     dynamic var languagesspoken = ""
     
@@ -62,6 +41,9 @@ public class User: Object
     
     dynamic var isFavorite = false
     
+    
+    // MARK: Realm Properties
+    
     override public static func primaryKey() -> String?
     {
         return "uid"
@@ -69,24 +51,6 @@ public class User: Object
     
     override public static func indexedProperties() -> [String]
     {
-        return ["name", "email"]
-    }
-    
-    override public static func ignoredProperties() -> [String] {
-        return ["thumbnailURL", "mobilePictureURL"]
-    }
-    
-    static func thumbnailURLFromId(id: Int) -> NSURL
-    {
-        let baseUrl = "https://www.warmshowers.org/files/imagecache/profile_picture/pictures/picture-%d.jpg"
-        let url = NSURL(string: NSString(format: baseUrl, id) as String)
-        return url!;
-    }
-    
-    static func mobileURLFromId(id: Int) -> NSURL
-    {
-        let baseUrl = "https://www.warmshowers.org/files/imagecache/mobile_photo_4x3/pictures/picture-%d.jpg"
-        let url = NSURL(string: NSString(format: baseUrl, id) as String)
-        return url!;
+        return ["name", "fullname", "city", "password"]
     }
 }

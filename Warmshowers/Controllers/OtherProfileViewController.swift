@@ -29,6 +29,7 @@ class OtherProfileViewController: UIViewController
     
     let realm = Realm()
     let userRepository = UserRepository()
+    let feedbackRepository = FeedbackRepository()
     
     let isFavoriteImage = UIImage(named: "nav-star-full")
     let isNoFavoriteImage = UIImage(named: "nav-star-empty")
@@ -90,6 +91,10 @@ class OtherProfileViewController: UIViewController
         tableView.reloadData()
         
         API.sharedInstance.getFeedbackForUser(user!.uid).onSuccess() { userFeedback in
+//            for feedback in userFeedback {
+//                self.feedbackRepository.save(feedback)
+//            }
+            
             self.tableData.append(userFeedback)
             self.tableView.reloadData()
         }
@@ -170,10 +175,11 @@ extension OtherProfileViewController: UITableViewDataSource
             cell?.feedbackLabel.attributedText = Utils.htmlToAttributedText(feedback.body)
             cell?.createdOnLabel.text = "\(feedback.rating) feedback written in \(Constants.Months[feedback.month]!) \(feedback.year)"
             
-            cell?.userPictureImageView.hnk_setImageFromURL(User.thumbnailURLFromId(feedback.fromUser.uid), placeholder: Storyboard.DefaultUserThumbnail)
-            cell?.userPictureImageView.layer.cornerRadius = 8
-            cell?.userPictureImageView.clipsToBounds = true
-            cell?.userPictureImageView.layer.borderWidth = 1.0;
+            UserPictureCache.sharedInstance.thumbnailById(feedback.fromUser.uid).onSuccess { image in
+                cell?.userPictureImageView.image = image
+            }.onFailure { error in
+                cell?.userPictureImageView.image = UserPictureCache.defaultThumbnail
+            }
 
             return cell!
         }

@@ -69,13 +69,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
         let message = messages[indexPath.row]
         let authors = message.participants
         
-        if authors != nil && authors!.count > 0 {
-            cell?.userPictureImageView.hnk_setImageFromURL(
-                User.thumbnailURLFromId(authors!.first!.uid),
-                placeholder: Storyboard.DefaultUserThumbnail,
-                format: iconFormat
-            )
-            
+        if authors != nil && authors!.count > 0 {            
             UserPictureCache.sharedInstance.thumbnailById(authors!.first!.uid).onSuccess { image in
                 cell?.userPictureImageView.image = image
             }.onFailure { error in

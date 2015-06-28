@@ -44,7 +44,7 @@ class UserRepository
     func findByActiveUser() -> User?
     {
         let result = Realm().objects(User).filter("password != ''")
-        return result.first!
+        return result.first
     }
     
     func save(user: User)

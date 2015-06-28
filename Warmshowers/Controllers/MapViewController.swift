@@ -44,7 +44,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
         locationManager.startUpdatingLocation()
         
         if let user = userRepository.findByActiveUser() {
-            if IJReachability.isConnectedToNetwork() {
+            if IJReachability.isConnectedToNetwork() && API.sharedInstance.loggedInUser == nil {
                 API.sharedInstance.login(user.name, password: user.password).onFailure() { error in
                     self.performSegueWithIdentifier(Storyboard.ShowLogin, sender: nil)
                 }

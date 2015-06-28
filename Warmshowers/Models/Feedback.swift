@@ -6,24 +6,30 @@
 //  Copyright (c) 2015 Michael Haeuslmann. All rights reserved.
 //
 
-class Feedback
-{  
-    var toUser: User
-    var fromUser = User()
+import RealmSwift
+
+class Feedback: Object
+{
+    dynamic var id = 0
+    dynamic var toUser = User()
+    dynamic var fromUser = User()
     
-    var body: String
+    dynamic var body = ""
     
-    var year: Int
-    var month: Int
+    dynamic var year = 0
+    dynamic var month = 0
     
-    var rating: String
-    var type: String
+    dynamic var rating = ""
+    dynamic var type = ""
     
-    let FixedRatingValues: Set<String> = ["Positive", "Neutral", "Negative"]
-    let FixedTypeValues: Set<String> = ["Guest", "Host", "Other", "Met Traveling"]
+    private let FixedRatingValues: Set<String> = ["Positive", "Neutral", "Negative"]
+    private let FixedTypeValues: Set<String> = ["Guest", "Host", "Other", "Met Traveling"]
     
-    init(toUser: User, body: String, year: Int, month: Int, rating: String, type: String)
+    convenience init(id: Int, toUser: User, body: String, year: Int, month: Int, rating: String, type: String)
     {
+        self.init()
+        
+        self.id = id
         self.toUser = toUser
         self.body = body
         
@@ -32,5 +38,21 @@ class Feedback
         
         self.rating = FixedRatingValues.contains(rating) ? rating : "Positive"
         self.type = FixedTypeValues.contains(type) ? type : "Other"
+    }
+    
+    // MARK: Realm Properties
+    
+    override static func primaryKey() -> String?
+    {
+        return "id"
+    }
+    
+    override static func indexedProperties() -> [String]
+    {
+        return ["toUser"]
+    }
+    
+    override static func ignoredProperties() -> [String] {
+        return ["FixedRatingValues", "FixedTypeValues"]
     }
 }

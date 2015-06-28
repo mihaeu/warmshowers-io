@@ -46,6 +46,7 @@ class NewFeedbackViewController: UIViewController
 //        )
 
         let feedback = Feedback(
+            id: Int(arc4random_uniform(9999)),
             toUser: toUser!,
             body: "This is a really long feedback message and we are very proud of our feedback writing skills and so forth and so forth.",
             year: 2015,
@@ -54,6 +55,7 @@ class NewFeedbackViewController: UIViewController
             type: "Guest"
         )
         
+        FeedbackRepository().save(feedback)
         API.sharedInstance.createFeedbackForUser(feedback).onSuccess() { success in
             self.navigationController?.popToRootViewControllerAnimated(true)
         }.onFailure() { error in

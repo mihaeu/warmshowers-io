@@ -20,6 +20,7 @@ class FeedbackSerialization
         (year, month) = self.extractYearMonthFromTimestamp(json["field_hosting_date_value"].doubleValue)
                 
         var feedback = Feedback(
+            id: json["nid"].intValue,
             toUser: User(uid: json["uid_1"].intValue, name: json["name_1"].stringValue),
             body: json["body"].stringValue,
             year: year,
