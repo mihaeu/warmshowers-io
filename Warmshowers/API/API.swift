@@ -275,7 +275,7 @@ public class API
                     log.error(error.description)
                     promise.failure(error)
                 } else {
-                    log.info("Created feedback for \(feedback.userForFeedback) at node (Status: \(response?.statusCode))")
+                    log.info("Created feedback for \(feedback.toUser.name) at node (Status: \(response?.statusCode))")
                     promise.success(true)
                 }
         }

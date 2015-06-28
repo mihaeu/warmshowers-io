@@ -10,7 +10,7 @@ import UIKit
 
 class NewFeedbackViewController: UIViewController
 {
-    var user: User?
+    var toUser: User?
     
     @IBOutlet weak var dateMetPicker: UIDatePicker!
     @IBOutlet weak var typeTextField: UITextField!
@@ -32,19 +32,26 @@ class NewFeedbackViewController: UIViewController
         let year = components.year
         let month = components.month
         
-        let type = typeTextField.text
-        let rating = typeTextField.text
         let body = feedbackTextField.text
+        let rating = ratingTextField.text
+        let type = typeTextField.text
         
+//        let feedback = Feedback(
+//            toUser: user!,
+//            body: body,
+//            year: year,
+//            month: month,
+//            rating: rating,
+//            type: type
+//        )
+
         let feedback = Feedback(
-            userIdForFeedback: user!.uid,
-//            userForFeedback: user!.name,
-            userForFeedback: "rfay-testuser",
-            body: body,
-            year: year,
-            month: month,
-            rating: rating,
-            type: type
+            toUser: toUser!,
+            body: "This is a really long feedback message and we are very proud of our feedback writing skills and so forth and so forth.",
+            year: 2015,
+            month: 6,
+            rating: "Positive",
+            type: "Guest"
         )
         
         API.sharedInstance.createFeedbackForUser(feedback).onSuccess() { success in

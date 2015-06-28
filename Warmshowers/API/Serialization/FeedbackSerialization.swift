@@ -8,32 +8,34 @@
 
 import SwiftyJSON
 
-public class FeedbackSerialization
+class FeedbackSerialization
 {
-    public static func deserializeJSON(json: JSON) -> Feedback
+    let FixedRatingValues: Set<String> = ["Positive", "Neutral", "Negative"]
+    let FixedTypeValues: Set<String> = ["Guest", "Host", "Met Traveling", "Other"]
+    
+    static func deserializeJSON(json: JSON) -> Feedback
     {
         var year = 0
         var month = 0
         (year, month) = self.extractYearMonthFromTimestamp(json["field_hosting_date_value"].doubleValue)
-        
+                
         var feedback = Feedback(
-            userIdForFeedback: json["uid_1"].intValue,
-            userForFeedback: json["name_1"].stringValue,
+            toUser: User(uid: json["uid_1"].intValue, name: json["name_1"].stringValue),
             body: json["body"].stringValue,
             year: year,
             month: month,
             rating: json["field_rating_value"].stringValue,
             type: json["field_guest_or_host_value"].stringValue
         )
-
-        feedback.fromUserId = json["uid"].intValue
-        feedback.fromUserName = json["name"].stringValue
-        feedback.fromFullName = json["fullname"].stringValue
+        
+        var fromUser = User(uid: json["uid"].intValue, name: json["name"].stringValue)
+        fromUser.fullname = json["fullname"].stringValue
+        feedback.fromUser = fromUser
         
         return feedback
     }
     
-    public static func extractYearMonthFromTimestamp(timestamp: Double) -> (Int,Int)
+    static func extractYearMonthFromTimestamp(timestamp: Double) -> (Int,Int)
     {
         let date = NSDate(timeIntervalSince1970: timestamp)
         let calendar = NSCalendar.currentCalendar()

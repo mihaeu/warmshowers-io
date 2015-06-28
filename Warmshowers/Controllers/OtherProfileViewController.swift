@@ -124,7 +124,7 @@ class OtherProfileViewController: UIViewController
     {
         if segue.identifier == Storyboard.ShowNewFeedbackSegue {
             if let newFeedbackViewController = segue.destinationViewController as? NewFeedbackViewController {
-                newFeedbackViewController.user = user
+                newFeedbackViewController.toUser = user
             }
         } else if segue.identifier == Storyboard.ShowNewMessageSegue {
             if let newMessageViewController = segue.destinationViewController as? NewMessageViewController {
@@ -166,11 +166,11 @@ extension OtherProfileViewController: UITableViewDataSource
             }
             
             let feedback = tableData[indexPath.section][indexPath.row] as! Feedback
-            cell?.userLabel.text = "\(feedback.fromFullName)"
+            cell?.userLabel.text = "\(feedback.fromUser.fullname)"
             cell?.feedbackLabel.attributedText = Utils.htmlToAttributedText(feedback.body)
             cell?.createdOnLabel.text = "\(feedback.rating) feedback written in \(Constants.Months[feedback.month]!) \(feedback.year)"
             
-            cell?.userPictureImageView.hnk_setImageFromURL(User.thumbnailURLFromId(feedback.fromUserId), placeholder: Storyboard.DefaultUserThumbnail)
+            cell?.userPictureImageView.hnk_setImageFromURL(User.thumbnailURLFromId(feedback.fromUser.uid), placeholder: Storyboard.DefaultUserThumbnail)
             cell?.userPictureImageView.layer.cornerRadius = 8
             cell?.userPictureImageView.clipsToBounds = true
             cell?.userPictureImageView.layer.borderWidth = 1.0;

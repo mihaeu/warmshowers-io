@@ -150,13 +150,13 @@ enum Router: URLRequestConvertible
             case .CreateFeedback(let feedback):
                 return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: [
                     "node[type]": "trust_referral",
-                    "node[field_member_i_trust][0][uid][uid]": feedback.userForFeedback,
+                    "node[field_member_i_trust][0][uid][uid]": feedback.toUser.name,
                     "node[body]": feedback.body,
                     "node[field_guest_or_host][value]": feedback.type,
                     "node[field_rating][value]": feedback.rating,
                     "node[field_hosting_date][0][value][year]": feedback.year,
                     "node[field_hosting_date][0][value][month]": feedback.month
-                    ]).0
+                ]).0
             
             // Message
             
