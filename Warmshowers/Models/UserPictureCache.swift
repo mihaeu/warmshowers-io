@@ -30,13 +30,13 @@ class UserPictureCache
     
     static var defaultThumbnail: UIImage {
         get {
-            let resizedImage = Toucan.Resize.resizeImage(Storyboard.DefaultUserThumbnail!, size: CGSize(width: 50, height: 50))
+            let resizedImage = Toucan.Resize.resizeImage(Storyboard.DefaultUserThumbnail!, size: CGSize(width: 50, height: 50), fitMode: .Crop)
             return Toucan.Mask.maskImageWithRoundedRect(resizedImage, cornerRadius: 8, borderWidth: 1, borderColor: UIColor(rgba: Storyboard.PrimaryTextColor))
         }
     }
     static var defaultPicture: UIImage {
         get {
-            let resizedImage = Toucan.Resize.resizeImage(Storyboard.DefaultUserPicture!, size: CGSize(width: 200, height: 200))
+            let resizedImage = Toucan.Resize.resizeImage(Storyboard.DefaultUserPicture!, size: CGSize(width: 200, height: 200), fitMode: .Crop)
             return Toucan.Mask.maskImageWithRoundedRect(resizedImage, cornerRadius: 8, borderWidth: 1, borderColor: UIColor(rgba: Storyboard.PrimaryTextColor))
         }
     }
