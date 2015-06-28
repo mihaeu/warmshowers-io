@@ -30,6 +30,7 @@
 		848BC7AF1AFBD7FD00974467 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 848BC7AD1AFBD7FD00974467 /* Main.storyboard */; };
 		848BC7B11AFBD7FD00974467 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 848BC7B01AFBD7FD00974467 /* Images.xcassets */; };
 		848BC7B41AFBD7FD00974467 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 848BC7B21AFBD7FD00974467 /* LaunchScreen.xib */; };
+		848F850E1B3FEDCF006A5F4B /* UserPictureCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848F850D1B3FEDCF006A5F4B /* UserPictureCache.swift */; };
 		84A8D96A1B14791A00E54581 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A8D9691B14791A00E54581 /* Router.swift */; };
 		84A8D96C1B14792D00E54581 /* UserAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A8D96B1B14792D00E54581 /* UserAnnotation.swift */; };
 		84B0C6A41B3C095500497DE0 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B0C6A31B3C095500497DE0 /* UserRepository.swift */; };
@@ -88,6 +89,7 @@
 		848BC7B31AFBD7FD00974467 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		848BC7B91AFBD7FD00974467 /* WarmshowersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WarmshowersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		848BC7BE1AFBD7FD00974467 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		848F850D1B3FEDCF006A5F4B /* UserPictureCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserPictureCache.swift; path = Models/UserPictureCache.swift; sourceTree = "<group>"; };
 		84A8D9691B14791A00E54581 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Router.swift; path = API/Router.swift; sourceTree = "<group>"; };
 		84A8D96B1B14792D00E54581 /* UserAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserAnnotation.swift; path = Views/UserAnnotation.swift; sourceTree = "<group>"; };
 		84B0C6A31B3C095500497DE0 /* UserRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserRepository.swift; path = Models/UserRepository.swift; sourceTree = "<group>"; };
@@ -262,6 +264,7 @@
 				84CFCD6F1B0D2B0700647959 /* MessageThread.swift */,
 				846D2C8E1B34227D009FADEF /* User.swift */,
 				84B0C6A31B3C095500497DE0 /* UserRepository.swift */,
+				848F850D1B3FEDCF006A5F4B /* UserPictureCache.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -499,6 +502,7 @@
 				84CFCD801B0D38D000647959 /* MessageThreadViewController.swift in Sources */,
 				84338C8A1B3D95C6003C0411 /* MessageSerialization.swift in Sources */,
 				84A8D96C1B14792D00E54581 /* UserAnnotation.swift in Sources */,
+				848F850E1B3FEDCF006A5F4B /* UserPictureCache.swift in Sources */,
 				84338C8B1B3D95C6003C0411 /* MessageThreadSerialization.swift in Sources */,
 				848BC7A71AFBD7FD00974467 /* AppDelegate.swift in Sources */,
 				84CFCD7C1B0D2E1700647959 /* MessagesViewController.swift in Sources */,

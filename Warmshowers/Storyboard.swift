@@ -30,7 +30,7 @@ struct Storyboard
     static let UserCellIdentifier = "User Cell"
     
     // UI
-    static let LeftCalloutFrame = CGRect(x: 0, y: 0, width: 59, height: 59)
+    static let LeftCalloutFrame = CGRect(x: 0, y: 0, width: 50, height: 50)
     
     // Colors
     static let DarkPrimaryColor = "#1976D2"

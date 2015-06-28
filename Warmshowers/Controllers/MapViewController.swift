@@ -168,10 +168,11 @@ extension MapViewController: MKMapViewDelegate
         
         if let userAnnotation = annotation as? UserAnnotation {
             var leftCalloutFrame = UIImageView(frame: Storyboard.LeftCalloutFrame)
-            let thumbnailURL = NSURL(string: userAnnotation.user!.thumbnailURL)
             
-            leftCalloutFrame.hnk_setImageFromURL(thumbnailURL!, placeholder: UIImage(named: "tab-profile"))
-            view.leftCalloutAccessoryView = leftCalloutFrame
+            UserPictureCache.sharedInstance.thumbnailById(userAnnotation.user!.uid).onSuccess { image in
+                leftCalloutFrame.image = image
+                view.leftCalloutAccessoryView = leftCalloutFrame
+            }
         }
 
         view.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as! UIButton

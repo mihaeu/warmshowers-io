@@ -24,12 +24,6 @@
 #define COCOAPODS_VERSION_MINOR_BrightFutures 0
 #define COCOAPODS_VERSION_PATCH_BrightFutures 0
 
-// Cartography
-#define COCOAPODS_POD_AVAILABLE_Cartography
-#define COCOAPODS_VERSION_MAJOR_Cartography 0
-#define COCOAPODS_VERSION_MINOR_Cartography 5
-#define COCOAPODS_VERSION_PATCH_Cartography 0
-
 // HanekeSwift
 #define COCOAPODS_POD_AVAILABLE_HanekeSwift
 #define COCOAPODS_VERSION_MAJOR_HanekeSwift 0
@@ -71,6 +65,12 @@
 #define COCOAPODS_VERSION_MAJOR_SwiftyJSON 2
 #define COCOAPODS_VERSION_MINOR_SwiftyJSON 2
 #define COCOAPODS_VERSION_PATCH_SwiftyJSON 0
+
+// Toucan
+#define COCOAPODS_POD_AVAILABLE_Toucan
+#define COCOAPODS_VERSION_MAJOR_Toucan 0
+#define COCOAPODS_VERSION_MINOR_Toucan 2
+#define COCOAPODS_VERSION_PATCH_Toucan 0
 
 // XCGLogger
 #define COCOAPODS_POD_AVAILABLE_XCGLogger
