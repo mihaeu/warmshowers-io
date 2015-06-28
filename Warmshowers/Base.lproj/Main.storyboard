@@ -713,6 +713,7 @@
                         <outlet property="mapView" destination="Edw-4D-QwA" id="oA5-gu-an0"/>
                         <segue destination="OvG-RX-cPr" kind="presentation" identifier="Show Other Profile" id="uyn-a3-iaD"/>
                         <segue destination="obc-7N-gOO" kind="show" identifier="Show Favorites" id="mCs-oj-EZd"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="Show Login" id="kdJ-Ee-EuN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gIP-jH-Aw2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -922,6 +923,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="FzF-ul-0ap"/>
+        <segue reference="kdJ-Ee-EuN"/>
         <segue reference="mCs-oj-EZd"/>
         <segue reference="uyn-a3-iaD"/>
         <segue reference="ggf-jH-iKU"/>
