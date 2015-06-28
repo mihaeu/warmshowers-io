@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Cartography
 import RealmSwift
 
 class OtherProfileViewController: UIViewController
