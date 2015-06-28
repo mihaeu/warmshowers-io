@@ -21,7 +21,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
     }
     
     private var users = [Int:User]()
-    private var userAnnotations = [MKAnnotation]()
+    private var userAnnotations = [Int:MKAnnotation]()
     
     private var didAdjustInitialZoomLevel = false
     private var myLocation: CLLocationCoordinate2D?
@@ -40,12 +40,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
             locationManager.requestWhenInUseAuthorization()
         }
 
-//      TODO: Do I need this for my app?
-//
-//      We aren't updating our location too many times, because we're not navigating,
-//      so maybe just showsUserLocation is enough? Can I get my own location any other way?
-//      I only want to reload the user info if I move far away from where I started.
-//
         locationManager.pausesLocationUpdatesAutomatically = true
         locationManager.startUpdatingLocation()
         
@@ -60,34 +54,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
                 }
                 self.performSegueWithIdentifier(Storyboard.ShowFavoriteSegue, sender: nil)
             }
-            
-            
         } else {
             performSegueWithIdentifier(Storyboard.ShowLogin, sender: nil)
         }
-    }
-    
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!)
-    {
-        if let firstLocation = locations.first as? CLLocation {
-            myLocation = firstLocation.coordinate
-            locationManager.stopUpdatingLocation()
-        }
-    }
-
-    func loadUserAnnotations(users: [Int:User])
-    {
-        // todo
-        mapView.removeAnnotations(userAnnotations)
-        userAnnotations.removeAll()
-        
-        for (id, user) in users {
-            if user.longitude != 0.0 {
-                userAnnotations.append(UserAnnotation(user: user))
-            }
-        }
-        
-        mapView.addAnnotations(userAnnotations)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
@@ -136,8 +105,39 @@ extension MapViewController: MKMapViewDelegate
             centerlon: centerLongitude,
             limit: limit
         ).onSuccess() { users in
-            self.users = users
-            self.loadUserAnnotations(users)
+            // remove users and their annotations when they are off-screen
+            for (userId, user) in self.users {
+                let location = CLLocationCoordinate2D(latitude: user.latitude, longitude: user.longitude)
+                let center   = mapView.region.center
+                var northWestCorner = CLLocationCoordinate2D(
+                    latitude: center.latitude  - (region.span.latitudeDelta  / 2.0),
+                    longitude: center.longitude - (region.span.longitudeDelta / 2.0)
+                )
+                var southEastCorner = CLLocationCoordinate2D(
+                    latitude: center.latitude  + (region.span.latitudeDelta  / 2.0),
+                    longitude: center.longitude + (region.span.longitudeDelta / 2.0)
+                )
+                
+                if location.latitude  >= northWestCorner.latitude
+                    && location.latitude  <= southEastCorner.latitude
+                    && location.longitude >= northWestCorner.longitude
+                    && location.longitude <= southEastCorner.longitude
+                {
+                
+                } else {
+                    mapView.removeAnnotation(self.userAnnotations[userId])
+                    self.users.removeValueForKey(userId)
+                }
+            }
+            // add only new users as annotations
+            for (userId, user) in users {
+                if self.users[userId] == nil {
+                    let userAnnotation = UserAnnotation(user: user)
+                    self.userAnnotations[userId] = userAnnotation
+                    self.users[userId] = user
+                    mapView.addAnnotation(userAnnotation)
+                }
+            }
         }
     }
     
@@ -188,6 +188,17 @@ extension MapViewController: MKMapViewDelegate
             if user.name == view.annotation.title {
                 performSegueWithIdentifier(Storyboard.ShowOtherProfileSegue, sender: user)
             }
+        }
+    }
+}
+
+extension MapViewController: CLLocationManagerDelegate
+{
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!)
+    {
+        if let firstLocation = locations.first as? CLLocation {
+            myLocation = firstLocation.coordinate
+            locationManager.stopUpdatingLocation()
         }
     }
 }
