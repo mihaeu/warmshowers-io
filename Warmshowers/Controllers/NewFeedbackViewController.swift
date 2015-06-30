@@ -12,11 +12,6 @@ class NewFeedbackViewController: UIViewController
 {
     var toUser: User?
     
-    @IBOutlet weak var dateMetPicker: UIDatePicker!
-    @IBOutlet weak var typeTextField: UITextField!
-    @IBOutlet weak var ratingTextField: UITextField!
-    @IBOutlet weak var feedbackTextField: UITextField!
-    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -26,25 +21,6 @@ class NewFeedbackViewController: UIViewController
     
     func createFeedback()
     {
-        let date = dateMetPicker.date
-        let calendar = NSCalendar.currentCalendar()
-        let components = calendar.components(NSCalendarUnit.CalendarUnitMonth | NSCalendarUnit.CalendarUnitYear , fromDate: date)
-        let year = components.year
-        let month = components.month
-        
-        let body = feedbackTextField.text
-        let rating = ratingTextField.text
-        let type = typeTextField.text
-        
-//        let feedback = Feedback(
-//            toUser: user!,
-//            body: body,
-//            year: year,
-//            month: month,
-//            rating: rating,
-//            type: type
-//        )
-
         let feedback = Feedback(
             id: Int(arc4random_uniform(9999)),
             toUser: toUser!,
