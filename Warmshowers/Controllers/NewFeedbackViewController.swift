@@ -8,15 +8,32 @@
 
 import UIKit
 
-class NewFeedbackViewController: UIViewController
+class NewFeedbackViewController: UITableViewController
 {
     var toUser: User?
+    
+    @IBOutlet weak var datePicker: UIDatePicker!
+    
+    private class Sections
+    {
+        static let Experience = 0
+        static let Met = 1
+        static let Date = 2
+        static let Feedback = 3
+    }
+    
+    private var experience = "Positive"
+    private var met = "Other"
+    private var date = NSDate()
+    private var feedback = ""
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Save, target: self, action: "createFeedback")
+        
+//        datePicker.hidden = true
     }
     
     func createFeedback()
@@ -46,5 +63,30 @@ class NewFeedbackViewController: UIViewController
             
             self.presentViewController(alertController, animated: true, completion: nil)
         }
+    }
+}
+
+extension NewFeedbackViewController: UITableViewDelegate
+{
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
+        if indexPath.section == Sections.Experience || indexPath.section == Sections.Met {
+            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+            uncheckAllCellsInSection(indexPath.section)
+            checkCellForIndexPath(indexPath)
+        }
+    }
+
+    func uncheckAllCellsInSection(sectionId: Int)
+    {
+        let numberOfRowsInSection = tableView.numberOfRowsInSection(sectionId)
+        for var index = 0; index < numberOfRowsInSection; ++index {
+            tableView.cellForRowAtIndexPath(NSIndexPath(forRow: index, inSection: sectionId))?.accessoryType = UITableViewCellAccessoryType.None
+        }
+    }
+    
+    func checkCellForIndexPath(indexPath: NSIndexPath)
+    {
+        tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.Checkmark
     }
 }

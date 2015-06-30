@@ -32,6 +32,7 @@
 		848BC7B41AFBD7FD00974467 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 848BC7B21AFBD7FD00974467 /* LaunchScreen.xib */; };
 		848F850E1B3FEDCF006A5F4B /* UserPictureCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848F850D1B3FEDCF006A5F4B /* UserPictureCache.swift */; };
 		848F85101B4080FC006A5F4B /* FeedbackRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848F850F1B4080FB006A5F4B /* FeedbackRepository.swift */; };
+		84977BF71B43192300433FF6 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84977BF61B43192300433FF6 /* UIColor.swift */; };
 		84A8D96A1B14791A00E54581 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A8D9691B14791A00E54581 /* Router.swift */; };
 		84A8D96C1B14792D00E54581 /* UserAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A8D96B1B14792D00E54581 /* UserAnnotation.swift */; };
 		84B0C6A41B3C095500497DE0 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B0C6A31B3C095500497DE0 /* UserRepository.swift */; };
@@ -92,6 +93,7 @@
 		848BC7BE1AFBD7FD00974467 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		848F850D1B3FEDCF006A5F4B /* UserPictureCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserPictureCache.swift; path = Models/UserPictureCache.swift; sourceTree = "<group>"; };
 		848F850F1B4080FB006A5F4B /* FeedbackRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedbackRepository.swift; path = Models/FeedbackRepository.swift; sourceTree = "<group>"; };
+		84977BF61B43192300433FF6 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIColor.swift; path = Extensions/UIColor.swift; sourceTree = "<group>"; };
 		84A8D9691B14791A00E54581 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Router.swift; path = API/Router.swift; sourceTree = "<group>"; };
 		84A8D96B1B14792D00E54581 /* UserAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserAnnotation.swift; path = Views/UserAnnotation.swift; sourceTree = "<group>"; };
 		84B0C6A31B3C095500497DE0 /* UserRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserRepository.swift; path = Models/UserRepository.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				84A8D9661B14785100E54581 /* Views */,
 				84CFCD651B0D011200647959 /* Controllers */,
 				846D6BF51AFD635E00144D4F /* API */,
+				84977BF51B4318F600433FF6 /* Extensions */,
 				848BC7A41AFBD7FD00974467 /* Supporting Files */,
 				84338C801B3D5030003C0411 /* MiscConstants.swift */,
 				84338C8D1B3D96BA003C0411 /* Utils.swift */,
@@ -226,6 +229,14 @@
 				848BC7BE1AFBD7FD00974467 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		84977BF51B4318F600433FF6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				84977BF61B43192300433FF6 /* UIColor.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		84A8D9661B14785100E54581 /* Views */ = {
@@ -500,6 +511,7 @@
 				848BC7AA1AFBD7FD00974467 /* Warmshowers.xcdatamodeld in Sources */,
 				84B491D31B3ABD2F00BC4445 /* MessageRepository.swift in Sources */,
 				84338C811B3D5030003C0411 /* MiscConstants.swift in Sources */,
+				84977BF71B43192300433FF6 /* UIColor.swift in Sources */,
 				84CFCD7E1B0D386600647959 /* NewMessageViewController.swift in Sources */,
 				847E78701B39A4DB0094C329 /* MessageCell.swift in Sources */,
 				84CFCD801B0D38D000647959 /* MessageThreadViewController.swift in Sources */,

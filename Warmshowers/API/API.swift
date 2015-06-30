@@ -17,8 +17,6 @@ public class API
     var manager: Manager
     
     static let sharedInstance = API()
-
-    public var loggedInUser: User?
     
     struct Status {
         static let AlreadyLoggedIn = 406
@@ -61,18 +59,14 @@ public class API
                     log.error(error?.description)
                     promise.failure(error!)
                 } else {
-                    if response?.statusCode == Status.LoginOk {
+                    if response?.statusCode == Status.LoginOk || response?.statusCode == Status.AlreadyLoggedIn {
                         log.info("\(username) logged in (Status: \(response?.statusCode))")
                         var json = JSON(json!)
                         
                         let user = UserSerialization.deserializeJSON(json["user"])
                         user.password = password
-                        self.loggedInUser = user
                         
                         promise.success(user)
-                    } else if response?.statusCode == Status.AlreadyLoggedIn {
-                        log.info("\(username) already logged (Status: \(response?.statusCode))")
-                        promise.failure(NSError(domain: "User already logged in", code: Status.AlreadyLoggedIn, userInfo: nil))
                     } else {
                         log.info("\(username) bad credentials(Status: \(response?.statusCode))")
                         promise.failure(NSError(domain: "User already logged in", code: Status.AlreadyLoggedIn, userInfo: nil))
@@ -88,20 +82,21 @@ public class API
     
         https://github.com/warmshowers/Warmshowers.org/wiki/Warmshowers-RESTful-Services-for-Mobile-Apps#wiki-logout
     
+        :param: user User
+    
         :returns: Future<Bool>
     */
-    public func logout() -> Future<Bool, NSError>
+    public func logout(user: User) -> Future<Bool, NSError>
     {
         let promise = Promise<Bool, NSError>()
         
-        manager.request(Router.Logout(username: loggedInUser!.name, password: loggedInUser!.password))
+        manager.request(Router.Logout(username: user.name, password: user.password))
             .responseJSON { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
                     promise.failure(error!)
                 } else {
-                    log.info("Logged out \(self.loggedInUser!.name) (Status: \(response?.statusCode))")
-                    self.loggedInUser = nil
+                    log.info("Logged out \(user.name) (Status: \(response?.statusCode))")
                     promise.success(true)
                 }
         }

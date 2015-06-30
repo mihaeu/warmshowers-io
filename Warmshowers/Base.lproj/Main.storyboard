@@ -77,7 +77,7 @@
                     <connections>
                         <outlet property="passwordTextField" destination="fHU-NW-npl" id="QsG-sT-pxf"/>
                         <outlet property="usernameTextField" destination="YFh-tL-uhM" id="WvF-VR-b8R"/>
-                        <segue destination="sTG-Wc-qTw" kind="show" identifier="Show Start" id="FzF-ul-0ap"/>
+                        <segue destination="hwh-xV-rX8" kind="show" identifier="Show Start" id="dPK-Yx-hlF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -314,10 +314,10 @@
             </objects>
             <point key="canvasLocation" x="3812" y="326"/>
         </scene>
-        <!--Table View Controller-->
+        <!--New Feedback View Controller-->
         <scene sceneID="ckL-67-c4j">
             <objects>
-                <tableViewController id="0Dq-HC-bz3" sceneMemberID="viewController">
+                <tableViewController id="0Dq-HC-bz3" customClass="NewFeedbackViewController" customModule="Warmshowers" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="zZ7-sD-bdl">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -325,7 +325,7 @@
                         <sections>
                             <tableViewSection headerTitle="How was your experience?" id="MRg-qX-vbr">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="X0f-Xs-sdE" style="IBUITableViewCellStyleDefault" id="mn3-1z-HbE">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" textLabel="X0f-Xs-sdE" style="IBUITableViewCellStyleDefault" id="mn3-1z-HbE">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mn3-1z-HbE" id="DgE-Wz-R9h">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -413,7 +413,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="P5h-2v-RIZ">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" id="P5h-2v-RIZ">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="P5h-2v-RIZ" id="0fe-j2-LPW">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -431,7 +431,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="When did you meet?" id="D7F-0g-ziP">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="A13-pV-okj">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="A13-pV-okj">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="A13-pV-okj" id="WHh-Ea-ALS">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -445,13 +445,13 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="150" id="byk-nh-ZaV">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="177" id="byk-nh-ZaV">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="byk-nh-ZaV" id="KCr-pC-qkT">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Hha-4M-soE">
-                                                    <rect key="frame" x="8" y="-7" width="584" height="162"/>
+                                                    <rect key="frame" x="8" y="7" width="584" height="162"/>
                                                     <date key="date" timeIntervalSinceReferenceDate="457371582.51875198">
                                                         <!--2015-06-30 15:39:42 +0000-->
                                                     </date>
@@ -500,6 +500,9 @@
                             <outlet property="delegate" destination="0Dq-HC-bz3" id="VLV-dB-kEW"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="datePicker" destination="Hha-4M-soE" id="22p-SS-n8q"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GoR-nF-sP7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1045,10 +1048,9 @@
         <image name="tab-profile" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="FzF-ul-0ap"/>
         <segue reference="kdJ-Ee-EuN"/>
-        <segue reference="mCs-oj-EZd"/>
         <segue reference="uyn-a3-iaD"/>
+        <segue reference="mCs-oj-EZd"/>
         <segue reference="ggf-jH-iKU"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -19,15 +19,16 @@ class MyProfileViewController: UIViewController
     
     private let api = API.sharedInstance
     private let userRepository = UserRepository()
+    private var user: User?
     
     override func viewDidLoad()
     {
-        let user = api.loggedInUser!
-        userLabel.text =  user.name
-        languagesSpokenLabel.text = user.languagesspoken
-        descriptionLabel.attributedText = Utils.htmlToAttributedText(user.comments)
+        user = userRepository.findByActiveUser()
+        userLabel.text =  user!.name
+        languagesSpokenLabel.text = user!.languagesspoken
+        descriptionLabel.attributedText = Utils.htmlToAttributedText(user!.comments)
         
-        UserPictureCache.sharedInstance.pictureById(user.uid).onSuccess { image in
+        UserPictureCache.sharedInstance.pictureById(user!.uid).onSuccess { image in
             self.userPictureImageView.image = image
         }.onFailure { error in
                 self.userPictureImageView.image = UserPictureCache.defaultPicture
@@ -36,8 +37,8 @@ class MyProfileViewController: UIViewController
 
     @IBAction func logout(sender: AnyObject)
     {
-        userRepository.update(api.loggedInUser!, key: "password", value: "")
-        api.logout().onSuccess() { success in
+        userRepository.update(user!, key: "password", value: "")
+        api.logout(user!).onSuccess() { success in
             self.performSegueWithIdentifier(Storyboard.ShowLogin, sender: nil)
         }
     }
