@@ -10,6 +10,7 @@
 		729C10AFDF1D1FFC5F3B2F7D /* Pods_Warmshowers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41CE4247DD6EEBA9135EDC97 /* Pods_Warmshowers.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		73C979E624E10C6864594746 /* Pods_WarmshowersTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23326D4A50F1BEADD824F208 /* Pods_WarmshowersTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		841E85D61B3A9CA8001DBF5A /* NewFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E85D51B3A9CA8001DBF5A /* NewFeedbackViewController.swift */; };
+		842055CF1B43CDBE00F88D0E /* NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842055CE1B43CDBE00F88D0E /* NSDate.swift */; };
 		84338C7E1B3D4A75003C0411 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84338C7D1B3D4A75003C0411 /* FavoriteCell.swift */; };
 		84338C811B3D5030003C0411 /* MiscConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84338C801B3D5030003C0411 /* MiscConstants.swift */; };
 		84338C831B3D8015003C0411 /* FeedbackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84338C821B3D8014003C0411 /* FeedbackCell.swift */; };
@@ -67,6 +68,7 @@
 		393D17F1A86431DDB0201F6E /* Pods-WarmshowersTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WarmshowersTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WarmshowersTests/Pods-WarmshowersTests.release.xcconfig"; sourceTree = "<group>"; };
 		41CE4247DD6EEBA9135EDC97 /* Pods_Warmshowers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Warmshowers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		841E85D51B3A9CA8001DBF5A /* NewFeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewFeedbackViewController.swift; path = Controllers/NewFeedbackViewController.swift; sourceTree = "<group>"; };
+		842055CE1B43CDBE00F88D0E /* NSDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSDate.swift; path = Extensions/NSDate.swift; sourceTree = "<group>"; };
 		84338C7D1B3D4A75003C0411 /* FavoriteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FavoriteCell.swift; path = Views/FavoriteCell.swift; sourceTree = "<group>"; };
 		84338C801B3D5030003C0411 /* MiscConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiscConstants.swift; sourceTree = "<group>"; };
 		84338C821B3D8014003C0411 /* FeedbackCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedbackCell.swift; path = Views/FeedbackCell.swift; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 		84977BF51B4318F600433FF6 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				842055CE1B43CDBE00F88D0E /* NSDate.swift */,
 				84977BF61B43192300433FF6 /* UIColor.swift */,
 			);
 			name = Extensions;
@@ -349,6 +352,7 @@
 				TargetAttributes = {
 					848BC7A01AFBD7FD00974467 = {
 						CreatedOnToolsVersion = 6.3;
+						DevelopmentTeam = 72P8X33Q8M;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -528,6 +532,7 @@
 				84338C8E1B3D96BA003C0411 /* Utils.swift in Sources */,
 				84338C7E1B3D4A75003C0411 /* FavoriteCell.swift in Sources */,
 				84338C831B3D8015003C0411 /* FeedbackCell.swift in Sources */,
+				842055CF1B43CDBE00F88D0E /* NSDate.swift in Sources */,
 				84DDD6721B0D56A6005A8EEE /* MyProfileViewController.swift in Sources */,
 				84CFCD781B0D2B7F00647959 /* APISecrets.swift in Sources */,
 				84CFCD671B0D017100647959 /* AuthenticationViewController.swift in Sources */,
@@ -664,11 +669,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				INFOPLIST_FILE = Warmshowers/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -679,11 +687,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				INFOPLIST_FILE = Warmshowers/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

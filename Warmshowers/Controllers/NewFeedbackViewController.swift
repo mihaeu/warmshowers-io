@@ -12,7 +12,9 @@ class NewFeedbackViewController: UITableViewController
 {
     var toUser: User?
     
+    @IBOutlet weak var feedbackTextView: UITextView!
     @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var dateLabel: UILabel!
     
     private class Sections
     {
@@ -22,9 +24,11 @@ class NewFeedbackViewController: UITableViewController
         static let Feedback = 3
     }
     
+    private let ExperienceValues = ["Positive, Neutral", "Negative"]
+    private let MetValues = ["Host", "Guest", "Met Traveling","Other"]
+    
     private var experience = "Positive"
     private var met = "Other"
-    private var date = NSDate()
     private var feedback = ""
     
     override func viewDidLoad()
@@ -33,7 +37,9 @@ class NewFeedbackViewController: UITableViewController
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Save, target: self, action: "createFeedback")
         
-//        datePicker.hidden = true
+        datePicker.addTarget(self, action: "dateChanged", forControlEvents: UIControlEvents.ValueChanged)
+        datePicker.hidden = true
+        dateLabel.text = Utils.shortDate(NSDate())
     }
     
     func createFeedback()
@@ -41,28 +47,19 @@ class NewFeedbackViewController: UITableViewController
         let feedback = Feedback(
             id: Int(arc4random_uniform(9999)),
             toUser: toUser!,
-            body: "This is a really long feedback message and we are very proud of our feedback writing skills and so forth and so forth.",
-            year: 2015,
-            month: 6,
-            rating: "Positive",
-            type: "Guest"
+            body: feedbackTextView.text,
+            date: datePicker.date,
+            rating: experience,
+            type: met
         )
-        
+
         FeedbackRepository().save(feedback)
-        API.sharedInstance.createFeedbackForUser(feedback).onSuccess() { success in
-            self.navigationController?.popToRootViewControllerAnimated(true)
-        }.onFailure() { error in
-            let alertController = UIAlertController(
-                title: "Feedback Problem",
-                message: "Couldn't create feedback.",
-                preferredStyle: UIAlertControllerStyle.Alert
-            )
-            alertController.addAction(
-                UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil)
-            )
-            
-            self.presentViewController(alertController, animated: true, completion: nil)
-        }
+        navigationController?.popToRootViewControllerAnimated(true)
+    }
+    
+    func dateChanged()
+    {
+        dateLabel.text = Utils.shortDate(datePicker.date)
     }
 }
 
@@ -70,11 +67,23 @@ extension NewFeedbackViewController: UITableViewDelegate
 {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-        if indexPath.section == Sections.Experience || indexPath.section == Sections.Met {
-            tableView.deselectRowAtIndexPath(indexPath, animated: true)
-            uncheckAllCellsInSection(indexPath.section)
-            checkCellForIndexPath(indexPath)
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        if indexPath.section == Sections.Experience {
+            updateExperience(indexPath)
+        } else if indexPath.section == Sections.Met {
+            updateMet(indexPath)
+        } else if indexPath.section == Sections.Date && indexPath.row == 0 {
+            updateDate(indexPath)
         }
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+    {
+        if datePicker.hidden && indexPath.section == Sections.Date && indexPath.row == 1 {
+            return 0
+        }
+        return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
     }
 
     func uncheckAllCellsInSection(sectionId: Int)
@@ -88,5 +97,35 @@ extension NewFeedbackViewController: UITableViewDelegate
     func checkCellForIndexPath(indexPath: NSIndexPath)
     {
         tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.Checkmark
+    }
+    
+    func updateDate(indexPath: NSIndexPath)
+    {
+        let cell = tableView.cellForRowAtIndexPath(indexPath)!
+        
+        datePicker.hidden = !datePicker.hidden
+        if datePicker.hidden {
+            cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+        } else {
+            cell.accessoryType = UITableViewCellAccessoryType.None
+        }
+        
+        dateLabel.text = Utils.shortDate(datePicker.date)
+        tableView.beginUpdates()
+        tableView.endUpdates()
+    }
+    
+    func updateExperience(indexPath: NSIndexPath)
+    {
+        uncheckAllCellsInSection(indexPath.section)
+        checkCellForIndexPath(indexPath)
+        experience = ExperienceValues[indexPath.row]
+    }
+    
+    func updateMet(indexPath: NSIndexPath)
+    {
+        uncheckAllCellsInSection(indexPath.section)
+        checkCellForIndexPath(indexPath)
+        met = MetValues[indexPath.row]
     }
 }

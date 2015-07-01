@@ -21,18 +21,21 @@ class FeedbackRepository
     func save(feedback: Feedback)
     {
         // if we already have this user in the database, get that one
-        var toUserResult = Realm().objects(User).filter("uid == '\(feedback.toUser.uid)' && uid > 0")
-        if toUserResult.count == 1 {
-            feedback.toUser = toUserResult.first!
-        }
+        var toUserResult = Realm().objects(User).filter("uid == \(feedback.toUser.uid) && uid > 0")
+        
         
         // if we already have this user in the database, get that one
-        var fromUserResult = Realm().objects(User).filter("uid == '\(feedback.fromUser.uid)' && uid > 0")
-        if fromUserResult.count == 1 {
-            feedback.fromUser = fromUserResult.first!
-        }
+        var fromUserResult = Realm().objects(User).filter("uid == \(feedback.fromUser.uid) && uid > 0")
         
         Realm().write {
+            if toUserResult.count == 1 {
+                feedback.toUser = toUserResult.first!
+            }
+            
+            if fromUserResult.count == 1 {
+                feedback.fromUser = fromUserResult.first!
+            }
+            
             Realm().add(feedback, update: true)
         }
     }

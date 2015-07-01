@@ -7,6 +7,7 @@
 //
 
 import RealmSwift
+import Foundation
 
 class Feedback: Object
 {
@@ -22,8 +23,8 @@ class Feedback: Object
     dynamic var rating = ""
     dynamic var type = ""
     
-    private let FixedRatingValues: Set<String> = ["Positive", "Neutral", "Negative"]
-    private let FixedTypeValues: Set<String> = ["Guest", "Host", "Other", "Met Traveling"]
+    private let RatingValues: Set<String> = ["Positive", "Neutral", "Negative"]
+    private let TypeValues: Set<String> = ["Guest", "Host", "Other", "Met Traveling"]
     
     convenience init(id: Int, toUser: User, body: String, year: Int, month: Int, rating: String, type: String)
     {
@@ -36,8 +37,13 @@ class Feedback: Object
         self.year = year
         self.month = month
         
-        self.rating = FixedRatingValues.contains(rating) ? rating : "Positive"
-        self.type = FixedTypeValues.contains(type) ? type : "Other"
+        self.rating = RatingValues.contains(rating) ? rating : "Positive"
+        self.type = TypeValues.contains(type) ? type : "Other"
+    }
+    
+    convenience init(id: Int, toUser: User, body: String, date: NSDate, rating: String, type: String)
+    {
+        self.init(id: id, toUser: toUser, body: body, year: date.month, month: date.month, rating: rating, type: type)
     }
     
     // MARK: Realm Properties
@@ -53,6 +59,6 @@ class Feedback: Object
     }
     
     override static func ignoredProperties() -> [String] {
-        return ["FixedRatingValues", "FixedTypeValues"]
+        return ["RatingValues", "TypeValues"]
     }
 }

@@ -30,14 +30,26 @@ class Utils
     }
     
     /**
-        E.g. 7:00 AM 12 December 2014
+        Displays date and time
     */
     static func longDateFromTimestamp(timestamp: Int) -> String
     {
-        let lastMessageDate = NSDate(timeIntervalSince1970: Double(timestamp))
+        let date = NSDate(timeIntervalSince1970: Double(timestamp))
+        return NSDateFormatter.localizedStringFromDate(
+            date,
+            dateStyle: NSDateFormatterStyle.MediumStyle,
+            timeStyle: NSDateFormatterStyle.ShortStyle
+        )
+
+    }
+    
+    /**
+        Displays only month and year
+    */
+    static func shortDate(date: NSDate) -> String
+    {
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateStyle = .MediumStyle
-        dateFormatter.timeStyle = .ShortStyle
-        return dateFormatter.stringFromDate(lastMessageDate)
+        dateFormatter.dateFormat = "MMMM yyyy"
+        return dateFormatter.stringFromDate(date)
     }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="hwh-xV-rX8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="hwh-xV-rX8">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -451,7 +451,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Hha-4M-soE">
-                                                    <rect key="frame" x="8" y="7" width="584" height="162"/>
+                                                    <rect key="frame" x="8" y="8" width="584" height="162"/>
                                                     <date key="date" timeIntervalSinceReferenceDate="457371582.51875198">
                                                         <!--2015-06-30 15:39:42 +0000-->
                                                     </date>
@@ -461,10 +461,9 @@
                                                 </datePicker>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Hha-4M-soE" firstAttribute="trailing" secondItem="KCr-pC-qkT" secondAttribute="trailingMargin" id="7fe-Zb-3OU"/>
-                                                <constraint firstItem="Hha-4M-soE" firstAttribute="top" secondItem="KCr-pC-qkT" secondAttribute="topMargin" id="XL6-lF-oW3"/>
-                                                <constraint firstItem="Hha-4M-soE" firstAttribute="leading" secondItem="KCr-pC-qkT" secondAttribute="leadingMargin" id="d9o-bJ-J0D"/>
-                                                <constraint firstItem="Hha-4M-soE" firstAttribute="bottom" secondItem="KCr-pC-qkT" secondAttribute="bottomMargin" id="e39-7N-Lad"/>
+                                                <constraint firstItem="Hha-4M-soE" firstAttribute="leading" secondItem="KCr-pC-qkT" secondAttribute="leadingMargin" id="SN8-R4-moA"/>
+                                                <constraint firstItem="Hha-4M-soE" firstAttribute="top" secondItem="KCr-pC-qkT" secondAttribute="topMargin" id="aJp-2O-i4H"/>
+                                                <constraint firstItem="Hha-4M-soE" firstAttribute="centerX" secondItem="KCr-pC-qkT" secondAttribute="centerX" id="hX6-G0-Pef"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -481,7 +480,7 @@
                                                     <rect key="frame" x="8" y="8" width="584" height="133"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="yes" spellCheckingType="yes"/>
                                                 </textView>
                                             </subviews>
                                             <constraints>
@@ -501,7 +500,9 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="dateLabel" destination="79r-O8-tyr" id="XTI-Mr-DuX"/>
                         <outlet property="datePicker" destination="Hha-4M-soE" id="22p-SS-n8q"/>
+                        <outlet property="feedbackTextView" destination="MEt-wW-QrS" id="Q7e-e9-yCI"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GoR-nF-sP7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1050,7 +1051,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="kdJ-Ee-EuN"/>
         <segue reference="uyn-a3-iaD"/>
-        <segue reference="mCs-oj-EZd"/>
         <segue reference="ggf-jH-iKU"/>
+        <segue reference="x4D-zR-hYu"/>
     </inferredMetricsTieBreakers>
 </document>
