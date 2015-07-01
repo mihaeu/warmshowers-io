@@ -826,79 +826,46 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Edw-4D-QwA">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </mapView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="vNL-27-CNt">
+                                <rect key="frame" x="150" y="64" width="300" height="300"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="4Gg-eM-23i"/>
+                                    <constraint firstAttribute="height" constant="300" id="cm5-Uk-oxr"/>
+                                </constraints>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="Edw-4D-QwA" secondAttribute="bottom" id="1iS-do-7oh"/>
                             <constraint firstItem="Edw-4D-QwA" firstAttribute="top" secondItem="7J8-60-JdL" secondAttribute="top" id="CbT-BB-lQ8"/>
+                            <constraint firstItem="vNL-27-CNt" firstAttribute="top" secondItem="X30-oA-2Ta" secondAttribute="bottom" id="IQn-6g-WXF"/>
                             <constraint firstAttribute="trailing" secondItem="Edw-4D-QwA" secondAttribute="trailing" id="fWp-LT-5rH"/>
                             <constraint firstItem="Edw-4D-QwA" firstAttribute="leading" secondItem="7J8-60-JdL" secondAttribute="leading" id="gBK-PY-WC5"/>
+                            <constraint firstAttribute="centerX" secondItem="vNL-27-CNt" secondAttribute="centerX" id="nuE-6v-blr"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="v6c-CS-OF6">
-                        <barButtonItem key="rightBarButtonItem" title="Search" id="oGF-kl-kZg">
-                            <connections>
-                                <segue destination="ZZo-Fe-3SX" kind="show" identifier="Search" id="k8B-Cl-F88"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="v6c-CS-OF6"/>
                     <connections>
                         <outlet property="mapView" destination="Edw-4D-QwA" id="oA5-gu-an0"/>
+                        <outlet property="searchDisplayController" destination="fSs-Ol-dso" id="SBA-ak-RRC"/>
+                        <outlet property="searchResultTableView" destination="vNL-27-CNt" id="8m3-OJ-ns0"/>
                         <segue destination="OvG-RX-cPr" kind="presentation" identifier="Show Other Profile" id="uyn-a3-iaD"/>
                         <segue destination="obc-7N-gOO" kind="show" identifier="Show Favorites" id="mCs-oj-EZd"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="Show Login" id="kdJ-Ee-EuN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gIP-jH-Aw2" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2350.5" y="-412"/>
-        </scene>
-        <!--Search View Controller-->
-        <scene sceneID="qO2-oB-ZRq">
-            <objects>
-                <tableViewController modalPresentationStyle="pageSheet" id="ZZo-Fe-3SX" customClass="SearchViewController" customModule="Warmshowers" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="vFD-q2-wZb">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" id="4Gy-dN-in5">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits"/>
-                            <connections>
-                                <outlet property="delegate" destination="ZZo-Fe-3SX" id="vG7-fK-P3e"/>
-                            </connections>
-                        </searchBar>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="bnZ-oq-8x5">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bnZ-oq-8x5" id="3eT-m3-Ptq">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="ZZo-Fe-3SX" id="cwc-4C-9Z5"/>
-                            <outlet property="delegate" destination="ZZo-Fe-3SX" id="2fm-tL-hzX"/>
-                        </connections>
-                    </tableView>
+                <searchDisplayController id="fSs-Ol-dso">
                     <connections>
-                        <outlet property="searchBar" destination="4Gy-dN-in5" id="fVW-6L-bbm"/>
-                        <outlet property="searchDisplayController" destination="uf1-Ow-ZEO" id="bHa-fB-rfo"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="q9S-Jy-Xne" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="uf1-Ow-ZEO">
-                    <connections>
-                        <outlet property="delegate" destination="ZZo-Fe-3SX" id="cbX-ui-9zS"/>
-                        <outlet property="searchBar" destination="4Gy-dN-in5" id="m4D-Fz-Loc"/>
-                        <outlet property="searchContentsController" destination="ZZo-Fe-3SX" id="j0P-tH-oZD"/>
-                        <outlet property="searchResultsDataSource" destination="ZZo-Fe-3SX" id="VLv-OH-AUu"/>
-                        <outlet property="searchResultsDelegate" destination="ZZo-Fe-3SX" id="XXd-MM-hR8"/>
+                        <outlet property="delegate" destination="sTG-Wc-qTw" id="vuV-aU-wZj"/>
+                        <outlet property="searchContentsController" destination="sTG-Wc-qTw" id="VbL-Kf-4PV"/>
+                        <outlet property="searchResultsDataSource" destination="sTG-Wc-qTw" id="lt3-1j-dpb"/>
+                        <outlet property="searchResultsDelegate" destination="sTG-Wc-qTw" id="yBd-LY-nNm"/>
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="3074" y="-412"/>
+            <point key="canvasLocation" x="2350" y="-412"/>
         </scene>
         <!--Favorites-->
         <scene sceneID="WoP-1p-OgQ">

@@ -13,12 +13,28 @@ import IJReachability
 
 class MapViewController: UIViewController, CLLocationManagerDelegate
 {
+    @IBOutlet weak var searchResultTableView: UITableView! {
+        didSet {
+            searchResultTableView.hidden = true
+            searchResultTableView.delegate = self
+            searchResultTableView.dataSource = self
+        }
+    }
     @IBOutlet weak var mapView: MKMapView! {
         didSet {
             mapView.showsUserLocation = true
             mapView.delegate = self
         }
     }
+    
+    var userInCenter: User? {
+        didSet {
+            if userInCenter != nil {
+                centerMapOnUser(userInCenter!)
+            }
+        }
+    }
+    var searchResults = [User]()
     
     private var users = [Int:User]()
     private var userAnnotations = [Int:MKAnnotation]()
@@ -29,10 +45,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
     private let userRepository = UserRepository()
     private let locationManager = CLLocationManager()
     
+    private var searchBar = UISearchBar()
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
+        searchBar.delegate = self
+        self.navigationItem.titleView = searchBar
+
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
 
@@ -57,6 +78,23 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
         } else {
             performSegueWithIdentifier(Storyboard.ShowLogin, sender: nil)
         }
+    }
+    
+    func centerMapOnUser(user: User)
+    {
+        var center = CLLocationCoordinate2D(latitude: user.latitude, longitude: user.longitude)
+        var span = MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
+        var region = MKCoordinateRegion(center: center, span: span)
+        mapView.setRegion(region, animated: true)
+    }
+    
+    func openSelectedUserAnnotation(user: User)
+    {
+        userAnnotations.removeValueForKey(user.uid)
+        let annotation = UserAnnotation(user: user)
+        userAnnotations[user.uid] = annotation
+        mapView.addAnnotation(annotation)
+        mapView.selectAnnotation(annotation, animated: true)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
@@ -118,13 +156,11 @@ extension MapViewController: MKMapViewDelegate
                     longitude: center.longitude + (region.span.longitudeDelta / 2.0)
                 )
                 
-                if location.latitude  >= northWestCorner.latitude
+                if !(location.latitude  >= northWestCorner.latitude
                     && location.latitude  <= southEastCorner.latitude
                     && location.longitude >= northWestCorner.longitude
-                    && location.longitude <= southEastCorner.longitude
+                    && location.longitude <= southEastCorner.longitude)
                 {
-                
-                } else {
                     mapView.removeAnnotation(self.userAnnotations[userId])
                     self.users.removeValueForKey(userId)
                 }
@@ -171,7 +207,6 @@ extension MapViewController: MKMapViewDelegate
             
             UserPictureCache.sharedInstance.thumbnailById(userAnnotation.user!.uid).onSuccess { image in
                 leftCalloutFrame.image = image
-                
             }.onFailure { error in
                 leftCalloutFrame.image = UserPictureCache.defaultThumbnail
             }
@@ -200,5 +235,58 @@ extension MapViewController: CLLocationManagerDelegate
             myLocation = firstLocation.coordinate
             locationManager.stopUpdatingLocation()
         }
+    }
+}
+
+extension MapViewController: UISearchBarDelegate
+{
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String)
+    {
+        if count(searchBar.text) < 3 {
+            searchResultTableView.hidden = true
+            return
+        }
+        
+        API.sharedInstance.searchByKeyword(searchText, limit: 10, page: 1).onSuccess { users in
+            self.searchResults.removeAll(keepCapacity: false)
+            for (userId, user) in users {
+                self.searchResults.append(user)
+            }
+            self.searchResultTableView.hidden = false
+            self.searchResultTableView.reloadData()
+        }
+    }
+}
+
+extension MapViewController: UITableViewDelegate
+{
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
+        let user = searchResults[indexPath.row]
+        
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+        searchResultTableView.hidden = true
+        
+        centerMapOnUser(user)
+        openSelectedUserAnnotation(user)
+    }
+}
+
+extension MapViewController: UITableViewDataSource
+{
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        return searchResults.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    {
+        var cell = tableView.dequeueReusableCellWithIdentifier("cell") as? UITableViewCell
+        if cell == nil {
+            cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "cell")
+        }
+        cell?.textLabel!.text = searchResults[indexPath.row].fullname
+        return cell!
     }
 }

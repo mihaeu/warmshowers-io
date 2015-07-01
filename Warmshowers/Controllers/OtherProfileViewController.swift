@@ -91,10 +91,6 @@ class OtherProfileViewController: UIViewController
         tableView.reloadData()
         
         API.sharedInstance.getFeedbackForUser(user!.uid).onSuccess() { userFeedback in
-//            for feedback in userFeedback {
-//                self.feedbackRepository.save(feedback)
-//            }
-            
             self.tableData.append(userFeedback)
             self.tableView.reloadData()
         }
@@ -145,7 +141,6 @@ extension OtherProfileViewController: UITableViewDataSource
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         if indexPath.section == ProfileOverviewIndex {
-            // TODO: special format with 2 columns except for the first column plzzz
             var cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.ProfileOverviewCellIdentifier) as? ProfileOverviewCell
             if cell == nil {
                 cell = ProfileOverviewCell(style: UITableViewCellStyle.Default, reuseIdentifier: Storyboard.ProfileOverviewCellIdentifier)
@@ -164,7 +159,6 @@ extension OtherProfileViewController: UITableViewDataSource
         }
         
         if indexPath.section == FeedbackIndex {
-            // TODO: refactor into init()s which set their property, thanks!
             var cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.FeedbackCellIdentifier) as? FeedbackCell
             if cell == nil {
                 cell = FeedbackCell(style: UITableViewCellStyle.Default, reuseIdentifier: Storyboard.FeedbackCellIdentifier)
