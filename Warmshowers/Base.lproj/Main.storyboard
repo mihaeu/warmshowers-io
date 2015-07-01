@@ -835,7 +835,13 @@
                             <constraint firstItem="Edw-4D-QwA" firstAttribute="leading" secondItem="7J8-60-JdL" secondAttribute="leading" id="gBK-PY-WC5"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="v6c-CS-OF6"/>
+                    <navigationItem key="navigationItem" id="v6c-CS-OF6">
+                        <barButtonItem key="rightBarButtonItem" title="Search" id="oGF-kl-kZg">
+                            <connections>
+                                <segue destination="ZZo-Fe-3SX" kind="show" identifier="Search" id="k8B-Cl-F88"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="Edw-4D-QwA" id="oA5-gu-an0"/>
                         <segue destination="OvG-RX-cPr" kind="presentation" identifier="Show Other Profile" id="uyn-a3-iaD"/>
@@ -846,6 +852,53 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gIP-jH-Aw2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2350.5" y="-412"/>
+        </scene>
+        <!--Search View Controller-->
+        <scene sceneID="qO2-oB-ZRq">
+            <objects>
+                <tableViewController modalPresentationStyle="pageSheet" id="ZZo-Fe-3SX" customClass="SearchViewController" customModule="Warmshowers" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="vFD-q2-wZb">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="4Gy-dN-in5">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="ZZo-Fe-3SX" id="vG7-fK-P3e"/>
+                            </connections>
+                        </searchBar>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="bnZ-oq-8x5">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bnZ-oq-8x5" id="3eT-m3-Ptq">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="ZZo-Fe-3SX" id="cwc-4C-9Z5"/>
+                            <outlet property="delegate" destination="ZZo-Fe-3SX" id="2fm-tL-hzX"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <outlet property="searchBar" destination="4Gy-dN-in5" id="fVW-6L-bbm"/>
+                        <outlet property="searchDisplayController" destination="uf1-Ow-ZEO" id="bHa-fB-rfo"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="q9S-Jy-Xne" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="uf1-Ow-ZEO">
+                    <connections>
+                        <outlet property="delegate" destination="ZZo-Fe-3SX" id="cbX-ui-9zS"/>
+                        <outlet property="searchBar" destination="4Gy-dN-in5" id="m4D-Fz-Loc"/>
+                        <outlet property="searchContentsController" destination="ZZo-Fe-3SX" id="j0P-tH-oZD"/>
+                        <outlet property="searchResultsDataSource" destination="ZZo-Fe-3SX" id="VLv-OH-AUu"/>
+                        <outlet property="searchResultsDelegate" destination="ZZo-Fe-3SX" id="XXd-MM-hR8"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="3074" y="-412"/>
         </scene>
         <!--Favorites-->
         <scene sceneID="WoP-1p-OgQ">
@@ -968,7 +1021,7 @@
         <!--Map-->
         <scene sceneID="sXU-iu-9ZO">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="lc3-r4-IRi" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lc3-r4-IRi" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Map" image="tab-map" id="MGJ-0w-VOB"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Xba-Q8-C8O">
@@ -1051,7 +1104,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="kdJ-Ee-EuN"/>
         <segue reference="uyn-a3-iaD"/>
-        <segue reference="ggf-jH-iKU"/>
-        <segue reference="x4D-zR-hYu"/>
+        <segue reference="mCs-oj-EZd"/>
+        <segue reference="aln-sR-7h2"/>
     </inferredMetricsTieBreakers>
 </document>
