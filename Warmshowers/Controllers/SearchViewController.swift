@@ -19,21 +19,20 @@ class SearchViewController: UITableViewController
         searchBar.delegate = self
     }
     
-    var data = ["1","2","3","4","5","6","7","8","9","10"]
-    var filteredData = ["1","2","3","4","5","6","7","8","9","10"]
+    var data = [User]()
 }
 
 extension SearchViewController: UISearchBarDelegate
 {
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String)
     {
-        filteredData.removeAll(keepCapacity: false)
-        for number in data {
-            if number > searchBar.text {
-                filteredData.append(number)
+        API.sharedInstance.searchByKeyword(searchText, limit: 10, page: 1).onSuccess { users in
+            self.data.removeAll(keepCapacity: false)
+            for (userId, user) in users {
+                self.data.append(user)
             }
+            self.tableView.reloadData()
         }
-        tableView.reloadData()
     }
 }
 
@@ -45,13 +44,13 @@ extension SearchViewController: UITableViewDataSource
         if cell == nil {
             cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "cell")
         }
-        cell?.textLabel!.text = filteredData[indexPath.row]
+        cell?.textLabel!.text = data[indexPath.row].fullname
         return cell!
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return filteredData.count
+        return data.count
     }
 }
 
@@ -59,6 +58,12 @@ extension SearchViewController: UITableViewDelegate
 {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-        log.debug("Select row \(indexPath.row)")
+        let value = tableView.cellForRowAtIndexPath(indexPath)?.textLabel?.text
+
+        if let mapViewController = presentingViewController as? MapViewController {
+            // setup information for controller
+        } else if let newMessageViewController = presentingViewController as? NewMessageViewController {
+            // setup information for controller
+        }
     }
 }
