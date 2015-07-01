@@ -27,6 +27,7 @@ class MessageThreadViewController: UIViewController, UITableViewDataSource
             api
                 .readMessageThread(threadId!)
                 .onSuccess() { messageThread in
+                    messageThread.messages = messageThread.messages?.reverse()
                     self.messageThread = messageThread
                     self.tableView.reloadData()
                 }
