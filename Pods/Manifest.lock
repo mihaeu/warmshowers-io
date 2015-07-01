@@ -5,7 +5,7 @@ PODS:
     - Result (~> 0.4.3)
   - HanekeSwift (0.9.1)
   - IJReachability (0.1.0)
-  - Nimble (0.4.2)
+  - Nimble (1.0.0)
   - Realm (0.93.2):
     - Realm/Headers (= 0.93.2)
   - Realm/Headers (0.93.2)
@@ -43,7 +43,7 @@ SPEC CHECKSUMS:
   BrightFutures: 41f4d8755cfe769f6db2f7193a43910188d3a61c
   HanekeSwift: 50d37bfbc4432edc649167e538c259feccb4a2bb
   IJReachability: 3eff33caca50869df09b257bcf712031a56a8575
-  Nimble: 49b7a7da8919f42823d37c6d68cc6d15a7009f32
+  Nimble: 8bee528e5fcc403653076545db562d2b5db7bb87
   Realm: 2fdd0ae74f730e190384e0338d8a0d3654df8220
   RealmSwift: 231b064da9f98b1c4f325fe1f1cb8756aae2b8d6
   Result: b44f6bc8762bbffaf2c5df58f2c7d12c3496ced8
