@@ -25,7 +25,7 @@ public class MessageSerialization
 
         var users = [User]()
         for (key, user) in json["participants"] {
-            users.append(User(uid: user["uid"].intValue, name: user["name"].stringValue))
+            users.append(User(id: user["uid"].intValue, username: user["name"].stringValue))
         }
         message.participants = users
         

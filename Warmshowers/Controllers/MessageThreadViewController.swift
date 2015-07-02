@@ -73,7 +73,7 @@ class MessageThreadViewController: UIViewController, UITableViewDataSource
         var cell: MessageBodyCell?
         
         // I am sending the message
-        if messageThread?.user?.uid == message?.author?.uid {
+        if messageThread?.user?.id == message?.author?.id {
             cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.MessageBodyToCellIdentifier) as? MessageBodyCell
             if cell == nil {
                 cell = MessageBodyCell(style: UITableViewCellStyle.Default, reuseIdentifier: Storyboard.MessageBodyToCellIdentifier)
@@ -89,7 +89,7 @@ class MessageThreadViewController: UIViewController, UITableViewDataSource
         cell?.bodyLabel.attributedText = Utils.htmlToAttributedText(message!.body!)
         cell?.messageSentLabel.text = Utils.longDateFromTimestamp(message!.timestamp)
         
-        UserPictureCache.sharedInstance.thumbnailById(message!.author!.uid).onSuccess { image in
+        UserPictureCache.sharedInstance.thumbnailById(message!.author!.id).onSuccess { image in
             cell?.userPictureImageView.image = image
         }.onFailure { error in
             cell?.userPictureImageView.image = UserPictureCache.defaultThumbnail

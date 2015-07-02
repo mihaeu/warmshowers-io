@@ -16,7 +16,7 @@ class UserRepository
     func findById(id: Int, refresh: Bool = false) -> Future<User, NSError>
     {
 //        if refresh == false {
-//            let result = Realm().objects(User).filter("uid == \(id)")
+//            let result = Realm().objects(User).filter("id == \(id)")
 //            if result.count == 1 {
 //                var futureUser = future { () -> Result<User> in
 //                    return .Success(Box(result.first!))

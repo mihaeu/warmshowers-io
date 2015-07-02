@@ -150,7 +150,7 @@ enum Router: URLRequestConvertible
             case .CreateFeedback(let feedback):
                 return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: [
                     "node[type]": "trust_referral",
-                    "node[field_member_i_trust][0][uid][uid]": feedback.toUser.name,
+                    "node[field_member_i_trust][0][uid][uid]": feedback.toUser.username,
                     "node[body]": feedback.body,
                     "node[field_guest_or_host][value]": feedback.type,
                     "node[field_rating][value]": feedback.rating,
@@ -173,7 +173,7 @@ enum Router: URLRequestConvertible
                 return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: ["thread_id": threadId, "status": unread]).0
             
             case .SendMessage(let message):
-                let recipientsString = ",".join(message.participants!.map {$0.name})
+                let recipientsString = ",".join(message.participants!.map {$0.username})
                 return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: [
                     "recipients": recipientsString,
                     "subject": message.subject,

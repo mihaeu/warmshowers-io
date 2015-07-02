@@ -22,6 +22,7 @@
 		8435FDA21B0CC21A007E2EEB /* APITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8435FDA11B0CC21A007E2EEB /* APITest.swift */; };
 		844C1A2E1AFBFF630013551A /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844C1A2D1AFBFF630013551A /* Storyboard.swift */; };
 		844D51BA1B3E803C00AAC684 /* ProfileOverviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844D51B91B3E803C00AAC684 /* ProfileOverviewCell.swift */; };
+		8456A0F31B452F75006E5DA0 /* OtherProfileDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8456A0F21B452F75006E5DA0 /* OtherProfileDataSource.swift */; };
 		846D2C8F1B34227D009FADEF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D2C8E1B34227D009FADEF /* User.swift */; };
 		847D25EA1B35724700E72F87 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D25E91B35724700E72F87 /* FavoriteViewController.swift */; };
 		847E786E1B39A4820094C329 /* MessageBodyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847E786D1B39A4820094C329 /* MessageBodyCell.swift */; };
@@ -80,6 +81,7 @@
 		8435FDA11B0CC21A007E2EEB /* APITest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APITest.swift; sourceTree = "<group>"; };
 		844C1A2D1AFBFF630013551A /* Storyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
 		844D51B91B3E803C00AAC684 /* ProfileOverviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileOverviewCell.swift; path = Views/ProfileOverviewCell.swift; sourceTree = "<group>"; };
+		8456A0F21B452F75006E5DA0 /* OtherProfileDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OtherProfileDataSource.swift; path = Models/OtherProfileDataSource.swift; sourceTree = "<group>"; };
 		846D2C8E1B34227D009FADEF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Models/User.swift; sourceTree = "<group>"; };
 		847D25E91B35724700E72F87 /* FavoriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FavoriteViewController.swift; path = Controllers/FavoriteViewController.swift; sourceTree = "<group>"; };
 		847E786D1B39A4820094C329 /* MessageBodyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageBodyCell.swift; path = Views/MessageBodyCell.swift; sourceTree = "<group>"; };
@@ -282,6 +284,7 @@
 				846D2C8E1B34227D009FADEF /* User.swift */,
 				84B0C6A31B3C095500497DE0 /* UserRepository.swift */,
 				848F850D1B3FEDCF006A5F4B /* UserPictureCache.swift */,
+				8456A0F21B452F75006E5DA0 /* OtherProfileDataSource.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -539,6 +542,7 @@
 				84338C891B3D95C6003C0411 /* FeedbackSerialization.swift in Sources */,
 				847D25EA1B35724700E72F87 /* FavoriteViewController.swift in Sources */,
 				846D2C8F1B34227D009FADEF /* User.swift in Sources */,
+				8456A0F31B452F75006E5DA0 /* OtherProfileDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -16,7 +16,7 @@ public class MessageThreadSerialization
         
         var participants = [User]()
         for (key, userJson) in json["participants"] {
-            var user = User(uid: userJson["uid"].intValue, name: userJson["name"].stringValue)
+            var user = User(id: userJson["uid"].intValue, username: userJson["name"].stringValue)
             participants.append(user)
         }
         messageThread.participants = participants
@@ -27,13 +27,13 @@ public class MessageThreadSerialization
             message.threadId = messageJson["thread_id"].intValue
             message.subject = messageJson["subject"].stringValue
             message.body = messageJson["body"].stringValue
-            message.author = User(uid: messageJson["author"]["uid"].intValue, name: messageJson["author"]["name"].stringValue)
+            message.author = User(id: messageJson["author"]["uid"].intValue, username: messageJson["author"]["name"].stringValue)
             message.timestamp = messageJson["timestamp"].intValue
             messages.append(message)
         }
         messageThread.messages = messages
         
-        var user = User(uid: json["user"]["uid"].intValue, name: json["user"]["name"].stringValue)
+        var user = User(id: json["user"]["uid"].intValue, username: json["user"]["name"].stringValue)
         messageThread.user = user
         
         messageThread.readAll = json["read_all"].boolValue

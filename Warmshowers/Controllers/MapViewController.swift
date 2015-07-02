@@ -66,7 +66,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
         
         if let user = userRepository.findByActiveUser() {
             if IJReachability.isConnectedToNetwork() {
-                API.sharedInstance.login(user.name, password: user.password).onFailure() { error in
+                API.sharedInstance.login(user.username, password: user.password).onFailure() { error in
                     self.performSegueWithIdentifier(Storyboard.ShowLogin, sender: nil)
                 }
             } else {
@@ -90,9 +90,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
     
     func openSelectedUserAnnotation(user: User)
     {
-        userAnnotations.removeValueForKey(user.uid)
+        userAnnotations.removeValueForKey(user.id)
         let annotation = UserAnnotation(user: user)
-        userAnnotations[user.uid] = annotation
+        userAnnotations[user.id] = annotation
         mapView.addAnnotation(annotation)
         mapView.selectAnnotation(annotation, animated: true)
     }
@@ -103,7 +103,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
             if let navigationController = segue.destinationViewController as? UINavigationController {
                 if let otherProfileViewController = navigationController.topViewController as? OtherProfileViewController {
                     if let user = sender as? User {
-                        otherProfileViewController.user = user
+                        otherProfileViewController.userId = user.id
                     }
                 }
             }
@@ -205,7 +205,7 @@ extension MapViewController: MKMapViewDelegate
         if let userAnnotation = annotation as? UserAnnotation {
             var leftCalloutFrame = UIImageView(frame: Storyboard.LeftCalloutFrame)
             
-            UserPictureCache.sharedInstance.thumbnailById(userAnnotation.user!.uid).onSuccess { image in
+            UserPictureCache.sharedInstance.thumbnailById(userAnnotation.user!.id).onSuccess { image in
                 leftCalloutFrame.image = image
             }.onFailure { error in
                 leftCalloutFrame.image = UserPictureCache.defaultThumbnail
@@ -220,7 +220,7 @@ extension MapViewController: MKMapViewDelegate
     func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!)
     {
         for (id, user) in users {
-            if user.name == view.annotation.title {
+            if user.username == view.annotation.title {
                 performSegueWithIdentifier(Storyboard.ShowOtherProfileSegue, sender: user)
             }
         }

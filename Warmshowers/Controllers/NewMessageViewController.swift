@@ -26,7 +26,7 @@ class NewMessageViewController: UIViewController
         
         if messageThread != nil {
             userTextField.enabled = false
-            userTextField.text = messageThread?.user?.name
+            userTextField.text = messageThread?.user?.fullname
             
             subjectTextField.enabled = false
             subjectTextField.text = messageThread?.subject
@@ -34,7 +34,7 @@ class NewMessageViewController: UIViewController
         
         if toUser !== nil {
             userTextField.enabled = false
-            userTextField.text = toUser!.name
+            userTextField.text = toUser!.fullname
             
             subjectTextField.becomeFirstResponder()
         }

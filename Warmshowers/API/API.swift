@@ -90,13 +90,13 @@ public class API
     {
         let promise = Promise<Bool, NSError>()
         
-        manager.request(Router.Logout(username: user.name, password: user.password))
+        manager.request(Router.Logout(username: user.username, password: user.password))
             .responseJSON { (request, response, json, error) in
                 if error != nil {
                     log.error(error?.description)
                     promise.failure(error!)
                 } else {
-                    log.info("Logged out \(user.name) (Status: \(response?.statusCode))")
+                    log.info("Logged out \(user.username) (Status: \(response?.statusCode))")
                     promise.success(true)
                 }
         }
@@ -161,9 +161,9 @@ public class API
                     var json = JSON(json!)
                     var users = [Int:User]()
                     for (key: String, userJson: JSON) in json["accounts"] {
-                        let uid = key.toInt()
+                        let id = key.toInt()
                         let user = UserSerialization.deserializeJSON(userJson)
-                        users[uid!] = user                      
+                        users[id!] = user
                     }
                     promise.success(users)
                 }
@@ -204,7 +204,7 @@ public class API
                     var users = [Int:User]()
                     for (key: String, userJson: JSON) in accounts {
                         let user = UserSerialization.deserializeJSON(userJson)
-                        users[user.uid] = user
+                        users[user.id] = user
                     }
                     promise.success(users)
                 }
@@ -270,7 +270,7 @@ public class API
                     log.error(error.description)
                     promise.failure(error)
                 } else {
-                    log.info("Created feedback for \(feedback.toUser.name) at node (Status: \(response?.statusCode))")
+                    log.info("Created feedback for \(feedback.toUser.username) at node (Status: \(response?.statusCode))")
                     promise.success(true)
                 }
         }

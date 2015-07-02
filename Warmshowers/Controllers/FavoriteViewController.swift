@@ -57,7 +57,7 @@ class FavoriteViewController: UIViewController, UITableViewDataSource, UITableVi
             if let navigationController = segue.destinationViewController as? UINavigationController {
                 if let otherProfileViewController = navigationController.topViewController as? OtherProfileViewController {
                     if let user = sender as? User {
-                        otherProfileViewController.user = user
+                        otherProfileViewController.userId = user.id
                     }
                 }
             }
@@ -85,7 +85,7 @@ class FavoriteViewController: UIViewController, UITableViewDataSource, UITableVi
         cell!.userLabel.text = user.fullname
         cell!.addressLabel.text = user.city
 
-        UserPictureCache.sharedInstance.thumbnailById(user.uid).onSuccess { image in
+        UserPictureCache.sharedInstance.thumbnailById(user.id).onSuccess { image in
             cell?.userPictureImageView.image = image
         }.onFailure { error in
             cell?.userPictureImageView.image = UserPictureCache.defaultThumbnail

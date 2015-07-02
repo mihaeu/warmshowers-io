@@ -21,7 +21,7 @@ class FeedbackSerialization
                 
         var feedback = Feedback(
             id: json["nid"].intValue,
-            toUser: User(uid: json["uid_1"].intValue, name: json["name_1"].stringValue),
+            toUser: User(id: json["uid_1"].intValue, username: json["name_1"].stringValue),
             body: json["body"].stringValue,
             year: year,
             month: month,
@@ -29,7 +29,7 @@ class FeedbackSerialization
             type: json["field_guest_or_host_value"].stringValue
         )
         
-        var fromUser = User(uid: json["uid"].intValue, name: json["name"].stringValue)
+        var fromUser = User(id: json["uid"].intValue, username: json["name"].stringValue)
         fromUser.fullname = json["fullname"].stringValue
         feedback.fromUser = fromUser
         

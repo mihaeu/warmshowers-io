@@ -10,15 +10,15 @@ import RealmSwift
 
 public class User: Object
 {
-    dynamic var uid = 0
-    dynamic var name = ""
-    
-    convenience init(uid: Int, name: String)
+    dynamic var id = 0
+    dynamic var username = ""
+
+    convenience init(id: Int, username: String)
     {
         self.init()
         
-        self.uid = uid
-        self.name = name
+        self.id = id
+        self.username = username
     }
     
     // this is only set for the logged in user
@@ -29,7 +29,7 @@ public class User: Object
     
     dynamic var picture = ""
     
-    dynamic var languagesspoken = ""
+    dynamic var spokenLanguages = ""
     
     dynamic var street = ""
     dynamic var city = ""
@@ -40,17 +40,18 @@ public class User: Object
     dynamic var longitude = 0.0
     
     dynamic var isFavorite = false
-    
+
+    dynamic var timeCached = NSDate(timeIntervalSince1970: 1)
     
     // MARK: Realm Properties
     
     override public static func primaryKey() -> String?
     {
-        return "uid"
+        return "id"
     }
     
     override public static func indexedProperties() -> [String]
     {
-        return ["name", "fullname", "city", "password"]
+        return ["username", "fullname", "city", "password"]
     }
 }

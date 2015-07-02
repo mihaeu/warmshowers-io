@@ -70,13 +70,13 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
         let authors = message.participants
         
         if authors != nil && authors!.count > 0 {            
-            UserPictureCache.sharedInstance.thumbnailById(authors!.first!.uid).onSuccess { image in
+            UserPictureCache.sharedInstance.thumbnailById(authors!.first!.id).onSuccess { image in
                 cell?.userPictureImageView.image = image
             }.onFailure { error in
                 cell?.userPictureImageView.image = UserPictureCache.defaultThumbnail
             }
             
-            userRepository.findById(authors!.first!.uid).onSuccess() { user in
+            userRepository.findById(authors!.first!.id).onSuccess() { user in
                 cell?.usernameLabel.text = user.fullname
             }
         }
