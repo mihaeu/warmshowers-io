@@ -23,6 +23,9 @@ target 'Warmshowers' do
     # Connectivity
     pod 'IJReachability', :git => 'https://github.com/Isuru-Nanayakkara/IJReachability.git'
 
+    # UI
+    pod "SwiftyDrop"
+
 end
 
 target 'WarmshowersTests' do
