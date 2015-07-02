@@ -7,15 +7,19 @@
 //
 
 import UIKit
+import SwiftyDrop
 
 class NewFeedbackViewController: UITableViewController
 {
-    var toUser: User?
-    
     @IBOutlet weak var feedbackTextView: UITextView!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var dateLabel: UILabel!
-    
+
+    var toUser: User?
+    private var experience = "Positive"
+    private var met = "Other"
+    private var feedback = ""
+
     private class Sections
     {
         static let Experience = 0
@@ -27,23 +31,32 @@ class NewFeedbackViewController: UITableViewController
     private let ExperienceValues = ["Positive, Neutral", "Negative"]
     private let MetValues = ["Host", "Guest", "Met Traveling","Other"]
     
-    private var experience = "Positive"
-    private var met = "Other"
-    private var feedback = ""
-    
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Save, target: self, action: "createFeedback")
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: UIBarButtonSystemItem.Save,
+            target: self,
+            action: "createFeedback"
+        )
         
         datePicker.addTarget(self, action: "dateChanged", forControlEvents: UIControlEvents.ValueChanged)
         datePicker.hidden = true
+        datePicker.maximumDate = NSDate()
         dateLabel.text = Utils.shortDate(NSDate())
+
+        feedbackTextView.text = "Feedback for \(toUser!.fullname) ..."
     }
-    
-    func createFeedback()
+
+    /**
+        Mocks the creation and saving of user feedback.
+    */
+    private func createFeedback()
     {
+        // id is generated like this, because the API access is still broken
+        // conflicts are possible, but that is not an issue for now, another
+        // test feedback will simply be overwritten
         let feedback = Feedback(
             id: Int(arc4random_uniform(9999)),
             toUser: toUser!,
@@ -53,11 +66,35 @@ class NewFeedbackViewController: UITableViewController
             type: met
         )
 
-        FeedbackRepository().save(feedback)
-        navigationController?.popToRootViewControllerAnimated(true)
+        if validateFeedback(feedback) {
+            FeedbackRepository().save(feedback)
+            navigationController?.popToRootViewControllerAnimated(true)
+        }
     }
-    
-    func dateChanged()
+
+    /**
+        Validate user feedback
+
+        :param: feedback
+
+        :returns: Bool
+    */
+    private func validateFeedback(feedback: Feedback) -> Bool
+    {
+        // minimum 10 words
+        let words = feedback.body.componentsSeparatedByString(" ")
+        if words.count < 10 {
+            Drop.down("Please make sure to use at least 10 words in your feedback.", state: .Error)
+            return false
+        }
+
+        return true
+    }
+
+    /**
+        When the user changes the date on the date picker, update the date label.
+    */
+    private func dateChanged()
     {
         dateLabel.text = Utils.shortDate(datePicker.date)
     }

@@ -41,9 +41,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             .Error: .red
         ]
 
+            var error: NSError?
+
         log.info("Default Realm database at: \(Realm.defaultPath)")
-        setSchemaVersion(9, Realm.defaultPath, { migration, oldSchemaVersion in })
-        
+
+//        Reset Realm database by deleting it
+//        NSFileManager.defaultManager().removeItemAtPath(Realm.defaultPath, error: &error)
+
+//        or migrate:
+//        setSchemaVersion(9, Realm.defaultPath, { migration, oldSchemaVersion in })
+
         return true
     }
 }

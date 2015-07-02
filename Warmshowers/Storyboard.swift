@@ -28,6 +28,7 @@ struct Storyboard
     static let MessageBodyToCellIdentifier = "Message Body To Cell"
     static let ProfileOverviewCellIdentifier = "Profile Overview Cell"
     static let UserCellIdentifier = "User Cell"
+    static let UsernameLabelId = "username"
     
     // UI
     static let LeftCalloutFrame = CGRect(x: 0, y: 0, width: 50, height: 50)

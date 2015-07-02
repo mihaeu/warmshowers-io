@@ -10,22 +10,23 @@ import UIKit
 import XCGLogger
 import SwiftyDrop
 
-class AuthenticationViewController: UIViewController
+class AuthenticationViewController: UIViewController, UITextFieldDelegate
 {
     private let api = API.sharedInstance
     private let userRepository = UserRepository()
     
-    @IBOutlet weak var usernameTextField: UITextField! {
-        didSet {
-            usernameTextField.resignFirstResponder()
-        }
-    }
+    @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
     override func viewDidAppear(antimated: Bool)
     {
         usernameTextField?.text = APISecrets.Username
+        usernameTextField.becomeFirstResponder()
+        usernameTextField.restorationIdentifier = "username"
+        usernameTextField.delegate = self
+
         passwordTextField?.text = APISecrets.Password
+        passwordTextField.delegate = self
     }
     
     @IBAction func attemptLogin()
@@ -39,5 +40,24 @@ class AuthenticationViewController: UIViewController
             .onFailure() { error in
                 Drop.down("Incorrect username or password. Please try again ...", state: .Error)
             }
+    }
+
+    //--------------------------------------------------------------------------
+    // MARK: UITextFieldDelegate
+    //--------------------------------------------------------------------------
+
+    func textFieldShouldReturn(textField: UITextField) -> Bool
+    {
+        // clicked 'Next' on username, switch to password field
+        if textField.restorationIdentifier == Storyboard.UsernameLabelId {
+            passwordTextField.becomeFirstResponder()
+            return true
+        }
+
+        // password submitted, try logging in
+        textField.resignFirstResponder()
+        attemptLogin()
+
+        return true
     }
 }
