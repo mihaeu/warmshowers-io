@@ -16,18 +16,19 @@ public class MessageSerialization
         
         message.threadId = json["thread_id"].intValue
         message.subject = json["subject"].stringValue
-        message.body = json["body"].string
+        message.body = json["body"].stringValue
 
         message.count = json["count"].intValue
         message.isNew = json["is_new"].boolValue
         message.lastUpdatedTimestamp = json["last_updated"].intValue
         message.threadStartedTimestamp = json["thread_started"].intValue
 
-        var users = [User]()
-        for (key, user) in json["participants"] {
-            users.append(User(id: user["uid"].intValue, username: user["name"].stringValue))
+        for (key, userJSON) in json["participants"] {
+            message.participants = User(
+                id: userJSON["uid"].intValue,
+                username: userJSON["name"].stringValue
+            )
         }
-        message.participants = users
         
         return message
     }

@@ -393,6 +393,7 @@ public class API
                     for (key, messageJson) in json {
                         messages.append(MessageSerialization.deserializeJSON(messageJson))
                     }
+                    log.info("Fetched \(messages.count) messages")
                     promise.success(messages)
                 }
         }

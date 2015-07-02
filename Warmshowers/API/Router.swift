@@ -173,15 +173,14 @@ enum Router: URLRequestConvertible
                 return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: ["thread_id": threadId, "status": unread]).0
             
             case .SendMessage(let message):
-                let recipientsString = ",".join(message.participants!.map {$0.username})
                 return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: [
-                    "recipients": recipientsString,
+                    "recipients": message.participants!.username,
                     "subject": message.subject,
-                    "body": message.body!
+                    "body": message.body
                 ]).0
             
             case .ReplyMessage(let message):
-                return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: ["thread_id": message.threadId, "body": message.body!]).0
+                return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: ["thread_id": message.threadId, "body": message.body]).0
             
             // Default (just in case)
             

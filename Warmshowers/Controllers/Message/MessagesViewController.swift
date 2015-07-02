@@ -67,21 +67,19 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     
         let message = messages[indexPath.row]
-        let authors = message.participants
-        
-        if authors != nil && authors!.count > 0 {            
-            UserPictureCache.sharedInstance.thumbnailById(authors!.first!.id).onSuccess { image in
+        if let author = message.participants {
+            UserPictureCache.sharedInstance.thumbnailById(author.id).onSuccess { image in
                 cell?.userPictureImageView.image = image
             }.onFailure { error in
                 cell?.userPictureImageView.image = UserPictureCache.defaultThumbnail
             }
             
-            userRepository.findById(authors!.first!.id).onSuccess() { user in
+            userRepository.findById(author.id).onSuccess() { user in
                 cell?.usernameLabel.text = user.fullname
             }
         }
 
-        cell?.lastMessageLabel.text = Utils.longDateFromTimestamp(message.lastUpdatedTimestamp!)
+        cell?.lastMessageLabel.text = Utils.longDateFromTimestamp(message.lastUpdatedTimestamp)
         cell?.subjectLabel.text = messages[indexPath.row].subject
         
         cell?.sizeToFit()

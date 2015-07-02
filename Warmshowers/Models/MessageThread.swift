@@ -6,23 +6,35 @@
 //  Copyright (c) 2015 Michael Haeuslmann. All rights reserved.
 //
 
-public class MessageThread
+import RealmSwift
+
+public class MessageThread: Object
 {
-    var id: Int
-    var readAll: Bool?
-    var to: Int?
-    var messageCount: Int?
-    var from: Int?
-    var start: Int?
+    dynamic var id = 0
+    dynamic var readAll = true
+    dynamic var to = 0
+    dynamic var messageCount = 0
+    dynamic var from = 0
+    dynamic var start = 0
     
-    var user: User?
-    var messages: [Message]?
-    var subject: String?
-    var participants: [User]?
-    
-    // TODO: init ...
-    init(id: Int)
+    dynamic var user: User?
+    dynamic var messages: [Message]?
+    dynamic var subject: String?
+    dynamic var participants: [User]?
+
+    convenience init(id: Int)
     {
+        self.init()
+
         self.id = id
+    }
+    
+    // -------------------------------------------------------------------------
+    // MARK: Realm Properties
+    // -------------------------------------------------------------------------
+
+    override public static func primaryKey() -> String?
+    {
+        return "id"
     }
 }

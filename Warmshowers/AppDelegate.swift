@@ -48,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        NSFileManager.defaultManager().removeItemAtPath(Realm.defaultPath, error: &error)
 
 //        or migrate:
-        setSchemaVersion(9, Realm.defaultPath, { migration, oldSchemaVersion in })
+        setSchemaVersion(12, Realm.defaultPath, { migration, oldSchemaVersion in })
 
         return true
     }

@@ -45,9 +45,11 @@ class Feedback: Object
     {
         self.init(id: id, toUser: toUser, body: body, year: date.month, month: date.month, rating: rating, type: type)
     }
-    
+
+    // -------------------------------------------------------------------------
     // MARK: Realm Properties
-    
+    // -------------------------------------------------------------------------
+
     override static func primaryKey() -> String?
     {
         return "id"

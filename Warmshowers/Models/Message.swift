@@ -6,20 +6,31 @@
 //  Copyright (c) 2015 Michael Haeuslmann. All rights reserved.
 //
 
-public class Message
+import RealmSwift
+
+public class Message: Object
 {
-    var threadId = 0
-    var subject = ""
+    dynamic var id = 0
+    dynamic var threadId = 0
+    dynamic var subject = ""
     
-    var count: Int?
-    var isNew: Bool?
-    var participants: [User]?
+    dynamic var count = 0
+    dynamic var isNew = false
+    dynamic var participants: User?
     
-    var timestamp: Int = 0
-    var lastUpdatedTimestamp: Int?
-    var threadStartedTimestamp: Int?
+    dynamic var timestamp = 0
+    dynamic var lastUpdatedTimestamp = 0
+    dynamic var threadStartedTimestamp = 0
     
-    var author: User?
-    var body: String?
-    var files: [String]?
+    dynamic var author: User?
+    dynamic var body = ""
+
+    // -------------------------------------------------------------------------
+    // MARK: Realm Properties
+    // -------------------------------------------------------------------------
+
+    override public static func primaryKey() -> String?
+    {
+        return "id"
+    }
 }

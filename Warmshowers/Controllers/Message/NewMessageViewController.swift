@@ -46,7 +46,7 @@ class NewMessageViewController: UIViewController
         if userWantsToSendNewMessage() {
             message.subject = subjectTextField.text
             message.body = bodyTextView.text
-            message.participants = [toUser!]
+            message.participants = toUser!
             messageRepository.save(message)
         } else if userWantsToReply() {
             message.threadId = messageThread!.id

@@ -86,7 +86,7 @@ class MessageThreadViewController: UIViewController, UITableViewDataSource
             }
         }
         
-        cell?.bodyLabel.attributedText = Utils.htmlToAttributedText(message!.body!)
+        cell?.bodyLabel.attributedText = Utils.htmlToAttributedText(message!.body)
         cell?.messageSentLabel.text = Utils.longDateFromTimestamp(message!.timestamp)
         
         UserPictureCache.sharedInstance.thumbnailById(message!.author!.id).onSuccess { image in

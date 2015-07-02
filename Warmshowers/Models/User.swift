@@ -43,7 +43,9 @@ public class User: Object
 
     dynamic var timeCached = NSDate(timeIntervalSince1970: 1)
     
+    // -------------------------------------------------------------------------
     // MARK: Realm Properties
+    // -------------------------------------------------------------------------
     
     override public static func primaryKey() -> String?
     {
