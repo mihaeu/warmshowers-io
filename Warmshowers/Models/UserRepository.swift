@@ -8,23 +8,50 @@
 
 import BrightFutures
 import RealmSwift
+import Result
+import Box
 
 class UserRepository
 {
     private let api = API.sharedInstance
+
+    /**
+        Fetches the user from either local storage or from the internet.
     
+        The result is wrapped either way, since it is not clear whether the
+        outcome is syncronous or asynchronous.
+
+        :param: id      User Id
+        :param: refresh When true fetches the User fromt the API (Default: false)
+
+        :returns: User on success, Error on failure
+    */
     func findById(id: Int, refresh: Bool = false) -> Future<User, NSError>
     {
-//        if refresh == false {
-//            let result = Realm().objects(User).filter("id == \(id)")
-//            if result.count == 1 {
-//                var futureUser = future { () -> Result<User> in
-//                    return .Success(Box(result.first!))
-//                }
-//            }
-//        }
-        
-        return api.getUser(id)
+        let result = Realm().objects(User).filter("id == \(id)")
+        var localUser = User()
+
+        if refresh == false {
+            if result.count == 1 {
+                let promise = Promise<User, NSError>()
+                localUser = result.first!
+                promise.success(localUser)
+                return promise.future
+            }
+        }
+
+        // before returning save the result locally
+        let future = api.getUser(id).onSuccess { user in
+            Realm().write {
+                // the favorite flag of a user is only saved locally and is
+                // not supported by the API, thus we need to transfer the
+                // flag from the local result (if it doesn't exist, it
+                // is false anyways)
+                user.isFavorite = localUser.isFavorite
+                Realm().add(user, update: true)
+            }
+        }
+        return future
     }
     
     func findByLocation(minlat: Double, maxlat: Double, minlon: Double, maxlon: Double, centerlat: Double, centerlon: Double, limit: Int) -> Future<[Int:User], NSError>
