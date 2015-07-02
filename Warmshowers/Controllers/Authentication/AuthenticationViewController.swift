@@ -8,6 +8,7 @@
 
 import UIKit
 import XCGLogger
+import SwiftyDrop
 
 class AuthenticationViewController: UIViewController
 {
@@ -36,16 +37,7 @@ class AuthenticationViewController: UIViewController
                 self.performSegueWithIdentifier(Storyboard.ShowStartSegue, sender: nil)
             }
             .onFailure() { error in
-                let alertController = UIAlertController(
-                    title: "Login Problem",
-                    message: "Incorrect username or password. Please try again ...",
-                    preferredStyle: UIAlertControllerStyle.Alert
-                )
-                alertController.addAction(
-                    UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil)
-                )
-
-                self.presentViewController(alertController, animated: true, completion: nil)
+                Drop.down("Incorrect username or password. Please try again ...", state: .Error)
             }
     }
 }

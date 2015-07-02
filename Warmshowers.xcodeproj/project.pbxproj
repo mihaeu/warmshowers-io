@@ -29,6 +29,7 @@
 		8456A1031B459022006E5DA0 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8456A1021B459022006E5DA0 /* FavoriteViewController.swift */; };
 		8456A1051B45902F006E5DA0 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8456A1041B45902F006E5DA0 /* AuthenticationViewController.swift */; };
 		8456A1081B459045006E5DA0 /* NewFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8456A1071B459045006E5DA0 /* NewFeedbackViewController.swift */; };
+		8456A10D1B45959A006E5DA0 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8456A10C1B45959A006E5DA0 /* MapViewController.swift */; };
 		846D2C8F1B34227D009FADEF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D2C8E1B34227D009FADEF /* User.swift */; };
 		847E786E1B39A4820094C329 /* MessageBodyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847E786D1B39A4820094C329 /* MessageBodyCell.swift */; };
 		847E78701B39A4DB0094C329 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847E786F1B39A4DB0094C329 /* MessageCell.swift */; };
@@ -86,6 +87,7 @@
 		8456A1021B459022006E5DA0 /* FavoriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FavoriteViewController.swift; path = Controllers/Favorite/FavoriteViewController.swift; sourceTree = "<group>"; };
 		8456A1041B45902F006E5DA0 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthenticationViewController.swift; path = Controllers/Authentication/AuthenticationViewController.swift; sourceTree = "<group>"; };
 		8456A1071B459045006E5DA0 /* NewFeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewFeedbackViewController.swift; path = Controllers/Feedback/NewFeedbackViewController.swift; sourceTree = "<group>"; };
+		8456A10C1B45959A006E5DA0 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapViewController.swift; path = Controllers/Map/MapViewController.swift; sourceTree = "<group>"; };
 		846D2C8E1B34227D009FADEF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Models/User.swift; sourceTree = "<group>"; };
 		847E786D1B39A4820094C329 /* MessageBodyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageBodyCell.swift; path = Views/MessageBodyCell.swift; sourceTree = "<group>"; };
 		847E786F1B39A4DB0094C329 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageCell.swift; path = Views/MessageCell.swift; sourceTree = "<group>"; };
@@ -197,6 +199,14 @@
 			name = Feedback;
 			sourceTree = "<group>";
 		};
+		8456A10B1B45958F006E5DA0 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				8456A10C1B45959A006E5DA0 /* MapViewController.swift */,
+			);
+			name = Map;
+			sourceTree = "<group>";
+		};
 		846D6BF51AFD635E00144D4F /* API */ = {
 			isa = PBXGroup;
 			children = (
@@ -302,6 +312,7 @@
 				8456A0F41B458F6E006E5DA0 /* Authentication */,
 				8456A0F51B458F7B006E5DA0 /* Favorite */,
 				8456A1061B459035006E5DA0 /* Feedback */,
+				8456A10B1B45958F006E5DA0 /* Map */,
 				8456A0F61B458F80006E5DA0 /* Message */,
 				8456A0F71B458F95006E5DA0 /* Profile */,
 			);
@@ -566,6 +577,7 @@
 				848F85101B4080FC006A5F4B /* FeedbackRepository.swift in Sources */,
 				847E786E1B39A4820094C329 /* MessageBodyCell.swift in Sources */,
 				8456A1031B459022006E5DA0 /* FavoriteViewController.swift in Sources */,
+				8456A10D1B45959A006E5DA0 /* MapViewController.swift in Sources */,
 				84338C8E1B3D96BA003C0411 /* Utils.swift in Sources */,
 				84338C7E1B3D4A75003C0411 /* FavoriteCell.swift in Sources */,
 				84338C831B3D8015003C0411 /* FeedbackCell.swift in Sources */,
