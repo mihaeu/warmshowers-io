@@ -52,7 +52,7 @@ class NewFeedbackViewController: UITableViewController
     /**
         Mocks the creation and saving of user feedback.
     */
-    private func createFeedback()
+    func createFeedback()
     {
         // id is generated like this, because the API access is still broken
         // conflicts are possible, but that is not an issue for now, another
@@ -94,7 +94,7 @@ class NewFeedbackViewController: UITableViewController
     /**
         When the user changes the date on the date picker, update the date label.
     */
-    private func dateChanged()
+    func dateChanged()
     {
         dateLabel.text = Utils.shortDate(datePicker.date)
     }
