@@ -42,4 +42,55 @@ class MyProfileViewController: UIViewController
             self.performSegueWithIdentifier(Storyboard.ShowLogin, sender: nil)
         }
     }
+
+    // TODO: Implement ...
+    func dataSource(user: User)
+    {
+        let sections = [
+            "Account",
+            "Location",
+            "Member"
+        ]
+        
+        var data = [String:[String:String]]()
+
+        data["Account"] = ["Username": user.name]
+        data["Location"] = [
+            "Country": user.country,
+            "Street": "",
+            "Additional": "",
+            "City": "",
+            "State/Province": "",
+            "Postal Code": ""
+        ]
+        data["Member"] = [
+            "Full Name": "",
+            "About you": "",
+            "Home Phone": "",
+            "Mobile Phone": "",
+            "Work Phone": "",
+            "Preferred Notice": "",
+            "Max. Guests": "",
+            "Closest Hotel": "",
+            "Closest Campsite": "",
+            "Closest Bike Shop": "",
+            "Spoken Languages": "",
+            "Website": ""
+        ]
+        data["Services"] = [
+            "Bed": "",
+            "Food": "",
+            "Laundry": "",
+            "Tent": "",
+            "SAG": "",
+            "Shower": "",
+            "Storage": "",
+            "Kitchen": ""
+        ]
+        data["Settings"] = [
+            "N/A" : "",
+            "Opt-Out" : "",
+            "Time-Zone" : ""
+        ]
+    }
 }
