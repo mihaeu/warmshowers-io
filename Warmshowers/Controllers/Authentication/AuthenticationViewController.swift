@@ -32,6 +32,23 @@ class AuthenticationViewController: UIViewController, UITextFieldDelegate
     
     @IBAction func attemptLogin()
     {
+        disableLoginButton()
+        api.login(usernameTextField.text, password: passwordTextField.text)
+            .onSuccess() { user in
+                self.userRepository.save(user)
+                self.performSegueWithIdentifier(Storyboard.ShowStartSegue, sender: nil)
+            }.onFailure() { error in
+                Drop.down("Incorrect username or password. Please try again ...", state: .Error)
+            }.onComplete { result in
+                self.enableLoginButton()
+            }
+    }
+
+    /**
+        Disables the login and shows a spinner.
+    */
+    private func disableLoginButton()
+    {
         let label = loginButton.titleLabel
         loginButton.titleLabel?.removeFromSuperview()
         let spinner = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
@@ -39,19 +56,20 @@ class AuthenticationViewController: UIViewController, UITextFieldDelegate
         loginButton.addSubview(spinner)
         spinner.startAnimating()
         loginButton.enabled = false
+    }
 
-        api
-            .login(usernameTextField.text, password: passwordTextField.text)
-            .onSuccess() { user in
-                self.userRepository.save(user)
-                self.performSegueWithIdentifier(Storyboard.ShowStartSegue, sender: nil)
-            }.onFailure() { error in
-                Drop.down("Incorrect username or password. Please try again ...", state: .Error)
-            }.onComplete { result in
-                spinner.removeFromSuperview()
-                self.loginButton.addSubview(label!)
-                self.loginButton.enabled = true
-            }
+    /**
+        Enable the login and show the normal text.
+    */
+    private func enableLoginButton()
+    {
+        // button should only have one subview
+        loginButton.subviews.first?.removeFromSuperview()
+        var label = UILabel()
+        label.text = "Login"
+        label.center = CGPointMake(loginButton.bounds.width / 2, loginButton.bounds.height / 2)
+        loginButton.addSubview(label)
+        loginButton.enabled = true
     }
 
     //--------------------------------------------------------------------------
@@ -60,16 +78,12 @@ class AuthenticationViewController: UIViewController, UITextFieldDelegate
 
     func textFieldShouldReturn(textField: UITextField) -> Bool
     {
-        // clicked 'Next' on username, switch to password field
-        if textField.restorationIdentifier == Storyboard.UsernameLabelId {
-            passwordTextField.becomeFirstResponder()
-            return true
+        // password submitted, try logging in
+        if textField.restorationIdentifier != Storyboard.UsernameLabelId {
+            attemptLogin()
         }
 
-        // password submitted, try logging in
         textField.resignFirstResponder()
-        attemptLogin()
-
         return true
     }
 }
