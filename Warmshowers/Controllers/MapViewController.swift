@@ -103,7 +103,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
             if let navigationController = segue.destinationViewController as? UINavigationController {
                 if let otherProfileViewController = navigationController.topViewController as? OtherProfileViewController {
                     if let user = sender as? User {
-                        otherProfileViewController.userId = user.id
+                        otherProfileViewController.user = user
                     }
                 }
             }
@@ -126,40 +126,29 @@ extension MapViewController: MKMapViewDelegate
         let centerLongitude = region.center.longitude
         let centerLatitude = region.center.latitude
         
-        let minlat = region.center.latitude - (region.span.latitudeDelta / 2)
-        let minlon = region.center.longitude - (region.span.longitudeDelta / 2)
+        let minlat = region.center.latitude - (region.span.latitudeDelta / 2.0)
+        let minlon = region.center.longitude - (region.span.longitudeDelta / 2.0)
         
-        let maxlat = region.center.latitude + (region.span.latitudeDelta / 2)
-        let maxlon = region.center.longitude + (region.span.longitudeDelta / 2)
+        let maxlat = region.center.latitude + (region.span.latitudeDelta / 2.0)
+        let maxlon = region.center.longitude + (region.span.longitudeDelta / 2.0)
         
         let limit = 100
         
         userRepository.findByLocation(
             minlat,
-            maxlat: maxlat,
-            minlon: minlon,
-            maxlon: maxlon,
-            centerlat: centerLatitude,
-            centerlon: centerLongitude,
+            maxLatitude: maxlat,
+            minLongitude: minlon,
+            maxLongitude: maxlon,
+            centerLatitude: centerLatitude,
+            centerLongitude: centerLongitude,
             limit: limit
         ).onSuccess() { users in
             // remove users and their annotations when they are off-screen
             for (userId, user) in self.users {
-                let location = CLLocationCoordinate2D(latitude: user.latitude, longitude: user.longitude)
-                let center   = mapView.region.center
-                var northWestCorner = CLLocationCoordinate2D(
-                    latitude: center.latitude  - (region.span.latitudeDelta  / 2.0),
-                    longitude: center.longitude - (region.span.longitudeDelta / 2.0)
-                )
-                var southEastCorner = CLLocationCoordinate2D(
-                    latitude: center.latitude  + (region.span.latitudeDelta  / 2.0),
-                    longitude: center.longitude + (region.span.longitudeDelta / 2.0)
-                )
-                
-                if !(location.latitude  >= northWestCorner.latitude
-                    && location.latitude  <= southEastCorner.latitude
-                    && location.longitude >= northWestCorner.longitude
-                    && location.longitude <= southEastCorner.longitude)
+                if !(user.latitude  >= minlat
+                    && user.latitude  <= maxlat
+                    && user.longitude >= minlon
+                    && user.longitude <= maxlon)
                 {
                     mapView.removeAnnotation(self.userAnnotations[userId])
                     self.users.removeValueForKey(userId)

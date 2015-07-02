@@ -57,7 +57,7 @@ class FavoriteViewController: UIViewController, UITableViewDataSource, UITableVi
             if let navigationController = segue.destinationViewController as? UINavigationController {
                 if let otherProfileViewController = navigationController.topViewController as? OtherProfileViewController {
                     if let user = sender as? User {
-                        otherProfileViewController.userId = user.id
+                        otherProfileViewController.user = user
                     }
                 }
             }

@@ -627,8 +627,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" text="Your message ..." translatesAutoresizingMaskIntoConstraints="NO" id="0Qp-CN-JpZ">
-                                <rect key="frame" x="16" y="148" width="568" height="444"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Your message ..." translatesAutoresizingMaskIntoConstraints="NO" id="0Qp-CN-JpZ">
+                                <rect key="frame" x="16" y="148" width="568" height="395"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>

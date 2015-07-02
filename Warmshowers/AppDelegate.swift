@@ -30,6 +30,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             writeToFile: nil,
             fileLogLevel: .Debug
         )
+        log.xcodeColors = [
+            .Verbose: .lightGrey,
+            .Debug: .darkGrey,
+            .Info: .darkGreen,
+            .Warning: .orange,
+            .Error: XCGLogger.XcodeColor(fg: UIColor.redColor(), bg: UIColor.whiteColor()), // Optionally use a UIColor
+            .Severe: XCGLogger.XcodeColor(fg: (255, 255, 255), bg: (255, 0, 0)) // Optionally use RGB values directly
+        ]
+
 
         log.info("Default Realm database at: \(Realm.defaultPath)")
         setSchemaVersion(9, Realm.defaultPath, { migration, oldSchemaVersion in

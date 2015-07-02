@@ -53,12 +53,49 @@ class UserRepository
         }
         return future
     }
-    
-    func findByLocation(minlat: Double, maxlat: Double, minlon: Double, maxlon: Double, centerlat: Double, centerlon: Double, limit: Int) -> Future<[Int:User], NSError>
+
+    /**
+        Fetches users within the given area.
+        
+        If there are more users in the area than the limit (or the limit of the API
+        which is ~800) only the limit will be returned and those users will all
+        be centered around the center.
+
+        :param: minlat      South-West latitude
+        :param: maxlat      North-East latitude
+        :param: minlon      South-West longitude
+        :param: maxlon      North-East longitude
+        :param: centerlat	Center latitude
+        :param: centerlon	Center longitude
+        :param: limit		Max. users (greatly influences response time)
+
+        :returns: User dictionary on success, Error on failure
+    */
+    func findByLocation(
+        minLatitude: Double,
+        maxLatitude: Double,
+        minLongitude: Double,
+        maxLongitude: Double,
+        centerLatitude: Double,
+        centerLongitude: Double,
+        limit: Int) -> Future<[Int:User], NSError>
     {
-        return api.searchByLocation(minlat, maxlat: maxlat, minlon: minlon, maxlon: maxlon, centerlat: centerlat, centerlon: centerlon, limit: limit)
+        return api.searchByLocation(
+            minLatitude,
+            maxlat: maxLatitude,
+            minlon: minLongitude,
+            maxlon: maxLongitude,
+            centerlat: centerLatitude,
+            centerlon: centerLongitude,
+            limit: limit
+        )
     }
-    
+
+    /**
+        Find all users which have been favorited.
+
+        :returns: User array
+    */
     func findByFavorite() -> [User]
     {
         var users = [User]()
@@ -67,20 +104,37 @@ class UserRepository
         }
         return users
     }
-    
+
+    /**
+        Find the currently logged in User
+
+        :returns: User
+    */
     func findByActiveUser() -> User?
     {
         let result = Realm().objects(User).filter("password != ''")
         return result.first
     }
-    
+
+    /**
+        Saves/Updates the whole user object.
+
+        :param: user	User
+    */
     func save(user: User)
     {
         Realm().write {
             Realm().add(user, update: true)
         }
     }
-    
+
+    /**
+        Updates a User property/
+
+        :param: user	User
+        :param: key     String
+        :param: value	AnyObject?
+    */
     func update(user: User, key: String, value: AnyObject?)
     {
         Realm().write {
