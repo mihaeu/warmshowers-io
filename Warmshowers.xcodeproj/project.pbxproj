@@ -46,6 +46,7 @@
 		84B0C6A41B3C095500497DE0 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B0C6A31B3C095500497DE0 /* UserRepository.swift */; };
 		84B491D31B3ABD2F00BC4445 /* MessageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B491D21B3ABD2F00BC4445 /* MessageRepository.swift */; };
 		84C019211B4672B000E13E77 /* MessageThreadRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C019201B4672B000E13E77 /* MessageThreadRepository.swift */; };
+		84C019231B46B1C500E13E77 /* UserAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C019221B46B1C500E13E77 /* UserAnnotationView.swift */; };
 		84CFCD711B0D2B0700647959 /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CFCD6D1B0D2B0700647959 /* Feedback.swift */; };
 		84CFCD721B0D2B0700647959 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CFCD6E1B0D2B0700647959 /* Message.swift */; };
 		84CFCD731B0D2B0700647959 /* MessageThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CFCD6F1B0D2B0700647959 /* MessageThread.swift */; };
@@ -109,6 +110,7 @@
 		84B0C6A31B3C095500497DE0 /* UserRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserRepository.swift; path = Models/UserRepository.swift; sourceTree = "<group>"; };
 		84B491D21B3ABD2F00BC4445 /* MessageRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageRepository.swift; path = Models/MessageRepository.swift; sourceTree = "<group>"; };
 		84C019201B4672B000E13E77 /* MessageThreadRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageThreadRepository.swift; path = Models/MessageThreadRepository.swift; sourceTree = "<group>"; };
+		84C019221B46B1C500E13E77 /* UserAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserAnnotationView.swift; path = Views/UserAnnotationView.swift; sourceTree = "<group>"; };
 		84CFCD6D1B0D2B0700647959 /* Feedback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Feedback.swift; path = Models/Feedback.swift; sourceTree = "<group>"; };
 		84CFCD6E1B0D2B0700647959 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = Models/Message.swift; sourceTree = "<group>"; };
 		84CFCD6F1B0D2B0700647959 /* MessageThread.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageThread.swift; path = Models/MessageThread.swift; sourceTree = "<group>"; };
@@ -304,6 +306,7 @@
 				84A8D96B1B14792D00E54581 /* UserAnnotation.swift */,
 				84338C821B3D8014003C0411 /* FeedbackCell.swift */,
 				844D51B91B3E803C00AAC684 /* ProfileOverviewCell.swift */,
+				84C019221B46B1C500E13E77 /* UserAnnotationView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -568,6 +571,7 @@
 				84B491D31B3ABD2F00BC4445 /* MessageRepository.swift in Sources */,
 				84338C811B3D5030003C0411 /* MiscConstants.swift in Sources */,
 				84977BF71B43192300433FF6 /* UIColor.swift in Sources */,
+				84C019231B46B1C500E13E77 /* UserAnnotationView.swift in Sources */,
 				847E78701B39A4DB0094C329 /* MessageCell.swift in Sources */,
 				8456A0FF1B459017006E5DA0 /* MessagesViewController.swift in Sources */,
 				84338C8A1B3D95C6003C0411 /* MessageSerialization.swift in Sources */,

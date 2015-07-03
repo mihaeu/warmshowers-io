@@ -188,28 +188,14 @@ extension MapViewController: MKMapViewDelegate
     
     func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView!
     {
-        var view = mapView.dequeueReusableAnnotationViewWithIdentifier(Storyboard.AnnotationViewReuseIdentifier) as? MKPinAnnotationView
-        
-        if (view == nil) {
-            view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: Storyboard.AnnotationViewReuseIdentifier)
-            view!.canShowCallout = true
-            view!.animatesDrop = true
-        } else {
-            view!.annotation = annotation
+        var view = mapView.dequeueReusableAnnotationViewWithIdentifier(
+            Storyboard.AnnotationViewReuseIdentifier) as? MKPinAnnotationView
+
+        if view == nil {
+            let userAnnotation = annotation as! UserAnnotation
+            view = UserAnnotationView(userAnnotation: userAnnotation)
         }
-        
-        if let userAnnotation = annotation as? UserAnnotation {
-            var leftCalloutFrame = UIImageView(frame: Storyboard.LeftCalloutFrame)
-            
-            UserPictureCache.sharedInstance.thumbnailById(userAnnotation.user!.id).onSuccess { image in
-                leftCalloutFrame.image = image
-            }.onFailure { error in
-                leftCalloutFrame.image = UserPictureCache.defaultThumbnail
-            }
-            view!.leftCalloutAccessoryView = leftCalloutFrame
-        }
-        view!.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as! UIButton
-        
+
         return view
     }
     
