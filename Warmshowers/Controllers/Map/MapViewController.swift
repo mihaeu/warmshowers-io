@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import Haneke
+import SwiftyDrop
 import IJReachability
 
 class MapViewController: UIViewController, CLLocationManagerDelegate
@@ -63,23 +64,24 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
 
         locationManager.pausesLocationUpdatesAutomatically = true
         locationManager.startUpdatingLocation()
-        
-        if let user = userRepository.findByActiveUser() {
-            if IJReachability.isConnectedToNetwork() {
-                API.sharedInstance.login(user.username, password: user.password).onFailure() { error in
+
+        let user = userRepository.findByActiveUser()
+        if user == nil {
+            performSegueWithIdentifier(Storyboard.ShowLogin, sender: nil)
+            return
+        }
+
+        // when connected, refresh login cookie
+        if IJReachability.isConnectedToNetwork() {
+            API.sharedInstance
+                .login(user!.username, password: user!.password)
+                .onFailure() { error in
                     self.performSegueWithIdentifier(Storyboard.ShowLogin, sender: nil)
                 }
-            } else {
-                if let mapTabBarItem = self.tabBarController?.tabBar.items?.first as? UITabBarItem {
-                    mapTabBarItem.enabled = false
-                }
-                self.performSegueWithIdentifier(Storyboard.ShowFavoriteSegue, sender: nil)
-            }
-        } else {
-            performSegueWithIdentifier(Storyboard.ShowLogin, sender: nil)
+        // no internet connection
         }
     }
-    
+
     func centerMapOnUser(user: User)
     {
         var center = CLLocationCoordinate2D(latitude: user.latitude, longitude: user.longitude)
@@ -163,6 +165,10 @@ extension MapViewController: MKMapViewDelegate
                     mapView.addAnnotation(userAnnotation)
                 }
             }
+        }.onFailure { error in
+            if !IJReachability.isConnectedToNetwork() {
+                Drop.down("Can't find any hosts, because there is no internet connection.", state: .Info)
+            }
         }
     }
     
@@ -182,13 +188,14 @@ extension MapViewController: MKMapViewDelegate
     
     func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView!
     {
-        var view = mapView.dequeueReusableAnnotationViewWithIdentifier(Storyboard.AnnotationViewReuseIdentifier)
+        var view = mapView.dequeueReusableAnnotationViewWithIdentifier(Storyboard.AnnotationViewReuseIdentifier) as? MKPinAnnotationView
         
         if (view == nil) {
             view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: Storyboard.AnnotationViewReuseIdentifier)
-            view.canShowCallout = true
+            view!.canShowCallout = true
+            view!.animatesDrop = true
         } else {
-            view.annotation = annotation
+            view!.annotation = annotation
         }
         
         if let userAnnotation = annotation as? UserAnnotation {
@@ -199,9 +206,9 @@ extension MapViewController: MKMapViewDelegate
             }.onFailure { error in
                 leftCalloutFrame.image = UserPictureCache.defaultThumbnail
             }
-            view.leftCalloutAccessoryView = leftCalloutFrame
+            view!.leftCalloutAccessoryView = leftCalloutFrame
         }
-        view.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as! UIButton
+        view!.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as! UIButton
         
         return view
     }

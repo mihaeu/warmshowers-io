@@ -41,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             .Error: .red
         ]
 
-        log.info("Default Realm database at: \(Realm.defaultPath)")
+        log.debug("Default Realm database at: \(Realm.defaultPath)")
 
 //        Reset Realm database by deleting it
 //        var error: NSError?

@@ -31,12 +31,20 @@ public class MessageThreadSerialization
             message.subject = messageJson["subject"].stringValue
             message.body = messageJson["body"].stringValue
             message.author = User(id: messageJson["author"]["uid"].intValue, username: messageJson["author"]["name"].stringValue)
+            let result = Realm().objects(User).filter("id == \(message.author!.id)")
+            if result.count == 1 {
+                message.author = result.first!
+            }
             message.timestamp = messageJson["timestamp"].intValue
             messages.append(message)
         }
         messageThread.messages = messages
         
         var user = User(id: json["user"]["uid"].intValue, username: json["user"]["name"].stringValue)
+        let result = Realm().objects(User).filter("id == \(user.id)")
+        if result.count == 1 {
+            user = result.first!
+        }
         messageThread.user = user
         
         messageThread.readAll = json["read_all"].boolValue

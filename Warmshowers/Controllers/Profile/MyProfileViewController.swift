@@ -26,14 +26,14 @@ class MyProfileViewController: UIViewController
     override func viewDidLoad()
     {
         user = userRepository.findByActiveUser()
-        userLabel.text =  user!.username
-        languagesSpokenLabel.text = user!.spokenLanguages
+        userLabel.text = user?.username
+        languagesSpokenLabel.text = user?.spokenLanguages
         descriptionLabel.attributedText = Utils.htmlToAttributedText(user!.comments)
-        
+
         UserPictureCache.sharedInstance.pictureById(user!.id).onSuccess { image in
             self.userPictureImageView.image = image
         }.onFailure { error in
-                self.userPictureImageView.image = UserPictureCache.defaultPicture
+            self.userPictureImageView.image = UserPictureCache.defaultPicture
         }
     }
 

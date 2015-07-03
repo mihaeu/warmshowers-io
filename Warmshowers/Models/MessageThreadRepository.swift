@@ -43,6 +43,17 @@ class MessageThreadRepository
         // fetch and cache
         return api.readMessageThread(threadId).onSuccess { messageThread in
             Realm().write {
+                // realm will replace existing users with participants users
+                // which have only sparse data, thus fetch and replace users
+                // for the result
+                var index = 0
+                for user in messageThread.participants {
+                    let result = Realm().objects(User).filter("id == \(user.id)")
+                    if result.count == 1 {
+                        messageThread.participants.replace(index, object: result.first!)
+                    }
+                    ++index
+                }
                 Realm().add(messageThread, update: true)
             }
         }
