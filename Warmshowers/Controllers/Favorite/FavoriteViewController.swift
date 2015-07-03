@@ -16,6 +16,7 @@ class FavoriteViewController: UIViewController, UITableViewDataSource, UITableVi
             tableView.dataSource = self
         }
     }
+    var noDataLabel = UILabel()
     
     // matching table for section headers, contains all country codes of favorited users
     // 0 : na
@@ -127,6 +128,26 @@ class FavoriteViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int
     {
+        if (tableData.count == 0) {
+            noDataLabel = UILabel(frame: CGRectMake(
+                5, 5,
+                tableView.bounds.size.width - 10,
+                tableView.bounds.size.height - 10))
+
+            noDataLabel.numberOfLines = 0
+            noDataLabel.text = "You don't have any favorite users.\n" +
+                "Click the star button on a user profile\nto add that user to your favorites.\n\n" +
+                "You can view your favorite users even\nwhen you don't have internet access."
+            noDataLabel.textAlignment = NSTextAlignment.Center
+            noDataLabel.sizeToFit()
+
+            tableView.backgroundView = noDataLabel
+            tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+
+            return 0
+        }
+
+        noDataLabel.hidden = true
         return tableData.count
     }
 }
