@@ -192,8 +192,11 @@ extension MapViewController: MKMapViewDelegate
             Storyboard.AnnotationViewReuseIdentifier) as? MKPinAnnotationView
 
         if view == nil {
-            let userAnnotation = annotation as! UserAnnotation
-            view = UserAnnotationView(userAnnotation: userAnnotation)
+            if let userAnnotation = annotation as? UserAnnotation {
+                view = UserAnnotationView(userAnnotation: userAnnotation)
+            } else {
+                view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "a")
+            }
         }
 
         return view
