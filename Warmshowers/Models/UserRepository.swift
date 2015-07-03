@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Michael Haeuslmann. All rights reserved.
 //
 
+import IJReachability
 import BrightFutures
 import RealmSwift
 import Result
@@ -31,13 +32,24 @@ class UserRepository
         let result = Realm().objects(User).filter("id == \(id)")
         var localUser = User()
 
-        if refresh == false {
-            if result.count == 1 {
-                let promise = Promise<User, NSError>()
-                localUser = result.first!
-                promise.success(localUser)
-                return promise.future
-            }
+        // if we don't want a refresh and we found something
+        if refresh == false && result.count == 1{
+            let promise = Promise<User, NSError>()
+            localUser = result.first!
+            promise.success(localUser)
+            return promise.future
+        }
+
+        // if we couldn't find anything or want a refresh from the API,
+        // but are not connected
+        if !IJReachability.isConnectedToNetwork() {
+            let promise = Promise<User, NSError>()
+            promise.failure(NSError(
+                domain: "No internet connection",
+                code: 100,
+                userInfo: nil
+            ))
+            return promise.future
         }
 
         // before returning save the result locally
@@ -61,13 +73,13 @@ class UserRepository
         which is ~800) only the limit will be returned and those users will all
         be centered around the center.
 
-        :param: minlat      South-West latitude
-        :param: maxlat      North-East latitude
-        :param: minlon      South-West longitude
-        :param: maxlon      North-East longitude
-        :param: centerlat	Center latitude
-        :param: centerlon	Center longitude
-        :param: limit		Max. users (greatly influences response time)
+        :param: minLatitude     South-West latitude
+        :param: maxLatitude     North-East latitude
+        :param: minLongitude    South-West longitude
+        :param: maxLongitude    North-East longitude
+        :param: centerLatitude	Center latitude
+        :param: centerLongitude	Center longitude
+        :param: limit           Max. users (greatly influences response time)
 
         :returns: User dictionary on success, Error on failure
     */

@@ -9,6 +9,7 @@
 import UIKit
 import XCGLogger
 import SwiftyDrop
+import IJReachability
 
 class AuthenticationViewController: UIViewController, UITextFieldDelegate
 {
@@ -18,6 +19,8 @@ class AuthenticationViewController: UIViewController, UITextFieldDelegate
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
+
 
     override func viewDidAppear(antimated: Bool)
     {
@@ -32,14 +35,19 @@ class AuthenticationViewController: UIViewController, UITextFieldDelegate
     
     @IBAction func attemptLogin()
     {
+        if !IJReachability.isConnectedToNetwork() {
+            Drop.down("No internet connection, please try again later ...", state: .Info)
+            return
+        }
+
         disableLoginButton()
         api.login(usernameTextField.text, password: passwordTextField.text)
             .onSuccess() { user in
                 self.userRepository.save(user)
                 self.performSegueWithIdentifier(Storyboard.ShowStartSegue, sender: nil)
+                self.enableLoginButton()
             }.onFailure() { error in
                 Drop.down("Incorrect username or password. Please try again ...", state: .Error)
-            }.onComplete { result in
                 self.enableLoginButton()
             }
     }
@@ -49,13 +57,10 @@ class AuthenticationViewController: UIViewController, UITextFieldDelegate
     */
     private func disableLoginButton()
     {
-        let label = loginButton.titleLabel
-        loginButton.titleLabel?.removeFromSuperview()
-        let spinner = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
-        spinner.center = CGPointMake(loginButton.bounds.width / 2, loginButton.bounds.height / 2)
-        loginButton.addSubview(spinner)
-        spinner.startAnimating()
         loginButton.enabled = false
+        loginButton.hidden = true
+
+        spinner.startAnimating()
     }
 
     /**
@@ -63,13 +68,10 @@ class AuthenticationViewController: UIViewController, UITextFieldDelegate
     */
     private func enableLoginButton()
     {
-        // button should only have one subview
-        loginButton.subviews.first?.removeFromSuperview()
-        var label = UILabel()
-        label.text = "Login"
-        label.center = CGPointMake(loginButton.bounds.width / 2, loginButton.bounds.height / 2)
-        loginButton.addSubview(label)
+        spinner.stopAnimating()
+
         loginButton.enabled = true
+        loginButton.hidden = false
     }
 
     //--------------------------------------------------------------------------

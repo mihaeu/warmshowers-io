@@ -8,6 +8,8 @@
 
 import UIKit
 import Haneke
+import SwiftyDrop
+import IJReachability
 
 class MyProfileViewController: UIViewController
 {
@@ -37,9 +39,13 @@ class MyProfileViewController: UIViewController
 
     @IBAction func logout(sender: AnyObject)
     {
-        userRepository.update(user!, key: "password", value: "")
-        api.logout(user!).onSuccess() { success in
-            self.performSegueWithIdentifier(Storyboard.ShowLogin, sender: nil)
+        if IJReachability.isConnectedToNetwork() {
+            userRepository.update(user!, key: "password", value: "")
+            api.logout(user!).onSuccess() { success in
+                self.performSegueWithIdentifier(Storyboard.ShowLogin, sender: nil)
+            }
+        } else {
+            Drop.down("No internet connection, please try again later ...", state: .Info)
         }
     }
 

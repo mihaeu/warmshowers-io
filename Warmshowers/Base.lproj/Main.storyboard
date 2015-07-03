@@ -44,7 +44,7 @@
                                     <constraint firstAttribute="height" constant="30" id="oAa-Fo-P80"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="go" secureTextEntry="YES"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES"/>
                             </textField>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="21h-l4-qzM">
                                 <rect key="frame" x="0.0" y="20" width="600" height="44"/>
@@ -56,6 +56,9 @@
                                     <navigationItem title="Login" id="f9h-Y0-Zv9"/>
                                 </items>
                             </navigationBar>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Ggr-c9-YCW">
+                                <rect key="frame" x="290" y="328" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -65,8 +68,10 @@
                             <constraint firstItem="21h-l4-qzM" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="BrV-ag-p1r"/>
                             <constraint firstAttribute="centerY" secondItem="fHU-NW-npl" secondAttribute="centerY" id="GWj-ZR-Uh2"/>
                             <constraint firstItem="pux-Ij-qM5" firstAttribute="width" secondItem="fHU-NW-npl" secondAttribute="width" id="MX0-Zo-M5i"/>
+                            <constraint firstItem="Ggr-c9-YCW" firstAttribute="centerY" secondItem="pux-Ij-qM5" secondAttribute="centerY" id="bpj-oY-MiK"/>
                             <constraint firstItem="pux-Ij-qM5" firstAttribute="top" secondItem="fHU-NW-npl" secondAttribute="bottom" constant="8" id="cJi-cE-ZN9"/>
                             <constraint firstItem="fHU-NW-npl" firstAttribute="width" secondItem="YFh-tL-uhM" secondAttribute="width" id="hFh-sn-147"/>
+                            <constraint firstItem="Ggr-c9-YCW" firstAttribute="centerX" secondItem="pux-Ij-qM5" secondAttribute="centerX" id="lo4-tz-Qfg"/>
                             <constraint firstItem="21h-l4-qzM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="mUg-YM-Xlu"/>
                             <constraint firstItem="fHU-NW-npl" firstAttribute="height" secondItem="YFh-tL-uhM" secondAttribute="height" id="mjJ-6T-z4p"/>
                             <constraint firstItem="21h-l4-qzM" firstAttribute="centerX" secondItem="YFh-tL-uhM" secondAttribute="centerX" id="oSa-Wy-XCR"/>
@@ -77,6 +82,7 @@
                     <connections>
                         <outlet property="loginButton" destination="pux-Ij-qM5" id="rpx-eq-NmY"/>
                         <outlet property="passwordTextField" destination="fHU-NW-npl" id="QsG-sT-pxf"/>
+                        <outlet property="spinner" destination="Ggr-c9-YCW" id="42U-RK-bgb"/>
                         <outlet property="usernameTextField" destination="YFh-tL-uhM" id="WvF-VR-b8R"/>
                         <segue destination="hwh-xV-rX8" kind="show" identifier="Show Start" id="dPK-Yx-hlF"/>
                     </connections>
