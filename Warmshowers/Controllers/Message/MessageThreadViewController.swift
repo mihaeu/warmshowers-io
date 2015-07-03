@@ -11,8 +11,9 @@ import UIKit
 class MessageThreadViewController: UIViewController, UITableViewDataSource
 {
     private let messageThreadRepository = MessageThreadRepository()
-
     private var messageThread: MessageThread?
+
+    private var refreshControl: UIRefreshControl!
     
     @IBOutlet weak var tableView: UITableView! {
         didSet {
@@ -27,7 +28,6 @@ class MessageThreadViewController: UIViewController, UITableViewDataSource
         didSet {
             messageThreadRepository.findById(threadId!)
                 .onSuccess() { messageThread in
-//                    messageThread.messages
                     self.messageThread = messageThread
                     self.tableView.reloadData()
                 }
@@ -42,8 +42,25 @@ class MessageThreadViewController: UIViewController, UITableViewDataSource
             target: self,
             action: "replyToThread"
         )
+
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
+        self.tableView.addSubview(refreshControl)
     }
-    
+
+    func refresh()
+    {
+        messageThreadRepository.findById(threadId!)
+            .onSuccess() { messageThread in
+                if self.messageThread != messageThread {
+                    self.messageThread = messageThread
+                    self.tableView.reloadData()
+                }
+        }
+
+        refreshControl.endRefreshing()
+    }
+
     func replyToThread()
     {
         performSegueWithIdentifier(Storyboard.ShowNewMessageSegue, sender: messageThread)

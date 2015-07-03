@@ -9,16 +9,14 @@
 import UIKit
 import Haneke
 
-let iconFormat = Format<UIImage>(name: "thumbnail", diskCapacity: 10 * 1024 * 1024) { image in
-    return image
-}
-
 class MessagesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
 {
     private let messageRepository = MessageRepository()
     private let userRepository = UserRepository()
     private var messages = [Message]()
-    
+
+    private var refreshControl: UIRefreshControl!
+
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.delegate = self
@@ -28,8 +26,19 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
             tableView.rowHeight = UITableViewAutomaticDimension;
         }
     }
-    
-    override func viewDidAppear(animated: Bool)
+
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
+        self.tableView.addSubview(refreshControl)
+
+        refresh()
+    }
+
+    func refresh()
     {
         messageRepository.getAll().onSuccess() { messages in
             if self.messages != messages {
@@ -38,8 +47,9 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
             }
         }
 
+        refreshControl.endRefreshing()
     }
-    
+
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
     {
         if segue.identifier == Storyboard.ShowMessageThreadSegue {
