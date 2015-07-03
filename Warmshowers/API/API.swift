@@ -421,6 +421,10 @@ public class API
                 } else {
                     var json = JSON(json!)
                     var messageThread = MessageThreadSerialization.deserializeJSON(json)
+                    log.info(
+                        "Fetched message thread \(messageThread.id) with " +
+                        "\(messageThread.messages.count) messages"
+                    )
                     promise.success(messageThread)
                 }
             }

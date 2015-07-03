@@ -10,7 +10,8 @@ import UIKit
 
 class MessageThreadViewController: UIViewController, UITableViewDataSource
 {
-    private var api = API.sharedInstance
+    private let messageThreadRepository = MessageThreadRepository()
+
     private var messageThread: MessageThread?
     
     @IBOutlet weak var tableView: UITableView! {
@@ -24,10 +25,9 @@ class MessageThreadViewController: UIViewController, UITableViewDataSource
     
     var threadId: Int? {
         didSet {
-            api
-                .readMessageThread(threadId!)
+            messageThreadRepository.findById(threadId!)
                 .onSuccess() { messageThread in
-                    messageThread.messages = messageThread.messages?.reverse()
+//                    messageThread.messages
                     self.messageThread = messageThread
                     self.tableView.reloadData()
                 }
@@ -69,7 +69,7 @@ class MessageThreadViewController: UIViewController, UITableViewDataSource
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let message = messageThread?.messages![indexPath.row]
+        let message = messageThread?.messages[indexPath.row]
         var cell: MessageBodyCell?
         
         // I am sending the message

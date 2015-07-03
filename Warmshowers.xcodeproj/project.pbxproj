@@ -329,10 +329,10 @@
 				84CFCD6E1B0D2B0700647959 /* Message.swift */,
 				84B491D21B3ABD2F00BC4445 /* MessageRepository.swift */,
 				84CFCD6F1B0D2B0700647959 /* MessageThread.swift */,
-				846D2C8E1B34227D009FADEF /* User.swift */,
-				84B0C6A31B3C095500497DE0 /* UserRepository.swift */,
-				848F850D1B3FEDCF006A5F4B /* UserPictureCache.swift */,
 				84C019201B4672B000E13E77 /* MessageThreadRepository.swift */,
+				846D2C8E1B34227D009FADEF /* User.swift */,
+				848F850D1B3FEDCF006A5F4B /* UserPictureCache.swift */,
+				84B0C6A31B3C095500497DE0 /* UserRepository.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";

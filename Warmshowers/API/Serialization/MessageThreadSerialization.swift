@@ -7,6 +7,7 @@
 //
 
 import SwiftyJSON
+import RealmSwift
 
 public class MessageThreadSerialization
 {
@@ -14,16 +15,18 @@ public class MessageThreadSerialization
     {
         var messageThread = MessageThread(id: json["thread_id"].intValue)
         
-        var participants = [User]()
+        var participants = List<User>()
         for (key, userJson) in json["participants"] {
             var user = User(id: userJson["uid"].intValue, username: userJson["name"].stringValue)
             participants.append(user)
         }
+
         messageThread.participants = participants
         
-        var messages = [Message]()
+        var messages = List<Message>()
         for (key, messageJson) in json["messages"] {
             var message = Message()
+            message.id = messageJson["mid"].intValue
             message.threadId = messageJson["thread_id"].intValue
             message.subject = messageJson["subject"].stringValue
             message.body = messageJson["body"].stringValue

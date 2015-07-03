@@ -18,9 +18,9 @@ public class MessageThread: Object
     dynamic var start = 0
     
     dynamic var user: User?
-    dynamic var messages: [Message]?
-    dynamic var subject: String?
-    dynamic var participants: [User]?
+    dynamic var messages = List<Message>()
+    dynamic var subject = ""
+    dynamic var participants = List<User>()
 
     convenience init(id: Int)
     {

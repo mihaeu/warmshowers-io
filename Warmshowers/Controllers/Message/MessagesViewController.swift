@@ -32,8 +32,10 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidAppear(animated: Bool)
     {
         messageRepository.getAll().onSuccess() { messages in
-            self.messages = messages
-            self.tableView.reloadData()
+            if self.messages != messages {
+                self.messages = messages
+                self.tableView.reloadData()
+            }
         }
 
     }
