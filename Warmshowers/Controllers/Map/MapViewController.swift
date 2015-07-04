@@ -12,7 +12,7 @@ import Haneke
 import SwiftyDrop
 import IJReachability
 
-class MapViewController: UIViewController, CLLocationManagerDelegate
+class MapViewController: UIViewController
 {
     @IBOutlet weak var searchResultTableView: UITableView! {
         didSet {
@@ -23,7 +23,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
     }
     @IBOutlet weak var mapView: MKMapView! {
         didSet {
-            mapView.showsUserLocation = true
             mapView.delegate = self
         }
     }
@@ -35,46 +34,32 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
             }
         }
     }
-    var searchResults = [User]()
-    
+    private var searchResults = [User]()
     private var users = [Int:User]()
     private var userAnnotations = [Int:MKAnnotation]()
-    
-    private var didAdjustInitialZoomLevel = false
-    private var myLocation: CLLocationCoordinate2D? {
-        didSet {
-            var region = mapView.region
-            region.span.latitudeDelta = region.span.latitudeDelta / 10
-            region.span.longitudeDelta = region.span.longitudeDelta / 10
-            mapView.setRegion(region, animated: true)
-            didAdjustInitialZoomLevel = true
-        }
-    }
-    
-    private let userRepository = UserRepository.sharedInstance
-    private var locationManager = CLLocationManager() {
-        didSet {
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-
-            if CLLocationManager.authorizationStatus() == .NotDetermined {
-                locationManager.requestWhenInUseAuthorization()
-            }
-
-            locationManager.pausesLocationUpdatesAutomatically = true
-            locationManager.startUpdatingLocation()
-        }
-    }
-    
+    private var initialZoomFinished = false
+    private var locationManager = CLLocationManager()
     private var searchBar = UISearchBar()
+    private let userRepository = UserRepository.sharedInstance
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
+
+        // set up location manager
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        if CLLocationManager.authorizationStatus() == .NotDetermined {
+            locationManager.requestWhenInUseAuthorization()
+        }
+        locationManager.startUpdatingLocation()
+        mapView.showsUserLocation = true
+
+        // add the search bar
         searchBar.delegate = self
         self.navigationItem.titleView = searchBar
 
+        // find the active user
         let user = userRepository.findByActiveUser()
         if user == nil {
             performSegueWithIdentifier(Storyboard.ShowLogin, sender: nil)
@@ -122,16 +107,21 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
     }
 }
 
+//--------------------------------------------------------------------------------------------------
+// MARK: MKMapViewDelegate
+//--------------------------------------------------------------------------------------------------
+
 extension MapViewController: MKMapViewDelegate
 {
     // MARK: Zooming and pinching
     
     func mapView(mapView: MKMapView!, regionDidChangeAnimated animated: Bool)
     {
-        if didAdjustInitialZoomLevel == false {
+        // saves a couple of API requests if we wait until we're zoomed
+        if initialZoomFinished == false {
             return
         }
-        
+
         let region = mapView.region
         
         let centerLongitude = region.center.longitude
@@ -180,21 +170,23 @@ extension MapViewController: MKMapViewDelegate
             }
         }
     }
-    
+
+    /**
+        This will trigger the first initial zoom
+
+        :param: mapView
+    */
     func mapViewDidFinishLoadingMap(mapView: MKMapView!)
     {
-        if didAdjustInitialZoomLevel == false {
+        if initialZoomFinished == false {
             var region = mapView.region
             region.span.latitudeDelta = region.span.latitudeDelta / 10
             region.span.longitudeDelta = region.span.longitudeDelta / 10
             mapView.setRegion(region, animated: true)
-            didAdjustInitialZoomLevel = true
+            initialZoomFinished = true
         }
     }
-    
-    
-    // MARK: Annotations
-    
+
     func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView!
     {
         var view = mapView.dequeueReusableAnnotationViewWithIdentifier(
@@ -204,7 +196,7 @@ extension MapViewController: MKMapViewDelegate
             if let userAnnotation = annotation as? UserAnnotation {
                 view = UserAnnotationView(userAnnotation: userAnnotation)
             } else {
-                view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "a")
+                view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "cell")
             }
         }
 
@@ -221,16 +213,26 @@ extension MapViewController: MKMapViewDelegate
     }
 }
 
+//--------------------------------------------------------------------------------------------------
+// MARK: CLLocationManagerDelegate
+//--------------------------------------------------------------------------------------------------
+
 extension MapViewController: CLLocationManagerDelegate
 {
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!)
     {
         if let firstLocation = locations.first as? CLLocation {
-            myLocation = firstLocation.coordinate
+            let span = MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1)
+            let region = MKCoordinateRegion(center: firstLocation.coordinate, span: span)
+            mapView.setRegion(region, animated: true)
             locationManager.stopUpdatingLocation()
         }
     }
 }
+
+//--------------------------------------------------------------------------------------------------
+// MARK: UISearchBarDelegate
+//--------------------------------------------------------------------------------------------------
 
 extension MapViewController: UISearchBarDelegate
 {
@@ -252,6 +254,10 @@ extension MapViewController: UISearchBarDelegate
     }
 }
 
+//--------------------------------------------------------------------------------------------------
+// MARK: UITableViewDelegate
+//--------------------------------------------------------------------------------------------------
+
 extension MapViewController: UITableViewDelegate
 {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
@@ -266,6 +272,10 @@ extension MapViewController: UITableViewDelegate
         openSelectedUserAnnotation(user)
     }
 }
+
+//--------------------------------------------------------------------------------------------------
+// MARK: UITableViewDataSource
+//--------------------------------------------------------------------------------------------------
 
 extension MapViewController: UITableViewDataSource
 {

@@ -53,6 +53,7 @@
 		84CFCD731B0D2B0700647959 /* MessageThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CFCD6F1B0D2B0700647959 /* MessageThread.swift */; };
 		84CFCD771B0D2B7F00647959 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CFCD751B0D2B7F00647959 /* API.swift */; };
 		84CFCD781B0D2B7F00647959 /* APISecrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CFCD761B0D2B7F00647959 /* APISecrets.swift */; };
+		84E893121B487254005555F5 /* OneShotLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E893111B487254005555F5 /* OneShotLocationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,6 +119,7 @@
 		84CFCD6F1B0D2B0700647959 /* MessageThread.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageThread.swift; path = Models/MessageThread.swift; sourceTree = "<group>"; };
 		84CFCD751B0D2B7F00647959 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = API.swift; path = API/API.swift; sourceTree = "<group>"; };
 		84CFCD761B0D2B7F00647959 /* APISecrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APISecrets.swift; path = API/APISecrets.swift; sourceTree = "<group>"; };
+		84E893111B487254005555F5 /* OneShotLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OneShotLocationManager.swift; path = Libraries/OneShotLocationManager.swift; sourceTree = "<group>"; };
 		D6FCB87087944DF13BD8B4DF /* Pods-Warmshowers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Warmshowers.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Warmshowers/Pods-Warmshowers.debug.xcconfig"; sourceTree = "<group>"; };
 		DF533D9EE4906563B6D713FA /* Pods-WarmshowersTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WarmshowersTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WarmshowersTests/Pods-WarmshowersTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -255,6 +257,7 @@
 				84CFCD651B0D011200647959 /* Controllers */,
 				846D6BF51AFD635E00144D4F /* API */,
 				84977BF51B4318F600433FF6 /* Extensions */,
+				84E893101B487221005555F5 /* Libraries */,
 				848BC7A41AFBD7FD00974467 /* Supporting Files */,
 				84338C801B3D5030003C0411 /* MiscConstants.swift */,
 				84338C8D1B3D96BA003C0411 /* Utils.swift */,
@@ -341,6 +344,14 @@
 				84B0C6A31B3C095500497DE0 /* UserRepository.swift */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		84E893101B487221005555F5 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				84E893111B487254005555F5 /* OneShotLocationManager.swift */,
+			);
+			name = Libraries;
 			sourceTree = "<group>";
 		};
 		872482773126DB5AFA7662D5 /* Pods */ = {
@@ -565,6 +576,7 @@
 				84338C8C1B3D95C6003C0411 /* UserSerialization.swift in Sources */,
 				8456A1051B45902F006E5DA0 /* AuthenticationViewController.swift in Sources */,
 				84CFCD711B0D2B0700647959 /* Feedback.swift in Sources */,
+				84E893121B487254005555F5 /* OneShotLocationManager.swift in Sources */,
 				8456A1011B459017006E5DA0 /* NewMessageViewController.swift in Sources */,
 				844C1A2E1AFBFF630013551A /* Storyboard.swift in Sources */,
 				84CFCD731B0D2B0700647959 /* MessageThread.swift in Sources */,

@@ -156,6 +156,11 @@ class UserRepository: BaseRepository
     */
     func save(user: User)
     {
+        // sometimes the API handles corrupt users
+        if user.id == 0 {
+            return
+        }
+
         Realm().write {
             Realm().add(user, update: true)
         }
