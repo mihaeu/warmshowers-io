@@ -190,14 +190,12 @@ extension MapViewController: MKMapViewDelegate
     func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView!
     {
         var view = mapView.dequeueReusableAnnotationViewWithIdentifier(
-            Storyboard.AnnotationViewReuseIdentifier) as? MKPinAnnotationView
-
+            Storyboard.AnnotationViewReuseIdentifier) as? UserAnnotationView
         if view == nil {
-            if let userAnnotation = annotation as? UserAnnotation {
-                view = UserAnnotationView(userAnnotation: userAnnotation)
-            } else {
-                view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "cell")
-            }
+            view = UserAnnotationView(annotation: annotation, reuseIdentifier: Storyboard.AnnotationViewReuseIdentifier)
+        }
+        if let userAnnotation = annotation as? UserAnnotation {
+            view!.updateUserInfo(userAnnotation.user!)
         }
 
         return view
