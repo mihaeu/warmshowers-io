@@ -66,9 +66,11 @@ class NewFeedbackViewController: UITableViewController
             type: met
         )
 
-        if validateFeedback(feedback) {
+        if feedbackIsValid(feedback) {
             FeedbackRepository.sharedInstance.save(feedback)
             navigationController?.popToRootViewControllerAnimated(true)
+        } else {
+            Drop.down("Please make sure to use at least 10 words in your feedback.", state: .Error)
         }
     }
 
@@ -79,12 +81,11 @@ class NewFeedbackViewController: UITableViewController
 
         :returns: Bool
     */
-    private func validateFeedback(feedback: Feedback) -> Bool
+    private func feedbackIsValid(feedback: Feedback) -> Bool
     {
         // minimum 10 words
         let words = feedback.body.componentsSeparatedByString(" ")
         if words.count < 10 {
-            Drop.down("Please make sure to use at least 10 words in your feedback.", state: .Error)
             return false
         }
 
