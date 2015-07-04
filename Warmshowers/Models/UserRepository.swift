@@ -12,9 +12,27 @@ import RealmSwift
 import Result
 import Box
 
+/// A central place for fetching and caching users.
 class UserRepository
 {
-    private let api = API.sharedInstance
+    /// Singleton
+    static var sharedInstance = UserRepository(api: API.sharedInstance)
+
+    private var api: API!
+
+    /**
+        Inject API so it can be mocked.
+    
+        Call this only when testing, use the sharedInstance otherwise.
+
+        :param: api	API
+    */
+    convenience init(api: API)
+    {
+        self.init()
+
+        self.api = api
+    }
 
     /**
         Fetches the user from either local storage or from the internet.

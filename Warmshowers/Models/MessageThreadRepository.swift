@@ -10,9 +10,26 @@ import RealmSwift
 import BrightFutures
 import IJReachability
 
+/// A central place for fetching and caching message repositories.
 class MessageThreadRepository
 {
-    let api = API.sharedInstance
+    static var sharedInstance = MessageThreadRepository(api: API.sharedInstance)
+
+    private var api: API!
+
+    /**
+    Inject API so it can be mocked.
+
+    Call this only when testing, use the sharedInstance otherwise.
+
+    :param: api	API
+    */
+    convenience init(api: API)
+    {
+        self.init()
+
+        self.api = api
+    }
 
     /**
         Fetch a message thread from the API or from local storage when offline.

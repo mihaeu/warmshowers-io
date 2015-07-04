@@ -10,9 +10,26 @@ import BrightFutures
 import RealmSwift
 import IJReachability
 
+/// A central place for fetching and caching messages.
 class MessageRepository
 {
-    let api = API.sharedInstance
+    static var sharedInstance = MessageRepository(api: API.sharedInstance)
+
+    private var api: API!
+
+    /**
+        Inject API so it can be mocked.
+
+        Call this only when testing, use the sharedInstance otherwise.
+
+        :param: api	API
+    */
+    convenience init(api: API)
+    {
+        self.init()
+
+        self.api = api
+    }
 
     /**
         Send the message.

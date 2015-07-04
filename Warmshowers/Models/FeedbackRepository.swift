@@ -10,9 +10,27 @@ import BrightFutures
 import RealmSwift
 import IJReachability
 
+/// A central place for fetching and caching Feedback
 class FeedbackRepository
 {
-    private let api = API.sharedInstance
+    /// Singleton
+    static var sharedInstance = FeedbackRepository(api: API.sharedInstance)
+
+    private var api: API!
+
+    /**
+        Inject API so it can be mocked.
+
+        Call this only when testing, use the sharedInstance otherwise.
+
+        :param: api	API
+    */
+    convenience init(api: API)
+    {
+        self.init()
+
+        self.api = api
+    }
 
     /**
         Get all feedback for a user.
