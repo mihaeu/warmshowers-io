@@ -272,6 +272,7 @@ extension MapViewController: UITableViewDataSource
             cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "cell")
         }
         cell?.textLabel!.text = searchResults[indexPath.row].fullname
+        cell?.textLabel?.textAlignment = NSTextAlignment.Center
         return cell!
     }
 }

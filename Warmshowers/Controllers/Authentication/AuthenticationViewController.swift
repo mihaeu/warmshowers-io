@@ -25,8 +25,6 @@ class AuthenticationViewController: UIViewController, UITextFieldDelegate
     override func viewDidAppear(antimated: Bool)
     {
         usernameTextField?.text = APISecrets.Username
-        usernameTextField.becomeFirstResponder()
-        usernameTextField.restorationIdentifier = "username"
         usernameTextField.delegate = self
 
         passwordTextField?.text = APISecrets.Password
