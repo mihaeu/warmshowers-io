@@ -29,6 +29,9 @@ struct Storyboard
     static let MessageBodyToCellIdentifier = "Message Body To Cell"
     static let ProfileOverviewCellIdentifier = "Profile Overview Cell"
     static let UserCellIdentifier = "User Cell"
+    static let MyPictureCellIdentifier = "My Picture Cell"
+    static let MyDescriptionCellIdentifier = "My Description Cell"
+    static let MyInfoCellIdentifier = "My Info Cell"
 
     static let UsernameLabelId = "username"
 

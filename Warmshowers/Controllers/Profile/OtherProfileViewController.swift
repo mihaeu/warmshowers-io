@@ -42,7 +42,7 @@ class OtherProfileViewController: UIViewController
         "User Information",
         "Feedback"
     ];
-    
+
     override func viewDidLoad()
     {
         userRepository.findById(user!.id).onSuccess { user in
@@ -66,13 +66,13 @@ class OtherProfileViewController: UIViewController
         userData.append(user!.spokenLanguages)
         userData.append(user!.latitude.description)
         userData.append(user!.longitude.description)
-        
+
         tableData = [[AnyObject]]()
         tableData.append([user!])
         tableData.append(userData)
         tableView.reloadData()
         
-        feedbackRepository.getAllById(user!.id).onSuccess() { userFeedback in
+        feedbackRepository.getAllByUser(user!).onSuccess() { userFeedback in
             self.tableData.append(userFeedback)
             self.tableView.reloadData()
         }
@@ -142,12 +142,11 @@ extension OtherProfileViewController: UITableViewDataSource
 
         var cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.UserCellIdentifier) as? UITableViewCell
         if cell == nil {
-            cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: Storyboard.UserCellIdentifier)
+            cell = UITableViewCell(style: UITableViewCellStyle.Value2, reuseIdentifier: Storyboard.UserCellIdentifier)
         }
-        
-        cell!.textLabel?.text = tableData[indexPath.section][indexPath.row] as? String
-        cell!.textLabel?.lineBreakMode = NSLineBreakMode.ByWordWrapping
-        cell!.textLabel?.numberOfLines = 0
+
+        cell!.textLabel?.text = "I'm a label"
+        cell!.detailTextLabel!.text = "\(tableData[indexPath.section][indexPath.row])"
 
         return cell!
     }

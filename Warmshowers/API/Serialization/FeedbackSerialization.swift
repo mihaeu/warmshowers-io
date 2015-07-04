@@ -2,8 +2,8 @@
 //  FeedbackSerialization.swift
 //  Warmshowers
 //
-//  Created by admin on 23/05/15.
-//  Copyright (c) 2015 mihaeu. All rights reserved.
+//  Created by Michael Haeuslmann on 23/05/15.
+//  Copyright (c) 2015 Michael Haeuslmann. All rights reserved.
 //
 
 import SwiftyJSON
@@ -28,6 +28,7 @@ class FeedbackSerialization
             rating: json["field_rating_value"].stringValue,
             type: json["field_guest_or_host_value"].stringValue
         )
+        feedback.toUserId = json["uid_1"].intValue
         
         var fromUser = User(id: json["uid"].intValue, username: json["name"].stringValue)
         fromUser.fullname = json["fullname"].stringValue

@@ -41,10 +41,30 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
     private var userAnnotations = [Int:MKAnnotation]()
     
     private var didAdjustInitialZoomLevel = false
-    private var myLocation: CLLocationCoordinate2D?
+    private var myLocation: CLLocationCoordinate2D? {
+        didSet {
+            var region = mapView.region
+            region.span.latitudeDelta = region.span.latitudeDelta / 10
+            region.span.longitudeDelta = region.span.longitudeDelta / 10
+            mapView.setRegion(region, animated: true)
+            didAdjustInitialZoomLevel = true
+        }
+    }
     
     private let userRepository = UserRepository.sharedInstance
-    private let locationManager = CLLocationManager()
+    private var locationManager = CLLocationManager() {
+        didSet {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+
+            if CLLocationManager.authorizationStatus() == .NotDetermined {
+                locationManager.requestWhenInUseAuthorization()
+            }
+
+            locationManager.pausesLocationUpdatesAutomatically = true
+            locationManager.startUpdatingLocation()
+        }
+    }
     
     private var searchBar = UISearchBar()
     
@@ -54,16 +74,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
         
         searchBar.delegate = self
         self.navigationItem.titleView = searchBar
-
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-
-        if CLLocationManager.authorizationStatus() == .NotDetermined {
-            locationManager.requestWhenInUseAuthorization()
-        }
-
-        locationManager.pausesLocationUpdatesAutomatically = true
-        locationManager.startUpdatingLocation()
 
         let user = userRepository.findByActiveUser()
         if user == nil {

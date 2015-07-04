@@ -22,7 +22,7 @@ class ProfileOverviewCell: UITableViewCell
     func update(user: User)
     {
         fullnameLabel.text = user.fullname
-        descriptionLabel.text = user.comments
+        descriptionLabel.attributedText = Utils.htmlToAttributedText(user.comments)
 
         UserPictureCache.sharedInstance.pictureById(user.id).onSuccess { image in
             self.userPictureImageView.image = image

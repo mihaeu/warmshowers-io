@@ -45,14 +45,15 @@ class FeedbackRepository: BaseRepository
 
         :returns: array of feedback on success, error on failure
     */
-    func getAllById(userId: Int, refresh: Bool = false) -> Future<[Feedback], NSError>
+    func getAllByUser(user: User, refresh: Bool = false) -> Future<[Feedback], NSError>
     {
+        let result = Realm().objects(Feedback).filter("toUserId == \(user.id)")
+
         // only check db, when not connected
-        if canGetLocal(refresh) {
-            let result = Realm().objects(Feedback).filter("toUser.id == \(userId)")
+        if result.count > 0 && canGetLocal(refresh) {
             let promise = Promise<[Feedback], NSError>()
             var userFeedback = [Feedback]()
-            for feedback in userFeedback {
+            for feedback in result {
                 userFeedback.append(feedback)
             }
             log.debug("Fetching feedback from cache, found \(userFeedback.count)")
@@ -61,7 +62,7 @@ class FeedbackRepository: BaseRepository
         }
 
         // fetch and cache
-        return api.getFeedbackForUser(userId).onSuccess { userFeedback in
+        return api.getFeedbackForUser(user.id).onSuccess { userFeedback in
             self.lastUpdated = NSDate()
             Realm().write {
                 for feedback in userFeedback {
@@ -91,6 +92,7 @@ class FeedbackRepository: BaseRepository
             if toUserResult.count == 1 {
                 feedback.toUser = toUserResult.first!
             }
+            feedback.toUserId = feedback.toUser.id
             
             if fromUserResult.count == 1 {
                 feedback.fromUser = fromUserResult.first!

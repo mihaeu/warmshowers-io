@@ -13,6 +13,7 @@ class Feedback: Object
 {
     dynamic var id = 0
     dynamic var toUser = User()
+    dynamic var toUserId = 0 // for realm relationship queries
     dynamic var fromUser = User()
     
     dynamic var body = ""
@@ -57,7 +58,7 @@ class Feedback: Object
     
     override static func indexedProperties() -> [String]
     {
-        return ["toUser"]
+        return ["toUser", "toUserId"]
     }
     
     override static func ignoredProperties() -> [String] {

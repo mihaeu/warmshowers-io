@@ -11,33 +11,69 @@ import Haneke
 import SwiftyDrop
 import IJReachability
 
-class MyProfileViewController: UIViewController
+class MyProfileViewController: UITableViewController
 {
     @IBOutlet weak var userPictureImageView: UIImageView!
+    @IBOutlet weak var descriptionTextView: UITextView!
+    @IBOutlet weak var fullnameTextField: UITextField!
+    @IBOutlet weak var spokenLanguagesTextField: UITextField!
+    @IBOutlet weak var mobilePhoneTextField: UITextField!
+    @IBOutlet weak var streetTextField: UITextField!
+    @IBOutlet weak var cityTextField: UITextField!
+    @IBOutlet weak var countryTextField: UITextField!
+    @IBOutlet weak var zipCodeTextField: UITextField!
 
-    @IBOutlet weak var userLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var languagesSpokenLabel: UILabel!
-    
+    private var user: User?
+
     private let api = API.sharedInstance
     private let userRepository = UserRepository.sharedInstance
-    private var user: User?
     
     override func viewDidLoad()
     {
-        user = userRepository.findByActiveUser()
-        userLabel.text = user?.username
-        languagesSpokenLabel.text = user?.spokenLanguages
-        descriptionLabel.attributedText = Utils.htmlToAttributedText(user!.comments)
+        let buttons = [
+            UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: "save"),
+            UIBarButtonItem(image: UIImage(named: "nav-logout"), style: .Plain, target: self, action: "logout")
+        ]
+        navigationItem.setRightBarButtonItems(buttons, animated: true)
 
-        UserPictureCache.sharedInstance.pictureById(user!.id).onSuccess { image in
-            self.userPictureImageView.image = image
-        }.onFailure { error in
-            self.userPictureImageView.image = UserPictureCache.defaultPicture
+        user = userRepository.findByActiveUser()
+        if user != nil {
+            descriptionTextView.attributedText = Utils.htmlToAttributedText(user!.comments)
+            fullnameTextField.text = user!.fullname
+            spokenLanguagesTextField.text = user!.spokenLanguages
+            mobilePhoneTextField.text = user!.mobilePhone
+            streetTextField.text = user!.street
+            cityTextField.text = user!.city
+            countryTextField.text = Constants.CountryCodes[user!.country]
+            zipCodeTextField.text = user!.zipCode
+
+            UserPictureCache.sharedInstance.pictureById(user!.id).onSuccess { image in
+                self.userPictureImageView.image = image
+            }.onFailure { error in
+                self.userPictureImageView.image = UserPictureCache.defaultPicture
+            }
         }
     }
 
-    @IBAction func logout(sender: AnyObject)
+    func save()
+    {
+        if user != nil {
+            userRepository.update(user!, key: "comments", value: descriptionTextView.text)
+            userRepository.update(user!, key: "fullname", value: fullnameTextField.text)
+            userRepository.update(user!, key: "spokenLanguages", value: spokenLanguagesTextField.text)
+            userRepository.update(user!, key: "mobilePhone", value: mobilePhoneTextField.text)
+            userRepository.update(user!, key: "street", value: streetTextField.text)
+            userRepository.update(user!, key: "city", value: cityTextField.text)
+            userRepository.update(user!, key: "country", value: countryTextField.text)
+            userRepository.update(user!, key: "zipCode", value: zipCodeTextField.text)
+            
+            userRepository.save(user!)
+            Drop.down("All changes saved ...", state: .Success)
+
+        }
+    }
+
+    func logout()
     {
         if IJReachability.isConnectedToNetwork() {
             userRepository.update(user!, key: "password", value: "")
@@ -47,56 +83,5 @@ class MyProfileViewController: UIViewController
         } else {
             Drop.down("No internet connection, please try again later ...", state: .Info)
         }
-    }
-
-    // TODO: Implement ...
-    func dataSource(user: User)
-    {
-        let sections = [
-            "Account",
-            "Location",
-            "Member"
-        ]
-        
-        var data = [String:[String:String]]()
-
-        data["Account"] = ["Username": user.username]
-        data["Location"] = [
-            "Country": user.country,
-            "Street": "",
-            "Additional": "",
-            "City": "",
-            "State/Province": "",
-            "Postal Code": ""
-        ]
-        data["Member"] = [
-            "Full Name": "",
-            "About you": "",
-            "Home Phone": "",
-            "Mobile Phone": "",
-            "Work Phone": "",
-            "Preferred Notice": "",
-            "Max. Guests": "",
-            "Closest Hotel": "",
-            "Closest Campsite": "",
-            "Closest Bike Shop": "",
-            "Spoken Languages": "",
-            "Website": ""
-        ]
-        data["Services"] = [
-            "Bed": "",
-            "Food": "",
-            "Laundry": "",
-            "Tent": "",
-            "SAG": "",
-            "Shower": "",
-            "Storage": "",
-            "Kitchen": ""
-        ]
-        data["Settings"] = [
-            "N/A" : "",
-            "Opt-Out" : "",
-            "Time-Zone" : ""
-        ]
     }
 }

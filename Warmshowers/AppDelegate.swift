@@ -19,10 +19,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func application(
-        application: UIApplication,
-        didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
+    {
+        setUpLog()
+        setUpRealm()
+        setUpInitialViewController()
+
+        return true
+    }
+
+    /**
+        Set up XCGLogger format, colors etc.
+    */
+    private func setUpLog()
+    {
         log.setup(
             logLevel: .Debug,
             showLogLevel: true,
@@ -41,19 +51,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             .Error: .red
         ]
 
+    }
+
+    /**
+        Set up Realm migrations.
+    */
+    private func setUpRealm()
+    {
         log.debug("Default Realm database at: \(Realm.defaultPath)")
 
-//        Reset Realm database by deleting it
-//        var error: NSError?
-//        NSFileManager.defaultManager().removeItemAtPath(Realm.defaultPath, error: &error)
+        // Reset Realm database by deleting it
+        // var error: NSError?
+        // NSFileManager.defaultManager().removeItemAtPath(Realm.defaultPath, error: &error)
 
-//        or migrate:
-        setSchemaVersion(13, Realm.defaultPath, { migration, oldSchemaVersion in })
+        // or migrate:
+        setSchemaVersion(16, Realm.defaultPath, { migration, oldSchemaVersion in })
+    }
 
-        //----------------------------------------------------------------------
-        // MARK: Initial view controller
-        //----------------------------------------------------------------------
-
+    /**
+        Set up initial view controller depending on login status.
+    */
+    private func setUpInitialViewController()
+    {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
 
@@ -67,7 +86,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 storyboard.instantiateViewControllerWithIdentifier("Map") as? UIViewController
         }
         self.window?.makeKeyAndVisible()
-
-        return true
     }
 }

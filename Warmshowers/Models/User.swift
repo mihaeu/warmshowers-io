@@ -30,6 +30,7 @@ public class User: Object
     dynamic var picture = ""
     
     dynamic var spokenLanguages = ""
+    dynamic var mobilePhone = ""
     
     dynamic var street = ""
     dynamic var city = ""
@@ -41,8 +42,6 @@ public class User: Object
     
     dynamic var isFavorite = false
 
-    dynamic var timeCached = NSDate(timeIntervalSince1970: 1)
-    
     // -------------------------------------------------------------------------
     // MARK: Realm Properties
     // -------------------------------------------------------------------------

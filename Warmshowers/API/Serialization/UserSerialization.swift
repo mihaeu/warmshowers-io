@@ -21,6 +21,7 @@ public class UserSerialization
         user.comments = json["comments"].stringValue
         
         user.spokenLanguages = json["languagesspoken"].stringValue
+        user.mobilePhone = json["mobilePhone"].stringValue
         
         user.street = json["street"].stringValue
         user.city = json["city"].stringValue
