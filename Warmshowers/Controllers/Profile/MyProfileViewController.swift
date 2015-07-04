@@ -38,7 +38,7 @@ class MyProfileViewController: UITableViewController
 
         user = userRepository.findByActiveUser()
         if user != nil {
-            descriptionTextView.attributedText = Utils.htmlToAttributedText(user!.comments)
+            descriptionTextView.text = user!.comments
             fullnameTextField.text = user!.fullname
             spokenLanguagesTextField.text = user!.spokenLanguages
             mobilePhoneTextField.text = user!.mobilePhone
