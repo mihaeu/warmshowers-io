@@ -13,7 +13,7 @@ import Result
 import Box
 
 /// A central place for fetching and caching users.
-class UserRepository
+class UserRepository: BaseRepository
 {
     /// Singleton
     static var sharedInstance = UserRepository(api: API.sharedInstance)
@@ -47,27 +47,21 @@ class UserRepository
     */
     func findById(id: Int, refresh: Bool = false) -> Future<User, NSError>
     {
-        let result = Realm().objects(User).filter("id == \(id)")
+        // sparse users have only id and username (e.g. from a search by keyword or
+        // location, in that case we don't want the user
+        let result = Realm().objects(User).filter("id == \(id) AND comments != ''")
         var localUser = User()
 
-        // if we don't want a refresh and we found something
-        if refresh == false && result.count == 1{
+        if result.count == 1 && canGetLocal(refresh) {
             let promise = Promise<User, NSError>()
-            localUser = result.first!
-            promise.success(localUser)
-            return promise.future
-        }
-
-        // if we couldn't find anything or want a refresh from the API,
-        // but are not connected
-        if !IJReachability.isConnectedToNetwork() {
-            let promise = Promise<User, NSError>()
-            promise.failure(Error.NoInternet)
+            promise.success(result.first!)
+            log.debug("Fetching user from cache, found \(result.first!.username)")
             return promise.future
         }
 
         // before returning save the result locally
         let future = api.getUser(id).onSuccess { user in
+            self.lastUpdated = NSDate()
             Realm().write {
                 // the favorite flag of a user is only saved locally and is
                 // not supported by the API, thus we need to transfer the
@@ -115,6 +109,19 @@ class UserRepository
             centerlon: centerLongitude,
             limit: limit
         )
+    }
+
+    /**
+        Search for users by username, fullname or city.
+
+        :param: keyword
+        :param: limit
+
+        :returns: Future<[Int:User]>
+    */
+    func searchByKeyword(keyword: String, limit: Int) -> Future<[Int:User], NSError>
+    {
+        return api.searchByKeyword(keyword, limit: limit)
     }
 
     /**

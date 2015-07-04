@@ -11,18 +11,18 @@ import BrightFutures
 import IJReachability
 
 /// A central place for fetching and caching message repositories.
-class MessageThreadRepository
+class MessageThreadRepository: BaseRepository
 {
     static var sharedInstance = MessageThreadRepository(api: API.sharedInstance)
 
     private var api: API!
 
     /**
-    Inject API so it can be mocked.
+        Inject API so it can be mocked.
 
-    Call this only when testing, use the sharedInstance otherwise.
+        Call this only when testing, use the sharedInstance otherwise.
 
-    :param: api	API
+        :param: api	API
     */
     convenience init(api: API)
     {
@@ -38,11 +38,11 @@ class MessageThreadRepository
 
         :returns: message thread on success, error on failure
     */
-    func findById(threadId: Int) -> Future<MessageThread, NSError>
+    func findById(threadId: Int, refresh: Bool = false) -> Future<MessageThread, NSError>
     {
         // messages should always be up to date, so only get the local version
         // when there is no other choice
-        if !IJReachability.isConnectedToNetwork() {
+        if cacheIsValid(refresh) {
             let result = Realm().objects(MessageThread).filter("id == \(threadId)")
             let promise = Promise<MessageThread, NSError>()
             if result.count == 1 {
@@ -50,11 +50,14 @@ class MessageThreadRepository
             } else {
                 promise.failure(Error.NoInternet)
             }
+
+            log.debug("Fetching message thread from cache, found \(result.count)")
             return promise.future
         }
 
         // fetch and cache
         return api.readMessageThread(threadId).onSuccess { messageThread in
+            self.lastUpdated = NSDate()
             Realm().write {
                 // realm will replace existing users with participants users
                 // which have only sparse data, thus fetch and replace users

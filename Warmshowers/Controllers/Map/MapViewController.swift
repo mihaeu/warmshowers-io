@@ -78,7 +78,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
                 .onFailure() { error in
                     self.performSegueWithIdentifier(Storyboard.ShowLogin, sender: nil)
                 }
-        // no internet connection
         }
     }
 
@@ -232,7 +231,7 @@ extension MapViewController: UISearchBarDelegate
             return
         }
         
-        API.sharedInstance.searchByKeyword(searchText, limit: 10, page: 1).onSuccess { users in
+        userRepository.searchByKeyword(searchText, limit: 10).onSuccess { users in
             self.searchResults.removeAll(keepCapacity: false)
             for (userId, user) in users {
                 self.searchResults.append(user)

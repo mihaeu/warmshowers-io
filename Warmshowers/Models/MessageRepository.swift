@@ -11,7 +11,7 @@ import RealmSwift
 import IJReachability
 
 /// A central place for fetching and caching messages.
-class MessageRepository
+class MessageRepository: BaseRepository
 {
     static var sharedInstance = MessageRepository(api: API.sharedInstance)
 
@@ -59,12 +59,14 @@ class MessageRepository
     /**
         Get and cache all messages for the current user.
 
+        :param: refresh If true will always check the API when possible.
+
         :returns: messages on success, error on failure
     */
-    func getAll() -> Future<[Message], NSError>
+    func getAll(refresh: Bool = false) -> Future<[Message], NSError>
     {
         // if offline, retrieve cached messages or return empty messages
-        if !IJReachability.isConnectedToNetwork() {
+        if cacheIsValid(refresh) {
             let result = Realm().objects(Message)
             var messages = [Message]()
             for message in result {
@@ -72,11 +74,14 @@ class MessageRepository
             }
             let promise = Promise<[Message], NSError>()
             promise.success(messages)
+
+            log.debug("Fetching messages from cache, found \(messages.count)")
             return promise.future
         }
 
         // cache and return
         return api.getAllMessages().onSuccess { messages in
+            self.lastUpdated = NSDate()
             for message in messages {
                 // check if the user already exists, because otherwise
                 // Realm will overwrite the existing user with the user provided

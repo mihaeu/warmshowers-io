@@ -72,7 +72,7 @@ class OtherProfileViewController: UIViewController
         tableData.append(userData)
         tableView.reloadData()
         
-        API.sharedInstance.getFeedbackForUser(user!.id).onSuccess() { userFeedback in
+        feedbackRepository.getAllById(user!.id).onSuccess() { userFeedback in
             self.tableData.append(userFeedback)
             self.tableView.reloadData()
         }
@@ -123,43 +123,23 @@ extension OtherProfileViewController: UITableViewDataSource
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         if indexPath.section == ProfileOverviewIndex {
+            let user = tableData[indexPath.section][indexPath.row] as! User
             var cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.ProfileOverviewCellIdentifier) as? ProfileOverviewCell
             if cell == nil {
-                cell = ProfileOverviewCell(style: UITableViewCellStyle.Default, reuseIdentifier: Storyboard.ProfileOverviewCellIdentifier)
+                cell = ProfileOverviewCell()
             }
-            
-            let user = tableData[indexPath.section][indexPath.row] as! User
-            cell!.fullnameLabel.text = user.fullname
-            cell!.descriptionLabel.text = user.comments
-            UserPictureCache.sharedInstance.pictureById(user.id).onSuccess { image in
-                cell?.userPictureImageView.image = image
-            }.onFailure { error in
-                cell?.userPictureImageView.image = UserPictureCache.defaultPicture
-            }
-            
+            cell!.update(user)
             return cell!
-        }
-        
-        if indexPath.section == FeedbackIndex {
+        } else if indexPath.section == FeedbackIndex {
+            let feedback = tableData[indexPath.section][indexPath.row] as! Feedback
             var cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.FeedbackCellIdentifier) as? FeedbackCell
             if cell == nil {
-                cell = FeedbackCell(style: UITableViewCellStyle.Default, reuseIdentifier: Storyboard.FeedbackCellIdentifier)
+                cell = FeedbackCell()
             }
-            
-            let feedback = tableData[indexPath.section][indexPath.row] as! Feedback
-            cell?.userLabel.text = "\(feedback.fromUser.fullname)"
-            cell?.feedbackLabel.attributedText = Utils.htmlToAttributedText(feedback.body)
-            cell?.createdOnLabel.text = "\(feedback.rating) feedback written in \(Constants.Months[feedback.month]!) \(feedback.year)"
-            
-            UserPictureCache.sharedInstance.thumbnailById(feedback.fromUser.id).onSuccess { image in
-                cell?.userPictureImageView.image = image
-            }.onFailure { error in
-                cell?.userPictureImageView.image = UserPictureCache.defaultThumbnail
-            }
-
+            cell!.update(feedback)
             return cell!
         }
-        
+
         var cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.UserCellIdentifier) as? UITableViewCell
         if cell == nil {
             cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: Storyboard.UserCellIdentifier)
@@ -168,7 +148,7 @@ extension OtherProfileViewController: UITableViewDataSource
         cell!.textLabel?.text = tableData[indexPath.section][indexPath.row] as? String
         cell!.textLabel?.lineBreakMode = NSLineBreakMode.ByWordWrapping
         cell!.textLabel?.numberOfLines = 0
-        
+
         return cell!
     }
 

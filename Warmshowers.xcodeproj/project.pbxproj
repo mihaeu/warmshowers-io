@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		729C10AFDF1D1FFC5F3B2F7D /* Pods_Warmshowers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41CE4247DD6EEBA9135EDC97 /* Pods_Warmshowers.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		73C979E624E10C6864594746 /* Pods_WarmshowersTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23326D4A50F1BEADD824F208 /* Pods_WarmshowersTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		8409EFC81B47D379005A73C9 /* BaseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8409EFC71B47D379005A73C9 /* BaseRepository.swift */; };
 		842055CF1B43CDBE00F88D0E /* NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842055CE1B43CDBE00F88D0E /* NSDate.swift */; };
 		84338C7E1B3D4A75003C0411 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84338C7D1B3D4A75003C0411 /* FavoriteCell.swift */; };
 		84338C811B3D5030003C0411 /* MiscConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84338C801B3D5030003C0411 /* MiscConstants.swift */; };
@@ -69,6 +70,7 @@
 		23326D4A50F1BEADD824F208 /* Pods_WarmshowersTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WarmshowersTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		393D17F1A86431DDB0201F6E /* Pods-WarmshowersTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WarmshowersTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WarmshowersTests/Pods-WarmshowersTests.release.xcconfig"; sourceTree = "<group>"; };
 		41CE4247DD6EEBA9135EDC97 /* Pods_Warmshowers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Warmshowers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8409EFC71B47D379005A73C9 /* BaseRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseRepository.swift; path = Models/BaseRepository.swift; sourceTree = "<group>"; };
 		842055CE1B43CDBE00F88D0E /* NSDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSDate.swift; path = Extensions/NSDate.swift; sourceTree = "<group>"; };
 		84338C7D1B3D4A75003C0411 /* FavoriteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FavoriteCell.swift; path = Views/FavoriteCell.swift; sourceTree = "<group>"; };
 		84338C801B3D5030003C0411 /* MiscConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiscConstants.swift; sourceTree = "<group>"; };
@@ -327,6 +329,7 @@
 		84CFCD6C1B0D2A9E00647959 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				8409EFC71B47D379005A73C9 /* BaseRepository.swift */,
 				84CFCD6D1B0D2B0700647959 /* Feedback.swift */,
 				848F850F1B4080FB006A5F4B /* FeedbackRepository.swift */,
 				84CFCD6E1B0D2B0700647959 /* Message.swift */,
@@ -574,6 +577,7 @@
 				84C019231B46B1C500E13E77 /* UserAnnotationView.swift in Sources */,
 				847E78701B39A4DB0094C329 /* MessageCell.swift in Sources */,
 				8456A0FF1B459017006E5DA0 /* MessagesViewController.swift in Sources */,
+				8409EFC81B47D379005A73C9 /* BaseRepository.swift in Sources */,
 				84338C8A1B3D95C6003C0411 /* MessageSerialization.swift in Sources */,
 				84A8D96C1B14792D00E54581 /* UserAnnotation.swift in Sources */,
 				848F850E1B3FEDCF006A5F4B /* UserPictureCache.swift in Sources */,

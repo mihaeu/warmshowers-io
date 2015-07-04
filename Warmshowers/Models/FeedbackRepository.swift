@@ -11,7 +11,7 @@ import RealmSwift
 import IJReachability
 
 /// A central place for fetching and caching Feedback
-class FeedbackRepository
+class FeedbackRepository: BaseRepository
 {
     /// Singleton
     static var sharedInstance = FeedbackRepository(api: API.sharedInstance)
@@ -40,25 +40,29 @@ class FeedbackRepository
         returns nothing (but succeeds).
 
         :param: userId
+    
+        :param: refresh If true will always check the API when possible.
 
         :returns: array of feedback on success, error on failure
     */
-    func getAllById(userId: Int) -> Future<[Feedback], NSError>
+    func getAllById(userId: Int, refresh: Bool = false) -> Future<[Feedback], NSError>
     {
         // only check db, when not connected
-        if !IJReachability.isConnectedToNetwork() {
+        if canGetLocal(refresh) {
             let result = Realm().objects(Feedback).filter("toUser.id == \(userId)")
             let promise = Promise<[Feedback], NSError>()
             var userFeedback = [Feedback]()
             for feedback in userFeedback {
                 userFeedback.append(feedback)
             }
+            log.debug("Fetching feedback from cache, found \(userFeedback.count)")
             promise.success(userFeedback)
             return promise.future
         }
 
         // fetch and cache
         return api.getFeedbackForUser(userId).onSuccess { userFeedback in
+            self.lastUpdated = NSDate()
             Realm().write {
                 for feedback in userFeedback {
                     Realm().add(feedback, update: true)
