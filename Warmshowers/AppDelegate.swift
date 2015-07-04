@@ -50,6 +50,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        or migrate:
         setSchemaVersion(13, Realm.defaultPath, { migration, oldSchemaVersion in })
 
+        //----------------------------------------------------------------------
+        // MARK: Initial view controller
+        //----------------------------------------------------------------------
+
+        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+
+        // NOT logged in
+        if UserRepository.sharedInstance.findByActiveUser() == nil {
+            self.window?.rootViewController =
+                storyboard.instantiateViewControllerWithIdentifier("Authentication") as? UIViewController
+        // otherwise send to map
+        } else {
+            self.window?.rootViewController =
+                storyboard.instantiateViewControllerWithIdentifier("Map") as? UIViewController
+        }
+        self.window?.makeKeyAndVisible()
+
         return true
     }
 }
