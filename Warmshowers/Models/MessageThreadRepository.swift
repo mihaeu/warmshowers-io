@@ -48,11 +48,7 @@ class MessageThreadRepository
             if result.count == 1 {
                 promise.success(result.first!)
             } else {
-                promise.failure(NSError(
-                    domain: "No internet connection",
-                    code: 1,
-                    userInfo: nil
-                ))
+                promise.failure(Error.NoInternet)
             }
             return promise.future
         }

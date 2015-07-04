@@ -44,11 +44,7 @@ class MessageRepository
     {
         if !IJReachability.isConnectedToNetwork() {
             let promise = Promise<Bool, NSError>()
-            promise.failure(NSError(
-                domain: "No internet connection",
-                code: 1,
-                userInfo: nil
-            ))
+            promise.failure(Error.NoInternet)
             return promise.future
         }
 

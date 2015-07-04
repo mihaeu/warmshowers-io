@@ -6,6 +6,13 @@
 //  Copyright (c) 2015 Michael Haeuslmann. All rights reserved.
 //
 
+import UIKit
+
+class Error
+{
+    static let NoInternet = NSError(domain: "No internet connection", code: 1, userInfo: nil)
+}
+
 class Constants
 {
     static let CountryCodes: [String:String] = [

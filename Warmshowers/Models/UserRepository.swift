@@ -62,11 +62,7 @@ class UserRepository
         // but are not connected
         if !IJReachability.isConnectedToNetwork() {
             let promise = Promise<User, NSError>()
-            promise.failure(NSError(
-                domain: "No internet connection",
-                code: 100,
-                userInfo: nil
-            ))
+            promise.failure(Error.NoInternet)
             return promise.future
         }
 
