@@ -14,7 +14,7 @@ import IJReachability
 class AuthenticationViewController: UIViewController, UITextFieldDelegate
 {
     private let api = API.sharedInstance
-    private let userRepository = UserRepository()
+    private let userRepository = UserRepository.sharedInstance
     
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!

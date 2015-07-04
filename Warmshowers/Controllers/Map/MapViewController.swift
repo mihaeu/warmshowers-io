@@ -43,7 +43,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
     private var didAdjustInitialZoomLevel = false
     private var myLocation: CLLocationCoordinate2D?
     
-    private let userRepository = UserRepository()
+    private let userRepository = UserRepository.sharedInstance
     private let locationManager = CLLocationManager()
     
     private var searchBar = UISearchBar()

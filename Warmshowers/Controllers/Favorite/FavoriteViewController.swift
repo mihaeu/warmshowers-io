@@ -26,7 +26,7 @@ class FavoriteViewController: UIViewController, UITableViewDataSource, UITableVi
     
     var tableData = [[User]]()
     
-    let userRepository = UserRepository()
+    let userRepository = UserRepository.sharedInstance
     
     override func viewWillAppear(animated: Bool)
     {

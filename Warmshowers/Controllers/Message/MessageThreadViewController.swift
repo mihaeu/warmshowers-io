@@ -10,7 +10,7 @@ import UIKit
 
 class MessageThreadViewController: UIViewController, UITableViewDataSource
 {
-    private let messageThreadRepository = MessageThreadRepository()
+    private let messageThreadRepository = MessageThreadRepository.sharedInstance
     private var messageThread: MessageThread?
 
     private var refreshControl: UIRefreshControl!

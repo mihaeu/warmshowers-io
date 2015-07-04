@@ -17,7 +17,7 @@ class NewMessageViewController: UIViewController
     @IBOutlet weak var subjectTextField: UITextField!
     @IBOutlet weak var bodyTextView: UITextView!
     
-    let messageRepository = MessageRepository()
+    let messageRepository = MessageRepository.sharedInstance
     
     override func viewDidLoad()
     {

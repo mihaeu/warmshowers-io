@@ -11,8 +11,8 @@ import Haneke
 
 class MessagesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
 {
-    private let messageRepository = MessageRepository()
-    private let userRepository = UserRepository()
+    private let messageRepository = MessageRepository.sharedInstance
+    private let userRepository = UserRepository.sharedInstance
     private var messages = [Message]()
 
     private var refreshControl: UIRefreshControl!

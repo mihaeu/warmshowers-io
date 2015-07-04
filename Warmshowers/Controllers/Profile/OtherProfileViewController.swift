@@ -28,8 +28,8 @@ class OtherProfileViewController: UIViewController
     var tableData = [[AnyObject]]()
     
     let realm = Realm()
-    let userRepository = UserRepository()
-    let feedbackRepository = FeedbackRepository()
+    let userRepository = UserRepository.sharedInstance
+    let feedbackRepository = FeedbackRepository.sharedInstance
     
     let isFavoriteImage = UIImage(named: "nav-star-full")
     let isNoFavoriteImage = UIImage(named: "nav-star-empty")

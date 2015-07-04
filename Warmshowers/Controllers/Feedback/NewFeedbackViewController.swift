@@ -67,7 +67,7 @@ class NewFeedbackViewController: UITableViewController
         )
 
         if validateFeedback(feedback) {
-            FeedbackRepository().save(feedback)
+            FeedbackRepository.sharedInstance.save(feedback)
             navigationController?.popToRootViewControllerAnimated(true)
         }
     }

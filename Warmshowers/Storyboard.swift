@@ -21,6 +21,7 @@ struct Storyboard
     
     // Identifiers
     static let AnnotationViewReuseIdentifier = "OtherUser"
+
     static let FavoriteCellIdentifier = "Favorite Cell"
     static let FeedbackCellIdentifier = "Feedback Cell"
     static let MessageCellIdentifier = "Message Cell"
@@ -28,7 +29,11 @@ struct Storyboard
     static let MessageBodyToCellIdentifier = "Message Body To Cell"
     static let ProfileOverviewCellIdentifier = "Profile Overview Cell"
     static let UserCellIdentifier = "User Cell"
+
     static let UsernameLabelId = "username"
+
+    static let AuthenticationViewControllerIdentifier = "Authentication"
+    static let MapViewControllerIdentifier = "Map"
     
     // UI
     static let LeftCalloutFrame = CGRect(x: 0, y: 0, width: 50, height: 50)

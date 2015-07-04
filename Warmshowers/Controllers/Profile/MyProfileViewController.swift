@@ -20,7 +20,7 @@ class MyProfileViewController: UIViewController
     @IBOutlet weak var languagesSpokenLabel: UILabel!
     
     private let api = API.sharedInstance
-    private let userRepository = UserRepository()
+    private let userRepository = UserRepository.sharedInstance
     private var user: User?
     
     override func viewDidLoad()
