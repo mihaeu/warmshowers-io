@@ -64,10 +64,8 @@ class FeedbackRepository: BaseRepository
         // fetch and cache
         return api.getFeedbackForUser(user.id).onSuccess { userFeedback in
             self.lastUpdated = NSDate()
-            Realm().write {
-                for feedback in userFeedback {
-                    Realm().add(feedback, update: true)
-                }
+            for feedback in userFeedback {
+                self.save(feedback)
             }
         }
     }

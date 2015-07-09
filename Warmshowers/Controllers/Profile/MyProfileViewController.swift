@@ -70,6 +70,7 @@ class MyProfileViewController: UITableViewController
             userRepository.save(user!)
             Drop.down("All changes saved ...", state: .Success)
 
+            view.endEditing(true)
         }
     }
 

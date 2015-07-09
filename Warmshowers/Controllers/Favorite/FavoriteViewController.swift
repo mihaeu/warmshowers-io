@@ -83,6 +83,11 @@ class FavoriteViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         
         let user = tableData[indexPath.section][indexPath.row]
+        if user.fullname == ""
+        {
+            println(user)
+            log.error(user.username)
+        }
         cell!.userLabel.text = user.fullname
         cell!.addressLabel.text = user.city
 

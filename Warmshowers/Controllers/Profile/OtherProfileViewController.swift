@@ -49,7 +49,7 @@ class OtherProfileViewController: UIViewController
         super.viewDidLoad()
 
         let buttons = [
-            UIBarButtonItem(image: user!.isFavorite ? isFavoriteImage : isNoFavoriteImage, style: .Plain, target: self, action: "favorite:"),
+            UIBarButtonItem(image: user!.isFavorite == true ? isFavoriteImage : isNoFavoriteImage, style: .Plain, target: self, action: "favorite:"),
             UIBarButtonItem(image: UIImage(named: "nav-feedback"), style: .Plain, target: self, action: "feedback"),
             UIBarButtonItem(image: UIImage(named: "nav-message"), style: .Plain, target: self, action: "message")
         ]

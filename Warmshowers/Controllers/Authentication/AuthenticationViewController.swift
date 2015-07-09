@@ -83,7 +83,7 @@ class AuthenticationViewController: UIViewController, UITextFieldDelegate
             attemptLogin()
         }
 
-        textField.resignFirstResponder()
+        view.endEditing(true)
         return true
     }
 }

@@ -50,12 +50,12 @@ class UserRepository: BaseRepository
         // sparse users have only id and username (e.g. from a search by keyword or
         // location, in that case we don't want the user
         let result = Realm().objects(User).filter("id == \(id) AND comments != ''")
-        var localUser = User()
+        var localUser = result.first
 
         if result.count == 1 && canGetLocal(refresh) {
             let promise = Promise<User, NSError>()
-            promise.success(result.first!)
-            log.debug("Fetching user from cache, found \(result.first!.username)")
+            promise.success(localUser!)
+            log.debug("Fetching user from cache, found \(localUser!.username)")
             return promise.future
         }
 
@@ -67,7 +67,9 @@ class UserRepository: BaseRepository
                 // not supported by the API, thus we need to transfer the
                 // flag from the local result (if it doesn't exist, it
                 // is false anyways)
-                user.isFavorite = localUser.isFavorite
+                if localUser != nil {
+                    user.isFavorite = localUser!.isFavorite
+                }
                 Realm().add(user, update: true)
             }
         }
