@@ -35,7 +35,6 @@
 		847E786E1B39A4820094C329 /* MessageBodyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847E786D1B39A4820094C329 /* MessageBodyCell.swift */; };
 		847E78701B39A4DB0094C329 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847E786F1B39A4DB0094C329 /* MessageCell.swift */; };
 		848BC7A71AFBD7FD00974467 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848BC7A61AFBD7FD00974467 /* AppDelegate.swift */; };
-		848BC7AA1AFBD7FD00974467 /* Warmshowers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 848BC7A81AFBD7FD00974467 /* Warmshowers.xcdatamodeld */; };
 		848BC7AF1AFBD7FD00974467 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 848BC7AD1AFBD7FD00974467 /* Main.storyboard */; };
 		848BC7B11AFBD7FD00974467 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 848BC7B01AFBD7FD00974467 /* Images.xcassets */; };
 		848BC7B41AFBD7FD00974467 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 848BC7B21AFBD7FD00974467 /* LaunchScreen.xib */; };
@@ -98,7 +97,6 @@
 		848BC7A11AFBD7FD00974467 /* Warmshowers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Warmshowers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		848BC7A51AFBD7FD00974467 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		848BC7A61AFBD7FD00974467 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		848BC7A91AFBD7FD00974467 /* Warmshowers.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Warmshowers.xcdatamodel; sourceTree = "<group>"; };
 		848BC7AE1AFBD7FD00974467 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		848BC7B01AFBD7FD00974467 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		848BC7B31AFBD7FD00974467 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -267,7 +265,6 @@
 			children = (
 				848BC7B01AFBD7FD00974467 /* Images.xcassets */,
 				848BC7B21AFBD7FD00974467 /* LaunchScreen.xib */,
-				848BC7A81AFBD7FD00974467 /* Warmshowers.xcdatamodeld */,
 				848BC7A51AFBD7FD00974467 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -570,7 +567,6 @@
 				84CFCD731B0D2B0700647959 /* MessageThread.swift in Sources */,
 				844D51BA1B3E803C00AAC684 /* ProfileOverviewCell.swift in Sources */,
 				84B0C6A41B3C095500497DE0 /* UserRepository.swift in Sources */,
-				848BC7AA1AFBD7FD00974467 /* Warmshowers.xcdatamodeld in Sources */,
 				84B491D31B3ABD2F00BC4445 /* MessageRepository.swift in Sources */,
 				84338C811B3D5030003C0411 /* MiscConstants.swift in Sources */,
 				84977BF71B43192300433FF6 /* UIColor.swift in Sources */,
@@ -828,19 +824,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		848BC7A81AFBD7FD00974467 /* Warmshowers.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				848BC7A91AFBD7FD00974467 /* Warmshowers.xcdatamodel */,
-			);
-			currentVersion = 848BC7A91AFBD7FD00974467 /* Warmshowers.xcdatamodel */;
-			path = Warmshowers.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 848BC7991AFBD7FD00974467 /* Project object */;
 }
