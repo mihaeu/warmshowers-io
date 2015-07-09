@@ -103,9 +103,8 @@ class OtherProfileViewController: UIViewController
     func favorite(sender: UIBarButtonItem)
     {
         if user != nil {
-            realm.write {
-                self.user!.isFavorite = !self.user!.isFavorite
-            }
+            // switch favorite status
+            userRepository.update(user!, key: "isFavorite", value: !user!.isFavorite)
             sender.image = user?.isFavorite == true ? isFavoriteImage : isNoFavoriteImage
         }
     }
