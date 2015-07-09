@@ -40,16 +40,13 @@ class MessageThreadRepository: BaseRepository
     */
     func findById(threadId: Int, refresh: Bool = false) -> Future<MessageThread, NSError>
     {
+        let result = Realm().objects(MessageThread).filter("id == \(threadId)")
+
         // messages should always be up to date, so only get the local version
         // when there is no other choice
-        if cacheIsValid(refresh) {
-            let result = Realm().objects(MessageThread).filter("id == \(threadId)")
+        if result.count == 1 && cacheIsValid(refresh) {
             let promise = Promise<MessageThread, NSError>()
-            if result.count == 1 {
-                promise.success(result.first!)
-            } else {
-                promise.failure(Error.NoInternet)
-            }
+            promise.success(result.first!)
 
             log.debug("Fetching message thread from cache, found \(result.count)")
             return promise.future
