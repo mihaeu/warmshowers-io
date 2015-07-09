@@ -240,15 +240,31 @@ extension MapViewController: UISearchBarDelegate
             searchResultTableView.hidden = true
             return
         }
-        
-        userRepository.searchByKeyword(searchText, limit: 10).onSuccess { users in
-            self.searchResults.removeAll(keepCapacity: false)
+
+        userRepository.searchByKeyword(searchText, limit: 5).onSuccess { users in
+            // if search bar is empty, someone has already clicked a result
+            // and this response is coming in too late
+            if searchBar.text == "" {
+                return
+            }
+
+            self.searchResults = [User]()
             for (userId, user) in users {
                 self.searchResults.append(user)
             }
             self.searchResultTableView.hidden = false
+
+            var frame = self.searchResultTableView.frame;
+            frame.size.height = self.searchResultTableView.contentSize.height;
+            self.searchResultTableView.frame = frame;
+
             self.searchResultTableView.reloadData()
         }
+    }
+
+    func searchBarSearchButtonClicked(searchBar: UISearchBar)
+    {
+        searchBar.resignFirstResponder()
     }
 }
 
