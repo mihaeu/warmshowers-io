@@ -30,7 +30,12 @@ public class MessageThreadSerialization
             message.threadId = messageJson["thread_id"].intValue
             message.subject = messageJson["subject"].stringValue
             message.body = messageJson["body"].stringValue
-            message.author = User(id: messageJson["author"]["uid"].intValue, username: messageJson["author"]["name"].stringValue)
+
+            message.author = User(
+                id: messageJson["author"]["uid"].intValue,
+                username: messageJson["author"]["name"].stringValue
+            )
+
             let result = Realm().objects(User).filter("id == \(message.author!.id)")
             if result.count == 1 {
                 message.author = result.first!

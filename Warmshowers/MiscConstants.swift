@@ -11,6 +11,7 @@ import UIKit
 class Error
 {
     static let NoInternet = NSError(domain: "No internet connection", code: 1, userInfo: nil)
+    static let Unauthorized = NSError(domain: "Not logged in", code: 401, userInfo: nil)
 }
 
 class Constants

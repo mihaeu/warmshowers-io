@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import IJReachability
 import SwiftyDrop
 
 class NewFeedbackViewController: UITableViewController
@@ -28,7 +29,7 @@ class NewFeedbackViewController: UITableViewController
         static let Feedback = 3
     }
     
-    private let ExperienceValues = ["Positive, Neutral", "Negative"]
+    private let ExperienceValues = ["Positive", "Neutral", "Negative"]
     private let MetValues = ["Host", "Guest", "Met Traveling","Other"]
     
     override func viewDidLoad()
@@ -54,6 +55,11 @@ class NewFeedbackViewController: UITableViewController
     */
     func createFeedback()
     {
+        if !(IJReachability.isConnectedToNetwork()) {
+            Drop.down("Couldn't give feedback, because you are not connected to the internet.", state: .Info)
+            return
+        }
+
         // id is generated like this, because the API access is still broken
         // conflicts are possible, but that is not an issue for now, another
         // test feedback will simply be overwritten

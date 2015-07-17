@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import IJReachability
+import SwiftyDrop
 
 class NewMessageViewController: UIViewController
 {
@@ -42,6 +44,11 @@ class NewMessageViewController: UIViewController
     
     func sendMessage()
     {
+        if !(IJReachability.isConnectedToNetwork()) {
+            Drop.down("Couldn't send your message, because you are not connected to the internet.", state: .Info)
+            return
+        }
+
         var message = Message()
         if userWantsToSendNewMessage() {
             message.subject = subjectTextField.text

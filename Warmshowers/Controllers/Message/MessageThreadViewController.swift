@@ -106,12 +106,13 @@ class MessageThreadViewController: UIViewController, UITableViewDataSource
         cell?.bodyLabel.attributedText = Utils.htmlToAttributedText(message!.body)
         cell?.messageSentLabel.text = Utils.longDateFromTimestamp(message!.timestamp)
         
-        UserPictureCache.sharedInstance.thumbnailById(message!.author!.id).onSuccess { image in
-            cell?.userPictureImageView.image = image
-        }.onFailure { error in
-            cell?.userPictureImageView.image = UserPictureCache.defaultThumbnail
-        }
-        
+        UserPictureCache.sharedInstance.thumbnailById(message!.author!.id)
+            .onSuccess { image in
+                cell?.userPictureImageView.image = image
+            }.onFailure { error in
+                cell?.userPictureImageView.image = UserPictureCache.defaultThumbnail
+            }
+
         cell?.sizeToFit()
         return cell!
     }

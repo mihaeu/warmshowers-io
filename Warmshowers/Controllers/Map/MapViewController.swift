@@ -254,11 +254,11 @@ extension MapViewController: UISearchBarDelegate
             }
             self.searchResultTableView.hidden = false
 
+            self.searchResultTableView.reloadData()
+
             var frame = self.searchResultTableView.frame;
             frame.size.height = self.searchResultTableView.contentSize.height;
             self.searchResultTableView.frame = frame;
-
-            self.searchResultTableView.reloadData()
         }
     }
 

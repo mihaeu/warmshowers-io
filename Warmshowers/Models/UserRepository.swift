@@ -141,13 +141,16 @@ class UserRepository: BaseRepository
     }
 
     /**
-        Find the currently logged in User
+        Find the currently logged in User and registers the user with the API.
 
         :returns: User
     */
     func findByActiveUser() -> User?
     {
         let result = Realm().objects(User).filter("password != ''")
+        if result.first != nil {
+            api.loggedInUser = result.first
+        }
         return result.first
     }
 

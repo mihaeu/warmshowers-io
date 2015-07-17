@@ -77,7 +77,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
         if cell == nil {
             cell = MessageCell(style: UITableViewCellStyle.Default, reuseIdentifier: Storyboard.MessageCellIdentifier)
         }
-    
+
         let message = messages[indexPath.row]
         if let author = message.participants {
             UserPictureCache.sharedInstance.thumbnailById(author.id).onSuccess { image in
@@ -97,7 +97,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
         cell?.sizeToFit()
         return cell!
     }
-    
+
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return messages.count

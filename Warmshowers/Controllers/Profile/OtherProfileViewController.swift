@@ -24,6 +24,7 @@ class OtherProfileViewController: UIViewController
     var user: User?
     private var userData = [[String]]()
     private var userFeedback = [Feedback]()
+    private var refreshControl: UIRefreshControl!
     
     let realm = Realm()
     let userRepository = UserRepository.sharedInstance
@@ -55,16 +56,34 @@ class OtherProfileViewController: UIViewController
         ]
         navigationItem.setRightBarButtonItems(buttons, animated: true)
 
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
+        self.tableView.addSubview(refreshControl)
+
+        refresh()
+    }
+
+    func refresh()
+    {
         userRepository.findById(user!.id).onSuccess { user in
             self.user = user
             self.setUpUserData()
             self.tableView.reloadData()
+
+            let buttons = [
+                UIBarButtonItem(image: user.isFavorite == true ? self.isFavoriteImage : self.isNoFavoriteImage, style: .Plain, target: self, action: "favorite:"),
+                UIBarButtonItem(image: UIImage(named: "nav-feedback"), style: .Plain, target: self, action: "feedback"),
+                UIBarButtonItem(image: UIImage(named: "nav-message"), style: .Plain, target: self, action: "message")
+            ]
+            self.navigationItem.setRightBarButtonItems(buttons, animated: true)
         }
 
         feedbackRepository.getAllByUser(user!).onSuccess() { userFeedback in
             self.userFeedback = userFeedback
             self.tableView.reloadData()
         }
+
+        refreshControl.endRefreshing()
     }
 
     private func setUpUserData()

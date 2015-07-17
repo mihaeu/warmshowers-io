@@ -15,11 +15,20 @@ public class API
 {
     /// Alamofire serves a singleton, but we want to be able to mock this
     var manager: Manager
+    var retries = 3
+
+    // this should never be accessed from the outside, but needs to be setable
+    // by the UserRepository
+    // if the user starts the app without an internet connection, the api has to be
+    // able to log in once the connection is back
+    // this is what the information form the user coming from the database is used for
+    var loggedInUser: User? = nil
     
     static let sharedInstance = API()
     
     struct Status {
         static let AlreadyLoggedIn = 406
+        static let Unauthorized = 401
         static let LoginOk = 200
     }
     
@@ -65,7 +74,8 @@ public class API
                         
                         let user = UserSerialization.deserializeJSON(json["user"])
                         user.password = password
-                        
+
+                        self.loggedInUser = user
                         promise.success(user)
                     } else {
                         log.info("\(username) bad credentials(Status: \(response?.statusCode))")
@@ -97,13 +107,14 @@ public class API
                     promise.failure(error!)
                 } else {
                     log.info("Logged out \(user.username) (Status: \(response?.statusCode))")
+                    self.loggedInUser = nil
                     promise.success(true)
                 }
         }
         
         return promise.future
     }
-    
+
     // MARK: Search API Methods
     
     /**
@@ -124,6 +135,16 @@ public class API
                 if error != nil {
                     log.error(error?.description)
                     promise.failure(error!)
+                } else if response?.statusCode == Status.Unauthorized {
+                    --self.retries
+                    if self.loggedInUser != nil && self.retries > 0 {
+                        self.login(self.loggedInUser!.username, password: self.loggedInUser!.password)
+                            .onSuccess { user in
+                                return self.getUser(userId)
+                            }.onFailure { error in
+                                promise.failure(Error.Unauthorized)
+                            }
+                    }
                 } else {
                     log.info("Got user with id: \(userId) (Status: \(response?.statusCode))")
                     var json = JSON(json!)
@@ -299,10 +320,14 @@ public class API
         manager
             .request(Router.SendMessage(message: message))
             .responseJSON() { (request, response, json, error) in
-                if error != nil {
+
+                if error != nil
+                {
                     log.error(error?.description)
                     promise.failure(error!)
-                } else {
+                }
+                else
+                {
                     promise.success(true)
                 }
         }
@@ -387,6 +412,16 @@ public class API
                 if error != nil {
                     log.error(error?.description)
                     promise.failure(error!)
+                } else if response?.statusCode == Status.Unauthorized {
+                    --self.retries
+                    if self.loggedInUser != nil && self.retries > 0 {
+                        self.login(self.loggedInUser!.username, password: self.loggedInUser!.password)
+                            .onSuccess { user in
+                                return self.getAllMessages()
+                            }.onFailure { error in
+                                promise.failure(Error.Unauthorized)
+                        }
+                    }
                 } else {
                     var json = JSON(json!)
                     var messages = [Message]()
